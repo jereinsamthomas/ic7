@@ -1004,11 +1004,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const section = document.getElementById('winnersSection');
     const list = document.getElementById('winnersList');
     if (!list || !section) return;
+    section.hidden = false;
     if (!items.length) {
-      section.hidden = true;
+      list.innerHTML = '<p class="tourpage-empty" style="grid-column: 1/-1; width: 100%;">No champions recorded yet.</p>';
       return;
     }
-    section.hidden = false;
     list.innerHTML = items.map(it => {
       const name = it.player || 'Winner';
       const initial = name.charAt(0).toUpperCase();
