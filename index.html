@@ -1461,7 +1461,7 @@ table.board td.pts{color:var(--red-bright);font-weight:700;}
   </div>
 </div>
 
-<script>
+<script type="module">
 /* ======================= CLUB CONFIG — EDIT THESE ======================= */
 const CLUB_WHATSAPP        = "919999999999";   // main club WhatsApp number
 const CLUB_ADMIN1_WHATSAPP = "919999999999";   // admin 1 WhatsApp number
@@ -1482,29 +1482,10 @@ const ADMIN_RECOVERY_CODE    = "778899";        // secret numeric code — the O
    you'd need a small backend (a database + a couple of API routes) —
    ask and I can help you wire one up.
    ===================================================================== */
-(function(){
+import { Store } from '/src/store.js';
 
-  // ---- storage helper: real localStorage when available, in-memory fallback otherwise ----
-  let useMemory = false;
-  try{
-    localStorage.setItem('__ic7_probe__','1');
-    localStorage.removeItem('__ic7_probe__');
-  }catch(e){ useMemory = true; }
-  const memoryStore = {};
-  const Store = {
-    get(key, fallback){
-      if(useMemory) return (key in memoryStore) ? memoryStore[key] : fallback;
-      try{
-        const raw = localStorage.getItem(key);
-        return raw === null ? fallback : JSON.parse(raw);
-      }catch(e){ return fallback; }
-    },
-    set(key, value){
-      if(useMemory){ memoryStore[key] = value; return true; }
-      try{ localStorage.setItem(key, JSON.stringify(value)); return true; }
-      catch(e){ memoryStore[key] = value; useMemory = true; return false; }
-    }
-  };
+(async function(){
+  await Store.init();
 
   async function sha256(text){
     // Dependency-free hash — deliberately NOT using crypto.subtle here, because

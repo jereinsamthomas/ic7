@@ -788,8 +788,11 @@ table.board td.pts{color:var(--red-bright);font-weight:700;}
   </div>
 </footer>
 
-<script>
-document.addEventListener('DOMContentLoaded', () => {
+<script type="module">
+import { Store } from '/src/store.js';
+
+document.addEventListener('DOMContentLoaded', async () => {
+  await Store.init();
 
   // Starfield (same ambient effect as the main site)
   const starHost = document.getElementById('starfield');
@@ -811,24 +814,6 @@ document.addEventListener('DOMContentLoaded', () => {
     star.style.animationDelay = `${(-Math.random()*10).toFixed(1)}s, ${(-Math.random()*10).toFixed(1)}s`;
     starHost.appendChild(star);
   }
-
-  // ---- storage helper: same pattern as the main site, shared by localStorage on the same origin ----
-  let useMemory = false;
-  try{ localStorage.setItem('__ic7_probe__','1'); localStorage.removeItem('__ic7_probe__'); }
-  catch(e){ useMemory = true; }
-  const memoryStore = {};
-  const Store = {
-    get(key, fallback){
-      if(useMemory) return (key in memoryStore) ? memoryStore[key] : fallback;
-      try{ const raw = localStorage.getItem(key); return raw === null ? fallback : JSON.parse(raw); }
-      catch(e){ return fallback; }
-    },
-    set(key, value){
-      if(useMemory){ memoryStore[key] = value; return true; }
-      try{ localStorage.setItem(key, JSON.stringify(value)); return true; }
-      catch(e){ memoryStore[key] = value; useMemory = true; return false; }
-    }
-  };
 
   function generateId(){ return Date.now().toString(36) + Math.random().toString(36).slice(2,7); }
   function formatDate(iso){

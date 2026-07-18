@@ -931,8 +931,11 @@ table.board td.pts{color:var(--red-bright);font-weight:700;}
   </div>
 </footer>
 
-<script>
-document.addEventListener('DOMContentLoaded', () => {
+<script type="module">
+import { Store } from '/src/store.js';
+
+document.addEventListener('DOMContentLoaded', async () => {
+  await Store.init();
 
   // Starfield
   const starHost = document.getElementById('starfield');
@@ -955,18 +958,7 @@ document.addEventListener('DOMContentLoaded', () => {
     starHost.appendChild(star);
   }
 
-  // ---- storage helper (shared localStorage on the same origin as index.html) ----
-  let useMemory = false;
-  try{ localStorage.setItem('__ic7_probe__','1'); localStorage.removeItem('__ic7_probe__'); }
-  catch(e){ useMemory = true; }
-  const memoryStore = {};
-  const Store = {
-    get(key, fallback){
-      if(useMemory) return (key in memoryStore) ? memoryStore[key] : fallback;
-      try{ const raw = localStorage.getItem(key); return raw === null ? fallback : JSON.parse(raw); }
-      catch(e){ return fallback; }
-    }
-  };
+
 
   function escapeHtml(str){
     return String(str || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
