@@ -2144,7 +2144,11 @@ const ADMIN_RECOVERY_CODE    = "778899";        // secret numeric code — the O
       titleField: it => it.player, subtitleField: it => `${it.assists||0} assists` },
     { key:'glove', label:'Golden Glove',
       fields:[ {id:'player', label:'Goalkeeper', type:'text', required:true}, {id:'team', label:'Team', type:'text'}, {id:'cleanSheets', label:'Clean Sheets', type:'text'}, {id:'matches', label:'Matches', type:'text'} ],
-      titleField: it => it.player, subtitleField: it => `${it.cleanSheets||0} clean sheets` }
+      titleField: it => it.player, subtitleField: it => `${it.cleanSheets||0} clean sheets` },
+    { key:'winners', label:'Roll of Honor',
+      fields:[ {id:'season', label:'Season (e.g. Season 1)', type:'text', required:true}, {id:'player', label:'Winner Name', type:'text', required:true}, {id:'logo', label:'Winner Logo / Avatar (optional)', type:'file', maxWidth:300} ],
+      titleField: it => `${it.season || 'Season'}: ${it.player || 'Winner'}`, subtitleField: it => '',
+      thumbField: 'logo' }
   ];
 
   // Build the tournament <select>, the 4 table-type tab buttons, and one

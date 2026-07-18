@@ -780,6 +780,75 @@ table.board td.pts{color:var(--red-bright);font-weight:700;}
 .tourpage-empty{font-family:var(--font-mono);font-size:12.5px;color:var(--ink-faint);padding:24px;border:1px dashed var(--line-strong);text-align:center;}
 @media(max-width:600px){.tourpage-main{padding:50px 20px 80px;}}
 
+/* Roll of Honor Styles */
+.winners-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 20px;
+  margin-bottom: 40px;
+}
+.winner-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 24px 16px;
+  border-radius: 4px;
+  position: relative;
+  transition: all .25s ease;
+}
+.winner-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 4px;
+  border: 1px solid var(--line);
+  background: var(--glass);
+  z-index: -1;
+  transition: all .25s ease;
+}
+.winner-card:hover {
+  transform: translateY(-4px);
+}
+.winner-card:hover::before {
+  border-color: var(--red-bright);
+  background: var(--glass-strong);
+  box-shadow: 0 10px 25px -10px rgba(230,30,37,0.3);
+}
+.winner-badge {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background-color: var(--bg-elevated-2);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: 2px solid var(--red);
+  box-shadow: 0 0 15px rgba(230,30,37,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 20px;
+  color: var(--red-bright);
+  margin-bottom: 16px;
+}
+.winner-season {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 6px;
+}
+.winner-name {
+  font-family: var(--font-display);
+  font-size: 17px;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
 </style>
 </head>
 <body>
@@ -805,7 +874,13 @@ table.board td.pts{color:var(--red-bright);font-weight:700;}
     <div><span>Teams</span><b id="tourTeams">14 Teams</b></div>
   </div>
 
-  <div class="tourpage-table-block reveal in-view">
+  <!-- Roll of Honor -->
+  <div class="tourpage-table-block reveal" id="winnersSection" hidden>
+    <h2>Roll of Honor</h2>
+    <div class="winners-grid" id="winnersList"></div>
+  </div>
+
+<div class="tourpage-table-block reveal in-view">
     <h2>Standings</h2>
     <div class="board-wrap">
       <table class="board">
@@ -923,6 +998,31 @@ document.addEventListener('DOMContentLoaded', () => {
   renderTable('scorers', ['player','team','goals','matches']);
   renderTable('assists', ['player','team','assists','matches']);
   renderTable('glove', ['player','team','cleanSheets','matches']);
+
+  function renderWinners() {
+    const items = Store.get('ic7_tour_' + TOUR_ID + '_winners', []);
+    const section = document.getElementById('winnersSection');
+    const list = document.getElementById('winnersList');
+    if (!list || !section) return;
+    if (!items.length) {
+      section.hidden = true;
+      return;
+    }
+    section.hidden = false;
+    list.innerHTML = items.map(it => {
+      const name = it.player || 'Winner';
+      const initial = name.charAt(0).toUpperCase();
+      const badgeStyle = it.logo ? ` style="background-image:url('${it.logo}')"` : '';
+      const badgeContent = it.logo ? '' : escapeHtml(initial);
+      return `<div class="winner-card reveal in-view">
+        <div class="winner-badge"${badgeStyle}>${badgeContent}</div>
+        <div class="winner-season">${escapeHtml(it.season || '')}</div>
+        <div class="winner-name">${escapeHtml(name)}</div>
+      </div>`;
+    }).join('');
+  }
+
+  renderWinners();
 
 });
 </script>
