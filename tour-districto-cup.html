@@ -973,6 +973,21 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('tourTeams').textContent = meta.teams;
   document.title = meta.name + ' — IC7 Iconic Sevens';
 
+  if (meta.champion) {
+    const metaRow = document.querySelector('.tourpage-meta-row');
+    if (metaRow) {
+      const champDiv = document.createElement('div');
+      champDiv.style.display = 'flex';
+      champDiv.style.flexDirection = 'column';
+      champDiv.style.gap = '4px';
+      const logoHtml = meta.champLogo 
+        ? `<div style="width:24px;height:24px;border-radius:50%;background-image:url('${meta.champLogo}');background-size:cover;background-position:center;border:1px solid var(--red);box-shadow: 0 0 10px rgba(230,30,37,0.3);"></div>`
+        : '';
+      champDiv.innerHTML = `<span>Current Champion</span><b style="display:flex;align-items:center;gap:8px;color:#fff;">${logoHtml}${escapeHtml(meta.champion)}</b>`;
+      metaRow.appendChild(champDiv);
+    }
+  }
+
   function renderTable(key, fieldkeys){
     const items = Store.get('ic7_tour_' + TOUR_ID + '_' + key, []);
     const tbody = document.getElementById('tb_' + key);
