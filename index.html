@@ -3,1630 +3,2634 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TACTICS OS — Tactical Mastery</title>
-<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&family=Barlow+Condensed:wght@300;400;500;600;700;800;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<title>IC7 Iconic Sevens — Kerala eFootball Clan</title>
+<meta name="description" content="IC7 Iconic Sevens — a Kerala eFootball clan. Coin tournaments, clan championships, live updates, squads, player profiles and registration.">
+<link rel="icon" type="image/png" href="/assets/asset_4ec290c1ae.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg: #0a0f0a;
-  --bg2: #0d130d;
-  --bg3: #111811;
-  --panel: #0f150f;
-  --border: #1e2e1e;
-  --border2: #243624;
-  --green: #00ff41;
-  --green2: #00cc33;
-  --green3: #00ff4133;
-  --green4: #00ff4111;
-  --green-dim: #00aa2a;
-  --text: #c8dfc8;
-  --text2: #7a9e7a;
-  --text3: #4a6e4a;
-  --red: #ff4141;
-  --red2: #ff414133;
-  --amber: #ffaa00;
-  --sidebar-w: 200px;
-  --font-display: 'Barlow Condensed', sans-serif;
-  --font-mono: 'Share Tech Mono', monospace;
-  --font-body: 'Barlow', sans-serif;
+/* ============================= TOKENS (GAMING RED, BLACK, WHITE) ============================= */
+:root{
+  --bg: #050507;
+  --bg-elevated: #0b0b0f;
+  --bg-elevated-2: #121217;
+  --pitch: #1a0305;
+  --red: #e61e25;
+  --red-bright: #ff1f27;
+  --red-dim: #8a0b0f;
+  --ink: #ffffff;
+  --ink-dim: #b8b8c7;
+  --ink-faint: #5c5c6d;
+  --logo-data: url("/assets/asset_d2d274761c.png");
+  --line: rgba(230,30,37,0.22);
+  --line-strong: rgba(230,30,37,0.5);
+  --glass: rgba(255,255,255,0.025);
+  --glass-strong: rgba(255,255,255,0.06);
+  --shadow: rgba(0,0,0,0.96);
+  --green-live: #3ecf72;
+  --radius-lg: 0px; 
+  --radius-md: 4px;
+  --radius-sm: 2px;
+  --font-display: 'Anton', sans-serif;
+  --font-body: 'Manrope', sans-serif;
+  --font-mono: 'Space Mono', monospace;
+  --container: 1220px;
+  color-scheme: dark;
 }
 
-* { margin:0; padding:0; box-sizing:border-box; }
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--font-body);
+  line-height:1.6;
+  overflow-x:hidden;
+}
+img,svg{display:block;max-width:100%;}
+a{color:inherit;text-decoration:none;}
+ul{list-style:none;}
+button{font-family:inherit;cursor:pointer;background:none;border:none;color:inherit;}
+input,select,textarea{font-family:inherit;}
+::selection{background:var(--red);color:#ffffff;}
 
-html, body {
-  height: 100%;
-  background: var(--bg);
-  color: var(--text);
-  font-family: var(--font-body);
-  font-size: 14px;
-  overflow: hidden;
+.wrap{max-width:var(--container);margin:0 auto;padding:0 24px;}
+.section{padding:110px 0 100px;position:relative;}
+@media(max-width:700px){.section{padding:78px 0 70px;}}
+
+.eyebrow{
+  display:flex;align-items:center;gap:10px;
+  font-family:var(--font-mono);
+  font-size:12.5px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--red);margin-bottom:16px;
+}
+.eyebrow::before{content:"";width:26px;height:1px;background:var(--red);}
+
+.section-title{
+  font-family:var(--font-display);
+  font-weight:400;
+  text-transform:uppercase;
+  font-size:clamp(36px,6vw,62px);
+  letter-spacing:.02em;
+  line-height:0.95;
+  margin-bottom:22px;
+}
+.section-lede{
+  color:var(--ink-dim);
+  font-size:16.5px;
+  max-width:620px;
+  margin-bottom:52px;
+}
+.red-text{
+  background:linear-gradient(100deg, var(--red-bright) 10%, var(--red) 50%, var(--red-dim) 90%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
 }
 
-/* ========== SCANLINE OVERLAY ========== */
-body::before {
-  content:'';
-  position: fixed;
+.glass{
+  background:var(--glass);
+  border:1px solid var(--line);
+  box-shadow:0 25px 60px -30px var(--shadow);
+}
+
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  padding:16px 32px;
+  font-family:var(--font-body);font-weight:800;font-size:14px;
+  letter-spacing:.05em;text-transform:uppercase;
+  transition:all .25s ease;
+  white-space:nowrap;
+  border-radius: 0px;
+}
+.btn svg{width:18px;height:18px;}
+.btn-red{
+  background: var(--red);
+  color:#ffffff;
+  box-shadow:0 12px 30px -10px rgba(230,30,37,0.5);
+}
+.btn-red:hover{background: var(--red-bright); transform:translateY(-2px); box-shadow:0 16px 36px -8px rgba(230,30,37,0.65);}
+.btn-outline{
+  border:1px solid var(--line-strong);color:var(--ink);background:transparent;
+}
+.btn-outline:hover{border-color:var(--ink);background:rgba(255,255,255,0.05);transform:translateY(-2px);}
+
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s ease, transform .8s ease;}
+.reveal.in-view{opacity:1;transform:translateY(0);}
+
+/* ============================= HEADER / NAV ============================= */
+.site-header{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  transition:all .35s ease;
+  border-bottom:1px solid transparent;
+}
+.site-header.scrolled{
+  background:color-mix(in srgb, var(--bg) 92%, transparent);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line);
+}
+.nav-inner{
+  max-width:var(--container);margin:0 auto;padding:16px 24px;
+  display:flex;align-items:center;justify-content:space-between;gap:20px;
+}
+.brand{display:flex;align-items:center;gap:14px;}
+.crest-img-nav{
+  display:block;width:44px;height:44px;border-radius:50%;flex:none;
+  background-color:#fff;
+  background-image:var(--logo-data);background-size:contain;background-position:center;background-repeat:no-repeat;
+  border:1.5px solid var(--red);
+  box-shadow:0 0 15px rgba(230,30,37,0.4);
+}
+.brand-text{
+  font-family:var(--font-display);font-size:16px;letter-spacing:.06em;
+  text-transform:uppercase;line-height:1.1;
+}
+.brand-text small{display:block;font-family:var(--font-mono);font-size:9.5px;letter-spacing:.18em;color:var(--red);text-transform:uppercase;margin-top:2px;}
+
+.nav-links{display:flex;align-items:center;gap:30px;}
+.nav-links a:not(.nav-cta){
+  position:relative;font-size:13.5px;font-weight:700;letter-spacing:.05em;
+  color:var(--ink-dim);padding:6px 0;transition:color .25s ease;
+  text-transform:uppercase;
+}
+.nav-links a:not(.nav-cta)::after{
+  content:"";position:absolute;left:0;bottom:-2px;width:0;height:2px;background:var(--red);
+  transition:width .3s ease;
+}
+.nav-links a:not(.nav-cta):hover{color:var(--ink);}
+.nav-links a:not(.nav-cta):hover::after{width:100%;}
+.nav-cta{
+  font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+  padding:9px 20px;border:1px solid var(--red);color:var(--red);
+  transition:all .25s ease;
+}
+.nav-cta:hover{background:var(--red);color:#ffffff;}
+
+.nav-actions{display:flex;align-items:center;gap:10px;}
+.icon-btn{
+  width:38px;height:38px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  border:1px solid var(--line);background:var(--glass);color:var(--ink);
+  transition:all .25s ease;
+  flex:none;
+}
+.icon-btn svg{width:17px;height:17px;}
+.icon-btn:hover{border-color:var(--red);color:var(--red);transform:translateY(-2px);}
+
+.hamburger{display:none;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);align-items:center;justify-content:center;background:var(--glass);}
+.hamburger svg{width:18px;height:18px;}
+
+/* LED ticker */
+.ticker-strip{
+  border-top:1px solid var(--line);
+  background: var(--bg-elevated);
+  overflow:hidden;height:34px;display:flex;align-items:center;
+}
+.ticker-track{
+  display:flex;align-items:center;gap:48px;white-space:nowrap;
+  font-family:var(--font-mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--red-bright);
+  animation:ticker 26s linear infinite;
+}
+.ticker-track span{display:inline-flex;align-items:center;gap:8px;}
+.ticker-dot{width:6px;height:6px;border-radius:50%;background:var(--green-live);box-shadow:0 0 8px var(--green-live);flex:none;}
+@keyframes ticker{from{transform:translateX(0);}to{transform:translateX(-100%);}}
+
+/* ============================= PRO E-FOOTBALL ENGINE HERO SECTION ============================= */
+.hero{
+  position:relative;min-height:100vh;display:flex;align-items:center;
+  overflow:hidden;padding-top:24px;
+  background: #030305;
+}
+
+/* Deep Space & Textured Stadium Backdrop */
+.cosmic-void {
+  position: absolute;
   inset: 0;
-  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.08) 2px, rgba(0,0,0,0.08) 4px);
-  pointer-events: none;
-  z-index: 9999;
+  z-index: 0;
+  background-repeat: no-repeat;
+  background-position: center, center, center, center 24%;
+  background-size: cover, cover, cover, cover;
+  background-image: 
+    radial-gradient(circle at 85% 35%, rgba(230, 30, 37, 0.38) 0%, transparent 50%),
+    radial-gradient(circle at 15% 75%, rgba(138, 11, 15, 0.24) 0%, transparent 60%),
+    linear-gradient(100deg, rgba(3,3,5,0.97) 0%, rgba(3,3,5,0.9) 30%, rgba(3,3,5,0.62) 62%, rgba(3,3,5,0.38) 100%),
+    url("/assets/asset_38294717af.jpg");
 }
 
-/* ========== LAYOUT ========== */
-.app {
-  display: flex;
-  height: 100vh;
-  width: 100vw;
-}
-
-/* ========== SIDEBAR ========== */
-.sidebar {
-  width: var(--sidebar-w);
-  background: var(--panel);
-  border-right: 1px solid var(--border);
-  display: flex;
-  flex-direction: column;
-  flex-shrink: 0;
-  position: relative;
-  overflow: hidden;
-}
-
-.sidebar::before {
-  content:'';
+/* Pro eFootball Dynamic Video Game Scanlines */
+.game-scanlines {
   position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 2px;
-  background: var(--green);
-  box-shadow: 0 0 12px var(--green);
-}
-
-.logo {
-  padding: 18px 16px 14px;
-  border-bottom: 1px solid var(--border);
-}
-
-.logo-text {
-  font-family: var(--font-display);
-  font-size: 20px;
-  font-weight: 900;
-  letter-spacing: 2px;
-  color: #fff;
-  text-transform: uppercase;
-}
-
-.logo-text span {
-  color: var(--green);
-}
-
-.status-dot {
-  display: inline-block;
-  width: 6px; height: 6px;
-  background: var(--green);
-  border-radius: 50%;
-  margin-right: 5px;
-  box-shadow: 0 0 6px var(--green);
-  animation: blink 2s infinite;
-}
-
-@keyframes blink {
-  0%,100%{opacity:1} 50%{opacity:0.3}
-}
-
-.status-line {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  color: var(--green-dim);
-  margin-top: 4px;
-  letter-spacing: 1px;
-}
-
-.nav-section {
-  padding: 12px 0;
-  border-bottom: 1px solid var(--border);
-}
-
-.nav-label {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  color: var(--text3);
-  letter-spacing: 2px;
-  padding: 0 16px 8px;
-  text-transform: uppercase;
-}
-
-.nav-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 9px 16px;
-  cursor: pointer;
-  font-family: var(--font-display);
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: var(--text2);
-  transition: all 0.15s;
-  position: relative;
-  border-left: 2px solid transparent;
-}
-
-.nav-item:hover {
-  color: var(--text);
-  background: var(--green4);
-  border-left-color: var(--green3);
-}
-
-.nav-item.active {
-  color: var(--green);
-  background: var(--green4);
-  border-left-color: var(--green);
-}
-
-.nav-item.active::after {
-  content:'';
-  position: absolute;
-  right: 0; top: 50%;
-  transform: translateY(-50%);
-  width: 4px; height: 4px;
-  background: var(--green);
-  border-radius: 50%;
-  box-shadow: 0 0 6px var(--green);
-}
-
-.nav-icon { font-size: 15px; width: 18px; text-align: center; }
-
-.sidebar-footer {
-  margin-top: auto;
-  padding: 12px 16px;
-  border-top: 1px solid var(--border);
-}
-
-.analyst-profile {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  color: var(--text3);
-  letter-spacing: 1px;
-}
-
-.analyst-name {
-  color: var(--green-dim);
-  display: block;
-  margin-top: 2px;
-  font-size: 10px;
-}
-
-/* ========== MAIN CONTENT ========== */
-.main {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-
-/* ========== TOPBAR ========== */
-.topbar {
-  display: flex;
-  align-items: center;
-  padding: 10px 24px;
-  border-bottom: 1px solid var(--border);
-  background: var(--panel);
-  gap: 8px;
-  flex-shrink: 0;
-}
-
-.breadcrumb {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  color: var(--text3);
-  letter-spacing: 1px;
-}
-
-.breadcrumb span { color: var(--text2); }
-
-.topbar-right {
-  margin-left: auto;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.sys-badge {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  padding: 3px 8px;
-  border: 1px solid var(--green3);
-  color: var(--green);
-  letter-spacing: 1px;
-  background: var(--green4);
-}
-
-/* ========== PAGE CONTAINER ========== */
-.page {
-  flex: 1;
-  overflow-y: auto;
-  padding: 28px 28px 40px;
-  display: none;
-}
-
-.page.active { display: block; }
-
-.page::-webkit-scrollbar { width: 4px; }
-.page::-webkit-scrollbar-track { background: var(--bg); }
-.page::-webkit-scrollbar-thumb { background: var(--border2); }
-
-/* ========== PAGE HEADER ========== */
-.page-header {
-  margin-bottom: 28px;
-}
-
-.page-title {
-  font-family: var(--font-display);
-  font-size: 38px;
-  font-weight: 900;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: #fff;
-  line-height: 1;
-}
-
-.page-title span { color: var(--green); }
-
-.page-sub {
-  font-size: 13px;
-  color: var(--text2);
-  margin-top: 6px;
-  font-weight: 300;
-}
-
-/* ========== DASHBOARD ========== */
-.hero-section {
-  background: linear-gradient(135deg, var(--bg3) 0%, var(--panel) 100%);
-  border: 1px solid var(--border);
-  padding: 36px 36px 32px;
-  position: relative;
-  overflow: hidden;
-  margin-bottom: 28px;
-}
-
-.hero-section::before {
-  content:'';
-  position: absolute;
-  top: 0; right: 0;
-  width: 300px; height: 300px;
-  background: radial-gradient(circle, var(--green3) 0%, transparent 70%);
-  pointer-events: none;
-}
-
-.hero-section::after {
-  content: '⚽';
-  position: absolute;
-  right: 40px; top: 50%;
-  transform: translateY(-50%);
-  font-size: 100px;
-  opacity: 0.06;
-}
-
-.hero-label {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  color: var(--green);
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 12px;
-}
-
-.hero-label::before {
-  content:'';
-  width: 20px; height: 1px;
-  background: var(--green);
-}
-
-.hero-title {
-  font-family: var(--font-display);
-  font-size: 64px;
-  font-weight: 900;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  color: #fff;
-  line-height: 0.95;
-}
-
-.hero-title span { color: var(--green); display: block; }
-
-.hero-desc {
-  margin-top: 14px;
-  font-size: 14px;
-  color: var(--text2);
-  max-width: 460px;
-  line-height: 1.6;
-  font-weight: 300;
-}
-
-.hero-actions {
-  display: flex;
-  gap: 12px;
-  margin-top: 24px;
-}
-
-.btn-primary {
-  font-family: var(--font-display);
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  padding: 12px 24px;
-  background: var(--green);
-  color: #000;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  transition: all 0.15s;
-}
-
-.btn-primary:hover {
-  background: #fff;
-  box-shadow: 0 0 20px var(--green3);
-}
-
-.btn-secondary {
-  font-family: var(--font-display);
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  padding: 12px 24px;
-  background: transparent;
-  color: var(--text);
-  border: 1px solid var(--border2);
-  cursor: pointer;
-  transition: all 0.15s;
-}
-
-.btn-secondary:hover {
-  border-color: var(--green);
-  color: var(--green);
-}
-
-.section-title {
-  font-family: var(--font-display);
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--text2);
-  margin-bottom: 16px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.section-title::after {
-  content:'';
-  flex: 1;
-  height: 1px;
-  background: var(--border);
-}
-
-.modules-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-}
-
-.module-card {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  padding: 20px;
-  cursor: pointer;
-  transition: all 0.2s;
-  position: relative;
-  overflow: hidden;
-}
-
-.module-card::before {
-  content:'';
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 2px;
-  background: var(--green);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.2s;
-}
-
-.module-card:hover {
-  border-color: var(--border2);
-  background: var(--bg3);
-}
-
-.module-card:hover::before { transform: scaleX(1); }
-
-.module-icon {
-  font-size: 22px;
-  margin-bottom: 10px;
-  opacity: 0.8;
-}
-
-.module-name {
-  font-family: var(--font-display);
-  font-size: 15px;
-  font-weight: 800;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: #fff;
-  margin-bottom: 6px;
-}
-
-.module-desc {
-  font-size: 12px;
-  color: var(--text3);
-  line-height: 1.5;
-  font-weight: 300;
-}
-
-/* ========== FORMATIONS ========== */
-.formations-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 14px;
-}
-
-.search-bar {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-.search-input {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  color: var(--text);
-  font-family: var(--font-mono);
-  font-size: 12px;
-  padding: 9px 14px;
-  width: 260px;
-  outline: none;
-  letter-spacing: 1px;
-  transition: border-color 0.15s;
-}
-
-.search-input:focus { border-color: var(--green); }
-.search-input::placeholder { color: var(--text3); }
-
-.formation-card {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  padding: 14px;
-  cursor: pointer;
-  transition: all 0.2s;
-  position: relative;
-}
-
-.formation-card:hover {
-  border-color: var(--green3);
-  background: var(--bg3);
-}
-
-.formation-card.selected {
-  border-color: var(--green);
-  background: var(--green4);
-}
-
-.formation-name {
-  font-family: var(--font-display);
-  font-size: 18px;
-  font-weight: 900;
-  letter-spacing: 2px;
-  color: #fff;
-  margin-bottom: 2px;
-}
-
-.formation-type {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  color: var(--text3);
-  letter-spacing: 1px;
-  margin-bottom: 10px;
-}
-
-.formation-pitch {
-  width: 100%;
-  aspect-ratio: 0.72;
-  background: #0d1f0d;
-  border: 1px solid #1a2e1a;
-  position: relative;
-  border-radius: 2px;
-  overflow: hidden;
-}
-
-.formation-pitch::before {
-  content:'';
-  position: absolute;
-  left: 50%; top: 0; bottom: 0;
-  width: 1px;
-  background: #1e3a1e;
-  transform: translateX(-50%);
-}
-
-.formation-pitch::after {
-  content:'';
-  position: absolute;
-  left: 50%; top: 50%;
-  width: 30%; aspect-ratio: 1;
-  border: 1px solid #1e3a1e;
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.pitch-player {
-  position: absolute;
-  width: 18px; height: 18px;
-  background: var(--green);
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-mono);
-  font-size: 6px;
-  color: #000;
-  font-weight: 700;
-  box-shadow: 0 0 6px var(--green3);
+  inset: 0;
   z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.35) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+  background-size: 100% 4px, 6px 100%;
+  opacity: 0.6;
 }
 
-.formation-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 8px;
+/* eFootball Console HUD Grid System */
+.hud-grid-matrix {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: 0.12;
+  pointer-events: none;
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.5) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.5) 1px, transparent 1px);
 }
 
-.formation-count {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  color: var(--text3);
+/* HIGH TECH E-FOOTBALL RADAR MAP OVERLAY */
+.tactical-pitch-overlay {
+  position: absolute;
+  right: 6%;
+  top: 15%;
+  width: min(540px, 46vw);
+  height: min(540px, 46vw);
+  z-index: 2;
+  pointer-events: none;
+}
+.pitch-ring {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px dashed rgba(230,30,37,0.4);
+  border-radius: 50%;
+}
+.ring-1 { width: 100%; height: 100%; animation: spinTactical 50s linear infinite; }
+.ring-2 { width: 78%; height: 78%; border: 1px solid rgba(255, 255, 255, 0.05); animation: spinTactical 35s linear infinite reverse; }
+.ring-3 { width: 50%; height: 50%; border: 1px dashed rgba(255,255,255,0.2); }
+
+/* Gaming HUD Target Reticles */
+.hud-corner {
+  position: absolute; width: 16px; height: 16px; border: 2px solid var(--red); opacity: 0.6;
+}
+.tl { top: 0; left: 0; border-right: none; border-bottom: none; }
+.tr { top: 0; right: 0; border-left: none; border-bottom: none; }
+.bl { bottom: 0; left: 0; border-right: none; border-top: none; }
+.br { bottom: 0; right: 0; border-left: none; border-top: none; }
+
+/* Interactive Radar Engine Nodes */
+.radar-node {
+  position: absolute; width: 6px; height: 6px; background: #ffffff; border-radius: 50%;
+  box-shadow: 0 0 8px #ffffff; animation: nodePulse 2s infinite ease-in-out;
+}
+.node-red { background: var(--red-bright); box-shadow: 0 0 10px var(--red-bright); }
+.n1 { top: 30%; left: 40%; animation-delay: 0.2s; }
+.n2 { top: 55%; left: 25%; animation-delay: 0.7s; }
+.n3 { top: 70%; left: 65%; animation-delay: 0.4s; }
+
+@keyframes spinTactical { to { transform: translate(-50%, -50%) rotate(360deg); } }
+@keyframes nodePulse { 0%, 100% { transform: scale(0.8); opacity: 0.5; } 50% { transform: scale(1.4); opacity: 1; } }
+
+/* Glowing Tactical Stream Particles */
+.hero-particles{position:absolute;inset:0;z-index:1;pointer-events:none;}
+.particle{
+  position:absolute; background: rgba(230, 30, 37, 0.6); border-radius: 50%;
+  animation: streamUp linear infinite; box-shadow: 0 0 6px var(--red);
+}
+@keyframes streamUp {
+  0% { transform: translateY(105vh) scale(0.4); opacity: 0; }
+  15% { opacity: 0.9; }
+  85% { opacity: 0.4; }
+  100% { transform: translateY(-5vh) scale(1.1); opacity: 0; }
 }
 
-.formation-tag {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  padding: 2px 6px;
-  background: var(--green4);
-  color: var(--green);
-  border: 1px solid var(--green3);
-  letter-spacing: 1px;
+/* Floating Logo UI Frame */
+.hero-logo-container {
+  position:absolute;right:11%;top:25%;width:min(310px,28vw);height:min(310px,28vw);
+  z-index:3;
+  animation: logoBob 5s ease-in-out infinite;
 }
-
-/* ========== STYLES PAGE ========== */
-.styles-list {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+.hero-crest-img{
+  display:block;width:100%;height:100%;
+  border-radius:50%;
+  background-color:#fff;
+  background-image:var(--logo-data);background-size:contain;background-position:center;background-repeat:no-repeat;
+  filter: drop-shadow(0 20px 45px rgba(0,0,0,0.9)) drop-shadow(0 0 30px rgba(230,30,37,0.55));
+  border: 4px solid #ffffff;
 }
+@keyframes logoBob{0%,100%{transform:translateY(0) rotate(0deg);}50%{transform:translateY(-12px) rotate(1deg);}}
 
-.style-card {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  padding: 16px 20px;
-  cursor: pointer;
-  transition: all 0.15s;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
+.hero-inner{position:relative;z-index:4;max-width:var(--container);margin:0 auto;padding:60px 24px 40px;width:100%;}
 
-.style-card:hover {
-  border-color: var(--border2);
-  background: var(--bg3);
-}
-
-.style-card.selected {
-  border-color: var(--green);
-  background: var(--green4);
-}
-
-.style-name-block {
-  min-width: 200px;
-}
-
-.style-name {
-  font-family: var(--font-display);
-  font-size: 17px;
-  font-weight: 800;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: #fff;
-}
-
-.style-tag {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  color: var(--text3);
-  letter-spacing: 1px;
-}
-
-.style-bars {
-  flex: 1;
-  display: flex;
-  gap: 16px;
-}
-
-.bar-group {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.bar-label {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  color: var(--text3);
-  letter-spacing: 1px;
-  display: flex;
-  justify-content: space-between;
-  text-transform: uppercase;
-}
-
-.bar-label span { color: var(--text2); }
-
-.bar-track {
-  height: 4px;
-  background: var(--bg);
-  position: relative;
-  border-radius: 0;
-}
-
-.bar-fill {
-  height: 100%;
-  background: var(--green);
-  box-shadow: 0 0 4px var(--green3);
-  transition: width 0.4s;
-}
-
-.bar-fill.defense { background: var(--red); box-shadow: 0 0 4px var(--red2); }
-.bar-fill.tempo { background: var(--amber); }
-
-/* ========== ROLES PAGE ========== */
-.roles-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-}
-
-.role-card {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  padding: 16px;
-  cursor: pointer;
-  transition: all 0.15s;
-}
-
-.role-card:hover {
-  border-color: var(--border2);
-  background: var(--bg3);
-}
-
-.role-card.selected {
-  border-color: var(--green);
-  background: var(--green4);
-}
-
-.role-card-name {
-  font-family: var(--font-display);
-  font-size: 16px;
-  font-weight: 800;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: #fff;
-  margin-bottom: 10px;
-}
-
-.role-stats {
-  display: flex;
-  gap: 12px;
-}
-
-.role-stat {
-  flex: 1;
-}
-
-.role-stat-label {
-  font-family: var(--font-mono);
-  font-size: 8px;
-  color: var(--text3);
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  margin-bottom: 3px;
-  display: flex;
-  justify-content: space-between;
-}
-
-.role-stat-label span { color: var(--text2); }
-
-.role-bar-track {
-  height: 3px;
-  background: var(--bg);
-}
-
-.role-bar-fill {
-  height: 100%;
-  background: var(--green);
-}
-
-.role-bar-fill.def { background: var(--red); }
-
-/* ========== MATCH ANALYZER ========== */
-.match-layout {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  gap: 16px;
-  align-items: start;
-  margin-bottom: 20px;
-}
-
-.team-panel {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  padding: 20px;
-}
-
-.team-label {
-  font-family: var(--font-display);
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  margin-bottom: 16px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid var(--border);
-}
-
-.team-label.home { color: var(--green); }
-.team-label.away { color: var(--red); text-align: right; }
-
-.form-group {
-  margin-bottom: 14px;
-}
-
-.form-label {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  color: var(--text3);
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  margin-bottom: 5px;
-}
-
-.form-select, .form-input {
-  width: 100%;
-  background: var(--bg);
-  border: 1px solid var(--border);
-  color: var(--text);
+/* Editorial Console Headers */
+.magazine-tag-frame {
+  display: inline-block;
+  border: 1px solid rgba(255,255,255,0.4);
+  padding: 6px 18px;
   font-family: var(--font-mono);
   font-size: 11px;
-  padding: 9px 12px;
-  outline: none;
-  cursor: pointer;
-  transition: border-color 0.15s;
-  -webkit-appearance: none;
-  letter-spacing: 1px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin-bottom: 35px;
+  background: rgba(0,0,0,0.3);
 }
-
-.form-select:focus, .form-input:focus { border-color: var(--green); }
-
-.vs-divider {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px 0;
-}
-
-.vs-text {
+.hero-magazine-title {
   font-family: var(--font-display);
-  font-size: 28px;
-  font-weight: 900;
-  color: var(--text3);
-  letter-spacing: 4px;
+  text-transform: uppercase;
+  font-size: clamp(65px, 12vw, 150px);
+  line-height: 0.82;
+  letter-spacing: -0.01em;
+  margin-bottom: 24px;
 }
-
-.analyze-btn {
-  width: 100%;
-  font-family: var(--font-display);
-  font-size: 14px;
+.hero-magazine-title .sub-header {
+  display: block;
+  font-family: var(--font-body);
   font-weight: 800;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  padding: 14px;
-  background: var(--green);
-  color: #000;
-  border: none;
-  cursor: pointer;
-  margin-bottom: 20px;
-  transition: all 0.15s;
+  font-size: clamp(14px, 2.5vw, 26px);
+  letter-spacing: 0.52em;
+  color: #ffffff;
+  border-top: 1px solid rgba(255,255,255,0.18);
+  padding-top: 10px;
+  margin-top: 14px;
+}
+.hero-tagline{
+  font-size: clamp(15px, 1.6vw, 18px); color: var(--ink-dim); max-width: 540px; margin: 0 0 40px;
+}
+.hero-actions{display:flex;flex-wrap:wrap;gap:16px;margin-bottom:56px;}
+
+.hero-stats{display:flex;flex-wrap:wrap;gap:0;border-top:1px solid var(--line);padding-top:26px;max-width:640px;}
+.hero-stat{flex:1;min-width:120px;padding-right:24px;}
+.hero-stat b{
+  display:block;font-family:var(--font-mono);font-size:clamp(22px,2.6vw,30px);color:var(--red-bright);
+}
+.hero-stat span{font-size:12px;color:var(--ink-faint);text-transform:uppercase;letter-spacing:.08em;}
+
+.scroll-cue{
+  position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:2;
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  font-family:var(--font-mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-faint);
+}
+.scroll-cue .stick{width:1px;height:34px;background:linear-gradient(var(--red),transparent);animation:scroll-cue 1.8s ease-in-out infinite;}
+@keyframes scroll-cue{0%{opacity:0;transform:scaleY(.3);transform-origin:top;}50%{opacity:1;transform:scaleY(1);transform-origin:top;}100%{opacity:0;transform:scaleY(.3);transform-origin:bottom;}}
+
+/* ============================= ABOUT ============================= */
+.about-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:56px;align-items:center;}
+@media(max-width:860px){.about-grid{grid-template-columns:1fr;gap:36px;}}
+.about-emblem{
+  aspect-ratio:1/1;
+  background: linear-gradient(135deg, var(--bg-elevated), #1f0406);
+  border:1px solid var(--line);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;
+}
+.about-emblem .crest-big-img{
+  display:block;width:65%;aspect-ratio:1/1;border-radius:50%;position:relative;z-index:1;
+  background-color:#fff;
+  background-image:var(--logo-data);background-size:contain;background-position:center;background-repeat:no-repeat;
+  box-shadow:0 30px 60px -20px var(--shadow);
+  border: 2px solid #ffffff;
+}
+.about-copy p{color:var(--ink-dim);margin-bottom:18px;font-size:15.5px;}
+.about-copy p b{color:var(--ink);font-weight:700;}
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:32px;}
+@media(max-width:560px){.stat-row{grid-template-columns:repeat(2,1fr);}}
+.stat-card{padding:18px 16px;text-align:center;}
+.stat-card b{display:block;font-family:var(--font-mono);font-size:24px;color:var(--red-bright);}
+.stat-card span{font-size:11px;color:var(--ink-faint);text-transform:uppercase;letter-spacing:.06em;}
+
+/* ============================= ACTIVITIES ============================= */
+.activity-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+@media(max-width:980px){.activity-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:560px){.activity-grid{grid-template-columns:1fr;}}
+.activity-card{padding:30px 24px;transition:all .3s ease;}
+.activity-card:hover{border-color:var(--red);background:rgba(255,255,255,0.04);transform:translateY(-4px);}
+.activity-ic{
+  width:48px;height:48px;border-radius:0px;display:flex;align-items:center;justify-content:center;
+  background:rgba(230,30,37,0.15);
+  border:1px solid var(--line-strong);color:var(--red-bright);margin-bottom:20px;
+}
+.activity-ic svg{width:22px;height:22px;}
+.activity-card h3{font-family:var(--font-display);font-weight:400;text-transform:uppercase;font-size:19px;letter-spacing:.02em;margin-bottom:10px;}
+.activity-card p{font-size:14px;color:var(--ink-dim);}
+
+/* ============================= LIVE ============================= */
+.live-panel{padding:38px;display:grid;grid-template-columns:auto 1fr auto;gap:30px;align-items:center;position:relative;overflow:hidden;}
+@media(max-width:760px){.live-panel{grid-template-columns:1fr;text-align:center;}}
+.live-badge{
+  display:inline-flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:12px;letter-spacing:.15em;
+  color:var(--green-live);border:1px solid rgba(62,207,114,0.4);padding:8px 14px;
+  background:rgba(62,207,114,0.08);
+}
+.live-badge .dot{width:7px;height:7px;border-radius:50%;background:var(--green-live);box-shadow:0 0 10px var(--green-live);animation:pulse 1.4s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(1.4);}}
+.live-mid h3{font-family:var(--font-display);font-weight:400;font-size:clamp(20px,2.6vw,28px);text-transform:uppercase;margin:14px 0 6px;}
+.live-mid p{color:var(--ink-dim);font-size:14px;}
+.live-score{display:flex;align-items:center;gap:18px;justify-content:center;font-family:var(--font-mono);}
+.live-score .team{font-size:13px;color:var(--ink-dim);text-transform:uppercase;letter-spacing:.05em;}
+.live-score .score{font-size:38px;color:var(--red-bright);}
+
+/* ============================= SCHEDULE ============================= */
+.schedule-list{display:flex;flex-direction:column;gap:14px;}
+.fixture{
+  display:grid;grid-template-columns:80px 1fr auto auto;gap:22px;align-items:center;
+  padding:20px 24px;transition:all .25s ease;
+}
+.fixture:hover{border-color:var(--red);background:rgba(230,30,37,0.03);}
+@media(max-width:700px){.fixture{grid-template-columns:64px 1fr;row-gap:10px;}
+  .fixture .fx-status,.fixture .fx-venue{grid-column:1/-1;}}
+.fx-date{
+  text-align:center;font-family:var(--font-mono);border-right:1px solid var(--line);padding-right:18px;
+}
+@media(max-width:700px){.fx-date{padding-right:0;border-right:none;}}
+.fx-date b{display:block;font-size:24px;color:var(--red-bright);line-height:1;}
+.fx-date span{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);}
+.fx-teams{font-family:var(--font-display);text-transform:uppercase;font-size:18px;letter-spacing:.01em;}
+.fx-teams small{display:block;font-family:var(--font-body);font-weight:600;font-size:12px;text-transform:none;letter-spacing:0;color:var(--ink-faint);margin-top:4px;}
+.fx-venue{font-size:12.5px;color:var(--ink-dim);font-family:var(--font-mono);text-align:right;}
+.fx-status{
+  font-family:var(--font-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+  padding:6px 12px;border:1px solid var(--line-strong);color:var(--red);text-align:center;white-space:nowrap;
 }
 
-.analyze-btn:hover {
-  background: #fff;
-  box-shadow: 0 0 24px var(--green3);
+/* ============================= TEAMS ============================= */
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+@media(max-width:900px){.team-grid{grid-template-columns:1fr;}}
+.team-card{padding:0;overflow:hidden;}
+.team-top{
+  padding:32px 26px 26px;position:relative;
+  background:linear-gradient(155deg, rgba(230,30,37,0.08), transparent 60%);
+  border-bottom:1px solid var(--line);
+}
+.team-crest-replacement{
+  width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  background:var(--bg-elevated-2);
+  border: 1px solid var(--line-strong);
+  color:var(--red-bright);font-family:var(--font-display);font-size:14px;margin-bottom:16px;
+}
+.team-top h3{font-family:var(--font-display);text-transform:uppercase;font-size:22px;letter-spacing:.01em;margin-bottom:6px;}
+.team-top p{font-size:13px;color:var(--ink-dim);}
+.team-meta{display:flex;justify-content:space-between;padding:18px 26px;font-family:var(--font-mono);font-size:11.5px;color:var(--ink-faint);text-transform:uppercase;letter-spacing:.05em;}
+.team-meta b{color:var(--red-bright);display:block;font-size:15px;font-family:var(--font-mono);}
+
+/* ============================= PLAYERS ============================= */
+.player-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+@media(max-width:900px){.player-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:560px){.player-grid{grid-template-columns:1fr;}}
+.player-card{padding:26px;display:flex;align-items:center;gap:18px;transition:all .25s ease;}
+.player-card:hover{border-color:var(--red);background:rgba(255,255,255,0.03);transform:translateY(-3px);}
+.player-avatar{
+  width:64px;height:64px;border-radius:0px;flex:none;position:relative;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-display);font-size:20px;color:#ffffff;
+  background:linear-gradient(155deg, var(--red-bright), var(--red-dim));
+}
+.player-avatar .num{
+  position:absolute;bottom:-6px;right:-6px;width:24px;height:24px;border-radius:50%;
+  background:var(--bg-elevated-2);border:1px solid var(--line-strong);color:var(--red-bright);
+  font-family:var(--font-mono);font-size:11px;display:flex;align-items:center;justify-content:center;
+}
+.player-info h4{font-family:var(--font-display);text-transform:uppercase;font-size:16px;letter-spacing:.02em;margin-bottom:4px;}
+.player-info .pos{font-family:var(--font-mono);font-size:11px;color:var(--red);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;}
+.player-info .tag{font-size:12.5px;color:var(--ink-dim);}
+
+/* ============================= LEADERBOARD ============================= */
+.board-wrap{overflow-x:auto;border:1px solid var(--line);}
+table.board{width:100%;border-collapse:collapse;min-width:560px;font-family:var(--font-mono);}
+table.board th, table.board td{padding:16px 18px;text-align:left;font-size:13px;}
+table.board thead th{
+  text-transform:uppercase;letter-spacing:.08em;font-size:10.5px;color:var(--ink-faint);
+  border-bottom:1px solid var(--line);background:var(--glass);
+}
+table.board tbody tr{border-bottom:1px solid var(--line);transition:background .25s ease;}
+table.board tbody tr:last-child{border-bottom:none;}
+table.board tbody tr:hover{background:var(--glass);}
+table.board td.rank{color:var(--red-bright);font-weight:700;}
+table.board tbody tr.lead td{color:var(--red-bright);}
+table.board tbody tr.lead{background:linear-gradient(90deg, rgba(230,30,37,0.1), transparent); border-left:3px solid var(--red-bright);}
+table.board td.team-name{font-family:var(--font-body);font-weight:700;color:var(--ink);text-transform:none;font-size:14px;}
+table.board td.pts{color:var(--red-bright);font-weight:700;}
+
+/* ============================= GALLERY ============================= */
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+@media(max-width:860px){.gallery-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:520px){.gallery-grid{grid-template-columns:1fr;}}
+.gallery-tile{
+  aspect-ratio:4/3;position:relative;overflow:hidden;
+  border:1px solid var(--line);cursor:pointer;
+}
+.gallery-tile .gt-bg{
+  position:absolute;inset:0;transition:transform .5s ease;
+  display:flex;align-items:center;justify-content:center;
+}
+.gallery-tile:hover .gt-bg{transform:scale(1.06);}
+.gallery-tile .gt-bg svg{width:30%;height:30%;opacity:.4;}
+.gallery-tile .gt-overlay{
+  position:absolute;inset:0;display:flex;align-items:flex-end;padding:16px;
+  background:linear-gradient(to top, rgba(0,0,0,0.9), transparent 60%);
+  opacity:0;transition:opacity .3s ease;
+}
+.gallery-tile:hover .gt-overlay{opacity:1;}
+.gallery-tile .gt-overlay span{font-family:var(--font-mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:#fff;}
+.gallery-note{margin-top:20px;font-size:12.5px;color:var(--ink-faint);font-family:var(--font-mono);}
+
+/* ============================= REGISTRATION ============================= */
+.register-wrap{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:start;}
+@media(max-width:900px){.register-wrap{grid-template-columns:1fr;}}
+.register-info p{color:var(--ink-dim);font-size:15px;margin-bottom:24px;}
+.register-steps{display:flex;flex-direction:column;gap:16px;margin-bottom:30px;}
+.register-steps li{display:flex;gap:14px;align-items:flex-start;}
+.rs-num{
+  width:28px;height:28px;border-radius:50%;border:1px solid var(--line-strong);color:var(--red);
+  display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:12px;flex:none;
+}
+.register-steps span{font-size:14px;color:var(--ink-dim);padding-top:4px;}
+.form-card{padding:34px;}
+.field{margin-bottom:18px;}
+.field label{display:block;font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:8px;}
+.field input, .field select, .field textarea{
+  width:100%;padding:14px 16px;border:1px solid var(--line);
+  background:var(--bg-elevated);color:var(--ink);font-size:14.5px;transition:border-color .25s ease;
+  border-radius:0px;
+}
+.field input:focus, .field select:focus, .field textarea:focus{outline:none;border-color:var(--red);}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+@media(max-width:480px){.field-row{grid-template-columns:1fr;}}
+.form-submit{width:100%;margin-top:6px;}
+
+/* ============================= CONTACT / FOOTER ============================= */
+.footer{border-top:1px solid var(--line);padding:72px 0 30px;background:var(--bg-elevated);}
+.footer-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:40px;margin-bottom:56px;}
+@media(max-width:860px){.footer-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:520px){.footer-grid{grid-template-columns:1fr;}}
+.footer-brand p{color:var(--ink-dim);font-size:13.5px;margin:16px 0 20px;max-width:280px;}
+.footer-socials{display:flex;gap:10px;}
+.footer h5{font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:18px;}
+.footer ul li{margin-bottom:11px;}
+.footer ul li a{font-size:13.5px;color:var(--ink-dim);transition:color .25s ease;}
+.footer ul li a:hover{color:var(--red);}
+.contact-card{padding:16px;display:flex;gap:12px;align-items:center;margin-bottom:12px;}
+.contact-card .icon-btn{border-color:var(--line-strong);}
+.contact-card b{display:block;font-size:13px;}
+.contact-card span{font-size:11.5px;color:var(--ink-faint);font-family:var(--font-mono);}
+.footer-bottom{
+  border-top:1px solid var(--line);padding-top:26px;
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;
+  font-size:12px;color:var(--ink-faint);font-family:var(--font-mono);
 }
 
-.analysis-result {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  padding: 20px;
-  display: none;
+/* WhatsApp floating button */
+.wa-float{
+  position:fixed;bottom:26px;right:26px;z-index:90;
+  width:58px;height:58px;border-radius:50%;
+  background:linear-gradient(150deg,#3ecf72,#25a75a);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 14px 30px -10px rgba(37,167,90,0.6);
+}
+.wa-float svg{width:28px;height:28px;color:#fff;}
+
+@media(max-width:900px){
+  .nav-links{
+    position:fixed;inset:0;top:0;
+    background:color-mix(in srgb, var(--bg) 98%, transparent);
+    backdrop-filter:blur(20px);
+    flex-direction:column;justify-content:center;gap:26px;
+    transform:translateX(100%);transition:transform .4s ease;
+  }
+  .nav-links.open{transform:translateX(0);}
+  .nav-links a:not(.nav-cta){font-size:20px;}
+  .hamburger{display:flex;}
+  .tactical-pitch-overlay { display: none; }
 }
 
-.analysis-result.visible { display: block; }
+/* ============================= GLOBAL STARFIELD (whole-site ambient animation) ============================= */
+.starfield{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
+.star{position:absolute;background:#ffffff;border-radius:50%;box-shadow:0 0 4px rgba(255,255,255,0.65);will-change:transform,opacity;}
+@keyframes starTwinkle{0%,100%{opacity:var(--s-min,0.15);}50%{opacity:1;}}
+@keyframes starDrift{from{transform:translate3d(0,0,0);}to{transform:translate3d(var(--s-dx,0px), var(--s-dy,-30px),0);}}
 
-.result-title {
-  font-family: var(--font-display);
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--green);
-  margin-bottom: 14px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid var(--border);
+/* ============================= HIGHLIGHT OF THE DAY / NEWS ============================= */
+.highlight-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+@media(max-width:900px){.highlight-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:600px){.highlight-grid{grid-template-columns:1fr;}}
+.highlight-card{overflow:hidden;transition:all .3s ease;}
+.highlight-card:hover{border-color:var(--red);transform:translateY(-4px);}
+.highlight-media{aspect-ratio:16/10;background-size:cover;background-position:center;background-color:var(--bg-elevated-2);display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--line);}
+.hl-noimg{font-family:var(--font-display);font-size:22px;color:var(--red-dim);letter-spacing:.05em;}
+.highlight-body{padding:20px 22px 24px;}
+.highlight-date{font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--red);}
+.highlight-body h3{font-family:var(--font-display);font-weight:400;text-transform:uppercase;font-size:18px;margin:8px 0 8px;letter-spacing:.01em;}
+.highlight-body p{font-size:13.5px;color:var(--ink-dim);}
+.highlight-empty{display:none;font-family:var(--font-mono);font-size:13px;color:var(--ink-faint);padding:30px;border:1px dashed var(--line-strong);text-align:center;}
+
+/* ============================= ADMIN ENTRY + LOGIN / PANEL MODAL ============================= */
+.admin-entry{font-family:var(--font-mono);font-size:12px;color:var(--ink-faint);background:none;border:none;cursor:pointer;letter-spacing:.05em;text-transform:uppercase;transition:color .2s ease;padding:0;}
+.admin-entry:hover{color:var(--red);}
+
+.modal-overlay{
+  position:fixed;inset:0;z-index:200;
+  background:rgba(3,3,5,0.86);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  display:flex;align-items:center;justify-content:center;padding:24px;
+}
+.modal-overlay[hidden]{display:none;}
+.modal-card{
+  position:relative;width:100%;max-width:460px;max-height:88vh;overflow-y:auto;
+  padding:36px 30px 30px;background:var(--bg-elevated-2);border:1px solid var(--line-strong);
+  box-shadow:0 40px 80px -20px var(--shadow);
+}
+.modal-close{
+  position:absolute;top:14px;right:14px;width:32px;height:32px;border:1px solid var(--line);
+  background:transparent;color:var(--ink-dim);font-size:20px;line-height:1;
+  display:flex;align-items:center;justify-content:center;transition:all .2s ease;
+}
+.modal-close:hover{color:var(--red);border-color:var(--red);}
+.admin-badge{display:inline-block;font-family:var(--font-mono);font-size:10.5px;letter-spacing:.2em;color:var(--red);border:1px solid var(--line-strong);padding:4px 10px;margin-bottom:16px;}
+.admin-view h3{font-family:var(--font-display);text-transform:uppercase;font-size:24px;font-weight:400;margin-bottom:8px;}
+.admin-sub{font-size:13.5px;color:var(--ink-dim);margin-bottom:20px;}
+.admin-error{font-size:12.5px;color:var(--red-bright);margin:-6px 0 14px;}
+.admin-success{font-size:12.5px;color:var(--green-live);margin:-6px 0 14px;}
+.admin-link{display:block;margin-top:14px;font-family:var(--font-mono);font-size:12px;color:var(--ink-faint);text-decoration:underline;text-underline-offset:3px;background:none;border:none;cursor:pointer;padding:0;}
+.admin-link:hover{color:var(--red);}
+.admin-panel-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;gap:12px;}
+.admin-form{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:20px 0;margin-bottom:20px;}
+.admin-form-actions{display:flex;gap:10px;}
+.admin-list{display:flex;flex-direction:column;gap:10px;margin-bottom:22px;max-height:220px;overflow-y:auto;}
+.admin-list-item{display:flex;align-items:center;gap:12px;padding:10px;border:1px solid var(--line);}
+.admin-list-thumb{width:44px;height:44px;flex:none;background-size:cover;background-position:center;background-color:var(--bg-elevated);}
+.admin-list-info{flex:1;min-width:0;}
+.admin-list-info b{display:block;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.admin-list-info span{font-size:11px;color:var(--ink-faint);font-family:var(--font-mono);}
+.admin-list-actions{display:flex;gap:6px;flex:none;}
+.admin-list-actions button{font-family:var(--font-mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;padding:6px 10px;border:1px solid var(--line-strong);color:var(--ink-dim);background:none;cursor:pointer;transition:all .2s ease;}
+.admin-list-actions button:hover{border-color:var(--red);color:var(--red);}
+.admin-pw-change{border-top:1px solid var(--line);padding-top:16px;}
+.admin-pw-change summary{cursor:pointer;font-family:var(--font-mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:14px;}
+.admin-storage-note{font-size:11.5px;color:var(--ink-faint);margin-top:16px;line-height:1.5;}
+
+@media (prefers-reduced-motion: reduce){
+  .star, .particle, .hero-logo-container{animation:none !important;}
 }
 
-.result-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  padding: 8px 0;
-  border-bottom: 1px solid var(--border);
-  font-size: 12px;
-  color: var(--text2);
-  line-height: 1.5;
+/* ============================= TOURNAMENT SECTION ============================= */
+.tournament-wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:40px;align-items:start;}
+@media(max-width:900px){.tournament-wrap{grid-template-columns:1fr;}}
+.tournament-info{padding:30px;}
+.tournament-meta{display:flex;flex-direction:column;gap:16px;}
+.tournament-meta div{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding-bottom:14px;}
+.tournament-meta div:last-child{border-bottom:none;padding-bottom:0;}
+.tournament-meta span{font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);}
+.tournament-meta b{font-family:var(--font-mono);font-size:15px;color:var(--red-bright);text-align:right;}
+
+/* ============================= ADMIN DASHBOARD ============================= */
+.admin-checkbox{display:flex;align-items:center;gap:10px;font-size:13.5px;color:var(--ink-dim);margin-bottom:18px;cursor:pointer;}
+.admin-checkbox input{width:16px;height:16px;accent-color:var(--red);}
+
+.dashboard-card{
+  position:relative;width:100%;max-width:960px;max-height:90vh;
+  background:var(--bg-elevated-2);border:1px solid var(--line-strong);
+  box-shadow:0 40px 80px -20px var(--shadow);
+  display:flex;flex-direction:column;overflow:hidden;
 }
-
-.result-item:last-child { border-bottom: none; }
-
-.result-arrow {
-  color: var(--green);
-  font-family: var(--font-mono);
-  font-size: 11px;
-  flex-shrink: 0;
-  margin-top: 1px;
+.dash-head{display:flex;justify-content:space-between;align-items:center;padding:20px 26px;border-bottom:1px solid var(--line);flex:none;}
+.dash-body{display:flex;flex:1;min-height:0;}
+@media(max-width:760px){.dash-body{flex-direction:column;}}
+.dash-tabs{
+  display:flex;flex-direction:column;gap:2px;flex:none;width:190px;
+  border-right:1px solid var(--line);padding:14px;overflow-y:auto;
 }
-
-/* ========== AI TEAM GENERATOR ========== */
-.generator-layout {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  margin-bottom: 20px;
+@media(max-width:760px){
+  .dash-tabs{width:100%;flex-direction:row;overflow-x:auto;border-right:none;border-bottom:1px solid var(--line);padding:10px 14px;gap:6px;}
 }
-
-.generator-output {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  padding: 20px;
-  display: none;
+.dash-tab{
+  text-align:left;padding:10px 12px;font-family:var(--font-mono);font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;
+  color:var(--ink-dim);border-left:2px solid transparent;white-space:nowrap;transition:all .2s ease;
 }
+@media(max-width:760px){.dash-tab{border-left:none;border-bottom:2px solid transparent;flex:none;}}
+.dash-tab:hover{color:var(--ink);}
+.dash-tab.active{color:var(--red-bright);border-color:var(--red);background:rgba(230,30,37,0.06);}
+.dash-panels{flex:1;overflow-y:auto;padding:26px 30px 40px;min-width:0;}
+.dash-panel h3{font-family:var(--font-display);text-transform:uppercase;font-size:22px;font-weight:400;margin-bottom:6px;}
+.dash-panel .admin-form{border:none;padding:0;margin-bottom:20px;}
 
-.generator-output.visible { display: block; }
+.tour-select-row{margin-bottom:14px;}
+.tour-select-row select{width:100%;max-width:320px;padding:12px 14px;border:1px solid var(--line);background:var(--bg-elevated);color:var(--ink);font-size:14px;}
+.tour-table-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;}
+.tour-table-tab{padding:8px 16px;font-family:var(--font-mono);font-size:11px;letter-spacing:.05em;text-transform:uppercase;border:1px solid var(--line-strong);color:var(--ink-dim);background:none;cursor:pointer;transition:all .2s ease;}
+.tour-table-tab:hover{color:var(--ink);}
+.tour-table-tab.active{color:#fff;background:var(--red);border-color:var(--red);}
+/* ============================= CRITERIA & RULES ============================= */
+.rules-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+@media(max-width:860px){.rules-grid{grid-template-columns:1fr;}}
+.rules-card{padding:28px 26px;}
+.rules-card h3{font-family:var(--font-display);font-weight:400;text-transform:uppercase;font-size:18px;letter-spacing:.02em;margin-bottom:14px;color:var(--red-bright);}
+.rules-card p{font-size:13.5px;color:var(--ink-dim);white-space:pre-line;line-height:1.75;}
+.rules-card.consequences{border-color:var(--line-strong);background:rgba(230,30,37,0.04);}
+.tournament-wrap.single{display:block;max-width:520px;}
+.tournament-wrap.single .tournament-info{padding-bottom:34px;}
+.tournament-cta{width:100%;margin-top:26px;}
 
-.team-row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 10px 0;
-  border-bottom: 1px solid var(--border);
+/* ============================= WEEKLY HIGHLIGHT CAROUSEL (top of page) ============================= */
+.wh-section{position:relative;padding:118px 0 20px;background:var(--bg-elevated);border-bottom:1px solid var(--line);}
+@media(max-width:700px){.wh-section{padding:104px 0 16px;}}
+.wh-carousel{position:relative;overflow:hidden;border:1px solid var(--line-strong);background:var(--bg-elevated-2);box-shadow:0 25px 60px -30px var(--shadow);}
+.wh-label{
+  position:absolute;top:14px;left:14px;z-index:2;
+  font-family:var(--font-mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;
+  color:#fff;background:var(--red);padding:6px 12px;
 }
+.wh-track{display:flex;transition:transform .6s ease;}
+.wh-slide{flex:0 0 100%;display:grid;grid-template-columns:.9fr 1.1fr;min-height:380px;}
+@media(max-width:760px){.wh-slide{grid-template-columns:1fr;min-height:auto;}}
+.wh-media{background-size:cover;background-position:center;background-color:var(--bg-elevated-2);display:flex;align-items:center;justify-content:center;min-height:300px;}
+.wh-text{padding:44px 46px;display:flex;flex-direction:column;justify-content:center;}
+.wh-date{font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--red);margin-bottom:10px;}
+.wh-text h3{font-family:var(--font-display);font-weight:400;text-transform:uppercase;font-size:clamp(24px,2.8vw,34px);letter-spacing:.01em;margin-bottom:14px;}
+.wh-text p{font-size:15px;color:var(--ink-dim);max-width:560px;}
+.wh-dots{position:absolute;bottom:14px;right:16px;z-index:2;display:flex;gap:7px;}
+.wh-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.3);border:none;padding:0;cursor:pointer;transition:all .2s ease;}
+.wh-dot.active{background:var(--red-bright);width:20px;border-radius:4px;}
 
-.team-row:last-child { border-bottom: none; }
+/* ============================= MAJOR TEAM TOURS ============================= */
+.tours-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+@media(max-width:900px){.tours-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:560px){.tours-grid{grid-template-columns:1fr;}}
+.tour-card{padding:28px 24px;display:block;transition:all .25s ease;}
+.tour-card:hover{border-color:var(--red);background:rgba(255,255,255,0.04);transform:translateY(-4px);}
+.tour-card .tour-teams{font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--red);margin-bottom:10px;}
+.tour-card h3{font-family:var(--font-display);font-weight:400;text-transform:uppercase;font-size:19px;letter-spacing:.02em;margin-bottom:10px;}
+.tour-card p{font-size:13.5px;color:var(--ink-dim);margin-bottom:16px;}
+.tour-card .tour-link{font-family:var(--font-mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);display:inline-flex;align-items:center;gap:6px;}
+.tour-card .tour-link svg{width:14px;height:14px;}
+.tour-card:hover .tour-link{color:var(--red-bright);}
 
-.pos-badge {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  padding: 3px 7px;
-  background: var(--green4);
-  color: var(--green);
-  border: 1px solid var(--green3);
-  min-width: 40px;
-  text-align: center;
-  letter-spacing: 1px;
-}
+/* ============================= UPCOMING TOURNAMENTS TICKER ============================= */
+.ut-section{overflow:hidden;background:var(--pitch);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:14px 0;}
+.ut-track{display:flex;align-items:center;gap:56px;white-space:nowrap;width:max-content;animation:utScroll 28s linear infinite;}
+.ut-item{display:inline-flex;align-items:center;gap:12px;font-family:var(--font-mono);font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-dim);}
+.ut-item b{color:var(--red-bright);}
+.ut-item .ut-dot{width:5px;height:5px;border-radius:50%;background:var(--red);flex:none;}
+@keyframes utScroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+@media (prefers-reduced-motion: reduce){.ut-track{animation:none;}}
 
-.pos-role {
-  font-family: var(--font-display);
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 1px;
-  color: var(--text);
-  flex: 1;
-}
-
-.pos-movement {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  color: var(--text3);
-  text-align: right;
-  max-width: 140px;
-  line-height: 1.4;
-}
-
-/* ========== MOVEMENTS EXPLORER ========== */
-.movements-layout {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  margin-bottom: 20px;
-}
-
-.movement-result {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  padding: 20px;
-}
-
-.movement-pos-row {
-  display: flex;
-  gap: 12px;
-  align-items: flex-start;
-  padding: 9px 0;
-  border-bottom: 1px solid var(--border);
-  font-size: 12px;
-}
-
-.movement-pos-row:last-child { border-bottom: none; }
-
-.movement-pos {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  color: var(--green);
-  min-width: 38px;
-  letter-spacing: 1px;
-  padding-top: 1px;
-}
-
-.movement-desc {
-  color: var(--text2);
-  line-height: 1.5;
-  font-size: 12px;
-}
-
-/* ========== SCROLLBAR ========== */
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--border2); }
-
-/* ========== ANIMATION ========== */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.page.active { animation: fadeIn 0.25s ease; }
-
-.highlight-green { color: var(--green); }
-
-/* ========== UTILITY ========== */
-.flex { display: flex; }
-.gap-8 { gap: 8px; }
-.mt-12 { margin-top: 12px; }
-.mb-20 { margin-bottom: 20px; }
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" defer></script>
 </head>
 <body>
-<div class="app">
 
-<!-- ===== SIDEBAR ===== -->
-<div class="sidebar">
-  <div class="logo">
-    <div class="logo-text">TACTICS<span>OS</span></div>
-    <div class="status-line"><span class="status-dot"></span>SYSTEM ONLINE</div>
+<div class="starfield" id="starfield" aria-hidden="true"></div>
+
+<!-- ============================= HEADER ============================= -->
+<header class="site-header" id="siteHeader">
+  <div class="nav-inner">
+    <a href="#hero" class="brand">
+      <span class="crest-img-nav" role="img" aria-label="IC7 Iconic Sevens crest"></span>
+      <span class="brand-text">Iconic Sevens<small>Kerala eFootball Clan</small></span>
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#about">About</a>
+      <a href="#activities">Activities</a>
+      <a href="#live">Live</a>
+      <a href="#highlights">Highlights</a>
+      <a href="tournament-registration.html" id="navTournamentLink" class="nav-cta" hidden>Tournament Reg</a>
+      <a href="#schedule">Schedule</a>
+      <a href="#teams">Squads</a>
+      <a href="#majorTours">Tours</a>
+      <a href="#leaderboard">Table</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#rules">Rules</a>
+      <a href="#register" class="nav-cta">Register</a>
+    </nav>
+    <div class="nav-actions">
+      <a class="icon-btn" data-ig-link href="#" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg>
+      </a>
+      <a class="icon-btn" data-wa-contact href="#" target="_blank" rel="noopener" aria-label="WhatsApp">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.02 2C6.5 2 2 6.48 2 12c0 1.86.5 3.6 1.4 5.1L2 22l5.06-1.33A9.94 9.94 0 0012.02 22C17.54 22 22 17.52 22 12S17.54 2 12.02 2zm0 18.1c-1.66 0-3.2-.47-4.5-1.29l-.32-.19-3 .79.8-2.93-.21-.3A8.08 8.08 0 013.93 12c0-4.46 3.63-8.09 8.09-8.09 4.46 0 8.08 3.63 8.08 8.09 0 4.46-3.62 8.1-8.08 8.1zm4.44-6.07c-.24-.12-1.43-.7-1.65-.79-.22-.08-.38-.12-.55.12-.16.24-.63.79-.77.95-.14.16-.28.18-.52.06-.24-.12-1.02-.38-1.94-1.2-.72-.64-1.2-1.43-1.35-1.67-.14-.24-.02-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.55-1.33-.76-1.82-.2-.48-.4-.42-.55-.42-.14 0-.3-.02-.46-.02-.16 0-.42.06-.64.3-.22.24-.85.83-.85 2.02 0 1.19.87 2.34 1 2.5.12.16 1.7 2.6 4.12 3.64.58.25 1.03.4 1.38.51.58.18 1.11.16 1.53.1.47-.07 1.43-.58 1.63-1.15.2-.56.2-1.04.14-1.15-.06-.1-.22-.16-.46-.28z"/></svg>
+      </a>
+      <button class="icon-btn" id="adminOpenBtn" aria-label="Admin login" title="Admin login">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4.5" y="10" width="15" height="10" rx="1.5"/><path d="M8 10V7a4 4 0 018 0v3"/><circle cx="12" cy="14.5" r="1.4" fill="currentColor" stroke="none"/></svg>
+      </button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path id="hbPath" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="ticker-strip">
+    <div class="ticker-track" id="tickerTrack"></div>
+  </div>
+</header>
+
+<!-- ============================= WEEKLY HIGHLIGHT (auto-sliding carousel) ============================= -->
+<section class="wh-section" id="highlights">
+  <div class="wrap">
+    <div class="wh-carousel" id="whCarousel">
+      <span class="wh-label">Weekly Highlight</span>
+      <div class="wh-track" id="whTrack"></div>
+      <div class="wh-dots" id="whDots"></div>
+    </div>
+    <p class="highlight-empty" id="highlightEmpty" hidden>No highlights yet — check back soon.</p>
+  </div>
+</section>
+
+<!-- ============================= HERO (E-FOOTBALL SYSTEM LAYOUT) ============================= -->
+<section class="hero" id="hero">
+  <div class="cosmic-void"></div>
+  <div class="hud-grid-matrix"></div>
+  <div class="game-scanlines"></div>
+  <div class="hero-particles" id="heroParticles"></div>
+
+  <!-- High Tech Video Game Radar Overlay -->
+  <div class="tactical-pitch-overlay">
+    <div class="pitch-ring ring-1">
+      <div class="hud-corner tl"></div>
+      <div class="hud-corner tr"></div>
+      <div class="hud-corner bl"></div>
+      <div class="hud-corner br"></div>
+    </div>
+    <div class="pitch-ring ring-2"></div>
+    <div class="pitch-ring ring-3"></div>
+    <div class="radar-node n1"></div>
+    <div class="radar-node n2 node-red"></div>
+    <div class="radar-node n3"></div>
   </div>
 
-  <div class="nav-section">
-    <div class="nav-label">Core Modules</div>
-    <div class="nav-item active" onclick="nav('dashboard',this)">
-      <span class="nav-icon">⊞</span> Dashboard
+  <!-- Floating Logo Frame -->
+  <div class="hero-logo-container">
+     <span class="hero-crest-img" role="img" aria-label="Iconic Sevens main crest"></span>
+  </div>
+
+  <div class="hero-inner">
+    <div class="magazine-tag-frame">← INTIMATE CUP EDITION →</div>
+    
+    <h1 class="hero-title hero-magazine-title">
+      <span class="red-text">ICONIC</span>
+      <span class="red-text">SEVENS</span>
+      <span class="sub-header">CLAN MAGAZINE</span>
+    </h1>
+
+    <p class="hero-tagline" id="heroTagline">An eFootball clan uniting players from every corner of Kerala under one badge. We grind coin tournaments, chase clan championships, and back each other like family — on the pitch and off it.</p>
+    
+    <div class="hero-actions">
+      <a href="#register" class="btn btn-red">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.02 2C6.5 2 2 6.48 2 12c0 1.86.5 3.6 1.4 5.1L2 22l5.06-1.33A9.94 9.94 0 0012.02 22C17.54 22 22 17.52 22 12S17.54 2 12.02 2zm0 18.1c-1.66 0-3.2-.47-4.5-1.29l-.32-.19-3 .79.8-2.93-.21-.3A8.08 8.08 0 013.93 12c0-4.46 3.63-8.09 8.09-8.09 4.46 0 8.08 3.63 8.08 8.09 0 4.46-3.62 8.1-8.08 8.1z"/></svg>
+        Register on WhatsApp
+      </a>
+      <a href="#schedule" class="btn btn-outline">View Fixtures</a>
     </div>
-    <div class="nav-item" onclick="nav('formations',this)">
-      <span class="nav-icon">⬡</span> Formations
-    </div>
-    <div class="nav-item" onclick="nav('styles',this)">
-      <span class="nav-icon">◈</span> Styles
-    </div>
-    <div class="nav-item" onclick="nav('roles',this)">
-      <span class="nav-icon">◉</span> Roles
-    </div>
-    <div class="nav-item" onclick="nav('analyzer',this)">
-      <span class="nav-icon">✕</span> Match Analyzer
-    </div>
-    <div class="nav-item" onclick="nav('generator',this)">
-      <span class="nav-icon">⚡</span> AI Team Generator
-    </div>
-    <div class="nav-item" onclick="nav('movements',this)">
-      <span class="nav-icon">→</span> Movements Explorer
+    <div class="hero-stats">
+      <div class="hero-stat"><b id="heroStatFounded">2020</b><span>Founded</span></div>
+      <div class="hero-stat"><b id="heroStatSquad">60+</b><span>Active Squad</span></div>
+      <div class="hero-stat"><b id="heroStatMatches">140+</b><span>Matches Hit</span></div>
+      <div class="hero-stat"><b id="heroStatTrophies">12</b><span>Trophies</span></div>
     </div>
   </div>
 
-  <div class="sidebar-footer">
-    <div class="analyst-profile">
-      ANALYST PROFILE
-      <span class="analyst-name">TACS-1.0</span>
+  <div class="scroll-cue"><span>Scroll</span><span class="stick"></span></div>
+</section>
+
+<!-- ============================= ABOUT ============================= -->
+<section class="section" id="about">
+  <div class="wrap about-grid">
+    <div class="about-emblem reveal">
+      <span class="crest-big-img" role="img" aria-label="IC7 Iconic Sevens crest"></span>
+    </div>
+    <div class="reveal">
+      <div class="eyebrow">About The Clan</div>
+      <h2 class="section-title">Where the clan<br>becomes family.</h2>
+      <div class="about-copy" id="aboutCopy">
+        <p id="aboutP1"><b>IC7 Iconic Sevens</b> started in 2020 when a handful of eFootball players from different corners of Kerala found each other online and started grinding matches together. What began as pickup games between strangers turned into a clan with a name, a crest and a reputation.</p>
+        <p id="aboutP2">Today we're a full-blown eFootball community — players from every district competing together, climbing coin tournaments for free, and repping IC7 in clan championships across the scene.</p>
+        <p id="aboutP3">We play to win, but IC7 is really about family. Join the clan and you're backed by people across Kerala who've got your back — as long as you hold up your end: the criteria to join are strict, and once you're in, the rules are non-negotiable.</p>
+      </div>
+      <div class="stat-row">
+        <div class="stat-card glass"><b id="aboutStatSquads">3</b><span>Squads</span></div>
+        <div class="stat-card glass"><b id="aboutStatTrophies">12</b><span>Trophies</span></div>
+        <div class="stat-card glass"><b id="aboutStatPlayers">60+</b><span>Players</span></div>
+        <div class="stat-card glass"><b id="aboutStatDistricts">7</b><span>Districts</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= UPCOMING TOURNAMENTS (moving ticker) ============================= -->
+<section class="ut-section" id="upcomingTours">
+  <div class="ut-track" id="utTrack"></div>
+</section>
+
+<!-- ============================= ACTIVITIES ============================= -->
+<section class="section" id="activities" style="background:var(--bg-elevated);">
+  <div class="wrap">
+    <div class="eyebrow reveal">What We Do</div>
+    <h2 class="section-title reveal">Clan Activities</h2>
+    <p class="section-lede reveal">Every week, in the lobby and in the community — this is the IC7 routine.</p>
+    <div class="activity-grid" id="activityGrid"></div>
+  </div>
+</section>
+
+<!-- ============================= LIVE ============================= -->
+<section class="section" id="live">
+  <div class="wrap">
+    <div class="eyebrow reveal">Right Now</div>
+    <h2 class="section-title reveal">Live Tournament Updates</h2>
+    <div class="live-panel glass reveal" id="livePanel">
+      <span class="live-badge" id="liveBadge"><span class="dot"></span><span id="liveBadgeText">LIVE</span></span>
+      <div class="live-mid">
+        <h3 id="liveTitle">IC7 Coin Cup 2026 — Semi Final</h3>
+        <p id="liveStatus">Live now · Online — IC7 Lobby</p>
+      </div>
+      <div class="live-score">
+        <span class="team" id="liveTeamA">IC7 Sevens</span>
+        <span class="score" id="liveScoreA">3</span>
+        <span class="sep">—</span>
+        <span class="score" id="liveScoreB">2</span>
+        <span class="team" id="liveTeamB">Coastal Kings</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= TOURNAMENT REGISTRATION ============================= -->
+<section class="section" id="tournament" style="background:var(--bg-elevated);" hidden>
+  <div class="wrap">
+    <div class="eyebrow reveal">Open Registration</div>
+    <h2 class="section-title reveal" id="tournamentName">Tournament</h2>
+    <p class="section-lede reveal" id="tournamentDesc"></p>
+    <div class="tournament-wrap single">
+      <div class="tournament-info glass reveal" id="tournamentBanner">
+        <div class="tournament-meta">
+          <div><span>Entry Fee</span><b id="tournamentFee">—</b></div>
+          <div><span>Deadline</span><b id="tournamentDeadline">—</b></div>
+          <div><span>Venue</span><b id="tournamentVenue">—</b></div>
+        </div>
+        <a href="tournament-registration.html" class="btn btn-red tournament-cta">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          Register For Tournament
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= SCHEDULE ============================= -->
+<section class="section" id="schedule" style="background:var(--bg-elevated);">
+  <div class="wrap">
+    <div class="eyebrow reveal">Fixtures</div>
+    <h2 class="section-title reveal">Match Schedule</h2>
+    <p class="section-lede reveal">Upcoming sevens fixtures for the IC7 senior squad.</p>
+    <div class="schedule-list" id="scheduleList"></div>
+  </div>
+</section>
+
+<!-- ============================= TEAMS ============================= -->
+<section class="section" id="teams">
+  <div class="wrap">
+    <div class="eyebrow reveal">Our Squads</div>
+    <h2 class="section-title reveal">Teams</h2>
+    <p class="section-lede reveal">Three squads, one crest — IC7 fields players at every level.</p>
+    <div class="team-grid" id="teamGrid"></div>
+  </div>
+</section>
+
+<!-- ============================= MAJOR TEAM TOURS ============================= -->
+<section class="section" id="majorTours" style="background:var(--bg-elevated);">
+  <div class="wrap">
+    <div class="eyebrow reveal">Competitions</div>
+    <h2 class="section-title reveal">Our Major Team Tours</h2>
+    <p class="section-lede reveal">Standings, top scorers, top assists and golden glove — tracked for every IC7 tournament.</p>
+    <div class="tours-grid" id="toursGrid"></div>
+  </div>
+</section>
+
+<!-- ============================= LEADERBOARD ============================= -->
+<section class="section" id="leaderboard">
+  <div class="wrap">
+    <div class="eyebrow reveal">Standings</div>
+    <h2 class="section-title reveal">Leaderboard</h2>
+    <p class="section-lede reveal">Kerala eFootball League — current table.</p>
+    <div class="board-wrap reveal">
+      <table class="board">
+        <thead><tr><th>#</th><th>Team</th><th>P</th><th>W</th><th>D</th><th>L</th><th>Pts</th></tr></thead>
+        <tbody id="leaderboardBody">
+          <tr class="lead"><td class="rank">01</td><td class="team-name">IC7 Iconic Sevens</td><td>10</td><td>8</td><td>1</td><td>1</td><td class="pts">25</td></tr>
+          <tr><td class="rank">02</td><td class="team-name">Coastal Kings</td><td>10</td><td>7</td><td>1</td><td>2</td><td class="pts">22</td></tr>
+          <tr><td class="rank">03</td><td class="team-name">Riverside FC</td><td>10</td><td>6</td><td>2</td><td>2</td><td class="pts">20</td></tr>
+          <tr><td class="rank">04</td><td class="team-name">Harbour United</td><td>10</td><td>5</td><td>2</td><td>3</td><td class="pts">17</td></tr>
+          <tr><td class="rank">05</td><td class="team-name">Highland Sevens</td><td>10</td><td>3</td><td>2</td><td>5</td><td class="pts">11</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= GALLERY ============================= -->
+<section class="section" id="gallery" style="background:var(--bg-elevated);">
+  <div class="wrap">
+    <div class="eyebrow reveal">Moments</div>
+    <h2 class="section-title reveal">Gallery</h2>
+    <p class="section-lede reveal">Snapshots from the clan. Swap these tiles with your own matchday and meetup photos.</p>
+    <div class="gallery-grid" id="galleryGrid"></div>
+    <p class="gallery-note">📸 Add real match photos from the admin dashboard — Gallery tab.</p>
+  </div>
+</section>
+
+<!-- ============================= CRITERIA & RULES ============================= -->
+<section class="section" id="rules" style="background:var(--bg-elevated);">
+  <div class="wrap">
+    <div class="eyebrow reveal">Before You Join</div>
+    <h2 class="section-title reveal">Criteria &amp; Clan Rules</h2>
+    <p class="section-lede reveal" id="rulesIntro">IC7 is free to join, but it isn't casual. Read this before you register.</p>
+    <div class="rules-grid">
+      <div class="rules-card glass reveal">
+        <h3>Joining Criteria</h3>
+        <p id="rulesCriteria"></p>
+      </div>
+      <div class="rules-card glass reveal">
+        <h3>Clan Rules</h3>
+        <p id="rulesConduct"></p>
+      </div>
+      <div class="rules-card glass reveal consequences">
+        <h3>Consequences</h3>
+        <p id="rulesConsequences"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= REGISTRATION ============================= -->
+<section class="section" id="register">
+  <div class="wrap register-wrap">
+    <div class="reveal">
+      <div class="eyebrow">Join The Clan</div>
+      <h2 class="section-title">Registration</h2>
+      <p>Read the <a href="#rules" style="color:var(--red);text-decoration:underline;">criteria &amp; clan rules</a> first. If you're good with them, fill the form and it opens a pre-filled WhatsApp message straight to our admin — no waiting.</p>
+      <ul class="register-steps">
+        <li><span class="rs-num">1</span><span>Fill in your name, age, position and a short note.</span></li>
+        <li><span class="rs-num">2</span><span>Tap <b>Send via WhatsApp</b> — your details load into a message.</span></li>
+        <li><span class="rs-num">3</span><span>Hit send in WhatsApp and our admin takes it from there.</span></li>
+      </ul>
+    </div>
+    <form class="form-card glass reveal" id="regForm">
+      <div class="field">
+        <label for="regName">Full Name</label>
+        <input type="text" id="regName" placeholder="e.g. Arjun Menon" required>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="regAge">Age</label>
+          <input type="number" id="regAge" placeholder="21" min="10" max="60" required>
+        </div>
+        <div class="field">
+          <label for="regPhone">WhatsApp Number</label>
+          <input type="tel" id="regPhone" placeholder="9847012345" required>
+        </div>
+      </div>
+      <div class="field">
+        <label for="regPosition">Preferred Position</label>
+        <select id="regPosition">
+          <option>Goalkeeper</option>
+          <option>Defender</option>
+          <option>Midfielder</option>
+          <option>Winger</option>
+          <option>Striker</option>
+          <option>Any Position</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="regMsg">Short Message (optional)</label>
+        <textarea id="regMsg" rows="3" placeholder="Playing experience, availability, anything else..."></textarea>
+      </div>
+      <button type="submit" class="btn btn-red form-submit">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.02 2C6.5 2 2 6.48 2 12c0 1.86.5 3.6 1.4 5.1L2 22l5.06-1.33A9.94 9.94 0 0012.02 22C17.54 22 22 17.52 22 12S17.54 2 12.02 2zm0 18.1c-1.66 0-3.2-.47-4.5-1.29l-.32-.19-3 .79.8-2.93-.21-.3A8.08 8.08 0 013.93 12c0-4.46 3.63-8.09 8.09-8.09 4.46 0 8.08 3.63 8.08 8.09 0 4.46-3.62 8.1-8.08 8.1z"/></svg>
+        Send via WhatsApp
+      </button>
+    </form>
+  </div>
+</section>
+
+<!-- ============================= FOOTER / CONTACT ============================= -->
+<footer class="footer" id="contact">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="brand">
+          <span class="crest-img-nav" role="img" aria-label="IC7 Iconic Sevens crest"></span>
+          <span class="brand-text">Iconic Sevens<small>Kerala eFootball Clan</small></span>
+        </div>
+        <p>A Kerala eFootball clan competing in coin tournaments and clan championships since 2020.</p>
+        <div class="footer-socials">
+          <a class="icon-btn" data-ig-link href="#" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a class="icon-btn" data-wa-contact href="#" target="_blank" rel="noopener" aria-label="WhatsApp">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.02 2C6.5 2 2 6.48 2 12c0 1.86.5 3.6 1.4 5.1L2 22l5.06-1.33A9.94 9.94 0 0012.02 22C17.54 22 22 17.52 22 12S17.54 2 12.02 2zm0 18.1c-1.66 0-3.2-.47-4.5-1.29l-.32-.19-3 .79.8-2.93-.21-.3A8.08 8.08 0 013.93 12c0-4.46 3.63-8.09 8.09-8.09 4.46 0 8.08 3.63 8.08 8.09 0 4.46-3.62 8.1-8.08 8.1z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div>
+        <h5>Explore</h5>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#activities">Activities</a></li>
+          <li><a href="#schedule">Schedule</a></li>
+          <li><a href="#teams">Teams</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Clan</h5>
+        <ul>
+          <li><a href="#leaderboard">Leaderboard</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#register">Register</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Contact Admins</h5>
+        <div class="contact-card glass">
+          <a class="icon-btn" data-wa-admin1 href="#" target="_blank" rel="noopener" aria-label="Admin WhatsApp">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.02 2C6.5 2 2 6.48 2 12c0 1.86.5 3.6 1.4 5.1L2 22l5.06-1.33A9.94 9.94 0 0012.02 22C17.54 22 22 17.52 22 12S17.54 2 12.02 2zm0 18.1c-1.66 0-3.2-.47-4.5-1.29l-.32-.19-3 .79.8-2.93-.21-.3A8.08 8.08 0 013.93 12c0-4.46 3.63-8.09 8.09-8.09 4.46 0 8.08 3.63 8.08 8.09 0 4.46-3.62 8.1-8.08 8.1z"/></svg>
+          </a>
+          <div><b id="footerAdmin1Name">Admin — Arjun</b><span>WhatsApp</span></div>
+        </div>
+        <div class="contact-card glass">
+          <a class="icon-btn" data-wa-admin2 href="#" target="_blank" rel="noopener" aria-label="Admin WhatsApp">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.02 2C6.5 2 2 6.48 2 12c0 1.86.5 3.6 1.4 5.1L2 22l5.06-1.33A9.94 9.94 0 0012.02 22C17.54 22 22 17.52 22 12S17.54 2 12.02 2zm0 18.1c-1.66 0-3.2-.47-4.5-1.29l-.32-.19-3 .79.8-2.93-.21-.3A8.08 8.08 0 013.93 12c0-4.46 3.63-8.09 8.09-8.09 4.46 0 8.08 3.63 8.08 8.09 0 4.46-3.62 8.1-8.08 8.1z"/></svg>
+          </a>
+          <div><b id="footerAdmin2Name">Admin — Sachin</b><span>WhatsApp</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 IC7 Iconic Sevens. All rights reserved.</span>
+      <button class="admin-entry" id="adminEntryBtn" type="button">Admin Login</button>
+      <span>Made for the clan — Kerala 🏆</span>
+    </div>
+  </div>
+</footer>
+
+<a class="wa-float" data-wa-contact href="#" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.02 2C6.5 2 2 6.48 2 12c0 1.86.5 3.6 1.4 5.1L2 22l5.06-1.33A9.94 9.94 0 0012.02 22C17.54 22 22 17.52 22 12S17.54 2 12.02 2zm0 18.1c-1.66 0-3.2-.47-4.5-1.29l-.32-.19-3 .79.8-2.93-.21-.3A8.08 8.08 0 013.93 12c0-4.46 3.63-8.09 8.09-8.09 4.46 0 8.08 3.63 8.08 8.09 0 4.46-3.62 8.1-8.08 8.1z"/></svg>
+</a>
+
+<!-- ============================= ADMIN LOGIN / PANEL MODAL ============================= -->
+<div class="modal-overlay" id="adminModalOverlay" hidden>
+  <div class="modal-card glass" id="adminModalCard" role="dialog" aria-modal="true" aria-label="Admin login">
+    <button class="modal-close" id="adminModalClose" type="button" aria-label="Close">&times;</button>
+
+    <!-- Login -->
+    <div class="admin-view" data-view="login">
+      <div class="admin-badge">ADMIN</div>
+      <h3>Admin Login</h3>
+      <p class="admin-sub">Enter the admin password to open the dashboard.</p>
+      <div class="field"><label for="loginPwInput">Password</label><input type="password" id="loginPwInput" autocomplete="current-password"></div>
+      <div class="admin-error" id="loginError" hidden>Incorrect password.</div>
+      <button class="btn btn-red" id="loginSubmitBtn" type="button">Log In</button>
+      <button class="admin-link" id="showForgotBtn" type="button">Forgot password?</button>
+    </div>
+
+    <!-- Forgot / reset -->
+    <div class="admin-view" data-view="forgot" hidden>
+      <div class="admin-badge">ADMIN</div>
+      <h3>Reset Password</h3>
+      <p class="admin-sub">Enter the recovery code set by the site owner, plus a new password.</p>
+      <div class="field"><label for="recoveryCodeInput">Recovery Code</label><input type="text" inputmode="numeric" id="recoveryCodeInput"></div>
+      <div class="field"><label for="newPwInput">New Password</label><input type="password" id="newPwInput" autocomplete="new-password"></div>
+      <div class="field"><label for="newPwConfirmInput">Confirm New Password</label><input type="password" id="newPwConfirmInput" autocomplete="new-password"></div>
+      <div class="admin-error" id="forgotError" hidden></div>
+      <div class="admin-success" id="forgotSuccess" hidden>Password updated — you can log in now.</div>
+      <button class="btn btn-red" id="resetSubmitBtn" type="button">Reset Password</button>
+      <button class="admin-link" id="backToLoginBtn" type="button">Back to login</button>
     </div>
   </div>
 </div>
 
-<!-- ===== MAIN ===== -->
-<div class="main">
-  <div class="topbar">
-    <div class="breadcrumb" id="breadcrumb">SYS / <span>dashboard</span></div>
-    <div class="topbar-right">
-      <div class="sys-badge">◉ ACTIVE</div>
+<!-- ============================= ADMIN DASHBOARD ============================= -->
+<div class="modal-overlay" id="dashOverlay" hidden>
+  <div class="dashboard-card glass" id="dashCard" role="dialog" aria-modal="true" aria-label="Admin dashboard">
+    <button class="modal-close" id="dashClose" type="button" aria-label="Close">&times;</button>
+    <div class="dash-head">
+      <div class="admin-badge">ADMIN DASHBOARD</div>
+      <button class="admin-link" id="logoutBtn" type="button">Log out</button>
+    </div>
+    <div class="dash-body">
+      <nav class="dash-tabs" id="dashTabs">
+        <button class="dash-tab active" data-tab="contact" type="button">Contact</button>
+        <button class="dash-tab" data-tab="hero" type="button">Hero &amp; About</button>
+        <button class="dash-tab" data-tab="live" type="button">Live Match</button>
+        <button class="dash-tab" data-tab="news" type="button">Weekly Highlight</button>
+        <button class="dash-tab" data-tab="tournament" type="button">Tournament</button>
+        <button class="dash-tab" data-tab="schedule" type="button">Schedule</button>
+        <button class="dash-tab" data-tab="teams" type="button">Teams</button>
+        <button class="dash-tab" data-tab="tours" type="button">Major Tours</button>
+        <button class="dash-tab" data-tab="leaderboard" type="button">Table</button>
+        <button class="dash-tab" data-tab="gallery" type="button">Gallery</button>
+        <button class="dash-tab" data-tab="activities" type="button">Activities</button>
+        <button class="dash-tab" data-tab="rules" type="button">Rules</button>
+        <button class="dash-tab" data-tab="password" type="button">Password</button>
+      </nav>
+
+      <div class="dash-panels">
+
+        <!-- CONTACT -->
+        <section class="dash-panel" data-panel="contact">
+          <h3>Site &amp; Contact</h3>
+          <p class="admin-sub">These numbers drive every WhatsApp button and link on the site.</p>
+          <form class="admin-form" id="contactForm">
+            <div class="field"><label for="ct_whatsappMain">Main Club WhatsApp (registrations)</label><input type="tel" id="ct_whatsappMain" required></div>
+            <div class="field-row">
+              <div class="field"><label for="ct_whatsappAdmin1Name">Admin 1 Name</label><input type="text" id="ct_whatsappAdmin1Name"></div>
+              <div class="field"><label for="ct_whatsappAdmin1">Admin 1 WhatsApp</label><input type="tel" id="ct_whatsappAdmin1"></div>
+            </div>
+            <div class="field-row">
+              <div class="field"><label for="ct_whatsappAdmin2Name">Admin 2 Name</label><input type="text" id="ct_whatsappAdmin2Name"></div>
+              <div class="field"><label for="ct_whatsappAdmin2">Admin 2 WhatsApp</label><input type="tel" id="ct_whatsappAdmin2"></div>
+            </div>
+            <div class="field"><label for="ct_instagram">Instagram Handle (no @)</label><input type="text" id="ct_instagram"></div>
+            <button type="submit" class="btn btn-red">Save Contact Info</button>
+            <span class="admin-success" id="contactSavedMsg" hidden>Saved.</span>
+          </form>
+        </section>
+
+        <!-- HERO & ABOUT -->
+        <section class="dash-panel" data-panel="hero" hidden>
+          <h3>Hero &amp; About</h3>
+          <p class="admin-sub">The headline tagline, stat counters, and About story.</p>
+          <form class="admin-form" id="heroForm">
+            <div class="field"><label for="he_tagline">Hero Tagline</label><textarea id="he_tagline" rows="2"></textarea></div>
+            <div class="field-row">
+              <div class="field"><label for="he_founded">Founded Year</label><input type="text" id="he_founded"></div>
+              <div class="field"><label for="he_squad">Active Squad</label><input type="text" id="he_squad"></div>
+            </div>
+            <div class="field-row">
+              <div class="field"><label for="he_matches">Matches Hit</label><input type="text" id="he_matches"></div>
+              <div class="field"><label for="he_trophies">Trophies</label><input type="text" id="he_trophies"></div>
+            </div>
+            <div class="field"><label for="he_p1">About — Paragraph 1</label><textarea id="he_p1" rows="2"></textarea></div>
+            <div class="field"><label for="he_p2">About — Paragraph 2</label><textarea id="he_p2" rows="2"></textarea></div>
+            <div class="field"><label for="he_p3">About — Paragraph 3</label><textarea id="he_p3" rows="2"></textarea></div>
+            <div class="field-row">
+              <div class="field"><label for="he_aboutSquads">Squads</label><input type="text" id="he_aboutSquads"></div>
+              <div class="field"><label for="he_aboutTrophies">Trophies (About)</label><input type="text" id="he_aboutTrophies"></div>
+            </div>
+            <div class="field-row">
+              <div class="field"><label for="he_aboutPlayers">Players</label><input type="text" id="he_aboutPlayers"></div>
+              <div class="field"><label for="he_aboutDistricts">Districts</label><input type="text" id="he_aboutDistricts"></div>
+            </div>
+            <button type="submit" class="btn btn-red">Save Hero &amp; About</button>
+            <span class="admin-success" id="heroSavedMsg" hidden>Saved.</span>
+          </form>
+        </section>
+
+        <!-- LIVE MATCH -->
+        <section class="dash-panel" data-panel="live" hidden>
+          <h3>Live Match Panel</h3>
+          <p class="admin-sub">Powers the "Live Tournament Updates" panel on the homepage.</p>
+          <form class="admin-form" id="liveForm">
+            <label class="admin-checkbox"><input type="checkbox" id="lv_active"> Show as LIVE right now</label>
+            <div class="field"><label for="lv_title">Match Title</label><input type="text" id="lv_title"></div>
+            <div class="field"><label for="lv_status">Status Line</label><input type="text" id="lv_status" placeholder="Live now · Online — IC7 Lobby"></div>
+            <div class="field-row">
+              <div class="field"><label for="lv_teamA">Team A</label><input type="text" id="lv_teamA"></div>
+              <div class="field"><label for="lv_scoreA">Score A</label><input type="text" id="lv_scoreA"></div>
+            </div>
+            <div class="field-row">
+              <div class="field"><label for="lv_teamB">Team B</label><input type="text" id="lv_teamB"></div>
+              <div class="field"><label for="lv_scoreB">Score B</label><input type="text" id="lv_scoreB"></div>
+            </div>
+            <button type="submit" class="btn btn-red">Save Live Match</button>
+            <span class="admin-success" id="liveSavedMsg" hidden>Saved.</span>
+          </form>
+        </section>
+
+        <!-- NEWS / HIGHLIGHTS -->
+        <section class="dash-panel" data-panel="news" hidden>
+          <h3>Weekly Highlight</h3>
+          <p class="admin-sub">These slides auto-play in the carousel at the very top of the site — add 5 to 10 for the best effect.</p>
+          <form class="admin-form" id="highlightForm">
+            <input type="hidden" id="hlEditId">
+            <div class="field"><label for="hlTitle">Title</label><input type="text" id="hlTitle" required></div>
+            <div class="field-row">
+              <div class="field"><label for="hlDate">Date</label><input type="date" id="hlDate" required></div>
+              <div class="field"><label for="hlImage">Photo</label><input type="file" accept="image/*" id="hlImage"></div>
+            </div>
+            <div class="field"><label for="hlBody">Story</label><textarea id="hlBody" rows="3" required></textarea></div>
+            <div class="admin-form-actions">
+              <button type="submit" class="btn btn-red">Save Highlight</button>
+              <button type="button" class="btn btn-outline" id="hlCancelEdit" hidden>Cancel Edit</button>
+            </div>
+          </form>
+          <div class="admin-list" id="adminHighlightList"></div>
+        </section>
+
+        <!-- TOURNAMENT -->
+        <section class="dash-panel" data-panel="tournament" hidden>
+          <h3>Tournament Registration</h3>
+          <p class="admin-sub">Publishes an open-registration section on the homepage and collects entries below.</p>
+          <form class="admin-form" id="tournamentSettingsForm">
+            <label class="admin-checkbox"><input type="checkbox" id="tn_active"> Show tournament registration section on the site</label>
+            <div class="field"><label for="tn_name">Tournament Name</label><input type="text" id="tn_name"></div>
+            <div class="field"><label for="tn_desc">Short Description</label><textarea id="tn_desc" rows="2"></textarea></div>
+            <div class="field-row">
+              <div class="field"><label for="tn_fee">Entry Fee</label><input type="text" id="tn_fee" placeholder="₹2,000 per team"></div>
+              <div class="field"><label for="tn_deadline">Deadline</label><input type="date" id="tn_deadline"></div>
+            </div>
+            <div class="field"><label for="tn_venue">Venue</label><input type="text" id="tn_venue"></div>
+            <div class="field"><label style="margin-bottom:4px;">Selectable Options (1–5, shown as a dropdown on the registration page — leave blank to skip)</label></div>
+            <div class="field-row">
+              <div class="field"><label for="tn_option1">Option 1</label><input type="text" id="tn_option1"></div>
+              <div class="field"><label for="tn_option2">Option 2</label><input type="text" id="tn_option2"></div>
+            </div>
+            <div class="field-row">
+              <div class="field"><label for="tn_option3">Option 3</label><input type="text" id="tn_option3"></div>
+              <div class="field"><label for="tn_option4">Option 4</label><input type="text" id="tn_option4"></div>
+            </div>
+            <div class="field"><label for="tn_option5">Option 5</label><input type="text" id="tn_option5"></div>
+            <button type="submit" class="btn btn-red">Save Tournament</button>
+            <span class="admin-success" id="tournamentSavedMsg" hidden>Saved.</span>
+          </form>
+
+          <div class="admin-panel-head" style="margin-top:26px;">
+            <h3 style="font-size:18px;">Registrations Received</h3>
+            <button class="admin-link" id="exportRegsBtn" type="button">Download Excel Sheet</button>
+          </div>
+          <div class="admin-list" id="adminRegList"></div>
+        </section>
+
+        <!-- SCHEDULE -->
+        <section class="dash-panel" data-panel="schedule" hidden>
+          <h3>Match Schedule</h3>
+          <form class="admin-form" id="fixtureForm">
+            <div id="fixtureFormFields"></div>
+            <div class="admin-form-actions">
+              <button type="submit" class="btn btn-red">Save Fixture</button>
+              <button type="button" class="btn btn-outline" id="fixtureCancelEdit" hidden>Cancel Edit</button>
+            </div>
+          </form>
+          <div class="admin-list" id="adminFixtureList"></div>
+        </section>
+
+        <!-- TEAMS -->
+        <section class="dash-panel" data-panel="teams" hidden>
+          <h3>Teams / Squads</h3>
+          <form class="admin-form" id="teamForm">
+            <div id="teamFormFields"></div>
+            <div class="admin-form-actions">
+              <button type="submit" class="btn btn-red">Save Team</button>
+              <button type="button" class="btn btn-outline" id="teamCancelEdit" hidden>Cancel Edit</button>
+            </div>
+          </form>
+          <div class="admin-list" id="adminTeamList"></div>
+        </section>
+
+        <!-- MAJOR TOURS -->
+        <!-- MAJOR TOURS -->
+        <section class="dash-panel" data-panel="tours" hidden>
+          <h3>Major Team Tours</h3>
+          <p class="admin-sub">Edit each tournament's name, team count and blurb. These power the cards on the homepage and the title of each tournament's page. To add a brand new tournament, see the "Adding a new tournament page" instructions.</p>
+          <form class="admin-form" id="toursMetaForm">
+            <div id="toursMetaFields"></div>
+            <button type="submit" class="btn btn-red">Save Tournament Info</button>
+            <span class="admin-success" id="toursMetaSavedMsg" hidden>Saved.</span>
+          </form>
+
+          <h3 style="margin-top:8px;">Tournament Stats</h3>
+          <p class="admin-sub">Pick a tournament and a table, then add rows. Each table shows 5 columns on the tournament's page (Rank + 4 fields below).</p>
+          <div class="tour-select-row">
+            <select id="tourStatsSelect"></select>
+          </div>
+          <div class="tour-table-tabs" id="tourTableTabs"></div>
+          <div id="tourStatBlocks"></div>
+        </section>
+
+        <!-- LEADERBOARD -->
+        <section class="dash-panel" data-panel="leaderboard" hidden>
+          <h3>Leaderboard</h3>
+          <p class="admin-sub">Rows are shown in the order you add them — put the top team first.</p>
+          <form class="admin-form" id="leaderboardForm">
+            <div id="leaderboardFormFields"></div>
+            <div class="admin-form-actions">
+              <button type="submit" class="btn btn-red">Save Row</button>
+              <button type="button" class="btn btn-outline" id="leaderboardCancelEdit" hidden>Cancel Edit</button>
+            </div>
+          </form>
+          <div class="admin-list" id="adminLeaderboardList"></div>
+        </section>
+
+        <!-- GALLERY -->
+        <section class="dash-panel" data-panel="gallery" hidden>
+          <h3>Gallery</h3>
+          <form class="admin-form" id="galleryForm">
+            <div id="galleryFormFields"></div>
+            <div class="admin-form-actions">
+              <button type="submit" class="btn btn-red">Save Photo</button>
+              <button type="button" class="btn btn-outline" id="galleryCancelEdit" hidden>Cancel Edit</button>
+            </div>
+          </form>
+          <div class="admin-list" id="adminGalleryList"></div>
+        </section>
+
+        <!-- ACTIVITIES -->
+        <section class="dash-panel" data-panel="activities" hidden>
+          <h3>Clan Activities</h3>
+          <form class="admin-form" id="activityForm">
+            <div id="activityFormFields"></div>
+            <div class="admin-form-actions">
+              <button type="submit" class="btn btn-red">Save Activity</button>
+              <button type="button" class="btn btn-outline" id="activityCancelEdit" hidden>Cancel Edit</button>
+            </div>
+          </form>
+          <div class="admin-list" id="adminActivityList"></div>
+        </section>
+
+        <!-- RULES -->
+        <section class="dash-panel" data-panel="rules" hidden>
+          <h3>Criteria &amp; Clan Rules</h3>
+          <p class="admin-sub">One line per rule — each line becomes its own bullet on the public page.</p>
+          <form class="admin-form" id="rulesForm">
+            <div class="field"><label for="ru_intro">Section Intro</label><textarea id="ru_intro" rows="2"></textarea></div>
+            <div class="field"><label for="ru_criteria">Joining Criteria (one per line)</label><textarea id="ru_criteria" rows="5"></textarea></div>
+            <div class="field"><label for="ru_conduct">Clan Rules (one per line)</label><textarea id="ru_conduct" rows="5"></textarea></div>
+            <div class="field"><label for="ru_consequences">Consequences (one per line)</label><textarea id="ru_consequences" rows="4"></textarea></div>
+            <button type="submit" class="btn btn-red">Save Rules</button>
+            <span class="admin-success" id="rulesSavedMsg" hidden>Saved.</span>
+          </form>
+        </section>
+
+        <!-- PASSWORD -->
+        <section class="dash-panel" data-panel="password" hidden>
+          <h3>Change Admin Password</h3>
+          <div class="field"><label for="changePwInput">New Password</label><input type="password" id="changePwInput" autocomplete="new-password"></div>
+          <div class="field"><label for="changePwConfirmInput">Confirm New Password</label><input type="password" id="changePwConfirmInput" autocomplete="new-password"></div>
+          <div class="admin-error" id="changePwMsg" hidden></div>
+          <button class="btn btn-outline" id="changePwBtn" type="button">Update Password</button>
+          <p class="admin-storage-note" id="storageNote"></p>
+        </section>
+
+      </div>
     </div>
   </div>
-
-  <!-- ===== DASHBOARD ===== -->
-  <div class="page active" id="page-dashboard">
-    <div class="hero-section">
-      <div class="hero-label">Professional Analysis Suite</div>
-      <div class="hero-title">TACTICAL<span>MASTERY</span></div>
-      <div class="hero-desc">Professional-grade football analysis suite. Deconstruct formations, analyze player roles, and simulate tactical matchups with precision data.</div>
-      <div class="hero-actions">
-        <button class="btn-primary" onclick="nav('analyzer',document.querySelector('.nav-item:nth-child(5)'))">START MATCH ANALYSIS →</button>
-        <button class="btn-secondary" onclick="nav('formations',document.querySelector('.nav-item:nth-child(2)'))">BROWSE FORMATIONS</button>
-      </div>
-    </div>
-
-    <div class="section-title">ACTIVE MODULES</div>
-    <div class="modules-grid">
-      <div class="module-card" onclick="nav('formations',document.querySelectorAll('.nav-item')[1])">
-        <div class="module-icon">⬡</div>
-        <div class="module-name">FORMATIONS</div>
-        <div class="module-desc">Browse 40+ structured tactical shapes and player distributions.</div>
-      </div>
-      <div class="module-card" onclick="nav('styles',document.querySelectorAll('.nav-item')[2])">
-        <div class="module-icon">◈</div>
-        <div class="module-name">PLAYING STYLES</div>
-        <div class="module-desc">Analyze tempo and tactical aggression across 20 systems.</div>
-      </div>
-      <div class="module-card" onclick="nav('roles',document.querySelectorAll('.nav-item')[3])">
-        <div class="module-icon">◉</div>
-        <div class="module-name">PLAYER ROLES</div>
-        <div class="module-desc">Deep dive into 160+ specialized positional functions.</div>
-      </div>
-      <div class="module-card" onclick="nav('analyzer',document.querySelectorAll('.nav-item')[4])">
-        <div class="module-icon">✕</div>
-        <div class="module-name">MATCH ANALYZER</div>
-        <div class="module-desc">Simulate tactical matchups and uncover strategic exploits.</div>
-      </div>
-      <div class="module-card" onclick="nav('generator',document.querySelectorAll('.nav-item')[5])">
-        <div class="module-icon">⚡</div>
-        <div class="module-name">AI GENERATOR</div>
-        <div class="module-desc">Auto-construct squads fitting any tactical philosophy.</div>
-      </div>
-      <div class="module-card" onclick="nav('movements',document.querySelectorAll('.nav-item')[6])">
-        <div class="module-icon">→</div>
-        <div class="module-name">MOVEMENTS</div>
-        <div class="module-desc">Granular on-ball and off-ball movement instructions.</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ===== FORMATIONS ===== -->
-  <div class="page" id="page-formations">
-    <div class="page-header">
-      <div class="page-title">FORMATIONS</div>
-      <div class="page-sub">Browse structured tactical shapes and player distributions.</div>
-    </div>
-
-    <div class="search-bar">
-      <input class="search-input" type="text" placeholder="SEARCH FORMATION..." id="formationSearch" oninput="filterFormations()" />
-    </div>
-
-    <div class="formations-grid" id="formationsGrid"></div>
-  </div>
-
-  <!-- ===== STYLES ===== -->
-  <div class="page" id="page-styles">
-    <div class="page-header">
-      <div class="page-title">PLAYING STYLES</div>
-      <div class="page-sub">Evaluate tactical philosophy through attack, defense, and tempo metrics.</div>
-    </div>
-    <div class="styles-list" id="stylesList"></div>
-  </div>
-
-  <!-- ===== ROLES ===== -->
-  <div class="page" id="page-roles">
-    <div class="page-header">
-      <div class="page-title">PLAYER ROLES</div>
-      <div class="page-sub">Explore specialized instructions and attributes drawn for every position.</div>
-    </div>
-    <div class="search-bar">
-      <input class="search-input" type="text" placeholder="SEARCH ROLE..." id="roleSearch" oninput="filterRoles()" />
-    </div>
-    <div class="roles-grid" id="rolesGrid"></div>
-  </div>
-
-  <!-- ===== MATCH ANALYZER ===== -->
-  <div class="page" id="page-analyzer">
-    <div class="page-header">
-      <div class="page-title">MATCH ANALYZER</div>
-      <div class="page-sub">Simulate tactical matchups. Select two teams to uncover strategic exploits.</div>
-    </div>
-
-    <div class="match-layout">
-      <div class="team-panel">
-        <div class="team-label home">⚽ HOME TEAM</div>
-        <div class="form-group">
-          <div class="form-label">Select Formation</div>
-          <select class="form-select" id="homeFormation">
-            <option value="">-- FORMATION --</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <div class="form-label">Select Style</div>
-          <select class="form-select" id="homeStyle">
-            <option value="">-- STYLE --</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <div class="form-label">Select Key Role</div>
-          <select class="form-select" id="homeRole">
-            <option value="">-- ROLE --</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="vs-divider">
-        <div class="vs-text">VS</div>
-      </div>
-
-      <div class="team-panel">
-        <div class="team-label away">AWAY TEAM ⚽</div>
-        <div class="form-group">
-          <div class="form-label">Select Formation</div>
-          <select class="form-select" id="awayFormation">
-            <option value="">-- FORMATION --</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <div class="form-label">Select Style</div>
-          <select class="form-select" id="awayStyle">
-            <option value="">-- STYLE --</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <div class="form-label">Select Key Role</div>
-          <select class="form-select" id="awayRole">
-            <option value="">-- ROLE --</option>
-          </select>
-        </div>
-      </div>
-    </div>
-
-    <button class="analyze-btn" onclick="runAnalysis()">▶ RUN MATCH ANALYSIS</button>
-
-    <div class="analysis-result" id="analysisResult">
-      <div class="result-title">⚡ ANALYSIS OUTPUT</div>
-      <div id="analysisItems"></div>
-    </div>
-  </div>
-
-  <!-- ===== AI TEAM GENERATOR ===== -->
-  <div class="page" id="page-generator">
-    <div class="page-header">
-      <div class="page-title">AI TEAM GENERATOR</div>
-      <div class="page-sub">Auto-construct a cohesive squad with specialized roles tailored to your system and philosophy.</div>
-    </div>
-
-    <div class="generator-layout">
-      <div class="team-panel">
-        <div class="team-label home">⚡ CONFIGURATION</div>
-        <div class="form-group">
-          <div class="form-label">Select Formation</div>
-          <select class="form-select" id="genFormation">
-            <option value="">-- FORMATION --</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <div class="form-label">Select Style</div>
-          <select class="form-select" id="genStyle">
-            <option value="">-- STYLE --</option>
-          </select>
-        </div>
-        <button class="analyze-btn" style="margin-top:8px;" onclick="runGenerator()">⚡ GENERATE SQUAD</button>
-      </div>
-      <div class="team-panel" style="background:var(--bg3);">
-        <div class="team-label home" style="color:var(--text2);">SQUAD PREVIEW</div>
-        <div style="font-family:var(--font-mono);font-size:10px;color:var(--text3);">Select formation and style, then generate.</div>
-      </div>
-    </div>
-
-    <div class="generator-output" id="generatorOutput">
-      <div class="result-title">⚽ GENERATED SQUAD</div>
-      <div id="generatorItems"></div>
-    </div>
-  </div>
-
-  <!-- ===== MOVEMENTS EXPLORER ===== -->
-  <div class="page" id="page-movements">
-    <div class="page-header">
-      <div class="page-title">MOVEMENTS EXPLORER</div>
-      <div class="page-sub">Get detailed position-by-position movement instructions based on system and style.</div>
-    </div>
-
-    <div class="movements-layout">
-      <div class="team-panel">
-        <div class="team-label home">→ EXPLORE MOVEMENTS</div>
-        <div class="form-group">
-          <div class="form-label">Select Formation</div>
-          <select class="form-select" id="movFormation">
-            <option value="">-- FORMATION --</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <div class="form-label">Select Style</div>
-          <select class="form-select" id="movStyle">
-            <option value="">-- STYLE --</option>
-          </select>
-        </div>
-        <button class="analyze-btn" style="margin-top:8px;" onclick="runMovements()">→ EXPLORE MOVEMENTS</button>
-      </div>
-      <div class="movement-result" id="movementResult">
-        <div class="result-title">MOVEMENT INSTRUCTIONS</div>
-        <div id="movementItems" style="font-family:var(--font-mono);font-size:10px;color:var(--text3);">Select a formation and style to view detailed movement instructions.</div>
-      </div>
-    </div>
-  </div>
-
-</div><!-- end main -->
-</div><!-- end app -->
+</div>
 
 <script>
-// ===== DATA =====
-const formations = {
-  "4-4-2": {pos:["LB","CB","CB","RB","LM","CM","CM","RM","ST","ST"],type:"Classic"},
-  "4-3-3": {pos:["LB","CB","CB","RB","CM","CM","CM","LW","ST","RW"],type:"Classic"},
-  "3-5-2": {pos:["CB","CB","CB","LM","CM","CM","CM","RM","ST","ST"],type:"Classic"},
-  "4-2-4": {pos:["LB","CB","CB","RB","CM","CM","LW","ST","ST","RW"],type:"Classic"},
-  "5-4-1": {pos:["CB","CB","CB","CB","CB","LM","CM","CM","RM","ST"],type:"Defensive"},
-  "4-5-1": {pos:["LB","CB","CB","RB","LM","CM","CM","CM","RM","ST"],type:"Defensive"},
-  "5-3-2": {pos:["CB","CB","CB","CB","CB","CM","CM","CM","ST","ST"],type:"Defensive"},
-  "4-1-4-1": {pos:["LB","CB","CB","RB","CDM","LM","CM","CM","RM","ST"],type:"Defensive"},
-  "4-2-3-1": {pos:["LB","CB","CB","RB","CDM","CDM","CAM","LW","RW","ST"],type:"Modern"},
-  "4-3-2-1": {pos:["LB","CB","CB","RB","CM","CM","CM","CAM","CAM","ST"],type:"Modern"},
-  "3-4-3": {pos:["CB","CB","CB","LM","CM","CM","RM","LW","ST","RW"],type:"Modern"},
-  "3-4-2-1": {pos:["CB","CB","CB","LM","CM","CM","RM","CAM","CAM","ST"],type:"Modern"},
-  "4-1-2-1-2": {pos:["LB","CB","CB","RB","CDM","CM","CM","CAM","ST","ST"],type:"Attacking"},
-  "4-2-2-2": {pos:["LB","CB","CB","RB","CDM","CDM","CAM","CAM","ST","ST"],type:"Attacking"},
-  "3-3-4": {pos:["CB","CB","CB","CM","CM","CM","LW","ST","ST","RW"],type:"Attacking"},
-  "2-3-5": {pos:["CB","CB","CM","CM","CM","LW","ST","ST","RW","RW"],type:"Attacking"},
-  "4-3-3 False 9": {pos:["LB","CB","CB","RB","CM","CM","CM","LW","CAM","RW"],type:"Hybrid"},
-  "3-2-4-1": {pos:["CB","CB","CB","CDM","CDM","LM","CM","CM","RM","ST"],type:"Hybrid"},
-  "2-3-2-3": {pos:["CB","CB","CM","CM","CM","CAM","CAM","LW","ST","RW"],type:"Hybrid"},
-  "3-1-4-2": {pos:["CB","CB","CB","CDM","LM","CM","CM","RM","ST","ST"],type:"Hybrid"},
-  "4-4-1-1": {pos:["LB","CB","CB","RB","LM","CM","CM","RM","CAM","ST"],type:"Variation"},
-  "4-3-1-2": {pos:["LB","CB","CB","RB","CM","CM","CM","CAM","ST","ST"],type:"Variation"},
-  "4-2-1-3": {pos:["LB","CB","CB","RB","CDM","CDM","CAM","LW","ST","RW"],type:"Variation"},
-  "4-1-3-2": {pos:["LB","CB","CB","RB","CDM","CM","CM","CM","ST","ST"],type:"Variation"},
-  "4-1-2-3": {pos:["LB","CB","CB","RB","CDM","CM","CM","LW","ST","RW"],type:"Variation"},
-  "3-5-1-1": {pos:["CB","CB","CB","LM","CM","CM","CM","RM","CAM","ST"],type:"Variation"},
-  "3-4-1-2": {pos:["CB","CB","CB","LM","CM","CM","RM","CAM","ST","ST"],type:"Variation"},
-  "5-2-3": {pos:["CB","CB","CB","CB","CB","CM","CM","LW","ST","RW"],type:"Defensive"},
-  "5-2-2-1": {pos:["CB","CB","CB","CB","CB","CM","CM","CAM","CAM","ST"],type:"Defensive"},
-  "4-1-3-1-1": {pos:["LB","CB","CB","RB","CDM","CM","CM","CM","CAM","ST"],type:"Defensive"},
-  "3-6-1": {pos:["CB","CB","CB","LM","CM","CM","CM","CM","RM","ST"],type:"Defensive"},
-  "4-6-0": {pos:["LB","CB","CB","RB","CM","CM","CM","CM","CM","CM"],type:"Rare"},
-  "2-4-4": {pos:["CB","CB","LM","CM","CM","RM","LW","ST","ST","RW"],type:"Rare"},
-  "2-5-3": {pos:["CB","CB","LM","CM","CM","CM","RM","LW","ST","RW"],type:"Rare"},
-  "3-2-3-2": {pos:["CB","CB","CB","CM","CM","CAM","CAM","CAM","ST","ST"],type:"Rare"}
-};
+/* ======================= CLUB CONFIG — EDIT THESE ======================= */
+const CLUB_WHATSAPP        = "919999999999";   // main club WhatsApp number
+const CLUB_ADMIN1_WHATSAPP = "919999999999";   // admin 1 WhatsApp number
+const CLUB_ADMIN2_WHATSAPP = "919888888888";   // admin 2 WhatsApp number
+const CLUB_INSTAGRAM       = "ic7iconicsevens"; // Instagram handle, no @
+const DEFAULT_ADMIN_PASSWORD = "IC7Admin@2026"; // first admin password — change this before publishing. Once anyone logs in, it upgrades to a stored hash and this line stops being read.
+const ADMIN_RECOVERY_CODE    = "778899";        // secret numeric code — the ONLY way to reset a forgotten admin password. Change this before publishing and keep it private.
+/* ========================================================================= */
 
-const styles = {
-  "Possession Play": {attack:7,defense:6,tempo:5},
-  "Counter Attack": {attack:9,defense:7,tempo:9},
-  "Park the Bus": {attack:3,defense:10,tempo:2},
-  "High Press": {attack:8,defense:6,tempo:9},
-  "Wing Play": {attack:8,defense:5,tempo:7},
-  "Long Ball": {attack:7,defense:5,tempo:8},
-  "Total Football": {attack:9,defense:8,tempo:8},
-  "Positional Play": {attack:8,defense:7,tempo:6},
-  "Vertical Play": {attack:9,defense:5,tempo:9},
-  "Low Block": {attack:3,defense:9,tempo:3},
-  "Mid Block": {attack:5,defense:7,tempo:5},
-  "High Block": {attack:7,defense:6,tempo:7},
-  "Build-Up Play": {attack:7,defense:6,tempo:5},
-  "Fast Transition": {attack:9,defense:6,tempo:10},
-  "Route One": {attack:7,defense:5,tempo:9},
-  "Press and Trap": {attack:8,defense:7,tempo:8},
-  "Overlapping Play": {attack:8,defense:6,tempo:7},
-  "False 9 System": {attack:8,defense:5,tempo:7},
-  "Target Man Play": {attack:8,defense:6,tempo:6},
-  "Compact Shape": {attack:5,defense:9,tempo:4}
-};
+/* =====================================================================
+   HIGHLIGHT OF THE DAY — public news feed + no-code admin panel.
 
-const roles = {
-  "Poacher":{attack:9,defense:2},"Advanced Forward":{attack:9,defense:3},"Complete Forward":{attack:9,defense:6},
-  "False 9":{attack:8,defense:5},"Target Man":{attack:8,defense:4},"Pressing Forward":{attack:8,defense:6},
-  "Shadow Striker":{attack:9,defense:4},"Second Striker":{attack:9,defense:4},"Fox in the Box":{attack:9,defense:3},
-  "Penalty Box Striker":{attack:10,defense:2},"Mobile Striker":{attack:8,defense:5},"Withdrawn Forward":{attack:7,defense:7},
-  "Playmaker":{attack:8,defense:5},"Advanced Playmaker":{attack:9,defense:4},"Deep-Lying Playmaker":{attack:7,defense:7},
-  "Regista":{attack:7,defense:6},"Enganche":{attack:9,defense:3},"Trequartista":{attack:9,defense:2},
-  "Roaming Playmaker":{attack:8,defense:7},"Wide Playmaker":{attack:8,defense:5},"Creative Midfielder":{attack:9,defense:4},
-  "Attacking Playmaker":{attack:9,defense:3},"Box-to-Box Midfielder":{attack:7,defense:7},"Ball Winning Midfielder":{attack:5,defense:9},
-  "Holding Midfielder":{attack:4,defense:9},"Anchor Man":{attack:3,defense:10},"Destroyer":{attack:4,defense:10},
-  "Mezzala":{attack:8,defense:6},"Carrilero":{attack:6,defense:8},"Advanced Midfielder":{attack:8,defense:5},
-  "Half Back":{attack:4,defense:9},"Attacking Midfielder":{attack:9,defense:4},"Central Defender":{attack:4,defense:8},
-  "Ball Playing Defender":{attack:5,defense:8},"No-Nonsense Defender":{attack:2,defense:9},"Stopper":{attack:5,defense:9},
-  "Sweeper":{attack:6,defense:8},"Libero":{attack:7,defense:7},"Man Marker":{attack:3,defense:10},
-  "Winger":{attack:8,defense:4},"Inside Forward":{attack:9,defense:4},"Inverted Winger":{attack:8,defense:5},
-  "Raumdeuter":{attack:9,defense:3},"Direct Winger":{attack:9,defense:3},"Pressing Winger":{attack:7,defense:7},
-  "Defensive Winger":{attack:6,defense:8},"Fullback":{attack:5,defense:7},"Wingback":{attack:7,defense:7},
-  "Complete Wingback":{attack:8,defense:7},"Defensive Fullback":{attack:4,defense:9},"Attacking Fullback":{attack:8,defense:5},
-  "Attacking Wingback":{attack:9,defense:5},"Sweeper Keeper":{attack:5,defense:8},"Shot Stopper":{attack:2,defense:9},
-  "Ball Playing Keeper":{attack:6,defense:7},"Modern Goalkeeper":{attack:6,defense:8},"Reflex Keeper":{attack:3,defense:10}
-};
+   This is a static, no-backend site, so "saving" means saving into the
+   admin's own browser (localStorage). That's perfect for a single admin
+   updating from their own phone/laptop. It does NOT sync across every
+   visitor's device — there's no server to sync through. If you outgrow
+   that and want every visitor, on any device, to see the same live feed,
+   you'd need a small backend (a database + a couple of API routes) —
+   ask and I can help you wire one up.
+   ===================================================================== */
+(function(){
 
-const movements = {
-  "Possession Play": {GK:"Short distribution, play from back",CB:"Split wide, build play",LB:"Overlap slowly",RB:"Overlap slowly",CDM:"Recycle possession, hold position",CM:"Short passing triangles, stay central",CAM:"Find space between lines",LM:"Support midfield",RM:"Support midfield",LW:"Hold width, cut inside",RW:"Stretch play wide",ST:"Drop deep, link play"},
-  "Counter Attack": {GK:"Quick long throws",CB:"Clear quickly",LB:"Stay back",RB:"Stay back",CDM:"Win ball quickly",CM:"Quick forward passes",CAM:"Drive forward",LM:"Track back",RM:"Track back",LW:"Sprint behind defense",RW:"Exploit wide space",ST:"Fast forward runs"},
-  "Park the Bus": {GK:"Time waste, long clear",CB:"Very deep line",LB:"Stay deep",RB:"Stay deep",CDM:"Shield defense",CM:"Stay compact",CAM:"Support defense",LM:"Track back fully",RM:"Track back fully",LW:"Track back fully",RW:"Track back fully",ST:"Stay isolated forward"},
-  "High Press": {GK:"High line sweeper",CB:"Hold high line",LB:"Push high",RB:"Push high",CDM:"Aggressive press",CM:"Push high, intercept",CAM:"Press midfield",LM:"Press wide",RM:"Press wide",LW:"Press fullbacks",RW:"Press fullbacks",ST:"Press center-backs"},
-  "Wing Play": {GK:"Distribute wide",CB:"Switch play",LB:"Overlap aggressively",RB:"Overlap aggressively",CDM:"Cover center",CM:"Switch ball wide",CAM:"Support flanks",LM:"Overlap and cross",RM:"Overlap and cross",LW:"Dribble wide, cross",RW:"Dribble wide, cross",ST:"Attack crosses"},
-  "Long Ball": {GK:"Long kicks",CB:"Direct long passes",LB:"Stay balanced",RB:"Stay balanced",CDM:"Win second balls",CM:"Support second balls",CAM:"Pick loose balls",LM:"Run forward",RM:"Run forward",LW:"Run for knockdowns",RW:"Run for knockdowns",ST:"Hold up play"},
-  "Total Football": {GK:"Sweeper keeper",CB:"Step into midfield",LB:"Invert or overlap",RB:"Invert or overlap",CDM:"Rotate positions",CM:"Free movement",CAM:"Interchange roles",LM:"Rotate with winger",RM:"Rotate with winger",LW:"Swap positions",RW:"Swap positions",ST:"Drop and rotate"},
-  "Positional Play": {GK:"Structured passing",CB:"Maintain shape",LB:"Stay wide",RB:"Stay wide",CDM:"Anchor position",CM:"Maintain structure",CAM:"Occupy half spaces",LM:"Hold width",RM:"Hold width",LW:"Stay wide",RW:"Stay wide",ST:"Occupy defenders"},
-  "Vertical Play": {GK:"Fast release",CB:"Direct forward passes",LB:"Support attack",RB:"Support attack",CDM:"Quick progression",CM:"Forward passes only",CAM:"Through balls",LM:"Run forward",RM:"Run forward",LW:"Cut inside quickly",RW:"Cut inside quickly",ST:"Direct runs"},
-  "Low Block": {GK:"Stay deep",CB:"Deep compact line",LB:"Defensive positioning",RB:"Defensive positioning",CDM:"Protect defense",CM:"Stay compact",CAM:"Support defense",LM:"Defensive support",RM:"Defensive support",LW:"Defensive support",RW:"Defensive support",ST:"Stay forward"},
-  "Mid Block": {GK:"Normal positioning",CB:"Mid defensive line",LB:"Balanced",RB:"Balanced",CDM:"Screen midfield",CM:"Hold middle line",CAM:"Press lightly",LM:"Track halfway",RM:"Track halfway",LW:"Track halfway",RW:"Track halfway",ST:"Press slightly"},
-  "High Block": {GK:"High starting position",CB:"Stay high",LB:"Push forward",RB:"Push forward",CDM:"Support press",CM:"Push forward",CAM:"Support attack",LM:"Push forward",RM:"Push forward",LW:"Stay high",RW:"Stay high",ST:"High positioning"},
-  "Build-Up Play": {GK:"Distribute ball",CB:"Play from back",LB:"Support build-up",RB:"Support build-up",CDM:"Drop between CBs",CM:"Support short passes",CAM:"Receive and turn",LM:"Hold width",RM:"Hold width",LW:"Hold width",RW:"Hold width",ST:"Link play"},
-  "Fast Transition": {GK:"Quick release",CB:"Immediate forward pass",LB:"Quick overlap",RB:"Quick overlap",CDM:"Win and release",CM:"Immediate forward pass",CAM:"Quick decisions",LM:"Sprint forward",RM:"Sprint forward",LW:"Explosive runs",RW:"Explosive runs",ST:"Attack quickly"},
-  "Route One": {GK:"Long kicks",CB:"Clear long",LB:"Stay back",RB:"Stay back",CDM:"Support second balls",CM:"Push forward",CAM:"Support striker",LM:"Run forward",RM:"Run forward",LW:"Run forward",RW:"Run forward",ST:"Win aerial duels"},
-  "Press and Trap": {GK:"Stay alert",CB:"Step up to intercept",LB:"Trap wide",RB:"Trap wide",CDM:"Close passing lanes",CM:"Close passing lanes",CAM:"Force mistakes",LM:"Trap wide",RM:"Trap wide",LW:"Trap wide",RW:"Trap wide",ST:"Force mistake"},
-  "Overlapping Play": {GK:"Safe distribution",CB:"Hold position",LB:"Overlap runs",RB:"Overlap runs",CDM:"Cover defense",CM:"Support attack",CAM:"Create chances",LM:"Overlap",RM:"Overlap",LW:"Cut inside",RW:"Cut inside",ST:"Finish moves"},
-  "False 9 System": {GK:"Short passes",CB:"Build from back",LB:"Overlap",RB:"Overlap",CDM:"Hold shape",CM:"Push forward",CAM:"Advance",LM:"Cut inside",RM:"Cut inside",LW:"Move inside",RW:"Move inside",ST:"Drop into midfield"},
-  "Target Man Play": {GK:"Long balls",CB:"Direct passes",LB:"Cross early",RB:"Cross early",CDM:"Support second balls",CM:"Deliver crosses",CAM:"Play off striker",LM:"Cross ball",RM:"Cross ball",LW:"Cross ball",RW:"Cross ball",ST:"Hold ball, aerial play"},
-  "Compact Shape": {GK:"Safe play",CB:"Stay tight",LB:"Tuck in",RB:"Tuck in",CDM:"Close gaps",CM:"Stay close",CAM:"Limited movement",LM:"Narrow",RM:"Narrow",LW:"Narrow position",RW:"Narrow position",ST:"Support midfield"}
-};
-
-const defaultRoles = {ST:"Poacher",CF:"Complete Forward",LW:"Winger",RW:"Winger",CAM:"Attacking Midfielder",CM:"Box-to-Box Midfielder",CDM:"Holding Midfielder",LM:"Winger",RM:"Winger",LB:"Fullback",RB:"Fullback",CB:"Central Defender",GK:"Sweeper Keeper"};
-
-// ===== PITCH POSITIONS =====
-const pitchLayouts = {
-  "GK":[[50,90]],
-  "CB":[[33,72],[67,72]],
-  "LB":[[15,72]],"RB":[[85,72]],
-  "CDM":[[50,57]],"CM":[[33,45],[67,45]],"CAM":[[50,33]],
-  "LM":[[15,45]],"RM":[[85,45]],
-  "LW":[[20,20]],"RW":[[80,20]],
-  "ST":[[50,15]],"CF":[[50,18]]
-};
-
-function getFormationLayout(positions) {
-  const counts = {};
-  positions.forEach(p => { counts[p] = (counts[p]||0)+1; });
-  const placed = {};
-  const result = [];
-  positions.forEach(p => {
-    placed[p] = (placed[p]||0)+1;
-    const total = counts[p];
-    const idx = placed[p]-1;
-    let x, y;
-    if(total === 1) {
-      x = 50; y = p==='GK'?88:p==='ST'?12:p==='LW'?20:p==='RW'?80:p==='LM'?15:p==='RM'?85:p==='CAM'?50:p==='CDM'?50:50;
-      y = p==='GK'?88:p==='CDM'?62:p==='CM'?50:p==='CAM'?35:p==='ST'?12:p==='LW'||p==='RW'?18:p==='LM'||p==='RM'?50:p==='LB'||p==='RB'?72:p==='CB'?72:50;
-      x = p==='LW'||p==='LM'||p==='LB'?15:p==='RW'||p==='RM'||p==='RB'?85:50;
-    } else {
-      const spread = total===2?[30,70]:total===3?[20,50,80]:total===4?[15,38,62,85]:total===5?[10,27,50,73,90]:[10,26,42,58,74,90];
-      x = spread[idx]||50;
-      y = p==='CB'?72:p==='CM'?50:p==='ST'?12:p==='CAM'?35:p==='CDM'?62:p==='LM'||p==='RM'?50:50;
+  // ---- storage helper: real localStorage when available, in-memory fallback otherwise ----
+  let useMemory = false;
+  try{
+    localStorage.setItem('__ic7_probe__','1');
+    localStorage.removeItem('__ic7_probe__');
+  }catch(e){ useMemory = true; }
+  const memoryStore = {};
+  const Store = {
+    get(key, fallback){
+      if(useMemory) return (key in memoryStore) ? memoryStore[key] : fallback;
+      try{
+        const raw = localStorage.getItem(key);
+        return raw === null ? fallback : JSON.parse(raw);
+      }catch(e){ return fallback; }
+    },
+    set(key, value){
+      if(useMemory){ memoryStore[key] = value; return true; }
+      try{ localStorage.setItem(key, JSON.stringify(value)); return true; }
+      catch(e){ memoryStore[key] = value; useMemory = true; return false; }
     }
-    result.push({pos:p,x,y});
-  });
-  return result;
-}
+  };
 
-// ===== RENDER FORMATIONS =====
-function renderFormations(filter='') {
-  const grid = document.getElementById('formationsGrid');
-  grid.innerHTML = '';
-  Object.entries(formations).forEach(([name, data]) => {
-    if(filter && !name.toLowerCase().includes(filter.toLowerCase())) return;
-    const positions = data.pos;
-    const layout = getFormationLayout(positions);
-    const card = document.createElement('div');
-    card.className = 'formation-card';
-    card.innerHTML = `
-      <div class="formation-name">${name}</div>
-      <div class="formation-type">${data.type.toUpperCase()}</div>
-      <div class="formation-pitch" style="position:relative;">
-        ${layout.map(({pos,x,y})=>`<div class="pitch-player" style="left:${x}%;top:${y}%;">${pos}</div>`).join('')}
+  async function sha256(text){
+    // Dependency-free hash — deliberately NOT using crypto.subtle here, because
+    // that API is disabled outside secure contexts (https/localhost). Opening
+    // this file directly (file://) or on plain http hosting would silently
+    // break the admin login if it relied on crypto.subtle. This keeps the
+    // password out of plain text in storage without that dependency.
+    const str = String(text);
+    let h1 = 0xdeadbeef ^ str.length, h2 = 0x41c6ce57 ^ str.length;
+    for(let i = 0; i < str.length; i++){
+      const ch = str.charCodeAt(i);
+      h1 = Math.imul(h1 ^ ch, 2654435761);
+      h2 = Math.imul(h2 ^ ch, 1597334677);
+    }
+    h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507) ^ Math.imul(h2 ^ (h2 >>> 13), 3266489909);
+    h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507) ^ Math.imul(h1 ^ (h1 >>> 13), 3266489909);
+    return (h1 >>> 0).toString(16).padStart(8,'0') + (h2 >>> 0).toString(16).padStart(8,'0');
+  }
+
+  function escapeHtml(str){
+    return String(str || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+
+  function formatDate(iso){
+    if(!iso) return '';
+    const d = new Date(iso + 'T00:00:00');
+    if(isNaN(d)) return iso;
+    return d.toLocaleDateString('en-IN', { day:'2-digit', month:'short', year:'numeric' });
+  }
+
+  // Compress an uploaded photo client-side before it goes into storage, so a
+  // handful of posts don't blow past the browser's storage quota.
+  function compressImage(file, maxWidth){
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const img = new Image();
+        img.onload = () => {
+          const scale = Math.min(1, maxWidth / img.width);
+          const w = Math.round(img.width * scale);
+          const h = Math.round(img.height * scale);
+          const canvas = document.createElement('canvas');
+          canvas.width = w; canvas.height = h;
+          canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+          resolve(canvas.toDataURL('image/jpeg', 0.72));
+        };
+        img.onerror = reject;
+        img.src = reader.result;
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
+
+  const SEED_HIGHLIGHTS = [
+    { id:'seed1', title:'Semi-Final Thriller In The IC7 Lobby', date:'2026-07-10', body:'IC7 came from behind twice to edge Coastal Kings 3–2 and book a final spot. Sachin\'s 58th-minute winner sent the sideline into chaos.', image:'' },
+    { id:'seed2', title:'Coin Tour Registration Is Open', date:'2026-07-11', body:'Free entry, real coins — the IC7 Coin Tour is live now. Register from the Tournament section and start climbing the ladder.', image:'' },
+    { id:'seed3', title:'IC7 Tops The Kerala eFootball League', date:'2026-07-08', body:'Eight wins from ten games has IC7 sitting at the top of the table heading into the final stretch of the season.', image:'' },
+    { id:'seed4', title:'New Faces In The Rookies Squad', date:'2026-07-06', body:'Four new players have joined IC7 Rookies this week after clearing trials. Welcome to the clan.', image:'' },
+    { id:'seed5', title:'Clan Championship Recap', date:'2026-07-03', body:'A tight group stage saw IC7\'s Elite Squad through on goal difference — full breakdown in the News section.', image:'' },
+    { id:'seed6', title:'Community Night Was One To Remember', date:'2026-07-01', body:'Good turnout for this week\'s voice hangout — strategy talk, some banter, and a few scrims to close it out.', image:'' }
+  ];
+
+  function getHighlights(){ return Store.get('ic7_highlights', SEED_HIGHLIGHTS); }
+  function saveHighlights(list){ Store.set('ic7_highlights', list); }
+
+  let whTimer = null;
+  function renderHighlights(){
+    const track = document.getElementById('whTrack');
+    const dotsHost = document.getElementById('whDots');
+    const empty = document.getElementById('highlightEmpty');
+    const carousel = document.getElementById('whCarousel');
+    if(!track) return;
+    if(whTimer){ clearInterval(whTimer); whTimer = null; }
+
+    const items = getHighlights().slice().sort((a,b) => (b.date||'').localeCompare(a.date||''));
+    if(!items.length){
+      track.innerHTML = '';
+      if(dotsHost) dotsHost.innerHTML = '';
+      if(empty) empty.hidden = false;
+      if(carousel) carousel.style.display = 'none';
+      return;
+    }
+    if(empty) empty.hidden = true;
+    if(carousel) carousel.style.display = '';
+
+    const slideHtml = (h) => {
+      const mediaStyle = h.image ? ` style="background-image:url('${h.image}')"` : '';
+      return `<div class="wh-slide">
+        <div class="wh-media"${mediaStyle}>${h.image ? '' : '<span class="hl-noimg">IC7</span>'}</div>
+        <div class="wh-text">
+          <span class="wh-date">${escapeHtml(formatDate(h.date))}</span>
+          <h3>${escapeHtml(h.title)}</h3>
+          <p>${escapeHtml(h.body)}</p>
+        </div>
+      </div>`;
+    };
+
+    const total = items.length;
+    // duplicate the first slide at the end so looping from last -> first is seamless
+    track.innerHTML = items.map(slideHtml).join('') + (total > 1 ? slideHtml(items[0]) : '');
+
+    if(dotsHost){
+      dotsHost.innerHTML = total > 1 ? items.map((_, i) => `<button type="button" class="wh-dot${i===0?' active':''}" data-i="${i}" aria-label="Go to slide ${i+1}"></button>`).join('') : '';
+    }
+
+    let idx = 0;
+    function goTo(i, animate){
+      track.style.transition = animate === false ? 'none' : 'transform .6s ease';
+      track.style.transform = `translateX(-${i * 100}%)`;
+      if(dotsHost){
+        [...dotsHost.children].forEach((d, di) => d.classList.toggle('active', di === (i % total)));
+      }
+    }
+    goTo(0, false);
+    // force a reflow so the next transform change animates from this starting point
+    void track.offsetWidth;
+
+    if(total > 1){
+      function advance(){
+        idx++;
+        goTo(idx, true);
+        if(idx === total){
+          setTimeout(() => {
+            idx = 0;
+            goTo(0, false);
+            void track.offsetWidth;
+          }, 620);
+        }
+      }
+      function start(){ whTimer = setInterval(advance, 5000); }
+      function stop(){ if(whTimer){ clearInterval(whTimer); whTimer = null; } }
+      start();
+      if(carousel){
+        carousel.addEventListener('mouseenter', stop);
+        carousel.addEventListener('mouseleave', start);
+      }
+      if(dotsHost){
+        dotsHost.querySelectorAll('.wh-dot').forEach(d => d.addEventListener('click', () => {
+          stop();
+          idx = parseInt(d.dataset.i, 10);
+          goTo(idx, true);
+          start();
+        }));
+      }
+    }
+  }
+
+  function renderAdminList(){
+    const list = document.getElementById('adminHighlightList');
+    if(!list) return;
+    const items = getHighlights().slice().sort((a,b) => (b.date||'').localeCompare(a.date||''));
+    list.innerHTML = '';
+    items.forEach(h => {
+      const row = document.createElement('div');
+      row.className = 'admin-list-item';
+      const thumbStyle = h.image ? `background-image:url('${h.image}')` : '';
+      row.innerHTML = `
+        <div class="admin-list-thumb" style="${thumbStyle}"></div>
+        <div class="admin-list-info"><b>${escapeHtml(h.title)}</b><span>${escapeHtml(formatDate(h.date))}</span></div>
+        <div class="admin-list-actions">
+          <button type="button" data-edit="${h.id}">Edit</button>
+          <button type="button" data-delete="${h.id}">Delete</button>
+        </div>`;
+      list.appendChild(row);
+    });
+    list.querySelectorAll('[data-edit]').forEach(btn => btn.addEventListener('click', () => loadHighlightIntoForm(btn.dataset.edit)));
+    list.querySelectorAll('[data-delete]').forEach(btn => btn.addEventListener('click', () => {
+      if(!confirm('Delete this highlight?')) return;
+      saveHighlights(getHighlights().filter(h => h.id !== btn.dataset.delete));
+      renderAdminList(); renderHighlights();
+    }));
+  }
+
+  function loadHighlightIntoForm(id){
+    const h = getHighlights().find(x => x.id === id);
+    if(!h) return;
+    document.getElementById('hlEditId').value = h.id;
+    document.getElementById('hlTitle').value = h.title;
+    document.getElementById('hlDate').value = h.date;
+    document.getElementById('hlBody').value = h.body;
+    document.getElementById('hlCancelEdit').hidden = false;
+  }
+
+  function resetHighlightForm(){
+    document.getElementById('highlightForm').reset();
+    document.getElementById('hlEditId').value = '';
+    document.getElementById('hlDate').value = new Date().toISOString().slice(0,10);
+    document.getElementById('hlCancelEdit').hidden = true;
+  }
+
+  // ---- admin auth ----
+  async function getAdminHash(){
+    let hash = Store.get('ic7_admin_pw_hash', null);
+    if(!hash){
+      hash = await sha256(DEFAULT_ADMIN_PASSWORD);
+      Store.set('ic7_admin_pw_hash', hash);
+    }
+    return hash;
+  }
+
+  let isLoggedIn = false;
+
+  function showView(name){
+    document.querySelectorAll('.admin-view').forEach(v => v.hidden = v.dataset.view !== name);
+  }
+
+  function openModal(){
+    if(isLoggedIn){ openDashboard(); return; }
+    document.getElementById('adminModalOverlay').hidden = false;
+    showView('login');
+    document.getElementById('loginPwInput').focus();
+  }
+  function closeModal(){
+    document.getElementById('adminModalOverlay').hidden = true;
+    document.getElementById('loginError').hidden = true;
+    document.getElementById('loginPwInput').value = '';
+  }
+
+  function openDashboard(){
+    document.getElementById('adminModalOverlay').hidden = true;
+    document.getElementById('dashOverlay').hidden = false;
+    renderAdminList();
+    const note = document.getElementById('storageNote');
+    if(note){
+      note.textContent = useMemory
+        ? "Preview mode: this environment can't save browser data right now, so changes here will reset on reload. Once hosted on your own site, changes save permanently in the visitor's browser."
+        : "Changes save in this browser only (no backend). For every visitor on every device to see updates automatically, you'd need a small backend added later.";
+    }
+  }
+  function closeDashboard(){
+    document.getElementById('dashOverlay').hidden = true;
+  }
+
+  document.getElementById('adminEntryBtn').addEventListener('click', openModal);
+  document.getElementById('adminModalClose').addEventListener('click', closeModal);
+  document.getElementById('adminModalOverlay').addEventListener('click', (e) => { if(e.target.id === 'adminModalOverlay') closeModal(); });
+  document.getElementById('dashClose').addEventListener('click', closeDashboard);
+  document.getElementById('dashOverlay').addEventListener('click', (e) => { if(e.target.id === 'dashOverlay') closeDashboard(); });
+
+  // Arriving from another page's "Admin Login" link (e.g. tournament-registration.html)
+  if(new URLSearchParams(window.location.search).get('admin') === '1'){
+    openModal();
+    history.replaceState(null, '', window.location.pathname + window.location.hash);
+  }
+
+  document.getElementById('dashTabs').addEventListener('click', (e) => {
+    const btn = e.target.closest('.dash-tab');
+    if(!btn) return;
+    document.querySelectorAll('.dash-tab').forEach(t => t.classList.toggle('active', t === btn));
+    document.querySelectorAll('.dash-panel').forEach(p => p.hidden = p.dataset.panel !== btn.dataset.tab);
+  });
+
+  document.getElementById('showForgotBtn').addEventListener('click', () => showView('forgot'));
+  document.getElementById('backToLoginBtn').addEventListener('click', () => showView('login'));
+
+  document.getElementById('loginSubmitBtn').addEventListener('click', async () => {
+    const errBox = document.getElementById('loginError');
+    try{
+      const pw = document.getElementById('loginPwInput').value;
+      const hash = await getAdminHash();
+      if(await sha256(pw) === hash){
+        isLoggedIn = true;
+        errBox.hidden = true;
+        resetHighlightForm();
+        openDashboard();
+      }else{
+        errBox.textContent = 'Incorrect password.';
+        errBox.hidden = false;
+      }
+    }catch(err){
+      errBox.textContent = 'Something went wrong logging in: ' + err.message;
+      errBox.hidden = false;
+    }
+  });
+  document.getElementById('loginPwInput').addEventListener('keydown', (e) => { if(e.key === 'Enter') document.getElementById('loginSubmitBtn').click(); });
+
+  document.getElementById('resetSubmitBtn').addEventListener('click', async () => {
+    const err = document.getElementById('forgotError');
+    const ok = document.getElementById('forgotSuccess');
+    err.hidden = true; ok.hidden = true;
+    try{
+      const code = document.getElementById('recoveryCodeInput').value.trim();
+      const pw1 = document.getElementById('newPwInput').value;
+      const pw2 = document.getElementById('newPwConfirmInput').value;
+      if(code !== ADMIN_RECOVERY_CODE){ err.textContent = 'Recovery code is incorrect.'; err.hidden = false; return; }
+      if(pw1.length < 6){ err.textContent = 'New password must be at least 6 characters.'; err.hidden = false; return; }
+      if(pw1 !== pw2){ err.textContent = 'Passwords do not match.'; err.hidden = false; return; }
+      Store.set('ic7_admin_pw_hash', await sha256(pw1));
+      ok.hidden = false;
+      document.getElementById('recoveryCodeInput').value = '';
+      document.getElementById('newPwInput').value = '';
+      document.getElementById('newPwConfirmInput').value = '';
+      setTimeout(() => showView('login'), 1200);
+    }catch(e){
+      err.textContent = 'Something went wrong: ' + e.message;
+      err.hidden = false;
+    }
+  });
+
+  document.getElementById('logoutBtn').addEventListener('click', () => { isLoggedIn = false; closeDashboard(); });
+
+  document.getElementById('changePwBtn').addEventListener('click', async () => {
+    const pw1 = document.getElementById('changePwInput').value;
+    const pw2 = document.getElementById('changePwConfirmInput').value;
+    const msg = document.getElementById('changePwMsg');
+    msg.hidden = true;
+    if(pw1.length < 6){ msg.textContent = 'New password must be at least 6 characters.'; msg.hidden = false; return; }
+    if(pw1 !== pw2){ msg.textContent = 'Passwords do not match.'; msg.hidden = false; return; }
+    Store.set('ic7_admin_pw_hash', await sha256(pw1));
+    msg.style.color = 'var(--green-live)';
+    msg.textContent = 'Password updated.';
+    msg.hidden = false;
+    document.getElementById('changePwInput').value = '';
+    document.getElementById('changePwConfirmInput').value = '';
+  });
+
+  document.getElementById('hlCancelEdit').addEventListener('click', resetHighlightForm);
+
+  document.getElementById('highlightForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const id = document.getElementById('hlEditId').value || (Date.now().toString(36) + Math.random().toString(36).slice(2,7));
+    const title = document.getElementById('hlTitle').value.trim();
+    const date = document.getElementById('hlDate').value;
+    const body = document.getElementById('hlBody').value.trim();
+    const fileInput = document.getElementById('hlImage');
+    const list = getHighlights();
+    const existing = list.find(h => h.id === id);
+    let image = existing ? existing.image : '';
+    if(fileInput.files && fileInput.files[0]){
+      try{ image = await compressImage(fileInput.files[0], 1000); }
+      catch(e){ /* keep previous image if compression fails */ }
+    }
+    const record = { id, title, date, body, image };
+    const next = existing ? list.map(h => h.id === id ? record : h) : [...list, record];
+    saveHighlights(next);
+    resetHighlightForm();
+    renderAdminList();
+    renderHighlights();
+  });
+
+  // init
+  resetHighlightForm();
+  renderHighlights();
+
+  /* =====================================================================
+     EVERYTHING ELSE ON THE SITE — same no-backend pattern as Highlights
+     above: read/write through Store, re-render the public section, and
+     give the dashboard a form + list to manage it. All defaults below
+     match what shipped on the page, so nothing changes until an admin
+     edits something.
+     ===================================================================== */
+
+  function generateId(){ return Date.now().toString(36) + Math.random().toString(36).slice(2,7); }
+
+  function buildFormFields(container, fields, idPrefix){
+    if(!container) return;
+    let html = `<input type="hidden" id="${idPrefix}EditId">`;
+    fields.forEach(f => {
+      if(f.type === 'file'){
+        html += `<div class="field"><label for="${idPrefix}_${f.id}">${f.label}</label><input type="file" accept="image/*" id="${idPrefix}_${f.id}"></div>`;
+      }else if(f.type === 'textarea'){
+        html += `<div class="field"><label for="${idPrefix}_${f.id}">${f.label}</label><textarea id="${idPrefix}_${f.id}" rows="${f.rows||2}" ${f.required?'required':''}></textarea></div>`;
+      }else{
+        html += `<div class="field"><label for="${idPrefix}_${f.id}">${f.label}</label><input type="${f.type||'text'}" id="${idPrefix}_${f.id}" ${f.required?'required':''}></div>`;
+      }
+    });
+    container.innerHTML = html;
+  }
+
+  // Generic list CRUD: schedule, teams, players, leaderboard, gallery, activities all use this.
+  function createCrudSection(cfg){
+    function getAll(){ return Store.get(cfg.storeKey, cfg.seed); }
+    function saveAll(list){ Store.set(cfg.storeKey, list); }
+
+    function renderPublic(){
+      const host = document.getElementById(cfg.publicContainerId);
+      if(!host) return;
+      const items = getAll();
+      host.innerHTML = items.map(cfg.publicRender).join('');
+      if(cfg.afterRenderPublic) cfg.afterRenderPublic(items);
+    }
+
+    function renderAdminList(){
+      const list = document.getElementById(cfg.adminListId);
+      if(!list) return;
+      const items = getAll();
+      list.innerHTML = items.map(it => {
+        const thumb = cfg.thumbField
+          ? `<div class="admin-list-thumb" style="${it[cfg.thumbField] ? `background-image:url('${it[cfg.thumbField]}')` : ''}"></div>`
+          : '';
+        return `<div class="admin-list-item">
+          ${thumb}
+          <div class="admin-list-info"><b>${escapeHtml(cfg.titleField(it))}</b><span>${escapeHtml(cfg.subtitleField ? cfg.subtitleField(it) : '')}</span></div>
+          <div class="admin-list-actions">
+            <button type="button" data-edit="${it.id}">Edit</button>
+            <button type="button" data-delete="${it.id}">Delete</button>
+          </div>
+        </div>`;
+      }).join('');
+      list.querySelectorAll('[data-edit]').forEach(b => b.addEventListener('click', () => loadIntoForm(b.dataset.edit)));
+      list.querySelectorAll('[data-delete]').forEach(b => b.addEventListener('click', () => {
+        if(!confirm('Delete this item?')) return;
+        saveAll(getAll().filter(x => x.id !== b.dataset.delete));
+        renderAdminList(); renderPublic();
+      }));
+    }
+
+    function loadIntoForm(id){
+      const it = getAll().find(x => x.id === id);
+      if(!it) return;
+      document.getElementById(cfg.idPrefix + 'EditId').value = it.id;
+      cfg.fields.forEach(f => {
+        if(f.type === 'file') return;
+        const el = document.getElementById(cfg.idPrefix + '_' + f.id);
+        if(el) el.value = it[f.id] || '';
+      });
+      const cancelBtn = document.getElementById(cfg.idPrefix + 'CancelEdit');
+      if(cancelBtn) cancelBtn.hidden = false;
+    }
+
+    function resetForm(){
+      const form = document.getElementById(cfg.formId);
+      if(form) form.reset();
+      const idEl = document.getElementById(cfg.idPrefix + 'EditId');
+      if(idEl) idEl.value = '';
+      const cancelBtn = document.getElementById(cfg.idPrefix + 'CancelEdit');
+      if(cancelBtn) cancelBtn.hidden = true;
+    }
+
+    async function handleSubmit(e){
+      e.preventDefault();
+      const id = document.getElementById(cfg.idPrefix + 'EditId').value || generateId();
+      const items = getAll();
+      const existing = items.find(x => x.id === id);
+      const record = { id };
+      for(const f of cfg.fields){
+        if(f.type === 'file'){
+          const fileInput = document.getElementById(cfg.idPrefix + '_' + f.id);
+          if(fileInput && fileInput.files && fileInput.files[0]){
+            try{ record[f.id] = await compressImage(fileInput.files[0], f.maxWidth || 1000); }
+            catch(err){ record[f.id] = existing ? existing[f.id] : ''; }
+          }else{
+            record[f.id] = existing ? existing[f.id] : '';
+          }
+        }else{
+          const el = document.getElementById(cfg.idPrefix + '_' + f.id);
+          record[f.id] = el ? el.value.trim() : '';
+        }
+      }
+      const next = existing ? items.map(x => x.id === id ? record : x) : [...items, record];
+      saveAll(next);
+      resetForm();
+      renderAdminList();
+      renderPublic();
+    }
+
+    const formEl = document.getElementById(cfg.formId);
+    if(formEl){
+      buildFormFields(document.getElementById(cfg.formFieldsId), cfg.fields, cfg.idPrefix);
+      formEl.addEventListener('submit', handleSubmit);
+      const cancelBtn = document.getElementById(cfg.idPrefix + 'CancelEdit');
+      if(cancelBtn) cancelBtn.addEventListener('click', resetForm);
+    }
+    renderPublic();
+    renderAdminList();
+    return { renderPublic, renderAdminList, getAll };
+  }
+
+  // ---- Schedule / Fixtures ----
+  function dayMonth(iso){
+    const d = new Date((iso||'') + 'T00:00:00');
+    if(isNaN(d)) return { day:'--', month:'---' };
+    return { day: String(d.getDate()).padStart(2,'0'), month: d.toLocaleDateString('en-IN',{month:'short'}) };
+  }
+  createCrudSection({
+    storeKey: 'ic7_fixtures',
+    seed: [
+      { id:'fx1', date:'2026-07-18', opponent:'Coastal Kings', competition:'IC7 Coin Cup · Final', venue:'Online', city:'IC7 Lobby', time:'7:00 PM' },
+      { id:'fx2', date:'2026-07-25', opponent:'Riverside FC', competition:'Kerala eFootball League', venue:'Online', city:'IC7 Lobby', time:'6:30 PM' },
+      { id:'fx3', date:'2026-08-02', opponent:'Harbour United', competition:'Friendly Challenge', venue:'Online', city:'IC7 Lobby', time:'5:00 PM' },
+      { id:'fx4', date:'2026-08-09', opponent:'Highland Sevens', competition:'Invitational Cup · Group Stage', venue:'Online', city:'IC7 Lobby', time:'4:30 PM' }
+    ],
+    fields: [
+      { id:'date', label:'Match Date', type:'date', required:true },
+      { id:'opponent', label:'Opponent', type:'text', required:true },
+      { id:'competition', label:'Competition / Round', type:'text' },
+      { id:'venue', label:'Venue', type:'text' },
+      { id:'city', label:'City', type:'text' },
+      { id:'time', label:'Kick-off Time', type:'text' }
+    ],
+    formId:'fixtureForm', formFieldsId:'fixtureFormFields', idPrefix:'fixture', adminListId:'adminFixtureList',
+    publicContainerId:'scheduleList',
+    titleField: it => `IC7 vs ${it.opponent}`,
+    subtitleField: it => `${it.date} · ${it.time}`,
+    publicRender: it => {
+      const dm = dayMonth(it.date);
+      return `<div class="fixture glass reveal in-view">
+        <div class="fx-date"><b>${escapeHtml(dm.day)}</b><span>${escapeHtml(dm.month)}</span></div>
+        <div class="fx-teams">IC7 vs ${escapeHtml(it.opponent)}<small>${escapeHtml(it.competition)}</small></div>
+        <div class="fx-venue">${escapeHtml(it.venue)}<br>${escapeHtml(it.city)}</div>
+        <div class="fx-status">${escapeHtml(it.time)}</div>
+      </div>`;
+    }
+  });
+
+  // ---- Teams ----
+  createCrudSection({
+    storeKey: 'ic7_teams',
+    seed: [
+      { id:'tm1', code:'SR', name:'IC7 Elite Squad', description:'Our first team on the eFootball circuit. Captained by Arjun Menon.', players:'18', trophies:'9', division:'A', logo:'' },
+      { id:'tm2', code:'TT', name:'IC7 Reserve Squad', description:'The next tier of players, grinding coin tournaments and pushing for a starting spot.', players:'16', trophies:'3', division:'B', logo:'' },
+      { id:'tm3', code:'JR', name:'IC7 Rookies', description:'Our entry squad — newer players learning the IC7 standard before moving up.', players:'20', trophies:'2', division:'Rookie', logo:'' }
+    ],
+    fields: [
+      { id:'code', label:'Badge Code (2-3 letters, used if no logo)', type:'text', required:true },
+      { id:'name', label:'Team Name', type:'text', required:true },
+      { id:'logo', label:'Team Logo (optional)', type:'file', maxWidth:400 },
+      { id:'description', label:'Description', type:'textarea' },
+      { id:'players', label:'Player Count', type:'text' },
+      { id:'trophies', label:'Trophies', type:'text' },
+      { id:'division', label:'Division / Age Group', type:'text' }
+    ],
+    formId:'teamForm', formFieldsId:'teamFormFields', idPrefix:'team', adminListId:'adminTeamList',
+    publicContainerId:'teamGrid', thumbField:'logo',
+    titleField: it => it.name,
+    subtitleField: it => `${it.players || 0} players`,
+    publicRender: it => `<div class="team-card glass reveal in-view">
+      <div class="team-top">
+        <div class="team-crest-replacement"${it.logo ? ` style="background-image:url('${it.logo}');background-size:cover;background-position:center;"` : ''}>${it.logo ? '' : escapeHtml(it.code)}</div>
+        <h3>${escapeHtml(it.name)}</h3>
+        <p>${escapeHtml(it.description)}</p>
       </div>
-      <div class="formation-footer">
-        <span class="formation-count">10 OUTFIELD</span>
-        <span class="formation-tag">${data.type}</span>
-      </div>`;
-    card.onclick = ()=>card.classList.toggle('selected');
-    grid.appendChild(card);
+      <div class="team-meta"><div><b>${escapeHtml(it.players)}</b>Players</div><div><b>${escapeHtml(it.trophies)}</b>Trophies</div><div><b>${escapeHtml(it.division)}</b>Division</div></div>
+    </div>`
   });
-}
 
-function filterFormations() {
-  renderFormations(document.getElementById('formationSearch').value);
-}
+  // ---- Major Team Tours (public cards, ticker, and per-tournament stat tables) ----
+  // MAJOR_TOURS is the single source of truth. To add a new tournament: add one
+  // entry here (id/name/teams/desc/page), then create that page file by copying
+  // an existing tour-*.html and changing its TOUR_ID — see the setup notes.
+  const MAJOR_TOURS = [
+    { id:'intimate-cup', name:'Intimate Cup', teams:'14 Teams', desc:'IC7\'s flagship knockout competition — the one everyone circles on the calendar.', page:'tour-intimate-cup.html' },
+    { id:'evolution-cup', name:'Evolution Cup', teams:'10 Teams', desc:'A season-long league format that tests squad depth over knockout nerves.', page:'tour-evolution-cup.html' },
+    { id:'districto-cup', name:'Districto Cup', teams:'10 Teams', desc:'Regional pride on the line, district by district across Kerala.', page:'tour-districto-cup.html' },
+    { id:'coopa-duo', name:"Coopa'd Duo", teams:'10 Teams', desc:'Paired-squad format — double the coordination, double the pressure.', page:'tour-coopa-duo.html' },
+    { id:'world-cup', name:'World Cup', teams:'8 Teams', desc:'IC7\'s biggest stage. Eight squads, one clan World Cup.', page:'tour-world-cup.html' },
+    { id:'club-world-cup', name:'Club World Cup', teams:'8 Teams', desc:'Champions of every other competition settle it here.', page:'tour-club-world-cup.html' }
+  ];
 
-// ===== RENDER STYLES =====
-function renderStyles() {
-  const list = document.getElementById('stylesList');
-  list.innerHTML = '';
-  Object.entries(styles).forEach(([name, data]) => {
-    const div = document.createElement('div');
-    div.className = 'style-card';
-    div.innerHTML = `
-      <div class="style-name-block">
-        <div class="style-name">${name}</div>
-        <div class="style-tag">Team Led: 101</div>
+  function getToursMeta(){
+    const stored = Store.get('ic7_major_tours', {});
+    const merged = {};
+    MAJOR_TOURS.forEach(t => {
+      merged[t.id] = Object.assign({ name:t.name, teams:t.teams, desc:t.desc }, stored[t.id] || {});
+    });
+    return merged;
+  }
+
+  function renderToursGrid(){
+    const host = document.getElementById('toursGrid');
+    if(!host) return;
+    const meta = getToursMeta();
+    host.innerHTML = MAJOR_TOURS.map(t => {
+      const m = meta[t.id];
+      return `<a href="${t.page}" class="tour-card glass reveal in-view">
+        <div class="tour-teams">${escapeHtml(m.teams)}</div>
+        <h3>${escapeHtml(m.name)}</h3>
+        <p>${escapeHtml(m.desc)}</p>
+        <span class="tour-link">View Tournament <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>`;
+    }).join('');
+  }
+
+  function renderUpcomingTicker(){
+    const host = document.getElementById('utTrack');
+    if(!host) return;
+    const meta = getToursMeta();
+    const items = MAJOR_TOURS.map(t => `<span class="ut-item"><span class="ut-dot"></span>Upcoming: <b>${escapeHtml(meta[t.id].name)}</b> — ${escapeHtml(meta[t.id].teams)}</span>`).join('');
+    host.innerHTML = items + items;
+  }
+
+  // Build the 18(+)-field meta form dynamically from MAJOR_TOURS, so adding a
+  // tournament to the array automatically adds its fields here — no HTML edits.
+  const toursMetaFieldsHost = document.getElementById('toursMetaFields');
+  if(toursMetaFieldsHost){
+    toursMetaFieldsHost.innerHTML = MAJOR_TOURS.map(t => `
+      <div class="field-row">
+        <div class="field"><label for="mt_${t.id}_name">${escapeHtml(t.name)} — Name</label><input type="text" id="mt_${t.id}_name"></div>
+        <div class="field"><label for="mt_${t.id}_teams">${escapeHtml(t.name)} — Teams</label><input type="text" id="mt_${t.id}_teams"></div>
       </div>
-      <div class="style-bars">
-        <div class="bar-group">
-          <div class="bar-label">Attack <span>${data.attack}/10</span></div>
-          <div class="bar-track"><div class="bar-fill" style="width:${data.attack*10}%"></div></div>
-        </div>
-        <div class="bar-group">
-          <div class="bar-label">Defense <span>${data.defense}/10</span></div>
-          <div class="bar-track"><div class="bar-fill defense" style="width:${data.defense*10}%"></div></div>
-        </div>
-        <div class="bar-group">
-          <div class="bar-label">Tempo <span>${data.tempo}/10</span></div>
-          <div class="bar-track"><div class="bar-fill tempo" style="width:${data.tempo*10}%"></div></div>
-        </div>
-      </div>`;
-    div.onclick = ()=>div.classList.toggle('selected');
-    list.appendChild(div);
+      <div class="field"><label for="mt_${t.id}_desc">${escapeHtml(t.name)} — Short Description</label><textarea id="mt_${t.id}_desc" rows="2"></textarea></div>
+    `).join('');
+  }
+
+  const toursMetaForm = document.getElementById('toursMetaForm');
+  if(toursMetaForm){
+    const meta0 = getToursMeta();
+    MAJOR_TOURS.forEach(t => {
+      const nameEl = document.getElementById(`mt_${t.id}_name`);
+      const teamsEl = document.getElementById(`mt_${t.id}_teams`);
+      const descEl = document.getElementById(`mt_${t.id}_desc`);
+      if(nameEl) nameEl.value = meta0[t.id].name;
+      if(teamsEl) teamsEl.value = meta0[t.id].teams;
+      if(descEl) descEl.value = meta0[t.id].desc;
+    });
+    toursMetaForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const data = {};
+      MAJOR_TOURS.forEach(t => {
+        data[t.id] = {
+          name: (document.getElementById(`mt_${t.id}_name`).value || '').trim() || t.name,
+          teams: (document.getElementById(`mt_${t.id}_teams`).value || '').trim() || t.teams,
+          desc: (document.getElementById(`mt_${t.id}_desc`).value || '').trim()
+        };
+      });
+      Store.set('ic7_major_tours', data);
+      renderToursGrid();
+      renderUpcomingTicker();
+      const msg = document.getElementById('toursMetaSavedMsg');
+      if(msg){ msg.hidden = false; setTimeout(() => msg.hidden = true, 2000); }
+    });
+  }
+  renderToursGrid();
+  renderUpcomingTicker();
+
+  // Each tournament tracks 4 tables, 5 columns each (Rank + 4 fields below)
+  const STAT_TABLE_DEFS = [
+    { key:'standings', label:'Standings',
+      fields:[ {id:'team', label:'Team', type:'text', required:true}, {id:'played', label:'Played', type:'text'}, {id:'won', label:'Won', type:'text'}, {id:'points', label:'Points', type:'text'} ],
+      titleField: it => it.team, subtitleField: it => `${it.points||0} pts` },
+    { key:'scorers', label:'Top Scorers',
+      fields:[ {id:'player', label:'Player', type:'text', required:true}, {id:'team', label:'Team', type:'text'}, {id:'goals', label:'Goals', type:'text'}, {id:'matches', label:'Matches', type:'text'} ],
+      titleField: it => it.player, subtitleField: it => `${it.goals||0} goals` },
+    { key:'assists', label:'Top Assists',
+      fields:[ {id:'player', label:'Player', type:'text', required:true}, {id:'team', label:'Team', type:'text'}, {id:'assists', label:'Assists', type:'text'}, {id:'matches', label:'Matches', type:'text'} ],
+      titleField: it => it.player, subtitleField: it => `${it.assists||0} assists` },
+    { key:'glove', label:'Golden Glove',
+      fields:[ {id:'player', label:'Goalkeeper', type:'text', required:true}, {id:'team', label:'Team', type:'text'}, {id:'cleanSheets', label:'Clean Sheets', type:'text'}, {id:'matches', label:'Matches', type:'text'} ],
+      titleField: it => it.player, subtitleField: it => `${it.cleanSheets||0} clean sheets` }
+  ];
+
+  // Build the tournament <select>, the 4 table-type tab buttons, and one
+  // form+list block per tournament×table combination — all from the arrays
+  // above, so a new MAJOR_TOURS entry gets full admin coverage automatically.
+  const tourSelectHost = document.getElementById('tourStatsSelect');
+  const tourTabsHost = document.getElementById('tourTableTabs');
+  const tourBlocksHost = document.getElementById('tourStatBlocks');
+
+  if(tourSelectHost){
+    tourSelectHost.innerHTML = MAJOR_TOURS.map(t => `<option value="${t.id}">${escapeHtml(t.name)}</option>`).join('');
+  }
+  if(tourTabsHost){
+    tourTabsHost.innerHTML = STAT_TABLE_DEFS.map((def, i) => `<button type="button" class="tour-table-tab${i===0?' active':''}" data-table="${def.key}">${def.label}</button>`).join('');
+  }
+  if(tourBlocksHost){
+    tourBlocksHost.innerHTML = MAJOR_TOURS.map(t => STAT_TABLE_DEFS.map((def, i) => `
+      <div class="tour-stat-block" data-tour="${t.id}" data-table="${def.key}"${(t.id===MAJOR_TOURS[0].id && i===0) ? '' : ' hidden'}>
+        <form class="admin-form" id="tf_${t.id}_${def.key}">
+          <div id="tff_${t.id}_${def.key}"></div>
+          <div class="admin-form-actions">
+            <button type="submit" class="btn btn-red">Save Row</button>
+            <button type="button" class="btn btn-outline" id="t_${t.id}_${def.key}CancelEdit" hidden>Cancel Edit</button>
+          </div>
+        </form>
+        <div class="admin-list" id="tal_${t.id}_${def.key}"></div>
+      </div>`).join('')).join('');
+  }
+
+  MAJOR_TOURS.forEach(t => {
+    STAT_TABLE_DEFS.forEach(def => {
+      createCrudSection({
+        storeKey: `ic7_tour_${t.id}_${def.key}`,
+        seed: [],
+        fields: def.fields,
+        formId: `tf_${t.id}_${def.key}`, formFieldsId: `tff_${t.id}_${def.key}`,
+        idPrefix: `t_${t.id}_${def.key}`, adminListId: `tal_${t.id}_${def.key}`,
+        publicContainerId: null,
+        titleField: def.titleField, subtitleField: def.subtitleField,
+        publicRender: () => ''
+      });
+    });
   });
-}
 
-// ===== RENDER ROLES =====
-function renderRoles(filter='') {
-  const grid = document.getElementById('rolesGrid');
-  grid.innerHTML = '';
-  Object.entries(roles).forEach(([name, data]) => {
-    if(filter && !name.toLowerCase().includes(filter.toLowerCase())) return;
-    const card = document.createElement('div');
-    card.className = 'role-card';
-    card.innerHTML = `
-      <div class="role-card-name">${name}</div>
-      <div class="role-stats">
-        <div class="role-stat">
-          <div class="role-stat-label">ATK <span>${data.attack}/10</span></div>
-          <div class="role-bar-track"><div class="role-bar-fill" style="width:${data.attack*10}%"></div></div>
-        </div>
-        <div class="role-stat">
-          <div class="role-stat-label">DEF <span>${data.defense}/10</span></div>
-          <div class="role-bar-track"><div class="role-bar-fill def" style="width:${data.defense*10}%"></div></div>
-        </div>
-      </div>`;
-    card.onclick = ()=>card.classList.toggle('selected');
-    grid.appendChild(card);
+  // Tournament stats tab/selector wiring
+  function showTourStatBlock(){
+    if(!tourSelectHost) return;
+    const tid = tourSelectHost.value;
+    const activeTab = document.querySelector('.tour-table-tab.active');
+    const key = activeTab ? activeTab.dataset.table : 'standings';
+    document.querySelectorAll('.tour-stat-block').forEach(b => {
+      b.hidden = !(b.dataset.tour === tid && b.dataset.table === key);
+    });
+  }
+  if(tourSelectHost){
+    tourSelectHost.addEventListener('change', showTourStatBlock);
+  }
+  if(tourTabsHost){
+    tourTabsHost.addEventListener('click', (e) => {
+      const btn = e.target.closest('.tour-table-tab');
+      if(!btn) return;
+      document.querySelectorAll('.tour-table-tab').forEach(b => b.classList.toggle('active', b === btn));
+      showTourStatBlock();
+    });
+  }
+
+  // ---- Leaderboard ----
+  createCrudSection({
+    storeKey: 'ic7_leaderboard',
+    seed: [
+      { id:'lb1', team:'IC7 Iconic Sevens', p:'10', w:'8', d:'1', l:'1', pts:'25' },
+      { id:'lb2', team:'Coastal Kings', p:'10', w:'7', d:'1', l:'2', pts:'22' },
+      { id:'lb3', team:'Riverside FC', p:'10', w:'6', d:'2', l:'2', pts:'20' },
+      { id:'lb4', team:'Harbour United', p:'10', w:'5', d:'2', l:'3', pts:'17' },
+      { id:'lb5', team:'Highland Sevens', p:'10', w:'3', d:'2', l:'5', pts:'11' }
+    ],
+    fields: [
+      { id:'team', label:'Team Name', type:'text', required:true },
+      { id:'p', label:'Played', type:'text' },
+      { id:'w', label:'Won', type:'text' },
+      { id:'d', label:'Drawn', type:'text' },
+      { id:'l', label:'Lost', type:'text' },
+      { id:'pts', label:'Points', type:'text' }
+    ],
+    formId:'leaderboardForm', formFieldsId:'leaderboardFormFields', idPrefix:'leaderboard', adminListId:'adminLeaderboardList',
+    publicContainerId:'leaderboardBody',
+    titleField: it => it.team,
+    subtitleField: it => `${it.pts || 0} pts`,
+    afterRenderPublic: (items) => {
+      const body = document.getElementById('leaderboardBody');
+      if(!body) return;
+      [...body.children].forEach((row, i) => {
+        row.querySelector('.rank').textContent = String(i+1).padStart(2,'0');
+        row.classList.toggle('lead', i === 0);
+      });
+    },
+    publicRender: it => `<tr><td class="rank">01</td><td class="team-name">${escapeHtml(it.team)}</td><td>${escapeHtml(it.p)}</td><td>${escapeHtml(it.w)}</td><td>${escapeHtml(it.d)}</td><td>${escapeHtml(it.l)}</td><td class="pts">${escapeHtml(it.pts)}</td></tr>`
   });
-}
 
-function filterRoles() {
-  renderRoles(document.getElementById('roleSearch').value);
-}
-
-// ===== POPULATE SELECTS =====
-function populateSelects() {
-  const fKeys = Object.keys(formations);
-  const sKeys = Object.keys(styles);
-  const rKeys = Object.keys(roles);
-  ['homeFormation','awayFormation','genFormation','movFormation'].forEach(id=>{
-    const el = document.getElementById(id);
-    fKeys.forEach(k=>{ const o=document.createElement('option');o.value=k;o.textContent=k;el.appendChild(o); });
+  // ---- Gallery ----
+  createCrudSection({
+    storeKey: 'ic7_gallery',
+    seed: [
+      { id:'gl1', caption:'Trophy Lift · 2025', image:'' },
+      { id:'gl2', caption:'Coin Cup Final', image:'' },
+      { id:'gl3', caption:'Squad Day', image:'' },
+      { id:'gl4', caption:'Tournament Kickoff', image:'' },
+      { id:'gl5', caption:'Behind The Scenes', image:'' },
+      { id:'gl6', caption:'Grind Session', image:'' }
+    ],
+    fields: [
+      { id:'caption', label:'Caption', type:'text', required:true },
+      { id:'image', label:'Photo', type:'file', maxWidth:1100 }
+    ],
+    formId:'galleryForm', formFieldsId:'galleryFormFields', idPrefix:'gallery', adminListId:'adminGalleryList',
+    publicContainerId:'galleryGrid', thumbField:'image',
+    titleField: it => it.caption,
+    subtitleField: () => '',
+    publicRender: it => `<div class="gallery-tile glass reveal in-view">
+      <div class="gt-bg" style="${it.image ? `background-image:url('${it.image}');background-size:cover;background-position:center;` : 'background:linear-gradient(155deg, rgba(230,30,37,0.18), var(--bg-elevated-2));'}">${it.image ? '' : '<span class="hl-noimg">IC7</span>'}</div>
+      <div class="gt-overlay"><span>${escapeHtml(it.caption)}</span></div>
+    </div>`
   });
-  ['homeStyle','awayStyle','genStyle','movStyle'].forEach(id=>{
-    const el = document.getElementById(id);
-    sKeys.forEach(k=>{ const o=document.createElement('option');o.value=k;o.textContent=k;el.appendChild(o); });
+
+  // ---- Activities ----
+  const ACTIVITY_ICONS = [
+    '<path d="M12 2v20M2 12h20"/><circle cx="12" cy="12" r="9"/>',
+    '<path d="M12 2l2.9 6.26L21 9.27l-4.5 4.38L17.8 21 12 17.77 6.2 21l1.3-7.35L3 9.27l6.1-1.01L12 2z"/>',
+    '<circle cx="9" cy="7" r="3.2"/><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6"/><circle cx="18" cy="8.5" r="2.4"/><path d="M15.7 14.2c2.7.3 4.8 2.3 4.8 5.3"/>',
+    '<path d="M4 7l16-3M4 7v11l16 3V4M4 7l8 2.4 8-2.4"/>'
+  ];
+  createCrudSection({
+    storeKey: 'ic7_activities',
+    seed: [
+      { id:'ac1', title:'Coin Tournaments', description:'Free-entry tournaments where every win earns coins — climb the ladder toward bigger clan competitions.' },
+      { id:'ac2', title:'Clan Championships', description:'Official IC7 squads compete in ranked eFootball tournaments across the Kerala scene.' },
+      { id:'ac3', title:'Community Hangouts', description:'Voice nights and squad talk — the family side of the clan, not just the matches.' },
+      { id:'ac4', title:'Challenge Matches', description:'Friendly clashes against rival clans, hosted through the week.' }
+    ],
+    fields: [
+      { id:'title', label:'Title', type:'text', required:true },
+      { id:'description', label:'Description', type:'textarea' }
+    ],
+    formId:'activityForm', formFieldsId:'activityFormFields', idPrefix:'activity', adminListId:'adminActivityList',
+    publicContainerId:'activityGrid',
+    titleField: it => it.title,
+    subtitleField: () => '',
+    publicRender: (it, i) => `<div class="activity-card glass reveal in-view">
+      <div class="activity-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">${ACTIVITY_ICONS[(i||0) % ACTIVITY_ICONS.length]}</svg></div>
+      <h3>${escapeHtml(it.title)}</h3>
+      <p>${escapeHtml(it.description)}</p>
+    </div>`
   });
-  ['homeRole','awayRole'].forEach(id=>{
-    const el = document.getElementById(id);
-    rKeys.forEach(k=>{ const o=document.createElement('option');o.value=k;o.textContent=k;el.appendChild(o); });
+
+  // ---- Object-style settings: Contact, Hero & About, Live match, Tournament ----
+  function setupObjectSettings(opts){
+    function get(){ return Object.assign({}, opts.seed, Store.get(opts.storeKey, {})); }
+    function save(data){ Store.set(opts.storeKey, data); }
+    function populate(){
+      const data = get();
+      opts.fields.forEach(f => {
+        const el = document.getElementById(opts.idPrefix + '_' + f.id);
+        if(!el) return;
+        if(f.type === 'checkbox') el.checked = !!data[f.id];
+        else el.value = data[f.id] !== undefined ? data[f.id] : '';
+      });
+    }
+    const form = document.getElementById(opts.formId);
+    if(form){
+      populate();
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const data = {};
+        opts.fields.forEach(f => {
+          const el = document.getElementById(opts.idPrefix + '_' + f.id);
+          if(!el) return;
+          data[f.id] = f.type === 'checkbox' ? el.checked : el.value.trim();
+        });
+        save(data);
+        if(opts.onSave) opts.onSave(data);
+        const msg = document.getElementById(opts.savedMsgId);
+        if(msg){ msg.hidden = false; setTimeout(() => msg.hidden = true, 2000); }
+      });
+    }
+    return { get, save, populate };
+  }
+
+  // Contact
+  const contactSettings = setupObjectSettings({
+    storeKey: 'ic7_contact',
+    seed: { whatsappMain: CLUB_WHATSAPP, whatsappAdmin1: CLUB_ADMIN1_WHATSAPP, whatsappAdmin1Name:'Arjun', whatsappAdmin2: CLUB_ADMIN2_WHATSAPP, whatsappAdmin2Name:'Sachin', instagram: CLUB_INSTAGRAM },
+    fields: [
+      { id:'whatsappMain', type:'text' }, { id:'whatsappAdmin1Name', type:'text' }, { id:'whatsappAdmin1', type:'text' },
+      { id:'whatsappAdmin2Name', type:'text' }, { id:'whatsappAdmin2', type:'text' }, { id:'instagram', type:'text' }
+    ],
+    formId:'contactForm', idPrefix:'ct', savedMsgId:'contactSavedMsg',
+    onSave: () => applyContactSettings()
   });
-}
 
-// ===== MATCH ANALYSIS =====
-function runAnalysis() {
-  const hF=document.getElementById('homeFormation').value;
-  const aF=document.getElementById('awayFormation').value;
-  const hS=document.getElementById('homeStyle').value;
-  const aS=document.getElementById('awayStyle').value;
-  const hR=document.getElementById('homeRole').value;
-  const aR=document.getElementById('awayRole').value;
+  function applyContactSettings(){
+    const c = contactSettings.get();
+    const waGreeting = encodeURIComponent("Hi IC7! I'd like to know more about the clan magazine edition.");
+    document.querySelectorAll('[data-wa-contact]').forEach(el => el.href = `https://wa.me/${c.whatsappMain}?text=${waGreeting}`);
+    document.querySelectorAll('[data-wa-admin1]').forEach(el => el.href = `https://wa.me/${c.whatsappAdmin1}`);
+    document.querySelectorAll('[data-wa-admin2]').forEach(el => el.href = `https://wa.me/${c.whatsappAdmin2}`);
+    document.querySelectorAll('[data-ig-link]').forEach(el => el.href = `https://instagram.com/${c.instagram}`);
+    const a1 = document.getElementById('footerAdmin1Name'); if(a1) a1.textContent = `Admin — ${c.whatsappAdmin1Name}`;
+    const a2 = document.getElementById('footerAdmin2Name'); if(a2) a2.textContent = `Admin — ${c.whatsappAdmin2Name}`;
+  }
+  applyContactSettings();
+  window.IC7CMS = { getContactSettings: contactSettings.get, applyContactSettings };
 
-  if(!hF||!aF||!hS||!aS||!hR||!aR) { alert('Please select all options.'); return; }
+  // Hero & About
+  const heroSettings = setupObjectSettings({
+    storeKey: 'ic7_hero_about',
+    seed: {
+      tagline: "An eFootball clan uniting players from every corner of Kerala under one badge. We grind coin tournaments, chase clan championships, and back each other like family — on the pitch and off it.",
+      founded:'2020', squad:'60+', matches:'140+', trophies:'12',
+      p1: "IC7 Iconic Sevens started in 2020 when a handful of eFootball players from different corners of Kerala found each other online and started grinding matches together. What began as pickup games between strangers turned into a clan with a name, a crest and a reputation.",
+      p2: "Today we're a full-blown eFootball community — players from every district competing together, climbing coin tournaments for free, and repping IC7 in clan championships across the scene.",
+      p3: "We play to win, but IC7 is really about family. Join the clan and you're backed by people across Kerala who've got your back — as long as you hold up your end: the criteria to join are strict, and once you're in, the rules are non-negotiable.",
+      aboutSquads:'3', aboutTrophies:'12', aboutPlayers:'60+', aboutDistricts:'7'
+    },
+    fields: [
+      { id:'tagline', type:'textarea' }, { id:'founded', type:'text' }, { id:'squad', type:'text' }, { id:'matches', type:'text' }, { id:'trophies', type:'text' },
+      { id:'p1', type:'textarea' }, { id:'p2', type:'textarea' }, { id:'p3', type:'textarea' },
+      { id:'aboutSquads', type:'text' }, { id:'aboutTrophies', type:'text' }, { id:'aboutPlayers', type:'text' }, { id:'aboutDistricts', type:'text' }
+    ],
+    formId:'heroForm', idPrefix:'he', savedMsgId:'heroSavedMsg',
+    onSave: () => applyHeroAbout()
+  });
+  function applyHeroAbout(){
+    const h = heroSettings.get();
+    const set = (id, val) => { const el = document.getElementById(id); if(el) el.textContent = val; };
+    set('heroTagline', h.tagline);
+    set('heroStatFounded', h.founded); set('heroStatSquad', h.squad); set('heroStatMatches', h.matches); set('heroStatTrophies', h.trophies);
+    set('aboutP1', h.p1); set('aboutP2', h.p2); set('aboutP3', h.p3);
+    set('aboutStatSquads', h.aboutSquads); set('aboutStatTrophies', h.aboutTrophies); set('aboutStatPlayers', h.aboutPlayers); set('aboutStatDistricts', h.aboutDistricts);
+    // preserve the bold "IC7 Iconic Sevens" lead-in on paragraph 1
+    const p1 = document.getElementById('aboutP1');
+    if(p1 && h.p1.indexOf('IC7 Iconic Sevens') === 0){
+      p1.innerHTML = '<b>IC7 Iconic Sevens</b>' + escapeHtml(h.p1.slice('IC7 Iconic Sevens'.length));
+    }
+  }
+  applyHeroAbout();
 
-  const insights = [];
-  if(formations[hF].pos.includes('LW')||formations[hF].pos.includes('RW'))
-    insights.push('Home team has wide attacking threats from the wings.');
-  if(styles[hS].attack > styles[aS].defense)
-    insights.push(`${hS} (ATK ${styles[hS].attack}) likely breaks through ${aS} (DEF ${styles[aS].defense}).`);
-  if(styles[aS].attack > styles[hS].defense)
-    insights.push(`${aS} (ATK ${styles[aS].attack}) can exploit ${hS} defense (DEF ${styles[hS].defense}).`);
-  if(roles[hR].attack > roles[aR].defense)
-    insights.push(`${hR} (ATK ${roles[hR].attack}) wins the individual battle vs ${aR} (DEF ${roles[aR].defense}).`);
-  if(hS==='Wing Play'&&(hR==='Winger'||hR==='Inside Forward'))
-    insights.push('Strong wing strategy synergy detected for home team.');
-  if(aS==='Park the Bus')
-    insights.push('Away team parking the bus — use crosses, set pieces, or long shots.');
-  if(styles[hS].tempo > styles[aS].tempo+2)
-    insights.push(`Home team has significant tempo advantage (${styles[hS].tempo} vs ${styles[aS].tempo}) — control pace early.`);
-  if(formations[hF].pos.includes('CDM')&&!formations[aF].pos.includes('CDM'))
-    insights.push('Home team has a defensive midfielder advantage in midfield protection.');
+  // Live match
+  const liveSettings = setupObjectSettings({
+    storeKey: 'ic7_live',
+    seed: { active:true, title:'IC7 Coin Cup 2026 — Semi Final', status:'Live now · Online — IC7 Lobby', teamA:'IC7 Sevens', scoreA:'3', teamB:'Coastal Kings', scoreB:'2' },
+    fields: [
+      { id:'active', type:'checkbox' }, { id:'title', type:'text' }, { id:'status', type:'text' },
+      { id:'teamA', type:'text' }, { id:'scoreA', type:'text' }, { id:'teamB', type:'text' }, { id:'scoreB', type:'text' }
+    ],
+    formId:'liveForm', idPrefix:'lv', savedMsgId:'liveSavedMsg',
+    onSave: () => applyLive()
+  });
+  function applyLive(){
+    const l = liveSettings.get();
+    const set = (id, val) => { const el = document.getElementById(id); if(el) el.textContent = val; };
+    set('liveTitle', l.title); set('liveStatus', l.status);
+    set('liveTeamA', l.teamA); set('liveScoreA', l.scoreA); set('liveTeamB', l.teamB); set('liveScoreB', l.scoreB);
+    const badge = document.getElementById('liveBadge');
+    const badgeText = document.getElementById('liveBadgeText');
+    if(badge && badgeText){
+      badgeText.textContent = l.active ? 'LIVE' : 'FULL TIME';
+      badge.style.color = l.active ? '' : 'var(--ink-faint)';
+      badge.style.borderColor = l.active ? '' : 'var(--line-strong)';
+    }
+  }
+  applyLive();
 
-  const el = document.getElementById('analysisResult');
-  const items = document.getElementById('analysisItems');
-  items.innerHTML = insights.map(i=>`<div class="result-item"><span class="result-arrow">→</span>${i}</div>`).join('');
-  el.classList.add('visible');
-}
+  // Tournament settings + registrations
+  const tournamentSettings = setupObjectSettings({
+    storeKey: 'ic7_tournament',
+    seed: {
+      active:true, name:'IC7 Coin Tour', desc:'Free-to-join coin tournament — win matches, earn coins, and climb toward IC7\'s bigger clan championships. Open to all eFootball players across Kerala.', fee:'Free Entry', deadline:'', venue:'Online — IC7 Lobby',
+      option1:'Open', option2:'Rookie', option3:'Veteran', option4:'', option5:''
+    },
+    fields: [
+      { id:'active', type:'checkbox' }, { id:'name', type:'text' }, { id:'desc', type:'textarea' },
+      { id:'fee', type:'text' }, { id:'deadline', type:'date' }, { id:'venue', type:'text' },
+      { id:'option1', type:'text' }, { id:'option2', type:'text' }, { id:'option3', type:'text' }, { id:'option4', type:'text' }, { id:'option5', type:'text' }
+    ],
+    formId:'tournamentSettingsForm', idPrefix:'tn', savedMsgId:'tournamentSavedMsg',
+    onSave: () => applyTournament()
+  });
+  function applyTournament(){
+    const t = tournamentSettings.get();
+    const section = document.getElementById('tournament');
+    const navLink = document.getElementById('navTournamentLink');
+    if(section) section.hidden = !t.active;
+    if(navLink) navLink.hidden = !t.active;
+    const set = (id, val) => { const el = document.getElementById(id); if(el) el.textContent = val; };
+    set('tournamentName', t.name); set('tournamentDesc', t.desc);
+    set('tournamentFee', t.fee || '—');
+    set('tournamentDeadline', t.deadline ? formatDate(t.deadline) : '—');
+    set('tournamentVenue', t.venue || '—');
+  }
+  applyTournament();
 
-// ===== GENERATOR =====
-function runGenerator() {
-  const f = document.getElementById('genFormation').value;
-  const s = document.getElementById('genStyle').value;
-  if(!f||!s) { alert('Select formation and style.'); return; }
-  const positions = formations[f].pos;
-  const movData = movements[s];
-  const items = document.getElementById('generatorItems');
-  items.innerHTML = positions.map(pos=>{
-    const role = defaultRoles[pos]||pos;
-    const mov = movData[pos]||'Standard movement';
-    return `<div class="team-row">
-      <span class="pos-badge">${pos}</span>
-      <span class="pos-role">${role}</span>
-      <span class="pos-movement">${mov}</span>
-    </div>`;
-  }).join('');
-  document.getElementById('generatorOutput').classList.add('visible');
-}
+  // Criteria & Clan Rules
+  const rulesSettings = setupObjectSettings({
+    storeKey: 'ic7_rules',
+    seed: {
+      intro: "IC7 is free to join, but it isn't casual. Read this before you register.",
+      criteria: "Active eFootball player on mobile, PS or PC\nComplete a short trial period with a squad\nRespectful to senior clan members and team captains\nReachable on WhatsApp for match-day coordination",
+      conduct: "Attend scheduled clan matches and coin tournaments unless excused in advance\nNo toxic behaviour, smurfing or cheating — you represent IC7\nFollow squad selection and rotation calls from admins and captains\nClan strategies and internal discussions stay inside the clan",
+      consequences: "1st breach — formal warning from an admin\n2nd breach — suspension from tournaments and matches\nRepeated or serious breach — removal from the clan"
+    },
+    fields: [
+      { id:'intro', type:'textarea' }, { id:'criteria', type:'textarea' }, { id:'conduct', type:'textarea' }, { id:'consequences', type:'textarea' }
+    ],
+    formId:'rulesForm', idPrefix:'ru', savedMsgId:'rulesSavedMsg',
+    onSave: () => applyRules()
+  });
+  function applyRules(){
+    const r = rulesSettings.get();
+    const set = (id, val) => { const el = document.getElementById(id); if(el) el.textContent = val; };
+    set('rulesIntro', r.intro);
+    set('rulesCriteria', r.criteria);
+    set('rulesConduct', r.conduct);
+    set('rulesConsequences', r.consequences);
+  }
+  applyRules();
 
-// ===== MOVEMENTS =====
-function runMovements() {
-  const f = document.getElementById('movFormation').value;
-  const s = document.getElementById('movStyle').value;
-  if(!f||!s) { alert('Select formation and style.'); return; }
-  const positions = formations[f].pos;
-  const movData = movements[s];
-  const items = document.getElementById('movementItems');
-  items.innerHTML = positions.map(pos=>{
-    const mov = movData[pos]||'Standard positioning';
-    return `<div class="movement-pos-row">
-      <span class="movement-pos">${pos}</span>
-      <span class="movement-desc">${mov}</span>
-    </div>`;
-  }).join('');
-}
+  function renderRegistrations(){
+    const list = document.getElementById('adminRegList');
+    if(!list) return;
+    const regs = Store.get('ic7_tournament_registrations', []);
+    if(!regs.length){ list.innerHTML = '<p class="admin-sub">No registrations yet.</p>'; return; }
+    list.innerHTML = regs.slice().reverse().map(r => `<div class="admin-list-item">
+        <div class="admin-list-info"><b>${escapeHtml(r.name)} — ${escapeHtml(r.category)}</b><span>${escapeHtml(r.phone)} · ${escapeHtml(formatDate(r.submittedAt.slice(0,10)))}</span></div>
+        <div class="admin-list-actions"><button type="button" data-delreg="${r.id}">Delete</button></div>
+      </div>`).join('');
+    list.querySelectorAll('[data-delreg]').forEach(b => b.addEventListener('click', () => {
+      if(!confirm('Delete this registration?')) return;
+      Store.set('ic7_tournament_registrations', Store.get('ic7_tournament_registrations', []).filter(r => r.id !== b.dataset.delreg));
+      renderRegistrations();
+    }));
+  }
+  renderRegistrations();
 
-// ===== NAV =====
-function nav(page, el) {
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
-  document.getElementById('page-'+page).classList.add('active');
-  if(el) el.classList.add('active');
-  document.getElementById('breadcrumb').innerHTML = `SYS / <span>${page}</span>`;
-}
+  const exportBtn = document.getElementById('exportRegsBtn');
+  if(exportBtn){
+    exportBtn.addEventListener('click', () => {
+      const regs = Store.get('ic7_tournament_registrations', []);
+      const rows = regs.map(r => ({
+        Name: r.name, Phone: r.phone, Option: r.category, Message: r.message || '', Submitted: r.submittedAt ? formatDate(r.submittedAt.slice(0,10)) : ''
+      }));
+      if(window.XLSX){
+        const ws = XLSX.utils.json_to_sheet(rows.length ? rows : [{Name:'',Phone:'',Option:'',Message:'',Submitted:''}]);
+        ws['!cols'] = [{wch:22},{wch:16},{wch:14},{wch:34},{wch:14}];
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, 'Registrations');
+        XLSX.writeFile(wb, 'ic7-tournament-registrations.xlsx');
+      }else{
+        // Excel library didn't load (e.g. offline) — fall back to CSV so the data is never stuck.
+        const header = ['Name','Phone','Option','Message','Submitted'];
+        const csvRows = rows.map(r => [r.Name, r.Phone, r.Option, r.Message, r.Submitted]);
+        const csv = [header, ...csvRows].map(row => row.map(v => `"${String(v||'').replace(/"/g,'""')}"`).join(',')).join('\n');
+        const blob = new Blob([csv], {type:'text/csv'});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url; a.download = 'ic7-tournament-registrations.csv';
+        document.body.appendChild(a); a.click(); a.remove();
+        URL.revokeObjectURL(url);
+      }
+    });
+  }
 
-// ===== INIT =====
-renderFormations();
-renderStyles();
-renderRoles();
-populateSelects();
+})();
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  // Wire up WhatsApp / Instagram links from config
+  // WhatsApp / Instagram links are wired dynamically from admin-editable contact
+  // settings (see IC7CMS below in the page) — this just re-applies them after
+  // the DOM is ready, falling back to the CLUB_CONFIG defaults if nothing's
+  // been saved by an admin yet.
+  if(window.IC7CMS){ window.IC7CMS.applyContactSettings(); }
+
+  // Header scroll state
+  const header = document.getElementById('siteHeader');
+  const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 12);
+  onScroll();
+  window.addEventListener('scroll', onScroll, {passive:true});
+
+  // Mobile nav toggle
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('navLinks');
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('open');
+  });
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  // Reveal on scroll
+  if(window.IntersectionObserver){
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.15, rootMargin:'0px 0px -40px 0px'});
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  }else{
+    // No IntersectionObserver support — just show everything instead of leaving it hidden.
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('in-view'));
+  }
+
+  // Global starfield — small white dots twinkling/drifting across the whole page
+  const starHost = document.getElementById('starfield');
+  const starCount = window.innerWidth < 700 ? 60 : 130;
+  for(let i=0; i<starCount; i++){
+    const star = document.createElement('span');
+    star.className = 'star';
+    const size = 1 + Math.random()*1.8;
+    star.style.width = size+'px';
+    star.style.height = size+'px';
+    star.style.left = (Math.random()*100)+'%';
+    star.style.top = (Math.random()*100)+'%';
+    star.style.setProperty('--s-min', (0.1 + Math.random()*0.25).toFixed(2));
+    star.style.setProperty('--s-dx', (Math.random()*30-15).toFixed(1)+'px');
+    star.style.setProperty('--s-dy', (-(20+Math.random()*40)).toFixed(1)+'px');
+    const twinkleDur = (2 + Math.random()*4).toFixed(1);
+    const driftDur = (18 + Math.random()*22).toFixed(1);
+    const twinkleDelay = (-Math.random()*10).toFixed(1);
+    const driftDelay = (-Math.random()*10).toFixed(1);
+    star.style.animation = `starTwinkle ${twinkleDur}s ease-in-out infinite, starDrift ${driftDur}s ease-in-out infinite alternate`;
+    star.style.animationDelay = `${twinkleDelay}s, ${driftDelay}s`;
+    starHost.appendChild(star);
+  }
+
+  // High velocity tactical telemetry particle generator
+  const particleHost = document.getElementById('heroParticles');
+  const streamCount = window.innerWidth < 700 ? 30 : 70;
+  
+  for(let i=0; i<streamCount; i++){
+    const particle = document.createElement('span');
+    particle.className = 'particle';
+    const size = 1 + Math.random()*2;
+    particle.style.width = size+'px';
+    particle.style.height = size+'px';
+    particle.style.left = Math.random()*100+'%';
+    particle.style.animationDuration = (5 + Math.random()*7)+'s';
+    particle.style.animationDelay = (-Math.random()*12)+'s';
+    particleHost.appendChild(particle);
+  }
+
+  // LED ticker content
+  const tickerItems = [
+    "IC7 Coin Cup 2026 — Semi Final Live Now",
+    "IC7 3 – 2 Coastal Kings, 62'",
+    "Next Fixture: IC7 vs Coastal Kings · 18 Jul, 7:00 PM",
+    "IC7 tops the Kerala eFootball League table",
+    "Coin Tour registration is open — free entry",
+  ];
+  const track = document.getElementById('tickerTrack');
+  const buildTicker = () => tickerItems.map(t => `<span><span class="ticker-dot"></span>${t}</span>`).join('');
+  track.innerHTML = buildTicker() + buildTicker();
+
+  // Registration form -> WhatsApp
+  const form = document.getElementById('regForm');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = document.getElementById('regName').value.trim();
+    const age = document.getElementById('regAge').value.trim();
+    const phone = document.getElementById('regPhone').value.trim();
+    const position = document.getElementById('regPosition').value;
+    const msg = document.getElementById('regMsg').value.trim();
+
+    let text = `Hi IC7! I'd like to register for the clan via the Magazine portal.\n\n`;
+    text += `Name: ${name}\n`;
+    text += `Age: ${age}\n`;
+    text += `WhatsApp: ${phone}\n`;
+    text += `Preferred Position: ${position}\n`;
+    if(msg) text += `Message: ${msg}\n`;
+
+    const mainNumber = (window.IC7CMS && window.IC7CMS.getContactSettings().whatsappMain) || CLUB_WHATSAPP;
+    const url = `https://wa.me/${mainNumber}?text=${encodeURIComponent(text)}`;
+    window.open(url, '_blank');
+  });
+
+});
 </script>
 </body>
 </html>
