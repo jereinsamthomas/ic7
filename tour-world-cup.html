@@ -1095,6 +1095,15 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   renderWinners();
 
+  window.addEventListener('ic7_store_updated', () => {
+    renderTable('standings', ['team','played','won','points']);
+    renderTable('scorers', ['player','team','goals','matches']);
+    renderTable('assists', ['player','team','assists','matches']);
+    renderTable('glove', ['player','team','cleanSheets','matches']);
+    renderTable('shield', ['player','team','season','matches']);
+    renderWinners();
+  });
+
 });
 </script>
 </body>

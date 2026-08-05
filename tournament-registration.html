@@ -834,28 +834,37 @@ document.addEventListener('DOMContentLoaded', async () => {
     }, Store.get('ic7_tournament', {}));
   }
 
-  const t = getTournament();
-  document.getElementById('tournamentName').textContent = t.name || 'Tournament';
-  document.getElementById('tournamentDesc').textContent = t.desc || '';
-  document.getElementById('tournamentFee').textContent = t.fee || '—';
-  document.getElementById('tournamentDeadline').textContent = t.deadline ? formatDate(t.deadline) : '—';
-  document.getElementById('tournamentVenue').textContent = t.venue || '—';
+  function renderTournamentInfo() {
+    const t = getTournament();
+    document.getElementById('tournamentName').textContent = t.name || 'Tournament';
+    document.getElementById('tournamentDesc').textContent = t.desc || '';
+    document.getElementById('tournamentFee').textContent = t.fee || '—';
+    document.getElementById('tournamentDeadline').textContent = t.deadline ? formatDate(t.deadline) : '—';
+    document.getElementById('tournamentVenue').textContent = t.venue || '—';
 
-  const optionValues = [t.option1, t.option2, t.option3, t.option4, t.option5].map(o => (o||'').trim()).filter(Boolean);
-  const categorySelect = document.getElementById('trCategory');
-  const categoryField = categorySelect.closest('.field');
-  if(optionValues.length){
-    categorySelect.innerHTML = optionValues.map(o => `<option>${o}</option>`).join('');
-  }else{
-    categoryField.hidden = true;
+    const optionValues = [t.option1, t.option2, t.option3, t.option4, t.option5].map(o => (o||'').trim()).filter(Boolean);
+    const categorySelect = document.getElementById('trCategory');
+    const categoryField = categorySelect.closest('.field');
+    if(optionValues.length){
+      categorySelect.innerHTML = optionValues.map(o => `<option>${o}</option>`).join('');
+      categoryField.hidden = false;
+    }else{
+      categoryField.hidden = true;
+    }
+
+    const form = document.getElementById('tournamentForm');
+    const closedNote = document.getElementById('tournamentClosedNote');
+    if(!t.active){
+      form.hidden = true;
+      closedNote.hidden = false;
+    } else {
+      form.hidden = false;
+      closedNote.hidden = true;
+    }
   }
 
-  const form = document.getElementById('tournamentForm');
-  const closedNote = document.getElementById('tournamentClosedNote');
-  if(!t.active){
-    form.hidden = true;
-    closedNote.hidden = false;
-  }
+  renderTournamentInfo();
+  window.addEventListener('ic7_store_updated', renderTournamentInfo);
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
