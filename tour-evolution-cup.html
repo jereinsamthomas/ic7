@@ -903,13 +903,17 @@ table.board td.pts{color:var(--red-bright);font-weight:700;}
   <!-- Standings -->
   <div class="tourpage-table-block reveal in-view">
     <h2>Standings</h2>
-
+    <div id="standingsImgWrap" hidden style="margin-bottom:24px;text-align:center;">
+      <img id="standingsImg" src="" alt="Standings Image" style="max-width:100%;max-height:540px;border-radius:6px;border:1px solid var(--line-strong);box-shadow:0 12px 35px rgba(0,0,0,0.85);object-fit:contain;">
+    </div>
     <div class="board-wrap">
       <table class="board">
         <thead><tr><th>#</th><th>Team</th><th>Played</th><th>Won</th><th>Points</th></tr></thead>
         <tbody id="tb_standings"></tbody>
       </table>
     </div>
+    <p class="tourpage-empty" id="empty_standings" hidden>No standings data yet â€” check back soon.</p>
+  </div>
     <p class="tourpage-empty" id="empty_standings" hidden>No standings data yet — check back soon.</p>
   </div>
 
