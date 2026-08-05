@@ -1093,27 +1093,27 @@
       background-image: url('/assets/tc_bg_lounge.jpg');
       background-size: cover;
       background-position: center 30%;
-      opacity: 0.28;
-      filter: saturate(0.7) brightness(0.55);
+      opacity: 0.65;
+      filter: saturate(0.85) brightness(0.75);
     }
     /* Small lounge photo — bottom-right decorative window card */
     .tc-bg-photo-small {
       position: absolute;
       bottom: 62px;
       right: 28px;
-      width: 140px;
-      height: 100px;
+      width: 180px;
+      height: 130px;
       background-image: url('/assets/tc_bg_lounge2.jpg');
       background-size: cover;
       background-position: center;
-      opacity: 0.38;
-      border: 1px solid rgba(245,158,11,0.3);
+      opacity: 0.72;
+      border: 1.5px solid rgba(245,158,11,0.55);
       border-radius: 2px;
-      filter: saturate(0.6) brightness(0.6);
-      box-shadow: 0 4px 20px rgba(0,0,0,0.7);
+      filter: saturate(0.85) brightness(0.8);
+      box-shadow: 0 6px 28px rgba(0,0,0,0.8), 0 0 0 1px rgba(245,158,11,0.2);
     }
     @media (max-width: 680px) {
-      .tc-bg-photo-small { width: 90px; height: 65px; bottom: 50px; right: 16px; }
+      .tc-bg-photo-small { width: 110px; height: 80px; bottom: 50px; right: 16px; }
     }
     /* SVG pitch lines overlay */
     .tc-bg-art svg {
@@ -1301,29 +1301,29 @@
 
     /* ---- Big luxury badge / crest ---- */
     .trophy-badge {
-      width: 160px;
-      height: 160px;
+      width: 200px;
+      height: 200px;
       border-radius: 50%;
       background-size: cover;
       background-position: center;
       background-color: #0f0308;
-      border: 4px solid #e11d48;
+      border: 5px solid #e11d48;
       box-shadow:
-        0 0 0 1px rgba(255,255,255,0.08),
-        0 0 30px rgba(225,29,72,0.6),
-        0 0 70px rgba(225,29,72,0.25),
-        inset 0 0 20px rgba(0,0,0,0.7);
+        0 0 0 2px rgba(255,255,255,0.1),
+        0 0 40px rgba(225,29,72,0.7),
+        0 0 90px rgba(225,29,72,0.3),
+        inset 0 0 24px rgba(0,0,0,0.7);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 72px;
+      font-size: 90px;
       margin: 0 auto;
       position: relative;
       z-index: 2;
       transition: transform .4s ease, box-shadow .4s ease;
     }
     @media (max-width: 480px) {
-      .trophy-badge { width: 120px; height: 120px; font-size: 52px; }
+      .trophy-badge { width: 140px; height: 140px; font-size: 60px; }
     }
 
     .pedestal-card:hover .trophy-badge {
