@@ -848,63 +848,63 @@ table.board td.pts { font-family: var(--font-mono); font-size: 17.5px; font-weig
 }
 
 /* ================================================
-   PRO MEDIUM-SIZE BOX-TYPE TROPHY CABINET SLIDER
+   FULL-SIZE TROPHY CABINET SHOWCASE (TOUR PAGES)
    ================================================ */
 .evo-tc-showcase {
   position: relative;
-  max-width: 860px;
-  margin: 10px auto 20px;
-  padding: 24px 20px 18px;
+  max-width: 960px;
+  margin: 40px auto 60px;
+  padding: 40px 24px 36px;
   background: radial-gradient(ellipse 90% 70% at 50% 15%, #1c080e 0%, #0a0205 65%, #030002 100%);
   border-radius: 8px;
   border: 1px solid rgba(225, 29, 72, 0.35);
-  box-shadow: 0 0 35px rgba(225,29,72,0.15), 0 25px 80px rgba(0, 0, 0, 0.98);
+  box-shadow: 0 0 40px rgba(225,29,72,0.15), 0 35px 100px rgba(0, 0, 0, 0.98);
   font-family: var(--font-luxury);
   color: #fff;
   text-align: center;
   overflow: hidden;
 }
 
-/* Header Area: Small, Sleek, Well-Arranged Logos */
+/* Header Area */
 .evo-tc-header {
   position: relative;
-  margin-bottom: 18px;
+  margin-bottom: 34px;
 }
 .evo-tc-top-icons {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 14px;
-  margin-bottom: 6px;
+  gap: 20px;
+  margin-bottom: 12px;
 }
 .evo-tc-player-sil {
-  width: 32px;
-  height: 32px;
-  opacity: 0.95;
-  filter: drop-shadow(0 0 6px rgba(255,255,255,0.4));
+  width: 46px;
+  height: 46px;
+  opacity: 0.9;
+  filter: drop-shadow(0 0 10px rgba(255,255,255,0.4));
 }
 .evo-tc-clan-logo {
-  width: 34px;
-  height: 34px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   border: 1.5px solid #d4af37;
-  box-shadow: 0 0 10px rgba(212,175,55,0.5);
+  box-shadow: 0 0 15px rgba(212,175,55,0.5);
   object-fit: cover;
 }
 .evo-tc-title-wrap {
   position: relative;
   display: inline-block;
-  margin-bottom: 2px;
+  margin-bottom: 6px;
 }
 .evo-tc-title {
   font-family: var(--font-luxury);
-  font-size: clamp(28px, 4.5vw, 46px);
+  font-size: clamp(38px, 6.5vw, 68px);
   font-weight: 900;
   letter-spacing: .05em;
   text-transform: lowercase;
   color: #ffffff;
   line-height: 1;
-  text-shadow: 0 0 18px rgba(255, 255, 255, 0.3);
+  text-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
 }
 .evo-tc-title .trophy-red {
   color: #e11d48;
@@ -917,39 +917,40 @@ table.board td.pts { font-family: var(--font-mono); font-size: 17.5px; font-weig
 }
 .evo-tc-subtitle {
   font-family: var(--font-luxury);
-  font-size: 9.5px;
+  font-size: 11px;
   font-weight: 700;
-  letter-spacing: .32em;
+  letter-spacing: .4em;
   text-transform: uppercase;
   color: #e6ca65;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  margin-top: 3px;
+  gap: 16px;
+  margin-top: 6px;
 }
 .evo-tc-subtitle::before, .evo-tc-subtitle::after {
   content: "";
   display: block;
-  width: 30px;
+  width: 45px;
   height: 1.5px;
   background: #e11d48;
-  box-shadow: 0 0 5px #e11d48;
+  box-shadow: 0 0 8px #e11d48;
 }
 
 /* Glass Cabinet Showcase Box */
 .evo-tc-cabinet {
   position: relative;
   border: 4px solid #1f1a1c;
-  border-top: 10px solid #161214;
-  border-bottom: 12px solid #161214;
-  box-shadow: 0 0 0 1px rgba(212,175,55,0.45), inset 0 0 35px rgba(0,0,0,0.95);
+  border-top: 14px solid #161214;
+  border-bottom: 18px solid #161214;
+  box-shadow: 0 0 0 1px rgba(212,175,55,0.45), inset 0 0 50px rgba(0,0,0,0.95);
   background:
     radial-gradient(ellipse 90% 70% at 50% 50%, rgba(200, 20, 45, 0.22) 0%, transparent 80%),
     linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.88) 100%),
     url('/assets/tc_bg_lounge.jpg') center/cover;
-  padding: 24px 14px 18px;
+  padding: 44px 24px 34px;
   border-radius: 4px;
+  min-height: 480px;
 }
 
 /* Top Engraved Plaque */
@@ -960,177 +961,183 @@ table.board td.pts { font-family: var(--font-mono); font-size: 17.5px; font-weig
   background: #0d0a0b;
   border: 1px solid rgba(212,175,55,0.5);
   border-top: none;
-  padding: 2px 16px;
+  padding: 4px 22px;
   font-family: var(--font-luxury);
-  font-size: 9px;
+  font-size: 10.5px;
   font-weight: 700;
-  letter-spacing: .32em;
+  letter-spacing: .38em;
   color: #e6ca65;
-  box-shadow: 0 3px 12px rgba(0,0,0,0.85);
+  box-shadow: 0 4px 18px rgba(0,0,0,0.85);
   border-radius: 0 0 4px 4px;
   z-index: 5;
 }
 
-/* Inner Double Box Grid */
+/* Pedestals Grid inside Cabinet */
 .evo-tc-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 32px;
   align-items: flex-end;
   justify-content: center;
   position: relative;
   z-index: 2;
-  margin-top: 4px;
-}
-@media (max-width: 580px) {
-  .evo-tc-grid { grid-template-columns: 1fr; gap: 14px; }
+  margin-top: 10px;
 }
 
-/* Individual Champion Trophy Inner Box */
+/* Individual Champion Trophy Bay */
 .evo-tc-bay {
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 1px solid rgba(212,175,55,0.25);
-  border-radius: 4px;
-  background: linear-gradient(180deg, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0.6) 100%);
-  padding: 14px 8px 12px;
-  box-shadow: inset 0 0 20px rgba(0,0,0,0.85);
 }
 
 /* Ceiling Spotlight Beam */
 .evo-tc-spotlight {
   position: absolute;
-  top: -24px;
-  width: 100px;
-  height: 150px;
+  top: -44px;
+  width: 150px;
+  height: 240px;
   background: linear-gradient(180deg, rgba(255,245,200,0.22) 0%, rgba(255,215,0,0.04) 60%, transparent 100%);
   clip-path: polygon(30% 0%, 70% 0%, 100% 100%, 0% 100%);
   pointer-events: none;
   z-index: 1;
 }
 
-/* Trophy Crest Shield / Badge (Medium-Small, Pro Arranged) */
+/* Trophy Crest Shield / Badge */
 .evo-tc-trophy-badge {
-  width: 115px;
-  height: 130px;
+  width: 180px;
+  height: 200px;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   z-index: 2;
-  transition: transform .35s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform .4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .evo-tc-trophy-badge:hover {
-  transform: scale(1.06) translateY(-3px);
+  transform: scale(1.06) translateY(-6px);
 }
 .evo-tc-trophy-img {
-  width: 110px;
-  height: 125px;
+  width: 175px;
+  height: 195px;
   object-fit: contain;
-  filter: drop-shadow(0 8px 16px rgba(0,0,0,0.95)) drop-shadow(0 0 12px rgba(212,175,55,0.45));
+  filter: drop-shadow(0 12px 25px rgba(0,0,0,0.95)) drop-shadow(0 0 18px rgba(212,175,55,0.45));
 }
 .evo-tc-default-crest {
-  width: 100px;
-  height: 100px;
+  width: 160px;
+  height: 160px;
   border-radius: 50%;
   background: radial-gradient(circle at 30% 30%, #3a3034 0%, #120d0f 70%, #080506 100%);
-  border: 3px solid #d4af37;
-  box-shadow: 0 0 0 2px rgba(255,255,255,0.1), 0 0 20px rgba(212,175,55,0.6), inset 0 0 16px rgba(0,0,0,0.85);
+  border: 4px solid #d4af37;
+  box-shadow: 0 0 0 2px rgba(255,255,255,0.1), 0 0 35px rgba(212,175,55,0.65), inset 0 0 25px rgba(0,0,0,0.85);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 48px;
+  font-size: 72px;
   color: #fff8dc;
   font-weight: 800;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+  text-shadow: 0 2px 10px rgba(0,0,0,0.8);
 }
 
-.evo-tc-anchor-shield, .evo-tc-dragon-shield {
-  width: 110px;
-  height: 125px;
-  filter: drop-shadow(0 8px 16px rgba(0,0,0,0.95)) drop-shadow(0 0 12px rgba(212,175,55,0.45));
+/* Anchor Shield Emblem (Season 1 Default SVG) */
+.evo-tc-anchor-shield {
+  width: 170px;
+  height: 190px;
+  filter: drop-shadow(0 12px 25px rgba(0,0,0,0.95)) drop-shadow(0 0 18px rgba(225,29,72,0.45));
+}
+
+/* Dragon Shield Emblem (Season 2 Default SVG) */
+.evo-tc-dragon-shield {
+  width: 170px;
+  height: 190px;
+  filter: drop-shadow(0 12px 25px rgba(0,0,0,0.95)) drop-shadow(0 0 18px rgba(212,175,55,0.45));
 }
 
 /* Engraved Metallic Base Plinth */
 .evo-tc-plinth {
   width: 100%;
-  max-width: 180px;
+  max-width: 240px;
   background: linear-gradient(180deg, #2b2326 0%, #151012 100%);
   border: 1px solid rgba(212,175,55,0.45);
-  border-bottom: 2.5px solid #d4af37;
-  padding: 10px 6px;
+  border-bottom: 3.5px solid #d4af37;
+  padding: 16px 12px;
   text-align: center;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.95);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.95);
   position: relative;
   z-index: 2;
 }
+.evo-tc-plinth::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 15%; right: 15%; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(212,175,55,0.6), transparent);
+}
 .evo-tc-plinth-season {
   font-family: var(--font-luxury);
-  font-size: 8.5px;
+  font-size: 10px;
   font-weight: 700;
-  letter-spacing: .25em;
+  letter-spacing: .32em;
   color: #e6ca65;
-  margin-bottom: 2px;
+  margin-bottom: 4px;
 }
 .evo-tc-plinth-title {
   font-family: var(--font-luxury);
-  font-size: 12px;
+  font-size: 15px;
   font-weight: 900;
-  letter-spacing: .18em;
+  letter-spacing: .22em;
   color: #ffffff;
-  margin-bottom: 2px;
-  text-shadow: 0 1px 3px rgba(255,255,255,0.3);
+  margin-bottom: 4px;
+  text-shadow: 0 1px 6px rgba(255,255,255,0.3);
 }
 .evo-tc-plinth-name {
   font-family: var(--font-luxury);
-  font-size: 13px;
+  font-size: 16.5px;
   font-weight: 800;
-  letter-spacing: .05em;
+  letter-spacing: .08em;
   color: #ffd700;
   text-transform: uppercase;
-  text-shadow: 0 0 8px rgba(255,215,0,0.5);
+  text-shadow: 0 0 12px rgba(255,215,0,0.5);
   word-break: break-word;
 }
 .evo-tc-plinth-star {
-  font-size: 8px;
+  font-size: 10px;
   color: #d4af37;
-  margin-top: 2px;
+  margin-top: 4px;
   letter-spacing: .2em;
 }
 
 /* Footer Section */
 .evo-tc-footer {
-  margin-top: 16px;
+  margin-top: 28px;
 }
 .evo-tc-footer-line1 {
   font-family: var(--font-luxury);
-  font-size: 9.5px;
+  font-size: 11px;
   font-weight: 700;
-  letter-spacing: .3em;
+  letter-spacing: .35em;
   color: #e11d48;
-  margin-bottom: 3px;
+  margin-bottom: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 14px;
 }
 .evo-tc-footer-line1::before, .evo-tc-footer-line1::after {
   content: "";
   display: block;
-  width: 25px;
+  width: 40px;
   height: 1px;
   background: #e11d48;
 }
 .evo-tc-footer-line2 {
   font-family: var(--font-luxury);
-  font-size: 11px;
+  font-size: 13.5px;
   font-weight: 800;
-  letter-spacing: .25em;
+  letter-spacing: .32em;
   color: #ffffff;
-  text-shadow: 0 0 8px rgba(255,255,255,0.3);
+  text-shadow: 0 0 12px rgba(255,255,255,0.3);
 }
 
 </style>
