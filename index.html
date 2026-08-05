@@ -4612,7 +4612,15 @@
         </div>
         <div class="field-row">
           <div class="field"><label for="mt_${t.id}_tourLogo">${escapeHtml(t.name)} — Tournament Logo</label><input type="file" accept="image/*" id="mt_${t.id}_tourLogo"><div id="mt_${t.id}_tourLogoPreview" style="margin-top:8px;"></div></div>
-          <div class="field"><label for="mt_${t.id}_standingsImg">${escapeHtml(t.name)} — Standings Table Image (screenshot)</label><input type="file" accept="image/*" id="mt_${t.id}_standingsImg"><div id="mt_${t.id}_standingsImgPreview" style="margin-top:8px;"></div></div>
+          <div class="field"><label for="mt_${t.id}_standingsImg">${escapeHtml(t.name)} — Standings Image (screenshot)</label><input type="file" accept="image/*" id="mt_${t.id}_standingsImg"><div id="mt_${t.id}_standingsImgPreview" style="margin-top:8px;"></div></div>
+        </div>
+        <div class="field-row">
+          <div class="field"><label for="mt_${t.id}_scorersImg">${escapeHtml(t.name)} — Top Scorers Image (screenshot)</label><input type="file" accept="image/*" id="mt_${t.id}_scorersImg"><div id="mt_${t.id}_scorersImgPreview" style="margin-top:8px;"></div></div>
+          <div class="field"><label for="mt_${t.id}_assistsImg">${escapeHtml(t.name)} — Top Assists Image (screenshot)</label><input type="file" accept="image/*" id="mt_${t.id}_assistsImg"><div id="mt_${t.id}_assistsImgPreview" style="margin-top:8px;"></div></div>
+        </div>
+        <div class="field-row">
+          <div class="field"><label for="mt_${t.id}_gloveImg">${escapeHtml(t.name)} — Golden Glove Image (screenshot)</label><input type="file" accept="image/*" id="mt_${t.id}_gloveImg"><div id="mt_${t.id}_gloveImgPreview" style="margin-top:8px;"></div></div>
+          <div class="field"><label for="mt_${t.id}_shieldImg">${escapeHtml(t.name)} — Shield Winner Image (screenshot)</label><input type="file" accept="image/*" id="mt_${t.id}_shieldImg"><div id="mt_${t.id}_shieldImgPreview" style="margin-top:8px;"></div></div>
         </div>
         <div class="field"><label for="mt_${t.id}_desc">${escapeHtml(t.name)} — Description</label><textarea id="mt_${t.id}_desc" rows="2"></textarea></div>
         <div class="field-row">
@@ -4665,23 +4673,26 @@
             });
           }
 
-          // Show existing standings image preview
-          const stPreviewEl = document.getElementById(`mt_${t.id}_standingsImgPreview`);
-          if (stPreviewEl && meta0[t.id].standingsImg) {
-            stPreviewEl.innerHTML = `<div style="display:flex;align-items:center;gap:10px;"><img src="${meta0[t.id].standingsImg}" style="max-width:120px;max-height:60px;border-radius:4px;object-fit:cover;border:1px solid var(--line-strong);"><span style="font-size:11px;color:var(--ink-faint);font-family:var(--font-mono);">Current standings img</span></div>`;
-          }
-          const stFileEl = document.getElementById(`mt_${t.id}_standingsImg`);
-          if (stFileEl) {
-            stFileEl.addEventListener('change', () => {
-              const file = stFileEl.files[0];
-              if (!file || !stPreviewEl) return;
-              const reader = new FileReader();
-              reader.onload = (ev) => {
-                stPreviewEl.innerHTML = `<div style="display:flex;align-items:center;gap:10px;"><img src="${ev.target.result}" style="max-width:120px;max-height:60px;border-radius:4px;object-fit:cover;border:1px solid var(--line-strong);"><span style="font-size:11px;color:var(--green-live);font-family:var(--font-mono);">New standings img ready</span></div>`;
-              };
-              reader.readAsDataURL(file);
-            });
-          }
+          // Image previews for table screenshots
+          ['standings', 'scorers', 'assists', 'glove', 'shield'].forEach(k => {
+            const imgKey = k + 'Img';
+            const prevEl = document.getElementById(`mt_${t.id}_${imgKey}Preview`);
+            if (prevEl && meta0[t.id][imgKey]) {
+              prevEl.innerHTML = `<div style="display:flex;align-items:center;gap:10px;"><img src="${meta0[t.id][imgKey]}" style="max-width:120px;max-height:60px;border-radius:4px;object-fit:cover;border:1px solid var(--line-strong);"><span style="font-size:11px;color:var(--ink-faint);font-family:var(--font-mono);">Current ${k} img</span></div>`;
+            }
+            const fileEl = document.getElementById(`mt_${t.id}_${imgKey}`);
+            if (fileEl) {
+              fileEl.addEventListener('change', () => {
+                const file = fileEl.files[0];
+                if (!file || !prevEl) return;
+                const reader = new FileReader();
+                reader.onload = (ev) => {
+                  prevEl.innerHTML = `<div style="display:flex;align-items:center;gap:10px;"><img src="${ev.target.result}" style="max-width:120px;max-height:60px;border-radius:4px;object-fit:cover;border:1px solid var(--line-strong);"><span style="font-size:11px;color:var(--green-live);font-family:var(--font-mono);">New ${k} img ready</span></div>`;
+                };
+                reader.readAsDataURL(file);
+              });
+            }
+          });
         });
         toursMetaForm.addEventListener('submit', async (e) => {
           e.preventDefault();
@@ -4706,12 +4717,20 @@
               try { tourLogo = await compressImage(tourLogoInput.files[0], 400); }
               catch (err) { console.error("Failed to compress tournament logo:", err); }
             }
-            const stInput = document.getElementById(`mt_${t.id}_standingsImg`);
-            let standingsImg = (meta0[t.id] && meta0[t.id].standingsImg) || '';
-            if (stInput && stInput.files && stInput.files[0]) {
-              try { standingsImg = await compressImage(stInput.files[0], 800); }
-              catch (err) { console.error("Failed to compress standings image:", err); }
+
+            // Compress & save table images
+            const imgData = {};
+            for (const k of ['standings', 'scorers', 'assists', 'glove', 'shield']) {
+              const imgKey = k + 'Img';
+              const inputEl = document.getElementById(`mt_${t.id}_${imgKey}`);
+              let imgVal = (meta0[t.id] && meta0[t.id][imgKey]) || '';
+              if (inputEl && inputEl.files && inputEl.files[0]) {
+                try { imgVal = await compressImage(inputEl.files[0], 800); }
+                catch (err) { console.error(`Failed to compress ${imgKey}:`, err); }
+              }
+              imgData[imgKey] = imgVal;
             }
+
             data[t.id] = {
               name: (document.getElementById(`mt_${t.id}_name`).value || '').trim() || t.name,
               teams: (document.getElementById(`mt_${t.id}_teams`).value || '').trim() || t.teams,
@@ -4723,7 +4742,11 @@
               shieldTag: (document.getElementById(`mt_${t.id}_shieldTag`).value || '').trim() || 'SHIELD WINNER',
               shieldLogo: shieldLogo,
               tourLogo: tourLogo,
-              standingsImg: standingsImg
+              standingsImg: imgData.standingsImg,
+              scorersImg: imgData.scorersImg,
+              assistsImg: imgData.assistsImg,
+              gloveImg: imgData.gloveImg,
+              shieldImg: imgData.shieldImg
             };
           }
           await Store.set('ic7_major_tours', data);
