@@ -2051,8 +2051,11 @@ import { Store } from './src/store.js';
     const meta = getToursMeta();
     host.innerHTML = MAJOR_TOURS.map(t => {
       const m = meta[t.id];
+      const logoHtml = m.tourLogo
+        ? `<div style="width:48px;height:48px;border-radius:50%;background-image:url('${m.tourLogo}');background-size:cover;background-position:center;border:2px solid var(--red);box-shadow:0 0 12px rgba(225,29,72,0.4);flex:none;"></div>`
+        : '';
       return `<a href="${t.page}" class="tour-card glass reveal in-view">
-        <div class="tour-teams">${escapeHtml(m.teams)}</div>
+        <div style="display:flex;align-items:center;gap:14px;margin-bottom:10px;">${logoHtml}<div class="tour-teams">${escapeHtml(m.teams)}</div></div>
         <h3>${escapeHtml(m.name)}</h3>
         <p>${escapeHtml(m.desc)}</p>
         <span class="tour-link">View Tournament <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
@@ -2073,19 +2076,25 @@ import { Store } from './src/store.js';
   const toursMetaFieldsHost = document.getElementById('toursMetaFields');
   if(toursMetaFieldsHost){
     toursMetaFieldsHost.innerHTML = MAJOR_TOURS.map(t => `
-      <div class="field-row">
-        <div class="field"><label for="mt_${t.id}_name">${escapeHtml(t.name)} — Name</label><input type="text" id="mt_${t.id}_name"></div>
-        <div class="field"><label for="mt_${t.id}_teams">${escapeHtml(t.name)} — Teams</label><input type="text" id="mt_${t.id}_teams"></div>
+      <div style="border-top:1px solid var(--line);padding-top:18px;margin-top:10px;">
+        <div style="font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--red);margin-bottom:14px;">${escapeHtml(t.name)}</div>
+        <div class="field-row">
+          <div class="field"><label for="mt_${t.id}_name">${escapeHtml(t.name)} — Name</label><input type="text" id="mt_${t.id}_name"></div>
+          <div class="field"><label for="mt_${t.id}_teams">${escapeHtml(t.name)} — Teams</label><input type="text" id="mt_${t.id}_teams"></div>
+        </div>
+        <div class="field-row">
+          <div class="field"><label for="mt_${t.id}_tourLogo">${escapeHtml(t.name)} — Tournament Logo</label><input type="file" accept="image/*" id="mt_${t.id}_tourLogo"><div id="mt_${t.id}_tourLogoPreview" style="margin-top:8px;"></div></div>
+          <div class="field"><label for="mt_${t.id}_desc">${escapeHtml(t.name)} — Description</label><textarea id="mt_${t.id}_desc" rows="2"></textarea></div>
+        </div>
+        <div class="field-row">
+          <div class="field"><label for="mt_${t.id}_champion">${escapeHtml(t.name)} — Current Champion</label><input type="text" id="mt_${t.id}_champion"></div>
+          <div class="field"><label for="mt_${t.id}_champLogo">${escapeHtml(t.name)} — Champion Logo (optional)</label><input type="file" accept="image/*" id="mt_${t.id}_champLogo"></div>
+        </div>
+        <div class="field-row">
+          <div class="field"><label for="mt_${t.id}_shieldWinner">${escapeHtml(t.name)} — Shield Winner</label><input type="text" id="mt_${t.id}_shieldWinner" placeholder="Shield winner name..."></div>
+          <div class="field"><label for="mt_${t.id}_shieldLogo">${escapeHtml(t.name)} — Shield Winner Logo (optional)</label><input type="file" accept="image/*" id="mt_${t.id}_shieldLogo"></div>
+        </div>
       </div>
-      <div class="field-row">
-        <div class="field"><label for="mt_${t.id}_champion">${escapeHtml(t.name)} — Current Champion</label><input type="text" id="mt_${t.id}_champion"></div>
-        <div class="field"><label for="mt_${t.id}_champLogo">${escapeHtml(t.name)} — Champion Logo (optional)</label><input type="file" accept="image/*" id="mt_${t.id}_champLogo"></div>
-      </div>
-      <div class="field-row">
-        <div class="field"><label for="mt_${t.id}_shieldWinner">${escapeHtml(t.name)} — Shield Winner</label><input type="text" id="mt_${t.id}_shieldWinner" placeholder="Shield winner name..."></div>
-        <div class="field"><label for="mt_${t.id}_shieldLogo">${escapeHtml(t.name)} — Shield Winner Logo (optional)</label><input type="file" accept="image/*" id="mt_${t.id}_shieldLogo"></div>
-      </div>
-      <div class="field"><label for="mt_${t.id}_desc">${escapeHtml(t.name)} — Short Description</label><textarea id="mt_${t.id}_desc" rows="2"></textarea></div>
     `).join('');
   }
 
@@ -2103,6 +2112,24 @@ import { Store } from './src/store.js';
       if(descEl) descEl.value = meta0[t.id].desc;
       if(champEl) champEl.value = meta0[t.id].champion || '';
       if(shieldEl) shieldEl.value = meta0[t.id].shieldWinner || '';
+      // Show existing tournament logo preview
+      const previewEl = document.getElementById(`mt_${t.id}_tourLogoPreview`);
+      if(previewEl && meta0[t.id].tourLogo) {
+        previewEl.innerHTML = `<div style="display:flex;align-items:center;gap:10px;"><img src="${meta0[t.id].tourLogo}" style="width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid var(--red);"><span style="font-size:11px;color:var(--ink-faint);font-family:var(--font-mono);">Current logo</span></div>`;
+      }
+      // Live preview on file select
+      const logoFileEl = document.getElementById(`mt_${t.id}_tourLogo`);
+      if(logoFileEl) {
+        logoFileEl.addEventListener('change', () => {
+          const file = logoFileEl.files[0];
+          if(!file || !previewEl) return;
+          const reader = new FileReader();
+          reader.onload = (ev) => {
+            previewEl.innerHTML = `<div style="display:flex;align-items:center;gap:10px;"><img src="${ev.target.result}" style="width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid var(--red);"><span style="font-size:11px;color:var(--green-live);font-family:var(--font-mono);">New logo ready</span></div>`;
+          };
+          reader.readAsDataURL(file);
+        });
+      }
     });
     toursMetaForm.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -2121,6 +2148,12 @@ import { Store } from './src/store.js';
           try { shieldLogo = await compressImage(shieldFileInput.files[0], 300); }
           catch (err) { console.error("Failed to compress shield logo:", err); }
         }
+        const tourLogoInput = document.getElementById(`mt_${t.id}_tourLogo`);
+        let tourLogo = (meta0[t.id] && meta0[t.id].tourLogo) || '';
+        if (tourLogoInput && tourLogoInput.files && tourLogoInput.files[0]) {
+          try { tourLogo = await compressImage(tourLogoInput.files[0], 400); }
+          catch (err) { console.error("Failed to compress tournament logo:", err); }
+        }
         data[t.id] = {
           name: (document.getElementById(`mt_${t.id}_name`).value || '').trim() || t.name,
           teams: (document.getElementById(`mt_${t.id}_teams`).value || '').trim() || t.teams,
@@ -2128,7 +2161,8 @@ import { Store } from './src/store.js';
           champion: (document.getElementById(`mt_${t.id}_champion`).value || '').trim(),
           champLogo: champLogo,
           shieldWinner: (document.getElementById(`mt_${t.id}_shieldWinner`).value || '').trim(),
-          shieldLogo: shieldLogo
+          shieldLogo: shieldLogo,
+          tourLogo: tourLogo
         };
       }
       await Store.set('ic7_major_tours', data);
