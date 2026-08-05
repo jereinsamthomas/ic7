@@ -1078,6 +1078,38 @@
       box-sizing: border-box;
     }
 
+    /* ---- Trophy Cabinet — football BG art layer ---- */
+    .tc-bg-art {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 1;
+      overflow: hidden;
+    }
+    .tc-bg-art svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+    /* Slow rotation for ball hexagons */
+    @keyframes tcHexSpin {
+      from { transform: rotate(0deg) scale(1); }
+      to   { transform: rotate(360deg) scale(1.08); }
+    }
+    @keyframes tcPitchPulse {
+      0%, 100% { opacity: 0.06; }
+      50%       { opacity: 0.11; }
+    }
+    @keyframes tcPlayerFloat {
+      0%, 100% { transform: translateY(0px) scaleX(-1); }
+      50%       { transform: translateY(-8px) scaleX(-1); }
+    }
+    .tc-ball-spin { animation: tcHexSpin 22s linear infinite; transform-origin: center; }
+    .tc-pitch-lines { animation: tcPitchPulse 6s ease-in-out infinite; }
+    .tc-player-sil { animation: tcPlayerFloat 5s ease-in-out infinite; transform-origin: center bottom; }
+
     /* ---- Outer frame: dark mahogany cabinet shell ---- */
     .trophy-case {
       position: relative;
@@ -1137,6 +1169,7 @@
     /* ---- Cabinet header bar ---- */
     .tc-case-header {
       position: relative;
+      z-index: 1;
       padding: 28px 32px 24px;
       background: linear-gradient(180deg, rgba(0,0,0,0.55) 0%, transparent 100%);
       border-bottom: 1px solid rgba(245,158,11,0.2);
@@ -1188,6 +1221,8 @@
 
     /* ---- Pedestals grid ---- */
     .trophy-pedestals-grid {
+      position: relative;
+      z-index: 1;
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 28px;
@@ -1344,6 +1379,8 @@
 
     /* ---- Footer tagline ---- */
     .tc-case-footer {
+      position: relative;
+      z-index: 1;
       margin-top: 32px;
       padding: 16px 32px 0;
       border-top: 1px solid rgba(245,158,11,0.15);
@@ -4636,6 +4673,131 @@
           return `
             <div class="trophy-slide">
               <div class="trophy-case">
+                <!-- Football themed background art -->
+                <div class="tc-bg-art" aria-hidden="true">
+                  <svg viewBox="0 0 900 500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+                    <defs>
+                      <radialGradient id="tcGlowC" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" stop-color="#e11d48" stop-opacity="0.18"/>
+                        <stop offset="100%" stop-color="#e11d48" stop-opacity="0"/>
+                      </radialGradient>
+                      <radialGradient id="tcGlowL" cx="0%" cy="50%" r="60%">
+                        <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.09"/>
+                        <stop offset="100%" stop-color="#f59e0b" stop-opacity="0"/>
+                      </radialGradient>
+                      <radialGradient id="tcGlowR" cx="100%" cy="50%" r="60%">
+                        <stop offset="0%" stop-color="#e11d48" stop-opacity="0.09"/>
+                        <stop offset="100%" stop-color="#e11d48" stop-opacity="0"/>
+                      </radialGradient>
+                      <clipPath id="tcClip"><rect width="900" height="500"/></clipPath>
+                    </defs>
+                    <g clip-path="url(#tcClip)">
+                      <!-- Ambient glow blobs -->
+                      <ellipse cx="450" cy="250" rx="340" ry="200" fill="url(#tcGlowC)"/>
+                      <ellipse cx="0" cy="250" rx="300" ry="250" fill="url(#tcGlowL)"/>
+                      <ellipse cx="900" cy="250" rx="300" ry="250" fill="url(#tcGlowR)"/>
+
+                      <!-- Pitch / tactical lines -->
+                      <g class="tc-pitch-lines" stroke="#e11d48" stroke-width="1" fill="none" opacity="0.08">
+                        <!-- outer boundary -->
+                        <rect x="80" y="60" width="740" height="380" rx="2"/>
+                        <!-- centre line -->
+                        <line x1="450" y1="60" x2="450" y2="440"/>
+                        <!-- centre circle -->
+                        <circle cx="450" cy="250" r="75"/>
+                        <circle cx="450" cy="250" r="5" fill="#e11d48" opacity="0.3"/>
+                        <!-- left penalty box -->
+                        <rect x="80" y="155" width="120" height="190"/>
+                        <!-- right penalty box -->
+                        <rect x="700" y="155" width="120" height="190"/>
+                        <!-- left goal area -->
+                        <rect x="80" y="200" width="52" height="100"/>
+                        <!-- right goal area -->
+                        <rect x="768" y="200" width="52" height="100"/>
+                        <!-- corner arcs -->
+                        <path d="M80 60 Q92 60 92 72"/>
+                        <path d="M820 60 Q808 60 808 72"/>
+                        <path d="M80 440 Q92 440 92 428"/>
+                        <path d="M820 440 Q808 440 808 428"/>
+                        <!-- penalty spots -->
+                        <circle cx="152" cy="250" r="3" fill="#e11d48" opacity="0.4"/>
+                        <circle cx="748" cy="250" r="3" fill="#e11d48" opacity="0.4"/>
+                        <!-- penalty arcs -->
+                        <path d="M200 200 A75 75 0 0 1 200 300" opacity="0.5"/>
+                        <path d="M700 200 A75 75 0 0 0 700 300" opacity="0.5"/>
+                      </g>
+
+                      <!-- Football (hexagon-panel classic ball) spinning slowly -->
+                      <g class="tc-ball-spin" style="transform-box:fill-box;" transform="translate(760,90)">
+                        <circle cx="0" cy="0" r="44" fill="none" stroke="rgba(225,29,72,0.18)" stroke-width="1.5"/>
+                        <!-- ball panels -->
+                        <polygon points="0,-28 24,-14 24,14 0,28 -24,14 -24,-14" fill="none" stroke="rgba(225,29,72,0.22)" stroke-width="1.2"/>
+                        <polygon points="0,-28 12,-48 -12,-48" fill="none" stroke="rgba(245,158,11,0.15)" stroke-width="1"/>
+                        <polygon points="24,14 44,22 38,44" fill="none" stroke="rgba(245,158,11,0.15)" stroke-width="1"/>
+                        <polygon points="-24,14 -44,22 -38,44" fill="none" stroke="rgba(245,158,11,0.15)" stroke-width="1"/>
+                        <polygon points="24,-14 44,-22 38,-44" fill="none" stroke="rgba(225,29,72,0.12)" stroke-width="1"/>
+                        <polygon points="-24,-14 -44,-22 -38,-44" fill="none" stroke="rgba(225,29,72,0.12)" stroke-width="1"/>
+                        <polygon points="0,28 12,48 -12,48" fill="none" stroke="rgba(225,29,72,0.12)" stroke-width="1"/>
+                      </g>
+
+                      <!-- Second smaller ball — bottom left corner -->
+                      <g class="tc-ball-spin" style="transform-box:fill-box;animation-duration:30s;animation-direction:reverse;" transform="translate(130,400)">
+                        <circle cx="0" cy="0" r="30" fill="none" stroke="rgba(245,158,11,0.12)" stroke-width="1"/>
+                        <polygon points="0,-19 16,-10 16,10 0,19 -16,10 -16,-10" fill="none" stroke="rgba(245,158,11,0.15)" stroke-width="1"/>
+                      </g>
+
+                      <!-- Player silhouette (kicking) — bottom right, mirrored -->
+                      <g class="tc-player-sil" transform="translate(820,460) scaleX(-1)" opacity="0.07">
+                        <!-- body -->
+                        <ellipse cx="0" cy="-110" rx="14" ry="18" fill="#fff"/>
+                        <!-- head -->
+                        <circle cx="0" cy="-140" r="12" fill="#fff"/>
+                        <!-- torso -->
+                        <rect x="-12" y="-92" width="24" height="42" rx="4" fill="#fff"/>
+                        <!-- left arm raised -->
+                        <line x1="-12" y1="-85" x2="-36" y2="-58" stroke="#fff" stroke-width="7" stroke-linecap="round"/>
+                        <!-- right arm back -->
+                        <line x1="12" y1="-85" x2="28" y2="-62" stroke="#fff" stroke-width="7" stroke-linecap="round"/>
+                        <!-- left leg (kicking) -->
+                        <line x1="-6" y1="-50" x2="-28" y2="-16" stroke="#fff" stroke-width="8" stroke-linecap="round"/>
+                        <line x1="-28" y1="-16" x2="-8" y2="8" stroke="#fff" stroke-width="7" stroke-linecap="round"/>
+                        <!-- right leg (planted) -->
+                        <line x1="6" y1="-50" x2="14" y2="-8" stroke="#fff" stroke-width="8" stroke-linecap="round"/>
+                        <line x1="14" y1="-8" x2="8" y2="8" stroke="#fff" stroke-width="7" stroke-linecap="round"/>
+                      </g>
+
+                      <!-- Second ghost player silhouette -- left side -->
+                      <g transform="translate(82,460)" opacity="0.05">
+                        <!-- head -->
+                        <circle cx="0" cy="-130" r="11" fill="#e11d48"/>
+                        <!-- body -->
+                        <rect x="-10" y="-119" width="20" height="40" rx="3" fill="#e11d48"/>
+                        <!-- arms running -->
+                        <line x1="-10" y1="-105" x2="-30" y2="-88" stroke="#e11d48" stroke-width="6" stroke-linecap="round"/>
+                        <line x1="10" y1="-105" x2="26" y2="-84" stroke="#e11d48" stroke-width="6" stroke-linecap="round"/>
+                        <!-- legs -->
+                        <line x1="-5" y1="-79" x2="-16" y2="-48" stroke="#e11d48" stroke-width="7" stroke-linecap="round"/>
+                        <line x1="-16" y1="-48" x2="-10" y2="-24" stroke="#e11d48" stroke-width="6" stroke-linecap="round"/>
+                        <line x1="5" y1="-79" x2="18" y2="-48" stroke="#e11d48" stroke-width="7" stroke-linecap="round"/>
+                        <line x1="18" y1="-48" x2="12" y2="-24" stroke="#e11d48" stroke-width="6" stroke-linecap="round"/>
+                      </g>
+
+                      <!-- Decorative diagonal scan lines (stadium effect) -->
+                      <g stroke="rgba(255,255,255,0.015)" stroke-width="1">
+                        <line x1="0" y1="0" x2="900" y2="500"/>
+                        <line x1="-100" y1="0" x2="800" y2="500"/>
+                        <line x1="100" y1="0" x2="1000" y2="500"/>
+                        <line x1="-200" y1="0" x2="700" y2="500"/>
+                        <line x1="200" y1="0" x2="1100" y2="500"/>
+                      </g>
+
+                      <!-- IC7 watermark text -->
+                      <text x="450" y="270" text-anchor="middle" font-family="Anton, sans-serif" font-size="160" fill="rgba(225,29,72,0.035)" letter-spacing="12" transform="rotate(-8,450,250)">IC7</text>
+                    </g>
+                  </svg>
+                </div>
+                <!-- end bg art -->
+
                 <div class="spotlight-beam" style="left:20%;"></div>
                 <div class="spotlight-beam" style="right:20%;"></div>
                 
