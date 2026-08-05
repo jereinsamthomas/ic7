@@ -888,7 +888,10 @@ table.board td.pts { font-family: var(--font-mono); font-size: 17.5px; font-weig
   <!-- Shield Winner -->
   <div class="tourpage-table-block reveal in-view">
     <h2>🛡️ Shield Winner</h2>
-    <div class="board-wrap" id="shieldBoardWrap">
+    <div id="shieldImgWrap" hidden style="margin-bottom:24px;text-align:center;">
+      <img id="shieldImg" src="" alt="Shield Winner Image" style="width:100%;max-width:100%;max-height:850px;border-radius:8px;border:1.5px solid var(--line-strong);box-shadow:0 20px 50px rgba(0,0,0,0.9);object-fit:contain;background:#000;">
+    </div>
+    <div class="board-wrap">
       <table class="board">
         <thead><tr><th>#</th><th>Player / Team</th><th>Club / Squad</th><th>Season</th><th>Matches</th></tr></thead>
         <tbody id="tb_shield"></tbody>
@@ -901,60 +904,36 @@ table.board td.pts { font-family: var(--font-mono); font-size: 17.5px; font-weig
   <div class="tourpage-table-block reveal in-view">
     <h2>📊 Standings</h2>
     <div id="standingsImgWrap" hidden style="margin-bottom:24px;text-align:center;">
-      <img id="standingsImg" src="" alt="Standings Image" style="max-width:100%;max-height:560px;border-radius:6px;border:1px solid var(--line-strong);box-shadow:0 12px 35px rgba(0,0,0,0.85);object-fit:contain;">
+      <img id="standingsImg" src="" alt="Standings Image" style="width:100%;max-width:100%;max-height:850px;border-radius:8px;border:1.5px solid var(--line-strong);box-shadow:0 20px 50px rgba(0,0,0,0.9);object-fit:contain;background:#000;">
     </div>
-    <div class="board-wrap">
-      <table class="board">
-        <thead><tr><th>#</th><th>Team</th><th>Played</th><th>Won</th><th>Points</th></tr></thead>
-        <tbody id="tb_standings"></tbody>
-      </table>
-    </div>
-    <p class="tourpage-empty" id="empty_standings" hidden>No standings data yet - check back soon.</p>
+    <p class="tourpage-empty" id="empty_standings" hidden>No standings image uploaded yet - check back soon.</p>
   </div>
 
   <!-- Top Scorers -->
   <div class="tourpage-table-block reveal in-view">
     <h2>⚽ Top Scorers</h2>
     <div id="scorersImgWrap" hidden style="margin-bottom:24px;text-align:center;">
-      <img id="scorersImg" src="" alt="Top Scorers Image" style="max-width:100%;max-height:560px;border-radius:6px;border:1px solid var(--line-strong);box-shadow:0 12px 35px rgba(0,0,0,0.85);object-fit:contain;">
+      <img id="scorersImg" src="" alt="Top Scorers Image" style="width:100%;max-width:100%;max-height:850px;border-radius:8px;border:1.5px solid var(--line-strong);box-shadow:0 20px 50px rgba(0,0,0,0.9);object-fit:contain;background:#000;">
     </div>
-    <div class="board-wrap">
-      <table class="board">
-        <thead><tr><th>#</th><th>Player</th><th>Team</th><th>Goals</th><th>Matches</th></tr></thead>
-        <tbody id="tb_scorers"></tbody>
-      </table>
-    </div>
-    <p class="tourpage-empty" id="empty_scorers" hidden>No top scorers data yet - check back soon.</p>
+    <p class="tourpage-empty" id="empty_scorers" hidden>No top scorers image uploaded yet - check back soon.</p>
   </div>
 
   <!-- Most Valuable Player -->
   <div class="tourpage-table-block reveal in-view">
     <h2>🌟 Most Valuable Player</h2>
     <div id="assistsImgWrap" hidden style="margin-bottom:24px;text-align:center;">
-      <img id="assistsImg" src="" alt="Most Valuable Player Image" style="max-width:100%;max-height:560px;border-radius:6px;border:1px solid var(--line-strong);box-shadow:0 12px 35px rgba(0,0,0,0.85);object-fit:contain;">
+      <img id="assistsImg" src="" alt="Most Valuable Player Image" style="width:100%;max-width:100%;max-height:850px;border-radius:8px;border:1.5px solid var(--line-strong);box-shadow:0 20px 50px rgba(0,0,0,0.9);object-fit:contain;background:#000;">
     </div>
-    <div class="board-wrap">
-      <table class="board">
-        <thead><tr><th>#</th><th>Player</th><th>Team</th><th>MVP Rating / Score</th><th>Matches</th></tr></thead>
-        <tbody id="tb_assists"></tbody>
-      </table>
-    </div>
-    <p class="tourpage-empty" id="empty_assists" hidden>No MVP data yet - check back soon.</p>
+    <p class="tourpage-empty" id="empty_assists" hidden>No MVP image uploaded yet - check back soon.</p>
   </div>
 
   <!-- Golden Glove -->
   <div class="tourpage-table-block reveal in-view">
     <h2>🧤 Golden Glove</h2>
     <div id="gloveImgWrap" hidden style="margin-bottom:24px;text-align:center;">
-      <img id="gloveImg" src="" alt="Golden Glove Image" style="max-width:100%;max-height:560px;border-radius:6px;border:1px solid var(--line-strong);box-shadow:0 12px 35px rgba(0,0,0,0.85);object-fit:contain;">
+      <img id="gloveImg" src="" alt="Golden Glove Image" style="width:100%;max-width:100%;max-height:850px;border-radius:8px;border:1.5px solid var(--line-strong);box-shadow:0 20px 50px rgba(0,0,0,0.9);object-fit:contain;background:#000;">
     </div>
-    <div class="board-wrap">
-      <table class="board">
-        <thead><tr><th>#</th><th>Goalkeeper</th><th>Team</th><th>Clean Sheets</th><th>Matches</th></tr></thead>
-        <tbody id="tb_glove"></tbody>
-      </table>
-    </div>
-    <p class="tourpage-empty" id="empty_glove" hidden>No golden glove data yet - check back soon.</p>
+    <p class="tourpage-empty" id="empty_glove" hidden>No golden glove image uploaded yet - check back soon.</p>
   </div>
 
 </main>
@@ -1043,13 +1022,18 @@ document.addEventListener('DOMContentLoaded', async () => {
       metaRow.appendChild(shieldDiv);
     }
   }
-  // Load uploaded table images for all stat sections
+    // Load uploaded table images for all stat sections
   ['standings', 'scorers', 'assists', 'glove', 'shield'].forEach(k => {
     const imgKey = k + 'Img';
+    const wrap = document.getElementById(k + 'ImgWrap');
+    const img = document.getElementById(k + 'Img');
+    const empty = document.getElementById('empty_' + k);
     if (meta && meta[imgKey]) {
-      const wrap = document.getElementById(k + 'ImgWrap');
-      const img = document.getElementById(k + 'Img');
       if (wrap && img) { img.src = meta[imgKey]; wrap.hidden = false; }
+      if (empty) empty.hidden = true;
+    } else {
+      if (wrap) wrap.hidden = true;
+      if (empty) empty.hidden = false;
     }
   });
 

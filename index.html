@@ -4978,28 +4978,8 @@
         }
       });
 
-      // Each tournament tracks 4 tables, 5 columns each (Rank + 4 fields below)
+            // Manual entry tables for tournament stats (Shield Winner & Roll of Honor)
       const STAT_TABLE_DEFS = [
-        {
-          key: 'standings', label: 'Standings',
-          fields: [{ id: 'team', label: 'Team Name', type: 'text', required: true }, { id: 'logo', label: 'Team Logo (optional)', type: 'file', maxWidth: 300 }, { id: 'played', label: 'Played', type: 'text' }, { id: 'won', label: 'Won', type: 'text' }, { id: 'points', label: 'Points', type: 'text' }],
-          titleField: it => it.team, subtitleField: it => `${it.points || 0} pts`, thumbField: 'logo'
-        },
-        {
-          key: 'scorers', label: 'Top Scorers',
-          fields: [{ id: 'player', label: 'Player Name', type: 'text', required: true }, { id: 'logo', label: 'Player Photo / Logo (optional)', type: 'file', maxWidth: 300 }, { id: 'team', label: 'Team', type: 'text' }, { id: 'goals', label: 'Goals', type: 'text' }, { id: 'matches', label: 'Matches', type: 'text' }],
-          titleField: it => it.player, subtitleField: it => `${it.goals || 0} goals`, thumbField: 'logo'
-        },
-        {
-          key: 'assists', label: 'Most Valuable',
-          fields: [{ id: 'player', label: 'Player Name', type: 'text', required: true }, { id: 'logo', label: 'Player Photo / Logo (optional)', type: 'file', maxWidth: 300 }, { id: 'team', label: 'Team', type: 'text' }, { id: 'assists', label: 'MVP Score / Rating', type: 'text' }, { id: 'matches', label: 'Matches', type: 'text' }],
-          titleField: it => it.player, subtitleField: it => `MVP ${it.assists || ''}`, thumbField: 'logo'
-        },
-        {
-          key: 'glove', label: 'Golden Glove',
-          fields: [{ id: 'player', label: 'Goalkeeper Name', type: 'text', required: true }, { id: 'logo', label: 'Keeper Photo / Logo (optional)', type: 'file', maxWidth: 300 }, { id: 'team', label: 'Team', type: 'text' }, { id: 'cleanSheets', label: 'Clean Sheets', type: 'text' }, { id: 'matches', label: 'Matches', type: 'text' }],
-          titleField: it => it.player, subtitleField: it => `${it.cleanSheets || 0} clean sheets`, thumbField: 'logo'
-        },
         {
           key: 'shield', label: 'Shield Winner',
           fields: [{ id: 'player', label: 'Player / Team Name', type: 'text', required: true }, { id: 'logo', label: 'Shield Logo / Avatar (optional)', type: 'file', maxWidth: 300 }, { id: 'team', label: 'Club / Squad', type: 'text' }, { id: 'season', label: 'Season', type: 'text' }, { id: 'matches', label: 'Matches', type: 'text' }],
