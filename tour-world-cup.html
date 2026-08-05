@@ -880,14 +880,25 @@ table.board td.pts{color:var(--red-bright);font-weight:700;}
   <div class="tourpage-meta-row">
     <div><span>Teams</span><b id="tourTeams">8 Teams</b></div>
   </div>
-
-
-  <!-- Roll of Honor -->
-  <div class="tourpage-table-block reveal" id="winnersSection" hidden>
-    <h2>Roll of Honor</h2>
+  <!-- Champions (Past Seasons) -->
+  <div class="tourpage-table-block reveal in-view" id="winnersSection">
+    <h2>🏆 Champions (Past Seasons)</h2>
     <div class="winners-grid" id="winnersList"></div>
   </div>
 
+  <!-- Shield Winner -->
+  <div class="tourpage-table-block reveal in-view">
+    <h2>🛡️ Shield Winner</h2>
+    <div class="board-wrap">
+      <table class="board">
+        <thead><tr><th>#</th><th>Player / Team</th><th>Club / Squad</th><th>Season</th><th>Matches</th></tr></thead>
+        <tbody id="tb_shield"></tbody>
+      </table>
+    </div>
+    <p class="tourpage-empty" id="empty_shield" hidden>No shield winner data yet — check back soon.</p>
+  </div>
+
+  <!-- Standings -->
   <div class="tourpage-table-block reveal in-view">
     <h2>Standings</h2>
     <div class="board-wrap">
@@ -899,6 +910,7 @@ table.board td.pts{color:var(--red-bright);font-weight:700;}
     <p class="tourpage-empty" id="empty_standings" hidden>No standings data yet — check back soon.</p>
   </div>
 
+  <!-- Top Scorers -->
   <div class="tourpage-table-block reveal in-view">
     <h2>Top Scorers</h2>
     <div class="board-wrap">
@@ -910,6 +922,7 @@ table.board td.pts{color:var(--red-bright);font-weight:700;}
     <p class="tourpage-empty" id="empty_scorers" hidden>No top scorers data yet — check back soon.</p>
   </div>
 
+  <!-- Top Assists -->
   <div class="tourpage-table-block reveal in-view">
     <h2>Top Assists</h2>
     <div class="board-wrap">
@@ -921,6 +934,7 @@ table.board td.pts{color:var(--red-bright);font-weight:700;}
     <p class="tourpage-empty" id="empty_assists" hidden>No top assists data yet — check back soon.</p>
   </div>
 
+  <!-- Golden Glove -->
   <div class="tourpage-table-block reveal in-view">
     <h2>Golden Glove</h2>
     <div class="board-wrap">
@@ -930,17 +944,6 @@ table.board td.pts{color:var(--red-bright);font-weight:700;}
       </table>
     </div>
     <p class="tourpage-empty" id="empty_glove" hidden>No golden glove data yet — check back soon.</p>
-  </div>
-
-  <div class="tourpage-table-block reveal in-view">
-    <h2>🛡️ Shield Winner</h2>
-    <div class="board-wrap">
-      <table class="board">
-        <thead><tr><th>#</th><th>Player / Team</th><th>Club / Squad</th><th>Season</th><th>Matches</th></tr></thead>
-        <tbody id="tb_shield"></tbody>
-      </table>
-    </div>
-    <p class="tourpage-empty" id="empty_shield" hidden>No shield winner data yet — check back soon.</p>
   </div>
 </main>
 
