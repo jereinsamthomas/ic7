@@ -2084,8 +2084,9 @@ import { Store } from './src/store.js';
         </div>
         <div class="field-row">
           <div class="field"><label for="mt_${t.id}_tourLogo">${escapeHtml(t.name)} — Tournament Logo</label><input type="file" accept="image/*" id="mt_${t.id}_tourLogo"><div id="mt_${t.id}_tourLogoPreview" style="margin-top:8px;"></div></div>
-          <div class="field"><label for="mt_${t.id}_desc">${escapeHtml(t.name)} — Description</label><textarea id="mt_${t.id}_desc" rows="2"></textarea></div>
+          <div class="field"><label for="mt_${t.id}_standingsImg">${escapeHtml(t.name)} — Standings Table Image (screenshot)</label><input type="file" accept="image/*" id="mt_${t.id}_standingsImg"><div id="mt_${t.id}_standingsImgPreview" style="margin-top:8px;"></div></div>
         </div>
+        <div class="field"><label for="mt_${t.id}_desc">${escapeHtml(t.name)} — Description</label><textarea id="mt_${t.id}_desc" rows="2"></textarea></div>
         <div class="field-row">
           <div class="field"><label for="mt_${t.id}_champion">${escapeHtml(t.name)} — Current Champion</label><input type="text" id="mt_${t.id}_champion"></div>
           <div class="field"><label for="mt_${t.id}_champLogo">${escapeHtml(t.name)} — Champion Logo (optional)</label><input type="file" accept="image/*" id="mt_${t.id}_champLogo"></div>
@@ -2130,6 +2131,24 @@ import { Store } from './src/store.js';
           reader.readAsDataURL(file);
         });
       }
+
+      // Show existing standings image preview
+      const stPreviewEl = document.getElementById(`mt_${t.id}_standingsImgPreview`);
+      if(stPreviewEl && meta0[t.id].standingsImg) {
+        stPreviewEl.innerHTML = `<div style="display:flex;align-items:center;gap:10px;"><img src="${meta0[t.id].standingsImg}" style="max-width:120px;max-height:60px;border-radius:4px;object-fit:cover;border:1px solid var(--line-strong);"><span style="font-size:11px;color:var(--ink-faint);font-family:var(--font-mono);">Current standings img</span></div>`;
+      }
+      const stFileEl = document.getElementById(`mt_${t.id}_standingsImg`);
+      if(stFileEl) {
+        stFileEl.addEventListener('change', () => {
+          const file = stFileEl.files[0];
+          if(!file || !stPreviewEl) return;
+          const reader = new FileReader();
+          reader.onload = (ev) => {
+            stPreviewEl.innerHTML = `<div style="display:flex;align-items:center;gap:10px;"><img src="${ev.target.result}" style="max-width:120px;max-height:60px;border-radius:4px;object-fit:cover;border:1px solid var(--line-strong);"><span style="font-size:11px;color:var(--green-live);font-family:var(--font-mono);">New standings img ready</span></div>`;
+          };
+          reader.readAsDataURL(file);
+        });
+      }
     });
     toursMetaForm.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -2154,6 +2173,12 @@ import { Store } from './src/store.js';
           try { tourLogo = await compressImage(tourLogoInput.files[0], 400); }
           catch (err) { console.error("Failed to compress tournament logo:", err); }
         }
+        const stInput = document.getElementById(`mt_${t.id}_standingsImg`);
+        let standingsImg = (meta0[t.id] && meta0[t.id].standingsImg) || '';
+        if (stInput && stInput.files && stInput.files[0]) {
+          try { standingsImg = await compressImage(stInput.files[0], 800); }
+          catch (err) { console.error("Failed to compress standings image:", err); }
+        }
         data[t.id] = {
           name: (document.getElementById(`mt_${t.id}_name`).value || '').trim() || t.name,
           teams: (document.getElementById(`mt_${t.id}_teams`).value || '').trim() || t.teams,
@@ -2162,7 +2187,8 @@ import { Store } from './src/store.js';
           champLogo: champLogo,
           shieldWinner: (document.getElementById(`mt_${t.id}_shieldWinner`).value || '').trim(),
           shieldLogo: shieldLogo,
-          tourLogo: tourLogo
+          tourLogo: tourLogo,
+          standingsImg: standingsImg
         };
       }
       await Store.set('ic7_major_tours', data);
@@ -2178,20 +2204,20 @@ import { Store } from './src/store.js';
   // Each tournament tracks 4 tables, 5 columns each (Rank + 4 fields below)
   const STAT_TABLE_DEFS = [
     { key:'standings', label:'Standings',
-      fields:[ {id:'team', label:'Team', type:'text', required:true}, {id:'played', label:'Played', type:'text'}, {id:'won', label:'Won', type:'text'}, {id:'points', label:'Points', type:'text'} ],
-      titleField: it => it.team, subtitleField: it => `${it.points||0} pts` },
+      fields:[ {id:'team', label:'Team Name', type:'text', required:true}, {id:'logo', label:'Team Logo (optional)', type:'file', maxWidth:300}, {id:'played', label:'Played', type:'text'}, {id:'won', label:'Won', type:'text'}, {id:'points', label:'Points', type:'text'} ],
+      titleField: it => it.team, subtitleField: it => `${it.points||0} pts`, thumbField:'logo' },
     { key:'scorers', label:'Top Scorers',
-      fields:[ {id:'player', label:'Player', type:'text', required:true}, {id:'team', label:'Team', type:'text'}, {id:'goals', label:'Goals', type:'text'}, {id:'matches', label:'Matches', type:'text'} ],
-      titleField: it => it.player, subtitleField: it => `${it.goals||0} goals` },
+      fields:[ {id:'player', label:'Player Name', type:'text', required:true}, {id:'logo', label:'Player Photo / Logo (optional)', type:'file', maxWidth:300}, {id:'team', label:'Team', type:'text'}, {id:'goals', label:'Goals', type:'text'}, {id:'matches', label:'Matches', type:'text'} ],
+      titleField: it => it.player, subtitleField: it => `${it.goals||0} goals`, thumbField:'logo' },
     { key:'assists', label:'Top Assists',
-      fields:[ {id:'player', label:'Player', type:'text', required:true}, {id:'team', label:'Team', type:'text'}, {id:'assists', label:'Assists', type:'text'}, {id:'matches', label:'Matches', type:'text'} ],
-      titleField: it => it.player, subtitleField: it => `${it.assists||0} assists` },
+      fields:[ {id:'player', label:'Player Name', type:'text', required:true}, {id:'logo', label:'Player Photo / Logo (optional)', type:'file', maxWidth:300}, {id:'team', label:'Team', type:'text'}, {id:'assists', label:'Assists', type:'text'}, {id:'matches', label:'Matches', type:'text'} ],
+      titleField: it => it.player, subtitleField: it => `${it.assists||0} assists`, thumbField:'logo' },
     { key:'glove', label:'Golden Glove',
-      fields:[ {id:'player', label:'Goalkeeper', type:'text', required:true}, {id:'team', label:'Team', type:'text'}, {id:'cleanSheets', label:'Clean Sheets', type:'text'}, {id:'matches', label:'Matches', type:'text'} ],
-      titleField: it => it.player, subtitleField: it => `${it.cleanSheets||0} clean sheets` },
+      fields:[ {id:'player', label:'Goalkeeper Name', type:'text', required:true}, {id:'logo', label:'Keeper Photo / Logo (optional)', type:'file', maxWidth:300}, {id:'team', label:'Team', type:'text'}, {id:'cleanSheets', label:'Clean Sheets', type:'text'}, {id:'matches', label:'Matches', type:'text'} ],
+      titleField: it => it.player, subtitleField: it => `${it.cleanSheets||0} clean sheets`, thumbField:'logo' },
     { key:'shield', label:'Shield Winner',
-      fields:[ {id:'player', label:'Player / Team Name', type:'text', required:true}, {id:'team', label:'Club / Squad', type:'text'}, {id:'season', label:'Season', type:'text'}, {id:'matches', label:'Matches', type:'text'} ],
-      titleField: it => it.player, subtitleField: it => `${it.season||''} — ${it.team||''}` },
+      fields:[ {id:'player', label:'Player / Team Name', type:'text', required:true}, {id:'logo', label:'Shield Logo / Avatar (optional)', type:'file', maxWidth:300}, {id:'team', label:'Club / Squad', type:'text'}, {id:'season', label:'Season', type:'text'}, {id:'matches', label:'Matches', type:'text'} ],
+      titleField: it => it.player, subtitleField: it => `${it.season||''} — ${it.team||''}`, thumbField:'logo' },
     { key:'winners', label:'Roll of Honor',
       fields:[ {id:'season', label:'Season (e.g. Season 1)', type:'text', required:true}, {id:'player', label:'Winner Name', type:'text', required:true}, {id:'logo', label:'Winner Logo / Avatar (optional)', type:'file', maxWidth:300} ],
       titleField: it => `${it.season || 'Season'}: ${it.player || 'Winner'}`, subtitleField: it => '',

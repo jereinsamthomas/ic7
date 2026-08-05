@@ -903,6 +903,9 @@ table.board td.pts{color:var(--red-bright);font-weight:700;}
   <!-- Standings -->
   <div class="tourpage-table-block reveal in-view">
     <h2>Standings</h2>
+    <div id="standingsImgWrap" hidden style="margin-bottom:24px;text-align:center;">
+      <img id="standingsImg" src="" alt="Standings Image" style="max-width:100%;max-height:540px;border-radius:6px;border:1px solid var(--line-strong);box-shadow:0 12px 35px rgba(0,0,0,0.85);object-fit:contain;">
+    </div>
     <div class="board-wrap">
       <table class="board">
         <thead><tr><th>#</th><th>Team</th><th>Played</th><th>Won</th><th>Points</th></tr></thead>
@@ -1038,7 +1041,14 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
 
-  function renderTable(key, fieldkeys){
+  // Standings image
+  if (meta.standingsImg) {
+    const wrap = document.getElementById('standingsImgWrap');
+    const img = document.getElementById('standingsImg');
+    if (wrap && img) { img.src = meta.standingsImg; wrap.hidden = false; }
+  }
+
+  function renderTable(key, fieldkeys, nameColIndex = 0){
     const items = Store.get('ic7_tour_' + TOUR_ID + '_' + key, []);
     const tbody = document.getElementById('tb_' + key);
     const empty = document.getElementById('empty_' + key);
@@ -1046,7 +1056,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     if(!items.length){ empty.hidden = false; tbody.innerHTML = ''; return; }
     empty.hidden = true;
     tbody.innerHTML = items.map((it, i) => {
-      const cells = fieldkeys.map(fk => '<td>' + escapeHtml(it[fk] || '') + '</td>').join('');
+      const cells = fieldkeys.map((fk, idx) => {
+        const val = escapeHtml(it[fk] || '');
+        if (idx === nameColIndex && it.logo) {
+          return `<td><div style="display:flex;align-items:center;gap:10px;"><img src="${it.logo}" style="width:24px;height:24px;border-radius:50%;object-fit:cover;border:1px solid var(--red);box-shadow:0 0 8px rgba(225,29,72,0.4);flex:none;"><span>${val}</span></div></td>`;
+        }
+        return '<td>' + val + '</td>';
+      }).join('');
       return '<tr><td class="rank">' + String(i+1).padStart(2,'0') + '</td>' + cells + '</tr>';
     }).join('');
   }
