@@ -1050,493 +1050,382 @@
       color: var(--red-bright);
     }
 
-    /* ============================= TROPHY CABINET SHOWCASE — LUXURY ============================= */
-    .trophy-cabinet-container {
-      position: relative;
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 56px;
-    }
-    @media (max-width: 680px) {
-      .trophy-cabinet-container { padding: 0 44px; }
-    }
-
-    .trophy-track-wrap {
-      overflow: hidden;
-      border-radius: 2px;
-    }
-
-    .trophy-track {
-      display: flex;
-      transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
-      width: 100%;
-    }
-
-    .trophy-slide {
-      flex: 0 0 100%;
-      width: 100%;
-      padding: 4px;
-      box-sizing: border-box;
-    }
-
     /* ================================================
-       TROPHY CABINET — LUXURY AWARD CEREMONY REDESIGN
-       ================================================ */
+   PRO MEDIUM-SIZE BOX-TYPE TROPHY CABINET SLIDER
+   ================================================ */
+.trophy-cabinet-container {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 50px;
+}
+.trophy-track-wrap { overflow: hidden; }
+.trophy-track {
+  display: flex;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.trophy-slide { flex: 0 0 100%; width: 100%; box-sizing: border-box; }
 
-    /* Outer container with nav arrows */
-    .trophy-cabinet-container {
-      position: relative;
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 60px;
-    }
-    @media (max-width: 680px) { .trophy-cabinet-container { padding: 0 44px; } }
+.evo-tc-showcase {
+  position: relative;
+  max-width: 860px;
+  margin: 10px auto 20px;
+  padding: 24px 20px 18px;
+  background: radial-gradient(ellipse 90% 70% at 50% 15%, #1c080e 0%, #0a0205 65%, #030002 100%);
+  border-radius: 8px;
+  border: 1px solid rgba(225, 29, 72, 0.35);
+  box-shadow: 0 0 35px rgba(225,29,72,0.15), 0 25px 80px rgba(0, 0, 0, 0.98);
+  font-family: var(--font-luxury);
+  color: #fff;
+  text-align: center;
+  overflow: hidden;
+}
 
-    .trophy-track-wrap { overflow: hidden; }
-    .trophy-track {
-      display: flex;
-      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .trophy-slide { flex: 0 0 100%; width: 100%; box-sizing: border-box; }
+/* Cosmic Twinkling Space Background Animation */
+.tc-cosmic-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+.tc-cosmic-bg span {
+  position: absolute;
+  background: #fff;
+  border-radius: 50%;
+  animation: tcTwinkle 4s ease-in-out infinite;
+}
+@keyframes tcTwinkle {
+  0%, 100% { opacity: 0.1; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.4); }
+}
 
-    /* ── The full cabinet frame — DEEP COSMIC STAR-SPACE BG ── */
-    .trophy-case {
-      position: relative;
-      overflow: hidden;
-      border-radius: 6px;
-      background:
-        /* Top center crimson starburst glow */
-        radial-gradient(circle at 50% 20%, rgba(225,29,72,0.22) 0%, transparent 55%),
-        /* Left ambient gold nebula */
-        radial-gradient(circle at 15% 75%, rgba(212,175,55,0.16) 0%, transparent 45%),
-        /* Right cosmic violet nebula */
-        radial-gradient(circle at 85% 30%, rgba(147,51,234,0.18) 0%, transparent 50%),
-        /* Deep space midnight backdrop */
-        radial-gradient(circle at 50% 50%, #150921 0%, #090312 60%, #030108 100%);
-      border: 1px solid rgba(212,175,55,0.4);
-      box-shadow:
-        0 0 0 3px rgba(212,175,55,0.12),
-        0 0 40px rgba(225,29,72,0.15),
-        0 50px 100px -20px rgba(0,0,0,0.98),
-        inset 0 1px 0 rgba(255,215,0,0.35),
-        inset 0 -1px 0 rgba(255,215,0,0.15);
-      min-height: 520px;
-      display: flex;
-      flex-direction: column;
-    }
+/* Header Area: Small, Sleek, Well-Arranged Logos */
+.evo-tc-header {
+  position: relative;
+  margin-bottom: 18px;
+  z-index: 2;
+}
+.evo-tc-top-icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 6px;
+}
+.evo-tc-player-sil {
+  width: 32px;
+  height: 32px;
+  opacity: 0.95;
+  filter: drop-shadow(0 0 6px rgba(255,255,255,0.4));
+}
+.evo-tc-clan-logo {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1.5px solid #d4af37;
+  box-shadow: 0 0 10px rgba(212,175,55,0.5);
+  object-fit: cover;
+}
+.evo-tc-title-wrap {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 2px;
+}
+.evo-tc-title {
+  font-family: var(--font-luxury);
+  font-size: clamp(28px, 4.5vw, 46px);
+  font-weight: 900;
+  letter-spacing: .05em;
+  text-transform: lowercase;
+  color: #ffffff;
+  line-height: 1;
+  text-shadow: 0 0 18px rgba(255, 255, 255, 0.3);
+}
+.evo-tc-title .trophy-red {
+  color: #e11d48;
+  display: inline-block;
+}
+.evo-tc-title .cup-title {
+  text-transform: uppercase;
+  font-size: 0.85em;
+  letter-spacing: 0.08em;
+}
+.evo-tc-subtitle {
+  font-family: var(--font-luxury);
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: .32em;
+  text-transform: uppercase;
+  color: #e6ca65;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 3px;
+}
+.evo-tc-subtitle::before, .evo-tc-subtitle::after {
+  content: "";
+  display: block;
+  width: 30px;
+  height: 1.5px;
+  background: #e11d48;
+  box-shadow: 0 0 5px #e11d48;
+}
 
-    /* Gold top-shimmer bar */
-    .trophy-case::before {
-      content: "";
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg,
-        transparent 0%,
-        rgba(212,175,55,0.5) 10%,
-        #ffd700 35%, #fff8dc 50%, #ffd700 65%,
-        rgba(212,175,55,0.5) 90%,
-        transparent 100%
-      );
-      box-shadow: 0 0 24px rgba(255,215,0,0.8), 0 0 60px rgba(255,215,0,0.3);
-      z-index: 5;
-    }
-    /* Bottom gold line */
-    .trophy-case::after {
-      content: "";
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg,
-        transparent 0%,
-        rgba(212,175,55,0.4) 20%,
-        rgba(212,175,55,0.8) 50%,
-        rgba(212,175,55,0.4) 80%,
-        transparent 100%
-      );
-      z-index: 5;
-    }
+/* Glass Cabinet Showcase Box */
+.evo-tc-cabinet {
+  position: relative;
+  border: 4px solid #1f1a1c;
+  border-top: 10px solid #161214;
+  border-bottom: 12px solid #161214;
+  box-shadow: 0 0 0 1px rgba(212,175,55,0.45), inset 0 0 35px rgba(0,0,0,0.95);
+  background:
+    radial-gradient(ellipse 90% 70% at 50% 50%, rgba(200, 20, 45, 0.22) 0%, transparent 80%),
+    linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.88) 100%),
+    url('/assets/tc_bg_lounge.jpg') center/cover;
+  padding: 24px 14px 18px;
+  border-radius: 4px;
+  z-index: 2;
+}
 
-    /* ── SVG / bg-art pitch & cosmic starfield overlay ── */
-    .tc-bg-art {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      z-index: 1;
-      overflow: hidden;
-    }
-    .tc-bg-art svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+/* Top Engraved Plaque */
+.evo-tc-top-plaque {
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  background: #0d0a0b;
+  border: 1px solid rgba(212,175,55,0.5);
+  border-top: none;
+  padding: 2px 16px;
+  font-family: var(--font-luxury);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .32em;
+  color: #e6ca65;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.85);
+  border-radius: 0 0 4px 4px;
+  z-index: 5;
+}
 
-    @keyframes tcStarBlink {
-      0%, 100% { opacity: 0.2; transform: scale(0.8); }
-      50%       { opacity: 1; transform: scale(1.4); }
-    }
-    .tc-star-s1 { animation: tcStarBlink 3s ease-in-out infinite; transform-origin: center; }
-    .tc-star-s2 { animation: tcStarBlink 4.5s ease-in-out 1.2s infinite; transform-origin: center; }
-    .tc-star-s3 { animation: tcStarBlink 2.5s ease-in-out 0.6s infinite; transform-origin: center; }
+/* Inner Double Box Grid */
+.evo-tc-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  align-items: flex-end;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+  margin-top: 4px;
+}
+@media (max-width: 580px) {
+  .evo-tc-grid { grid-template-columns: 1fr; gap: 14px; }
+}
 
-    @keyframes tcPitchPulse {
-      0%, 100% { opacity: 0.15; }
-      50%       { opacity: 0.28; }
-    }
-    .tc-pitch-lines { animation: tcPitchPulse 7s ease-in-out infinite; }
+/* Individual Champion Trophy Inner Box */
+.evo-tc-bay {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid rgba(212,175,55,0.25);
+  border-radius: 4px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0.6) 100%);
+  padding: 14px 8px 12px;
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.85);
+}
 
-    /* ── Spotlight beams from ceiling ── */
-    .spotlight-beam {
-      position: absolute;
-      top: 0;
-      width: 180px;
-      height: 55%;
-      background: linear-gradient(180deg,
-        rgba(255,250,210,0.18) 0%,
-        rgba(255,240,160,0.06) 50%,
-        transparent 100%
-      );
-      clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
-      pointer-events: none;
-      z-index: 2;
-    }
-    @keyframes tcBeamPulse {
-      0%, 100% { opacity: 0.55; }
-      50%       { opacity: 0.9; }
-    }
-    .spotlight-beam:first-of-type  { animation: tcBeamPulse 4s ease-in-out infinite; }
-    .spotlight-beam:nth-of-type(2) { animation: tcBeamPulse 4s ease-in-out 2s infinite; }
+/* Ceiling Spotlight Beam */
+.evo-tc-spotlight {
+  position: absolute;
+  top: -24px;
+  width: 100px;
+  height: 150px;
+  background: linear-gradient(180deg, rgba(255,245,200,0.22) 0%, rgba(255,215,0,0.04) 60%, transparent 100%);
+  clip-path: polygon(30% 0%, 70% 0%, 100% 100%, 0% 100%);
+  pointer-events: none;
+  z-index: 1;
+}
 
-    /* ── Award-ceremony header ── */
-    .tc-case-header {
-      position: relative;
-      z-index: 3;
-      text-align: center;
-      padding: 32px 32px 22px;
-      border-bottom: 1px solid rgba(212,175,55,0.2);
-      margin-bottom: 28px;
-      background: linear-gradient(180deg,
-        rgba(0,0,0,0.5) 0%,
-        transparent 100%
-      );
-    }
-    .tc-case-header h3 {
-      font-family: var(--font-luxury);
-      font-size: clamp(34px, 6.5vw, 66px);
-      font-weight: 800;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      /* Liquid Gold Pro Gradient */
-      background: linear-gradient(165deg, #FFFFFF 0%, #FFF5D1 25%, #E6CA65 50%, #B38728 75%, #FBF5B7 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      line-height: 1.1;
-      margin-bottom: 8px;
-      filter: drop-shadow(0 4px 25px rgba(212,175,55,0.6));
-    }
-    .tc-case-header p {
-      font-family: var(--font-luxury);
-      font-size: 11.5px;
-      font-weight: 700;
-      letter-spacing: .45em;
-      text-transform: uppercase;
-      color: #E6CA65;
-      text-shadow: 0 0 15px rgba(230,202,101,0.4);
-    }
+/* Trophy Crest Shield / Badge (Medium-Small, Pro Arranged) */
+.evo-tc-trophy-badge {
+  width: 115px;
+  height: 130px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  z-index: 2;
+  transition: transform .35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.evo-tc-trophy-badge:hover {
+  transform: scale(1.06) translateY(-3px);
+}
+.evo-tc-trophy-img {
+  width: 110px;
+  height: 125px;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 16px rgba(0,0,0,0.95)) drop-shadow(0 0 12px rgba(212,175,55,0.45));
+}
+.evo-tc-default-crest {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #3a3034 0%, #120d0f 70%, #080506 100%);
+  border: 3px solid #d4af37;
+  box-shadow: 0 0 0 2px rgba(255,255,255,0.1), 0 0 20px rgba(212,175,55,0.6), inset 0 0 16px rgba(0,0,0,0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  color: #fff8dc;
+  font-weight: 800;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+}
 
-    /* ── Two-pedestal display grid ── */
-    .trophy-pedestals-grid {
-      position: relative;
-      z-index: 3;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      padding: 0 36px 28px;
-      flex: 1;
-    }
-    @media (max-width: 680px) {
-      .trophy-pedestals-grid { grid-template-columns: 1fr; padding: 0 16px 20px; }
-    }
+.evo-tc-anchor-shield, .evo-tc-dragon-shield {
+  width: 110px;
+  height: 125px;
+  filter: drop-shadow(0 8px 16px rgba(0,0,0,0.95)) drop-shadow(0 0 12px rgba(212,175,55,0.45));
+}
 
-    /* ── Individual award display case ── */
-    .pedestal-card {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      border-radius: 4px;
-      overflow: hidden;
-      /* glass dark panel */
-      background: linear-gradient(170deg,
-        rgba(255,255,255,0.06) 0%,
-        rgba(0,0,0,0.65) 40%,
-        rgba(0,0,0,0.85) 100%
-      );
-      border: 1px solid rgba(212,175,55,0.25);
-      box-shadow:
-        inset 0 1px 0 rgba(255,255,255,0.08),
-        inset 0 -2px 0 rgba(212,175,55,0.2),
-        0 20px 50px rgba(0,0,0,0.7);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      transition: transform .4s ease, box-shadow .4s ease, border-color .4s ease;
-      padding: 32px 20px 22px;
-    }
-    .pedestal-card:hover {
-      transform: translateY(-6px);
-      box-shadow:
-        inset 0 1px 0 rgba(255,255,255,0.1),
-        inset 0 -2px 0 rgba(225,29,72,0.6),
-        0 30px 60px rgba(0,0,0,0.8),
-        0 0 0 1px rgba(225,29,72,0.35),
-        0 0 40px rgba(225,29,72,0.2);
-      border-color: rgba(225,29,72,0.5);
-    }
-    .pedestal-card.shield-card:hover {
-      box-shadow:
-        inset 0 1px 0 rgba(255,255,255,0.1),
-        inset 0 -2px 0 rgba(245,158,11,0.6),
-        0 30px 60px rgba(0,0,0,0.8),
-        0 0 0 1px rgba(245,158,11,0.35),
-        0 0 40px rgba(245,158,11,0.2);
-      border-color: rgba(245,158,11,0.5);
-    }
-    /* Gloss top-edge */
-    .pedestal-card::before {
-      content: "";
-      position: absolute;
-      top: 0; left: 10%; right: 10%; height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-    }
-    /* Award category tag — top centre */
-    .pedestal-card::after {
-      content: attr(data-tag);
-      position: absolute;
-      top: 0; left: 50%;
-      transform: translateX(-50%);
-      font-family: var(--font-luxury);
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: .3em;
-      text-transform: uppercase;
-      color: #FFF5D1;
-      background: linear-gradient(180deg, rgba(25,18,5,0.95), rgba(8,2,4,0.95));
-      border: 1px solid rgba(230,202,101,0.6);
-      border-top: none;
-      border-radius: 0 0 4px 4px;
-      padding: 5px 16px;
-      white-space: nowrap;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.8), 0 0 10px rgba(230,202,101,0.3);
-    }
+/* Engraved Metallic Base Plinth */
+.evo-tc-plinth {
+  width: 100%;
+  max-width: 180px;
+  background: linear-gradient(180deg, #2b2326 0%, #151012 100%);
+  border: 1px solid rgba(212,175,55,0.45);
+  border-bottom: 2.5px solid #d4af37;
+  padding: 10px 6px;
+  text-align: center;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.95);
+  position: relative;
+  z-index: 2;
+}
+.evo-tc-plinth-season {
+  font-family: var(--font-luxury);
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: .25em;
+  color: #e6ca65;
+  margin-bottom: 2px;
+}
+.evo-tc-plinth-title {
+  font-family: var(--font-luxury);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: .18em;
+  color: #ffffff;
+  margin-bottom: 2px;
+  text-shadow: 0 1px 3px rgba(255,255,255,0.3);
+}
+.evo-tc-plinth-name {
+  font-family: var(--font-luxury);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: .05em;
+  color: #ffd700;
+  text-transform: uppercase;
+  text-shadow: 0 0 8px rgba(255,215,0,0.5);
+  word-break: break-word;
+}
+.evo-tc-plinth-star {
+  font-size: 8px;
+  color: #d4af37;
+  margin-top: 2px;
+  letter-spacing: .2em;
+}
 
-    /* ── Crest / logo ring ── */
-    .trophy-crest-wrap {
-      position: relative;
-      margin-bottom: 20px;
-      z-index: 2;
-    }
-    /* outer decorative ring */
-    .trophy-crest-wrap::before {
-      content: "";
-      position: absolute;
-      inset: -10px;
-      border-radius: 50%;
-      background: conic-gradient(
-        from 0deg,
-        rgba(212,175,55,0.8) 0deg, rgba(255,215,0,1) 60deg,
-        rgba(212,175,55,0.3) 120deg, rgba(255,255,255,0.6) 180deg,
-        rgba(212,175,55,0.3) 240deg, rgba(255,215,0,1) 300deg,
-        rgba(212,175,55,0.8) 360deg
-      );
-      filter: blur(2px);
-      opacity: 0.5;
-      animation: tcRingRotate 8s linear infinite;
-    }
-    .pedestal-card.shield-card .trophy-crest-wrap::before {
-      background: conic-gradient(
-        from 0deg,
-        rgba(245,158,11,0.8) 0deg, rgba(255,200,50,1) 60deg,
-        rgba(245,158,11,0.3) 120deg, rgba(255,255,255,0.5) 180deg,
-        rgba(245,158,11,0.3) 240deg, rgba(255,200,50,1) 300deg,
-        rgba(245,158,11,0.8) 360deg
-      );
-    }
-    @keyframes tcRingRotate { to { transform: rotate(360deg); } }
-    /* inner dark fill so conic doesn't bleed */
-    .trophy-crest-wrap::after {
-      content: "";
-      position: absolute;
-      inset: -3px;
-      border-radius: 50%;
-      background: rgba(8,2,4,0.88);
-    }
+/* Footer Section */
+.evo-tc-footer {
+  margin-top: 16px;
+  z-index: 2;
+  position: relative;
+}
+.evo-tc-footer-line1 {
+  font-family: var(--font-luxury);
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: .3em;
+  color: #e11d48;
+  margin-bottom: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.evo-tc-footer-line1::before, .evo-tc-footer-line1::after {
+  content: "";
+  display: block;
+  width: 25px;
+  height: 1px;
+  background: #e11d48;
+}
+.evo-tc-footer-line2 {
+  font-family: var(--font-luxury);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .25em;
+  color: #ffffff;
+  text-shadow: 0 0 8px rgba(255,255,255,0.3);
+}
 
-    /* ── Logo/crest badge itself ── */
-    .trophy-badge {
-      position: relative;
-      z-index: 2;
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      background-size: cover;
-      background-position: center;
-      background-color: #0f0308;
-      border: 4px solid rgba(212,175,55,0.9);
-      box-shadow:
-        0 0 0 1px rgba(255,255,255,0.12),
-        0 0 0 8px rgba(10,3,5,0.7),
-        0 0 50px rgba(225,29,72,0.6),
-        0 0 100px rgba(225,29,72,0.2),
-        inset 0 0 30px rgba(0,0,0,0.8);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 80px;
-      margin: 0 auto;
-      transition: transform .4s cubic-bezier(0.16,1,0.3,1), box-shadow .4s ease;
-    }
-    .pedestal-card.champion-card .trophy-badge {
-      border-color: rgba(225,29,72,0.9);
-      box-shadow:
-        0 0 0 1px rgba(255,255,255,0.12),
-        0 0 0 8px rgba(10,3,5,0.7),
-        0 0 50px rgba(225,29,72,0.65),
-        0 0 100px rgba(225,29,72,0.25),
-        inset 0 0 30px rgba(0,0,0,0.8);
-    }
-    .pedestal-card.shield-card .trophy-badge {
-      border-color: rgba(245,158,11,0.9);
-      box-shadow:
-        0 0 0 1px rgba(255,255,255,0.12),
-        0 0 0 8px rgba(10,3,5,0.7),
-        0 0 50px rgba(245,158,11,0.6),
-        0 0 100px rgba(245,158,11,0.2),
-        inset 0 0 30px rgba(0,0,0,0.8);
-    }
-    .pedestal-card:hover .trophy-badge {
-      transform: scale(1.06) translateY(-6px);
-    }
-    @media (max-width: 480px) {
-      .trophy-badge { width: 130px; height: 130px; font-size: 58px; }
-    }
+/* Nav arrows */
+.tc-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: rgba(15,8,12,0.92);
+  border: 1.5px solid rgba(212,175,55,0.6);
+  color: #ffd700;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all .3s ease;
+  box-shadow: 0 0 20px rgba(0,0,0,0.9), 0 0 15px rgba(212,175,55,0.3);
+}
+.tc-arrow:hover {
+  background: #e11d48;
+  border-color: #ffffff;
+  color: #ffffff;
+  box-shadow: 0 0 25px rgba(225,29,72,0.7);
+  transform: translateY(-50%) scale(1.1);
+}
+.tc-prev { left: -10px; }
+.tc-next { right: -10px; }
 
-    /* ── Award plinth ── */
-    .pedestal-base {
-      width: 100%;
-      background: linear-gradient(180deg,
-        rgba(212,175,55,0.08) 0%,
-        rgba(0,0,0,0.6) 100%
-      );
-      border-top: 1px solid rgba(212,175,55,0.3);
-      padding: 16px 12px 14px;
-      text-align: center;
-    }
-    .pedestal-type {
-      font-family: var(--font-luxury);
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: .35em;
-      text-transform: uppercase;
-      color: #E6CA65;
-      margin-bottom: 8px;
-    }
-    .pedestal-winner-name {
-      font-family: var(--font-luxury);
-      font-size: clamp(22px, 3.2vw, 32px);
-      font-weight: 800;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      line-height: 1.15;
-      word-break: break-word;
-    }
-    .pedestal-card.champion-card .pedestal-winner-name {
-      background: linear-gradient(165deg, #FFFFFF 0%, #FFF5D1 30%, #E6CA65 60%, #B38728 90%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      filter: drop-shadow(0 2px 14px rgba(230,202,101,0.5));
-    }
-    .pedestal-card.shield-card .pedestal-winner-name {
-      background: linear-gradient(165deg, #FFFDF0 0%, #F59E0B 40%, #D97706 70%, #FBBF24 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      filter: drop-shadow(0 2px 14px rgba(245,158,11,0.5));
-    }
-    /* Star row under winner name */
-    .pedestal-stars {
-      margin-top: 10px;
-      font-size: 11px;
-      letter-spacing: .25em;
-      color: #E6CA65;
-      text-shadow: 0 0 10px rgba(230,202,101,0.5);
-    }
+/* Dot indicators */
+.tc-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-top: 18px;
+}
+.tc-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: rgba(212,175,55,0.2);
+  border: 1px solid rgba(212,175,55,0.3);
+  cursor: pointer;
+  transition: all .3s ease;
+  padding: 0;
+}
+.tc-dot.active {
+  width: 22px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #ffd700, #f59e0b);
+  border-color: #ffd700;
+  box-shadow: 0 0 10px rgba(212,175,55,0.7);
+}
 
-    /* ── Footer tagline ── */
-    .tc-case-footer {
-      position: relative;
-      z-index: 3;
-      text-align: center;
-      padding: 14px 32px 18px;
-      border-top: 1px solid rgba(212,175,55,0.15);
-      margin-top: auto;
-      font-family: var(--font-mono);
-      font-size: 10px;
-      letter-spacing: .35em;
-      text-transform: uppercase;
-      color: rgba(212,175,55,0.4);
-    }
-
-    /* ── Nav arrows ── */
-    .tc-arrow {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 10;
-      width: 52px; height: 52px;
-      border-radius: 50%;
-      background: rgba(5,0,3,0.92);
-      border: 1px solid rgba(212,175,55,0.45);
-      color: rgba(212,175,55,0.9);
-      font-size: 28px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all .3s ease;
-      box-shadow: 0 0 0 1px rgba(212,175,55,0.1), 0 8px 24px rgba(0,0,0,0.7);
-    }
-    .tc-arrow:hover {
-      background: rgba(212,175,55,0.15);
-      border-color: #ffd700;
-      color: #ffd700;
-      box-shadow: 0 0 0 1px rgba(212,175,55,0.3), 0 0 24px rgba(212,175,55,0.4);
-      transform: translateY(-50%) scale(1.08);
-    }
-    .tc-prev { left: -26px; }
-    .tc-next { right: -26px; }
-
-    /* ── Dot indicators ── */
-    .tc-dots {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 12px;
-      margin-top: 22px;
-    }
-    .tc-dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: rgba(212,175,55,0.2);
-      border: 1px solid rgba(212,175,55,0.3);
-      cursor: pointer;
-      transition: all .3s ease;
-      padding: 0;
-    }
-    .tc-dot.active {
-      width: 22px;
-      border-radius: 3px;
-      background: linear-gradient(90deg, #ffd700, #f59e0b);
-      border-color: #ffd700;
-      box-shadow: 0 0 10px rgba(212,175,55,0.7);
-    }
 
 
     /* ============================= SCHEDULE ============================= */
@@ -3316,7 +3205,28 @@
     </div>
   </section>
 
-<!-- ============================= TEAMS ============================= -->
+<!-- ============================= TROPHY CABINET ============================= -->
+  <section class="section" id="trophyCabinet" style="background:var(--bg-elevated); position:relative; overflow:hidden;">
+    <div class="wrap">
+      <div class="eyebrow reveal">WHERE LEGENDS EVOLVE</div>
+      <h2 class="section-title reveal">TROPHY <span class="red-text">CABINET</span></h2>
+      <p class="section-lede reveal">Two Seasons. One Legacy. Explore the reigning champions and shield winners across IC7's 6 major tournament series.</p>
+      
+      <!-- 3D Glass Showcase Cabinet Frame -->
+      <div class="trophy-cabinet-container reveal">
+        <button type="button" class="tc-arrow tc-prev" id="tcPrevBtn" aria-label="Previous Tournament">‹</button>
+        <button type="button" class="tc-arrow tc-next" id="tcNextBtn" aria-label="Next Tournament">›</button>
+        
+        <div class="trophy-track-wrap">
+          <div class="trophy-track" id="trophyTrack"></div>
+        </div>
+
+        <div class="tc-dots" id="tcDots"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================= TEAMS ============================= -->
   <section class="section" id="teams">
     <div class="wrap">
       <div class="eyebrow reveal">Our Squads</div>
@@ -4633,6 +4543,43 @@
           if (champEl) champEl.value = meta0[t.id].champion || '';
           if (champTagEl) champTagEl.value = meta0[t.id].champTag || 'CURRENT CHAMPIONS';
           if (shieldEl) shieldEl.value = meta0[t.id].shieldWinner || '';
+          if (shieldTagEl) shieldTagEl.value = meta0[t.id].shieldTag || 'SHIELD WINNER';
+
+          // Show existing champion logo preview
+          const champPrevEl = document.getElementById(`mt_${t.id}_champLogoPreview`);
+          if (champPrevEl && meta0[t.id].champLogo) {
+            champPrevEl.innerHTML = `<div style="display:flex;align-items:center;gap:10px;"><img src="${meta0[t.id].champLogo}" style="width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid var(--red);"><span style="font-size:11px;color:var(--ink-faint);font-family:var(--font-mono);">Current champ logo</span></div>`;
+          }
+          const champFileEl = document.getElementById(`mt_${t.id}_champLogo`);
+          if (champFileEl) {
+            champFileEl.addEventListener('change', () => {
+              const file = champFileEl.files[0];
+              if (!file || !champPrevEl) return;
+              const reader = new FileReader();
+              reader.onload = (ev) => {
+                champPrevEl.innerHTML = `<div style="display:flex;align-items:center;gap:10px;"><img src="${ev.target.result}" style="width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid var(--red);"><span style="font-size:11px;color:var(--green-live);font-family:var(--font-mono);">New logo ready</span></div>`;
+              };
+              reader.readAsDataURL(file);
+            });
+          }
+
+          // Show existing shield logo preview
+          const shieldPrevEl = document.getElementById(`mt_${t.id}_shieldLogoPreview`);
+          if (shieldPrevEl && meta0[t.id].shieldLogo) {
+            shieldPrevEl.innerHTML = `<div style="display:flex;align-items:center;gap:10px;"><img src="${meta0[t.id].shieldLogo}" style="width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid var(--red);"><span style="font-size:11px;color:var(--ink-faint);font-family:var(--font-mono);">Current shield logo</span></div>`;
+          }
+          const shieldFileEl = document.getElementById(`mt_${t.id}_shieldLogo`);
+          if (shieldFileEl) {
+            shieldFileEl.addEventListener('change', () => {
+              const file = shieldFileEl.files[0];
+              if (!file || !shieldPrevEl) return;
+              const reader = new FileReader();
+              reader.onload = (ev) => {
+                shieldPrevEl.innerHTML = `<div style="display:flex;align-items:center;gap:10px;"><img src="${ev.target.result}" style="width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid var(--red);"><span style="font-size:11px;color:var(--green-live);font-family:var(--font-mono);">New logo ready</span></div>`;
+              };
+              reader.readAsDataURL(file);
+            });
+          }
           // Show existing tournament logo preview
           const previewEl = document.getElementById(`mt_${t.id}_tourLogoPreview`);
           if (previewEl && meta0[t.id].tourLogo) {
@@ -4729,7 +4676,216 @@
             };
           }
           await Store.set('ic7_major_tours', data);
-          renderToursGrid();
+          let tcTimer = null;
+      function renderTrophyCabinet() {
+        const track = document.getElementById('trophyTrack');
+        const dotsHost = document.getElementById('tcDots');
+        if (!track) return;
+
+        const meta = getToursMeta();
+
+        function getTourTitleHtml(tourId, rawName) {
+          if (tourId === 'evolution-cup') return `<span>evo</span><span class="trophy-red">l</span><span>ution</span> <span class="cup-title">C<span class="trophy-red">🏆</span>P</span>`;
+          if (tourId === 'intimate-cup') return `<span>inti</span><span class="trophy-red">m</span><span>ate</span> <span class="cup-title">C<span class="trophy-red">🏆</span>P</span>`;
+          if (tourId === 'world-cup') return `<span>wor</span><span class="trophy-red">l</span><span>d</span> <span class="cup-title">C<span class="trophy-red">🏆</span>P</span>`;
+          if (tourId === 'club-world-cup') return `<span>c</span><span class="trophy-red">l</span><span>ub world</span> <span class="cup-title">C<span class="trophy-red">🏆</span>P</span>`;
+          if (tourId === 'coopa-duo') return `<span>coopa'd</span> <span class="trophy-red">d</span><span>uo</span>`;
+          if (tourId === 'districto-cup') return `<span>distric</span><span class="trophy-red">t</span><span>o</span> <span class="cup-title">C<span class="trophy-red">🏆</span>P</span>`;
+          return `<span>${escapeHtml(rawName.toLowerCase())}</span>`;
+        }
+
+        function getTourSubtitle(tourId) {
+          if (tourId === 'club-world-cup') return 'THE PINNACLE OF GLOBAL CLUB FOOTBALL.';
+          return '14 TEAMS. ONE INTENSE RIVALRY.';
+        }
+
+        function getTourBadgeLogo(tourId, mLogo) {
+          if (mLogo) return mLogo;
+          if (tourId === 'intimate-cup') return '/assets/intimate_cup_badge.jpg';
+          return '/assets/asset_4ec290c1ae.png';
+        }
+
+        const slidesHtml = MAJOR_TOURS.map((t) => {
+          const m = meta[t.id] || {};
+          const tourName = m.name || t.name;
+          const champName = m.champion || (t.id === 'intimate-cup' ? 'INTIMATE CHAMPION' : 'IL CAPITANO');
+          const shieldName = m.shieldWinner || (t.id === 'intimate-cup' ? 'INTIMATE SHIELD' : 'ICONIC SHIELD');
+
+          const champTag = m.champTag || 'SEASON 1';
+          const shieldTag = m.shieldTag || 'SEASON 2';
+
+          const titleHtml = getTourTitleHtml(t.id, tourName);
+          const subtitleText = getTourSubtitle(t.id);
+          const badgeLogo = getTourBadgeLogo(t.id, m.tourLogo);
+
+          const champBadgeHtml = m.champLogo
+            ? `<div class="evo-tc-trophy-badge"><img class="evo-tc-trophy-img" src="${m.champLogo}" alt="${escapeHtml(champName)}"></div>`
+            : `<div class="evo-tc-trophy-badge">
+                <svg class="evo-tc-anchor-shield" viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <linearGradient id="silverGrad_${t.id}" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#ffffff"/>
+                      <stop offset="40%" stop-color="#b0b5bc"/>
+                      <stop offset="70%" stop-color="#78808a"/>
+                      <stop offset="100%" stop-color="#3a4048"/>
+                    </linearGradient>
+                    <radialGradient id="ballGold_${t.id}" cx="50%" cy="50%" r="50%">
+                      <stop offset="0%" stop-color="#fff5d1"/>
+                      <stop offset="50%" stop-color="#ffd700"/>
+                      <stop offset="100%" stop-color="#996515"/>
+                    </radialGradient>
+                  </defs>
+                  <path d="M100 10 L165 40 V110 C165 155 100 195 100 195 C100 195 35 155 35 110 V40 Z" fill="url(#silverGrad_${t.id})" stroke="#222" stroke-width="3"/>
+                  <path d="M100 25 L150 50 V105 C150 142 100 175 100 175 C100 175 50 142 50 105 V50 Z" fill="#120e10" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+                  <path d="M35 110 C35 150 70 180 100 180 C130 180 165 150 165 110 M100 45 V175 M70 120 H130" stroke="url(#silverGrad_${t.id})" stroke-width="12" fill="none" stroke-linecap="round"/>
+                  <circle cx="100" cy="45" r="14" fill="url(#ballGold_${t.id})" stroke="#fff" stroke-width="1.5"/>
+                  <rect x="35" y="90" width="130" height="24" rx="2" fill="#000" stroke="url(#silverGrad_${t.id})" stroke-width="1.5"/>
+                  <text x="100" y="106" text-anchor="middle" font-family="Cinzel,serif" font-size="9.5" font-weight="900" fill="#fff" letter-spacing="0.5">${escapeHtml(champName)}</text>
+                </svg>
+              </div>`;
+
+          const shieldBadgeHtml = m.shieldLogo
+            ? `<div class="evo-tc-trophy-badge"><img class="evo-tc-trophy-img" src="${m.shieldLogo}" alt="${escapeHtml(shieldName)}"></div>`
+            : `<div class="evo-tc-trophy-badge">
+                <svg class="evo-tc-dragon-shield" viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <radialGradient id="goldPlate_${t.id}" cx="50%" cy="50%" r="50%">
+                      <stop offset="0%" stop-color="#fffdf0"/>
+                      <stop offset="35%" stop-color="#ffd700"/>
+                      <stop offset="75%" stop-color="#d4af37"/>
+                      <stop offset="100%" stop-color="#553a08"/>
+                    </radialGradient>
+                  </defs>
+                  <circle cx="100" cy="110" r="82" fill="url(#goldPlate_${t.id})" stroke="#111" stroke-width="4"/>
+                  <circle cx="100" cy="110" r="72" fill="#180508" stroke="#ffd700" stroke-width="2"/>
+                  <path id="textArc_${t.id}" d="M35 110 A65 65 0 1 1 165 110" fill="none"/>
+                  <text font-family="Cinzel,serif" font-size="10.5" font-weight="900" fill="#ffd700" letter-spacing="1.5"><textPath href="#textArc_${t.id}" startOffset="50%" text-anchor="middle">${escapeHtml(shieldName)}</textPath></text>
+                  <path d="M100 65 C115 65 130 75 125 95 C120 115 140 120 135 140 C130 155 110 155 100 140 C90 155 70 155 65 140 C60 120 80 115 75 95 C70 75 85 65 100 65 Z" fill="#e11d48" stroke="#ffd700" stroke-width="1.5"/>
+                  <circle cx="100" cy="172" r="3" fill="#ffd700"/>
+                  <circle cx="70" cy="160" r="2.5" fill="#ffd700"/>
+                  <circle cx="130" cy="160" r="2.5" fill="#ffd700"/>
+                </svg>
+              </div>`;
+
+          // Generate animated twinkling space stars (50 stars)
+          let starsHtml = '';
+          for (let i = 0; i < 50; i++) {
+            const size = 1 + Math.random() * 2;
+            const left = Math.random() * 100;
+            const top = Math.random() * 100;
+            const delay = -(Math.random() * 4);
+            starsHtml += `<span style="width:${size}px;height:${size}px;left:${left}%;top:${top}%;animation-delay:${delay}s;"></span>`;
+          }
+
+          return `
+            <div class="trophy-slide">
+              <div class="evo-tc-showcase">
+                <!-- Cosmic Twinkling Space Background Animation -->
+                <div class="tc-cosmic-bg">${starsHtml}</div>
+
+                <!-- Header Area -->
+                <div class="evo-tc-header">
+                  <div class="evo-tc-top-icons">
+                    <svg class="evo-tc-player-sil" viewBox="0 0 100 100" fill="#ffffff">
+                      <circle cx="50" cy="20" r="12"/>
+                      <path d="M40 38 h20 v30 h-8 v-25 h-8 v-25 h-4 v-30 z" transform="rotate(-15 50 50)"/>
+                      <path d="M20 40 l20 -10 l10 20 l-15 15 z"/>
+                      <path d="M60 30 l25 -10 l-10 25 z"/>
+                    </svg>
+                    <img class="evo-tc-clan-logo" src="${badgeLogo}" alt="${escapeHtml(tourName)} Logo">
+                  </div>
+                  <div class="evo-tc-title-wrap">
+                    <h1 class="evo-tc-title">${titleHtml}</h1>
+                  </div>
+                  <div class="evo-tc-subtitle">${subtitleText}</div>
+                </div>
+
+                <!-- Glass Cabinet Showcase Box -->
+                <div class="evo-tc-cabinet">
+                  <div class="evo-tc-top-plaque">TROPHY CABINET</div>
+                  <div class="evo-tc-grid">
+                    <!-- Left Pedestal (Champion) -->
+                    <div class="evo-tc-bay">
+                      <div class="evo-tc-spotlight"></div>
+                      ${champBadgeHtml}
+                      <div class="evo-tc-plinth">
+                        <div class="evo-tc-plinth-season">${escapeHtml(champTag)}</div>
+                        <div class="evo-tc-plinth-title">CHAMPIONS</div>
+                        <div class="evo-tc-plinth-name">${escapeHtml(champName)}</div>
+                        <div class="evo-tc-plinth-star">★</div>
+                      </div>
+                    </div>
+
+                    <!-- Right Pedestal (Shield Winner) -->
+                    <div class="evo-tc-bay">
+                      <div class="evo-tc-spotlight"></div>
+                      ${shieldBadgeHtml}
+                      <div class="evo-tc-plinth">
+                        <div class="evo-tc-plinth-season">${escapeHtml(shieldTag)}</div>
+                        <div class="evo-tc-plinth-title">CHAMPIONS</div>
+                        <div class="evo-tc-plinth-name">${escapeHtml(shieldName)}</div>
+                        <div class="evo-tc-plinth-star">★</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Cabinet Footer Tagline -->
+                <div class="evo-tc-footer">
+                  <div class="evo-tc-footer-line1">TWO SEASONS. ONE LEGACY.</div>
+                  <div class="evo-tc-footer-line2">EVOLUTION CUP | INTIMATE CUP | DISTRICTO CUP | COOPA'D CUP | THE FINAL.</div>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        track.innerHTML = slidesHtml;
+
+        if (dotsHost) {
+          dotsHost.innerHTML = MAJOR_TOURS.map(
+            (t, i) =>
+              `<button type="button" class="tc-dot${i === 0 ? ' active' : ''}" data-idx="${i}" aria-label="Slide ${i + 1}"></button>`
+          ).join('');
+        }
+
+        let currentIdx = 0;
+        const total = MAJOR_TOURS.length;
+
+        function goTo(idx) {
+          currentIdx = (idx + total) % total;
+          track.style.transform = `translateX(-${currentIdx * 100}%)`;
+          if (dotsHost) {
+            dotsHost.querySelectorAll('.tc-dot').forEach((d, i) => {
+              d.classList.toggle('active', i === currentIdx);
+            });
+          }
+        }
+
+        const prevBtn = document.getElementById('tcPrevBtn');
+        const nextBtn = document.getElementById('tcNextBtn');
+        if (prevBtn) prevBtn.onclick = () => { goTo(currentIdx - 1); resetAuto(); };
+        if (nextBtn) nextBtn.onclick = () => { goTo(currentIdx + 1); resetAuto(); };
+
+        if (dotsHost) {
+          dotsHost.onclick = (e) => {
+            const btn = e.target.closest('.tc-dot');
+            if (btn && btn.dataset.idx !== undefined) {
+              goTo(parseInt(btn.dataset.idx, 10));
+              resetAuto();
+            }
+          };
+        }
+
+        function resetAuto() {
+          if (tcTimer) clearInterval(tcTimer);
+          tcTimer = setInterval(() => goTo(currentIdx + 1), 6000);
+        }
+
+        resetAuto();
+      }
+
+      renderToursGrid();
           renderUpcomingTicker();
           const msg = document.getElementById('toursMetaSavedMsg');
           if (msg) { msg.hidden = false; setTimeout(() => msg.hidden = true, 2000); }
@@ -4738,12 +4894,432 @@
 
 
 
+      let tcTimer = null;
+      function renderTrophyCabinet() {
+        const track = document.getElementById('trophyTrack');
+        const dotsHost = document.getElementById('tcDots');
+        if (!track) return;
+
+        const meta = getToursMeta();
+
+        function getTourTitleHtml(tourId, rawName) {
+          if (tourId === 'evolution-cup') return `<span>evo</span><span class="trophy-red">l</span><span>ution</span> <span class="cup-title">C<span class="trophy-red">🏆</span>P</span>`;
+          if (tourId === 'intimate-cup') return `<span>inti</span><span class="trophy-red">m</span><span>ate</span> <span class="cup-title">C<span class="trophy-red">🏆</span>P</span>`;
+          if (tourId === 'world-cup') return `<span>wor</span><span class="trophy-red">l</span><span>d</span> <span class="cup-title">C<span class="trophy-red">🏆</span>P</span>`;
+          if (tourId === 'club-world-cup') return `<span>c</span><span class="trophy-red">l</span><span>ub world</span> <span class="cup-title">C<span class="trophy-red">🏆</span>P</span>`;
+          if (tourId === 'coopa-duo') return `<span>coopa'd</span> <span class="trophy-red">d</span><span>uo</span>`;
+          if (tourId === 'districto-cup') return `<span>distric</span><span class="trophy-red">t</span><span>o</span> <span class="cup-title">C<span class="trophy-red">🏆</span>P</span>`;
+          return `<span>${escapeHtml(rawName.toLowerCase())}</span>`;
+        }
+
+        function getTourSubtitle(tourId) {
+          if (tourId === 'club-world-cup') return 'THE PINNACLE OF GLOBAL CLUB FOOTBALL.';
+          return '14 TEAMS. ONE INTENSE RIVALRY.';
+        }
+
+        function getTourBadgeLogo(tourId, mLogo) {
+          if (mLogo) return mLogo;
+          if (tourId === 'intimate-cup') return '/assets/intimate_cup_badge.jpg';
+          return '/assets/asset_4ec290c1ae.png';
+        }
+
+        const slidesHtml = MAJOR_TOURS.map((t) => {
+          const m = meta[t.id] || {};
+          const tourName = m.name || t.name;
+          const champName = m.champion || (t.id === 'intimate-cup' ? 'INTIMATE CHAMPION' : 'IL CAPITANO');
+          const shieldName = m.shieldWinner || (t.id === 'intimate-cup' ? 'INTIMATE SHIELD' : 'ICONIC SHIELD');
+
+          const champTag = m.champTag || 'SEASON 1';
+          const shieldTag = m.shieldTag || 'SEASON 2';
+
+          const titleHtml = getTourTitleHtml(t.id, tourName);
+          const subtitleText = getTourSubtitle(t.id);
+          const badgeLogo = getTourBadgeLogo(t.id, m.tourLogo);
+
+          const champBadgeHtml = m.champLogo
+            ? `<div class="evo-tc-trophy-badge"><img class="evo-tc-trophy-img" src="${m.champLogo}" alt="${escapeHtml(champName)}"></div>`
+            : `<div class="evo-tc-trophy-badge">
+                <svg class="evo-tc-anchor-shield" viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <linearGradient id="silverGrad_${t.id}" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#ffffff"/>
+                      <stop offset="40%" stop-color="#b0b5bc"/>
+                      <stop offset="70%" stop-color="#78808a"/>
+                      <stop offset="100%" stop-color="#3a4048"/>
+                    </linearGradient>
+                    <radialGradient id="ballGold_${t.id}" cx="50%" cy="50%" r="50%">
+                      <stop offset="0%" stop-color="#fff5d1"/>
+                      <stop offset="50%" stop-color="#ffd700"/>
+                      <stop offset="100%" stop-color="#996515"/>
+                    </radialGradient>
+                  </defs>
+                  <path d="M100 10 L165 40 V110 C165 155 100 195 100 195 C100 195 35 155 35 110 V40 Z" fill="url(#silverGrad_${t.id})" stroke="#222" stroke-width="3"/>
+                  <path d="M100 25 L150 50 V105 C150 142 100 175 100 175 C100 175 50 142 50 105 V50 Z" fill="#120e10" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+                  <path d="M35 110 C35 150 70 180 100 180 C130 180 165 150 165 110 M100 45 V175 M70 120 H130" stroke="url(#silverGrad_${t.id})" stroke-width="12" fill="none" stroke-linecap="round"/>
+                  <circle cx="100" cy="45" r="14" fill="url(#ballGold_${t.id})" stroke="#fff" stroke-width="1.5"/>
+                  <rect x="35" y="90" width="130" height="24" rx="2" fill="#000" stroke="url(#silverGrad_${t.id})" stroke-width="1.5"/>
+                  <text x="100" y="106" text-anchor="middle" font-family="Cinzel,serif" font-size="9.5" font-weight="900" fill="#fff" letter-spacing="0.5">${escapeHtml(champName)}</text>
+                </svg>
+              </div>`;
+
+          const shieldBadgeHtml = m.shieldLogo
+            ? `<div class="evo-tc-trophy-badge"><img class="evo-tc-trophy-img" src="${m.shieldLogo}" alt="${escapeHtml(shieldName)}"></div>`
+            : `<div class="evo-tc-trophy-badge">
+                <svg class="evo-tc-dragon-shield" viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <radialGradient id="goldPlate_${t.id}" cx="50%" cy="50%" r="50%">
+                      <stop offset="0%" stop-color="#fffdf0"/>
+                      <stop offset="35%" stop-color="#ffd700"/>
+                      <stop offset="75%" stop-color="#d4af37"/>
+                      <stop offset="100%" stop-color="#553a08"/>
+                    </radialGradient>
+                  </defs>
+                  <circle cx="100" cy="110" r="82" fill="url(#goldPlate_${t.id})" stroke="#111" stroke-width="4"/>
+                  <circle cx="100" cy="110" r="72" fill="#180508" stroke="#ffd700" stroke-width="2"/>
+                  <path id="textArc_${t.id}" d="M35 110 A65 65 0 1 1 165 110" fill="none"/>
+                  <text font-family="Cinzel,serif" font-size="10.5" font-weight="900" fill="#ffd700" letter-spacing="1.5"><textPath href="#textArc_${t.id}" startOffset="50%" text-anchor="middle">${escapeHtml(shieldName)}</textPath></text>
+                  <path d="M100 65 C115 65 130 75 125 95 C120 115 140 120 135 140 C130 155 110 155 100 140 C90 155 70 155 65 140 C60 120 80 115 75 95 C70 75 85 65 100 65 Z" fill="#e11d48" stroke="#ffd700" stroke-width="1.5"/>
+                  <circle cx="100" cy="172" r="3" fill="#ffd700"/>
+                  <circle cx="70" cy="160" r="2.5" fill="#ffd700"/>
+                  <circle cx="130" cy="160" r="2.5" fill="#ffd700"/>
+                </svg>
+              </div>`;
+
+          // Generate animated twinkling space stars (50 stars)
+          let starsHtml = '';
+          for (let i = 0; i < 50; i++) {
+            const size = 1 + Math.random() * 2;
+            const left = Math.random() * 100;
+            const top = Math.random() * 100;
+            const delay = -(Math.random() * 4);
+            starsHtml += `<span style="width:${size}px;height:${size}px;left:${left}%;top:${top}%;animation-delay:${delay}s;"></span>`;
+          }
+
+          return `
+            <div class="trophy-slide">
+              <div class="evo-tc-showcase">
+                <!-- Cosmic Twinkling Space Background Animation -->
+                <div class="tc-cosmic-bg">${starsHtml}</div>
+
+                <!-- Header Area -->
+                <div class="evo-tc-header">
+                  <div class="evo-tc-top-icons">
+                    <svg class="evo-tc-player-sil" viewBox="0 0 100 100" fill="#ffffff">
+                      <circle cx="50" cy="20" r="12"/>
+                      <path d="M40 38 h20 v30 h-8 v-25 h-8 v-25 h-4 v-30 z" transform="rotate(-15 50 50)"/>
+                      <path d="M20 40 l20 -10 l10 20 l-15 15 z"/>
+                      <path d="M60 30 l25 -10 l-10 25 z"/>
+                    </svg>
+                    <img class="evo-tc-clan-logo" src="${badgeLogo}" alt="${escapeHtml(tourName)} Logo">
+                  </div>
+                  <div class="evo-tc-title-wrap">
+                    <h1 class="evo-tc-title">${titleHtml}</h1>
+                  </div>
+                  <div class="evo-tc-subtitle">${subtitleText}</div>
+                </div>
+
+                <!-- Glass Cabinet Showcase Box -->
+                <div class="evo-tc-cabinet">
+                  <div class="evo-tc-top-plaque">TROPHY CABINET</div>
+                  <div class="evo-tc-grid">
+                    <!-- Left Pedestal (Champion) -->
+                    <div class="evo-tc-bay">
+                      <div class="evo-tc-spotlight"></div>
+                      ${champBadgeHtml}
+                      <div class="evo-tc-plinth">
+                        <div class="evo-tc-plinth-season">${escapeHtml(champTag)}</div>
+                        <div class="evo-tc-plinth-title">CHAMPIONS</div>
+                        <div class="evo-tc-plinth-name">${escapeHtml(champName)}</div>
+                        <div class="evo-tc-plinth-star">★</div>
+                      </div>
+                    </div>
+
+                    <!-- Right Pedestal (Shield Winner) -->
+                    <div class="evo-tc-bay">
+                      <div class="evo-tc-spotlight"></div>
+                      ${shieldBadgeHtml}
+                      <div class="evo-tc-plinth">
+                        <div class="evo-tc-plinth-season">${escapeHtml(shieldTag)}</div>
+                        <div class="evo-tc-plinth-title">CHAMPIONS</div>
+                        <div class="evo-tc-plinth-name">${escapeHtml(shieldName)}</div>
+                        <div class="evo-tc-plinth-star">★</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Cabinet Footer Tagline -->
+                <div class="evo-tc-footer">
+                  <div class="evo-tc-footer-line1">TWO SEASONS. ONE LEGACY.</div>
+                  <div class="evo-tc-footer-line2">EVOLUTION CUP | INTIMATE CUP | DISTRICTO CUP | COOPA'D CUP | THE FINAL.</div>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        track.innerHTML = slidesHtml;
+
+        if (dotsHost) {
+          dotsHost.innerHTML = MAJOR_TOURS.map(
+            (t, i) =>
+              `<button type="button" class="tc-dot${i === 0 ? ' active' : ''}" data-idx="${i}" aria-label="Slide ${i + 1}"></button>`
+          ).join('');
+        }
+
+        let currentIdx = 0;
+        const total = MAJOR_TOURS.length;
+
+        function goTo(idx) {
+          currentIdx = (idx + total) % total;
+          track.style.transform = `translateX(-${currentIdx * 100}%)`;
+          if (dotsHost) {
+            dotsHost.querySelectorAll('.tc-dot').forEach((d, i) => {
+              d.classList.toggle('active', i === currentIdx);
+            });
+          }
+        }
+
+        const prevBtn = document.getElementById('tcPrevBtn');
+        const nextBtn = document.getElementById('tcNextBtn');
+        if (prevBtn) prevBtn.onclick = () => { goTo(currentIdx - 1); resetAuto(); };
+        if (nextBtn) nextBtn.onclick = () => { goTo(currentIdx + 1); resetAuto(); };
+
+        if (dotsHost) {
+          dotsHost.onclick = (e) => {
+            const btn = e.target.closest('.tc-dot');
+            if (btn && btn.dataset.idx !== undefined) {
+              goTo(parseInt(btn.dataset.idx, 10));
+              resetAuto();
+            }
+          };
+        }
+
+        function resetAuto() {
+          if (tcTimer) clearInterval(tcTimer);
+          tcTimer = setInterval(() => goTo(currentIdx + 1), 6000);
+        }
+
+        resetAuto();
+      }
+
       renderToursGrid();
       renderUpcomingTicker();
+      renderTrophyCabinet();
       window.addEventListener('ic7_store_updated', (e) => {
         if (!e.detail || !e.detail.key || e.detail.key === 'ic7_major_tours') {
-          renderToursGrid();
+          let tcTimer = null;
+      function renderTrophyCabinet() {
+        const track = document.getElementById('trophyTrack');
+        const dotsHost = document.getElementById('tcDots');
+        if (!track) return;
+
+        const meta = getToursMeta();
+
+        function getTourTitleHtml(tourId, rawName) {
+          if (tourId === 'evolution-cup') return `<span>evo</span><span class="trophy-red">l</span><span>ution</span> <span class="cup-title">C<span class="trophy-red">🏆</span>P</span>`;
+          if (tourId === 'intimate-cup') return `<span>inti</span><span class="trophy-red">m</span><span>ate</span> <span class="cup-title">C<span class="trophy-red">🏆</span>P</span>`;
+          if (tourId === 'world-cup') return `<span>wor</span><span class="trophy-red">l</span><span>d</span> <span class="cup-title">C<span class="trophy-red">🏆</span>P</span>`;
+          if (tourId === 'club-world-cup') return `<span>c</span><span class="trophy-red">l</span><span>ub world</span> <span class="cup-title">C<span class="trophy-red">🏆</span>P</span>`;
+          if (tourId === 'coopa-duo') return `<span>coopa'd</span> <span class="trophy-red">d</span><span>uo</span>`;
+          if (tourId === 'districto-cup') return `<span>distric</span><span class="trophy-red">t</span><span>o</span> <span class="cup-title">C<span class="trophy-red">🏆</span>P</span>`;
+          return `<span>${escapeHtml(rawName.toLowerCase())}</span>`;
+        }
+
+        function getTourSubtitle(tourId) {
+          if (tourId === 'club-world-cup') return 'THE PINNACLE OF GLOBAL CLUB FOOTBALL.';
+          return '14 TEAMS. ONE INTENSE RIVALRY.';
+        }
+
+        function getTourBadgeLogo(tourId, mLogo) {
+          if (mLogo) return mLogo;
+          if (tourId === 'intimate-cup') return '/assets/intimate_cup_badge.jpg';
+          return '/assets/asset_4ec290c1ae.png';
+        }
+
+        const slidesHtml = MAJOR_TOURS.map((t) => {
+          const m = meta[t.id] || {};
+          const tourName = m.name || t.name;
+          const champName = m.champion || (t.id === 'intimate-cup' ? 'INTIMATE CHAMPION' : 'IL CAPITANO');
+          const shieldName = m.shieldWinner || (t.id === 'intimate-cup' ? 'INTIMATE SHIELD' : 'ICONIC SHIELD');
+
+          const champTag = m.champTag || 'SEASON 1';
+          const shieldTag = m.shieldTag || 'SEASON 2';
+
+          const titleHtml = getTourTitleHtml(t.id, tourName);
+          const subtitleText = getTourSubtitle(t.id);
+          const badgeLogo = getTourBadgeLogo(t.id, m.tourLogo);
+
+          const champBadgeHtml = m.champLogo
+            ? `<div class="evo-tc-trophy-badge"><img class="evo-tc-trophy-img" src="${m.champLogo}" alt="${escapeHtml(champName)}"></div>`
+            : `<div class="evo-tc-trophy-badge">
+                <svg class="evo-tc-anchor-shield" viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <linearGradient id="silverGrad_${t.id}" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#ffffff"/>
+                      <stop offset="40%" stop-color="#b0b5bc"/>
+                      <stop offset="70%" stop-color="#78808a"/>
+                      <stop offset="100%" stop-color="#3a4048"/>
+                    </linearGradient>
+                    <radialGradient id="ballGold_${t.id}" cx="50%" cy="50%" r="50%">
+                      <stop offset="0%" stop-color="#fff5d1"/>
+                      <stop offset="50%" stop-color="#ffd700"/>
+                      <stop offset="100%" stop-color="#996515"/>
+                    </radialGradient>
+                  </defs>
+                  <path d="M100 10 L165 40 V110 C165 155 100 195 100 195 C100 195 35 155 35 110 V40 Z" fill="url(#silverGrad_${t.id})" stroke="#222" stroke-width="3"/>
+                  <path d="M100 25 L150 50 V105 C150 142 100 175 100 175 C100 175 50 142 50 105 V50 Z" fill="#120e10" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+                  <path d="M35 110 C35 150 70 180 100 180 C130 180 165 150 165 110 M100 45 V175 M70 120 H130" stroke="url(#silverGrad_${t.id})" stroke-width="12" fill="none" stroke-linecap="round"/>
+                  <circle cx="100" cy="45" r="14" fill="url(#ballGold_${t.id})" stroke="#fff" stroke-width="1.5"/>
+                  <rect x="35" y="90" width="130" height="24" rx="2" fill="#000" stroke="url(#silverGrad_${t.id})" stroke-width="1.5"/>
+                  <text x="100" y="106" text-anchor="middle" font-family="Cinzel,serif" font-size="9.5" font-weight="900" fill="#fff" letter-spacing="0.5">${escapeHtml(champName)}</text>
+                </svg>
+              </div>`;
+
+          const shieldBadgeHtml = m.shieldLogo
+            ? `<div class="evo-tc-trophy-badge"><img class="evo-tc-trophy-img" src="${m.shieldLogo}" alt="${escapeHtml(shieldName)}"></div>`
+            : `<div class="evo-tc-trophy-badge">
+                <svg class="evo-tc-dragon-shield" viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <radialGradient id="goldPlate_${t.id}" cx="50%" cy="50%" r="50%">
+                      <stop offset="0%" stop-color="#fffdf0"/>
+                      <stop offset="35%" stop-color="#ffd700"/>
+                      <stop offset="75%" stop-color="#d4af37"/>
+                      <stop offset="100%" stop-color="#553a08"/>
+                    </radialGradient>
+                  </defs>
+                  <circle cx="100" cy="110" r="82" fill="url(#goldPlate_${t.id})" stroke="#111" stroke-width="4"/>
+                  <circle cx="100" cy="110" r="72" fill="#180508" stroke="#ffd700" stroke-width="2"/>
+                  <path id="textArc_${t.id}" d="M35 110 A65 65 0 1 1 165 110" fill="none"/>
+                  <text font-family="Cinzel,serif" font-size="10.5" font-weight="900" fill="#ffd700" letter-spacing="1.5"><textPath href="#textArc_${t.id}" startOffset="50%" text-anchor="middle">${escapeHtml(shieldName)}</textPath></text>
+                  <path d="M100 65 C115 65 130 75 125 95 C120 115 140 120 135 140 C130 155 110 155 100 140 C90 155 70 155 65 140 C60 120 80 115 75 95 C70 75 85 65 100 65 Z" fill="#e11d48" stroke="#ffd700" stroke-width="1.5"/>
+                  <circle cx="100" cy="172" r="3" fill="#ffd700"/>
+                  <circle cx="70" cy="160" r="2.5" fill="#ffd700"/>
+                  <circle cx="130" cy="160" r="2.5" fill="#ffd700"/>
+                </svg>
+              </div>`;
+
+          // Generate animated twinkling space stars (50 stars)
+          let starsHtml = '';
+          for (let i = 0; i < 50; i++) {
+            const size = 1 + Math.random() * 2;
+            const left = Math.random() * 100;
+            const top = Math.random() * 100;
+            const delay = -(Math.random() * 4);
+            starsHtml += `<span style="width:${size}px;height:${size}px;left:${left}%;top:${top}%;animation-delay:${delay}s;"></span>`;
+          }
+
+          return `
+            <div class="trophy-slide">
+              <div class="evo-tc-showcase">
+                <!-- Cosmic Twinkling Space Background Animation -->
+                <div class="tc-cosmic-bg">${starsHtml}</div>
+
+                <!-- Header Area -->
+                <div class="evo-tc-header">
+                  <div class="evo-tc-top-icons">
+                    <svg class="evo-tc-player-sil" viewBox="0 0 100 100" fill="#ffffff">
+                      <circle cx="50" cy="20" r="12"/>
+                      <path d="M40 38 h20 v30 h-8 v-25 h-8 v-25 h-4 v-30 z" transform="rotate(-15 50 50)"/>
+                      <path d="M20 40 l20 -10 l10 20 l-15 15 z"/>
+                      <path d="M60 30 l25 -10 l-10 25 z"/>
+                    </svg>
+                    <img class="evo-tc-clan-logo" src="${badgeLogo}" alt="${escapeHtml(tourName)} Logo">
+                  </div>
+                  <div class="evo-tc-title-wrap">
+                    <h1 class="evo-tc-title">${titleHtml}</h1>
+                  </div>
+                  <div class="evo-tc-subtitle">${subtitleText}</div>
+                </div>
+
+                <!-- Glass Cabinet Showcase Box -->
+                <div class="evo-tc-cabinet">
+                  <div class="evo-tc-top-plaque">TROPHY CABINET</div>
+                  <div class="evo-tc-grid">
+                    <!-- Left Pedestal (Champion) -->
+                    <div class="evo-tc-bay">
+                      <div class="evo-tc-spotlight"></div>
+                      ${champBadgeHtml}
+                      <div class="evo-tc-plinth">
+                        <div class="evo-tc-plinth-season">${escapeHtml(champTag)}</div>
+                        <div class="evo-tc-plinth-title">CHAMPIONS</div>
+                        <div class="evo-tc-plinth-name">${escapeHtml(champName)}</div>
+                        <div class="evo-tc-plinth-star">★</div>
+                      </div>
+                    </div>
+
+                    <!-- Right Pedestal (Shield Winner) -->
+                    <div class="evo-tc-bay">
+                      <div class="evo-tc-spotlight"></div>
+                      ${shieldBadgeHtml}
+                      <div class="evo-tc-plinth">
+                        <div class="evo-tc-plinth-season">${escapeHtml(shieldTag)}</div>
+                        <div class="evo-tc-plinth-title">CHAMPIONS</div>
+                        <div class="evo-tc-plinth-name">${escapeHtml(shieldName)}</div>
+                        <div class="evo-tc-plinth-star">★</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Cabinet Footer Tagline -->
+                <div class="evo-tc-footer">
+                  <div class="evo-tc-footer-line1">TWO SEASONS. ONE LEGACY.</div>
+                  <div class="evo-tc-footer-line2">EVOLUTION CUP | INTIMATE CUP | DISTRICTO CUP | COOPA'D CUP | THE FINAL.</div>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        track.innerHTML = slidesHtml;
+
+        if (dotsHost) {
+          dotsHost.innerHTML = MAJOR_TOURS.map(
+            (t, i) =>
+              `<button type="button" class="tc-dot${i === 0 ? ' active' : ''}" data-idx="${i}" aria-label="Slide ${i + 1}"></button>`
+          ).join('');
+        }
+
+        let currentIdx = 0;
+        const total = MAJOR_TOURS.length;
+
+        function goTo(idx) {
+          currentIdx = (idx + total) % total;
+          track.style.transform = `translateX(-${currentIdx * 100}%)`;
+          if (dotsHost) {
+            dotsHost.querySelectorAll('.tc-dot').forEach((d, i) => {
+              d.classList.toggle('active', i === currentIdx);
+            });
+          }
+        }
+
+        const prevBtn = document.getElementById('tcPrevBtn');
+        const nextBtn = document.getElementById('tcNextBtn');
+        if (prevBtn) prevBtn.onclick = () => { goTo(currentIdx - 1); resetAuto(); };
+        if (nextBtn) nextBtn.onclick = () => { goTo(currentIdx + 1); resetAuto(); };
+
+        if (dotsHost) {
+          dotsHost.onclick = (e) => {
+            const btn = e.target.closest('.tc-dot');
+            if (btn && btn.dataset.idx !== undefined) {
+              goTo(parseInt(btn.dataset.idx, 10));
+              resetAuto();
+            }
+          };
+        }
+
+        function resetAuto() {
+          if (tcTimer) clearInterval(tcTimer);
+          tcTimer = setInterval(() => goTo(currentIdx + 1), 6000);
+        }
+
+        resetAuto();
+      }
+
+      renderToursGrid();
           renderUpcomingTicker();
+          renderTrophyCabinet();
         }
       });
 
