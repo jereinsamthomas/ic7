@@ -4758,7 +4758,7 @@
         });
       }
 
-      let tcTimer = null;
+                  let tcTimer = null;
       function renderTrophyCabinet() {
         const track = document.getElementById('trophyTrack');
         const dotsHost = document.getElementById('tcDots');
@@ -4768,163 +4768,115 @@
         const slidesHtml = MAJOR_TOURS.map((t) => {
           const m = meta[t.id] || {};
           const tourName = m.name || t.name;
-          const champName = m.champion || 'TBD';
-          const shieldName = m.shieldWinner || 'TBD';
+          const champName = m.champion || 'IL CAPITANO';
+          const shieldName = m.shieldWinner || 'ICONIC SHIELD';
 
-          const champLogoStyle = m.champLogo
-            ? `style="background-image:url('${m.champLogo}')"`
-            : '';
-          const champLogoContent = m.champLogo ? '' : '🏆';
+          const champTag = m.champTag || 'SEASON 1';
+          const shieldTag = m.shieldTag || 'SEASON 2';
 
-          const shieldLogoStyle = m.shieldLogo
-            ? `style="background-image:url('${m.shieldLogo}')"`
-            : '';
-          const shieldLogoContent = m.shieldLogo ? '' : '🛡️';
+          const champBadgeHtml = m.champLogo
+            ? `<div class="evo-tc-trophy-badge"><img class="evo-tc-trophy-img" src="${m.champLogo}" alt="${escapeHtml(champName)}"></div>`
+            : `<div class="evo-tc-trophy-badge">
+                <svg class="evo-tc-anchor-shield" viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <linearGradient id="silverGrad_${t.id}" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#ffffff"/>
+                      <stop offset="40%" stop-color="#b0b5bc"/>
+                      <stop offset="70%" stop-color="#78808a"/>
+                      <stop offset="100%" stop-color="#3a4048"/>
+                    </linearGradient>
+                    <radialGradient id="ballGold_${t.id}" cx="50%" cy="50%" r="50%">
+                      <stop offset="0%" stop-color="#fff5d1"/>
+                      <stop offset="50%" stop-color="#ffd700"/>
+                      <stop offset="100%" stop-color="#996515"/>
+                    </radialGradient>
+                  </defs>
+                  <path d="M100 10 L165 40 V110 C165 155 100 195 100 195 C100 195 35 155 35 110 V40 Z" fill="url(#silverGrad_${t.id})" stroke="#222" stroke-width="3"/>
+                  <path d="M100 25 L150 50 V105 C150 142 100 175 100 175 C100 175 50 142 50 105 V50 Z" fill="#120e10" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+                  <path d="M35 110 C35 150 70 180 100 180 C130 180 165 150 165 110 M100 45 V175 M70 120 H130" stroke="url(#silverGrad_${t.id})" stroke-width="12" fill="none" stroke-linecap="round"/>
+                  <circle cx="100" cy="45" r="14" fill="url(#ballGold_${t.id})" stroke="#fff" stroke-width="1.5"/>
+                  <rect x="42" y="90" width="116" height="24" rx="2" fill="#000" stroke="url(#silverGrad_${t.id})" stroke-width="1.5"/>
+                  <text x="100" y="106" text-anchor="middle" font-family="Cinzel,serif" font-size="10" font-weight="900" fill="#fff" letter-spacing="1">${escapeHtml(champName)}</text>
+                </svg>
+              </div>`;
 
-          const tourLogoHtml = m.tourLogo
-            ? `<img src="${m.tourLogo}" style="width:48px;height:48px;border-radius:50%;object-fit:cover;border:2px solid var(--red);box-shadow:0 0 15px rgba(225,29,72,0.5);margin:0 auto 8px;">`
-            : '';
-
-          const champTag = m.champTag || 'CURRENT CHAMPIONS';
-          const shieldTag = m.shieldTag || 'SHIELD WINNER';
+          const shieldBadgeHtml = m.shieldLogo
+            ? `<div class="evo-tc-trophy-badge"><img class="evo-tc-trophy-img" src="${m.shieldLogo}" alt="${escapeHtml(shieldName)}"></div>`
+            : `<div class="evo-tc-trophy-badge">
+                <svg class="evo-tc-dragon-shield" viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <radialGradient id="goldPlate_${t.id}" cx="50%" cy="50%" r="50%">
+                      <stop offset="0%" stop-color="#fffdf0"/>
+                      <stop offset="35%" stop-color="#ffd700"/>
+                      <stop offset="75%" stop-color="#d4af37"/>
+                      <stop offset="100%" stop-color="#553a08"/>
+                    </radialGradient>
+                  </defs>
+                  <circle cx="100" cy="110" r="82" fill="url(#goldPlate_${t.id})" stroke="#111" stroke-width="4"/>
+                  <circle cx="100" cy="110" r="72" fill="#180508" stroke="#ffd700" stroke-width="2"/>
+                  <path id="textArc_${t.id}" d="M35 110 A65 65 0 1 1 165 110" fill="none"/>
+                  <text font-family="Cinzel,serif" font-size="11" font-weight="900" fill="#ffd700" letter-spacing="2"><textPath href="#textArc_${t.id}" startOffset="50%" text-anchor="middle">${escapeHtml(shieldName)}</textPath></text>
+                  <path d="M100 65 C115 65 130 75 125 95 C120 115 140 120 135 140 C130 155 110 155 100 140 C90 155 70 155 65 140 C60 120 80 115 75 95 C70 75 85 65 100 65 Z" fill="#e11d48" stroke="#ffd700" stroke-width="1.5"/>
+                  <circle cx="100" cy="172" r="3" fill="#ffd700"/>
+                  <circle cx="70" cy="160" r="2.5" fill="#ffd700"/>
+                  <circle cx="130" cy="160" r="2.5" fill="#ffd700"/>
+                </svg>
+              </div>`;
 
           return `
             <div class="trophy-slide">
-              <div class="trophy-case">
-                <!-- Background art: Deep Cosmic Star Space & Tactical Pitch Overlay -->
-                <div class="tc-bg-art" aria-hidden="true">
-                  <svg viewBox="0 0 900 500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-                    <defs>
-                      <radialGradient id="tcGlowC" cx="50%" cy="50%" r="50%">
-                        <stop offset="0%" stop-color="#e11d48" stop-opacity="0.25"/>
-                        <stop offset="60%" stop-color="#9333ea" stop-opacity="0.1"/>
-                        <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
-                      </radialGradient>
-                      <radialGradient id="tcStarGlow" cx="50%" cy="50%" r="50%">
-                        <stop offset="0%" stop-color="#ffffff" stop-opacity="1"/>
-                        <stop offset="40%" stop-color="#ffd700" stop-opacity="0.8"/>
-                        <stop offset="100%" stop-color="#ffd700" stop-opacity="0"/>
-                      </radialGradient>
-                    </defs>
-                    
-                    <!-- Ambient cosmic nebula glow -->
-                    <ellipse cx="450" cy="250" rx="420" ry="240" fill="url(#tcGlowC)"/>
-
-                    <!-- Twinkling Cosmic Stars Group -->
-                    <g class="tc-starfield">
-                      <!-- Bright twinkling stars (s1) -->
-                      <circle cx="120" cy="80" r="2" fill="#ffffff" class="tc-star-s1"/>
-                      <circle cx="780" cy="90" r="2.5" fill="#ffd700" class="tc-star-s1"/>
-                      <circle cx="250" cy="420" r="1.8" fill="#ffffff" class="tc-star-s1"/>
-                      <circle cx="680" cy="410" r="2.2" fill="#fff5d1" class="tc-star-s1"/>
-                      <circle cx="450" cy="70" r="2" fill="#ffffff" class="tc-star-s1"/>
-
-                      <!-- Medium twinkling stars (s2) -->
-                      <circle cx="80" cy="280" r="1.5" fill="#ffd700" class="tc-star-s2"/>
-                      <circle cx="820" cy="260" r="1.5" fill="#ffffff" class="tc-star-s2"/>
-                      <circle cx="340" cy="110" r="1.8" fill="#ffffff" class="tc-star-s2"/>
-                      <circle cx="560" cy="110" r="1.8" fill="#ffd700" class="tc-star-s2"/>
-                      <circle cx="190" cy="190" r="1.5" fill="#ffffff" class="tc-star-s2"/>
-                      <circle cx="710" cy="190" r="1.5" fill="#ffffff" class="tc-star-s2"/>
-                      <circle cx="380" cy="440" r="1.5" fill="#e6ca65" class="tc-star-s2"/>
-                      <circle cx="520" cy="440" r="1.5" fill="#ffffff" class="tc-star-s2"/>
-
-                      <!-- Subtle background micro-stars (s3) -->
-                      <circle cx="50" cy="140" r="1" fill="#ffffff" class="tc-star-s3" opacity="0.6"/>
-                      <circle cx="850" cy="140" r="1" fill="#ffd700" class="tc-star-s3" opacity="0.6"/>
-                      <circle cx="150" cy="350" r="1" fill="#ffffff" class="tc-star-s3" opacity="0.6"/>
-                      <circle cx="750" cy="350" r="1" fill="#ffffff" class="tc-star-s3" opacity="0.6"/>
-                      <circle cx="290" cy="240" r="1" fill="#ffd700" class="tc-star-s3" opacity="0.5"/>
-                      <circle cx="610" cy="240" r="1" fill="#ffffff" class="tc-star-s3" opacity="0.5"/>
-                      <circle cx="450" cy="460" r="1.2" fill="#ffd700" class="tc-star-s3" opacity="0.7"/>
-
-                      <!-- 4-Point Star Sparkle Crosses -->
-                      <g transform="translate(140,110) scale(0.6)" class="tc-star-s1">
-                        <path d="M0,-12 L0,12 M-12,0 L12,0" stroke="#ffd700" stroke-width="1.5" opacity="0.85"/>
-                        <circle cx="0" cy="0" r="3" fill="#ffffff"/>
-                      </g>
-                      <g transform="translate(760,110) scale(0.6)" class="tc-star-s2">
-                        <path d="M0,-12 L0,12 M-12,0 L12,0" stroke="#ffffff" stroke-width="1.5" opacity="0.85"/>
-                        <circle cx="0" cy="0" r="3" fill="#ffd700"/>
-                      </g>
-                      <g transform="translate(450,40) scale(0.7)" class="tc-star-s3">
-                        <path d="M0,-14 L0,14 M-14,0 L14,0" stroke="#ffd700" stroke-width="1.8" opacity="0.9"/>
-                        <circle cx="0" cy="0" r="3.5" fill="#ffffff"/>
-                      </g>
-                    </g>
-
-                    <!-- Pitch / tactical lines overlay -->
-                    <g class="tc-pitch-lines" stroke="#e11d48" stroke-width="1.2" fill="none">
-                      <!-- outer boundary -->
-                      <rect x="60" y="50" width="780" height="400" rx="2"/>
-                      <!-- centre line -->
-                      <line x1="450" y1="50" x2="450" y2="450"/>
-                      <!-- centre circle -->
-                      <circle cx="450" cy="250" r="80"/>
-                      <circle cx="450" cy="250" r="4" fill="#e11d48" opacity="0.6"/>
-                      <!-- left penalty box -->
-                      <rect x="60" y="148" width="130" height="204"/>
-                      <!-- right penalty box -->
-                      <rect x="710" y="148" width="130" height="204"/>
-                      <!-- left goal area -->
-                      <rect x="60" y="195" width="56" height="110"/>
-                      <!-- right goal area -->
-                      <rect x="784" y="195" width="56" height="110"/>
-                      <!-- corner arcs -->
-                      <path d="M60 50 Q75 50 75 65"/>
-                      <path d="M840 50 Q825 50 825 65"/>
-                      <path d="M60 450 Q75 450 75 435"/>
-                      <path d="M840 450 Q825 450 825 435"/>
-                      <!-- penalty spots -->
-                      <circle cx="160" cy="250" r="3" fill="#e11d48" opacity="0.7"/>
-                      <circle cx="740" cy="250" r="3" fill="#e11d48" opacity="0.7"/>
-                      <!-- penalty arcs -->
-                      <path d="M190 190 A80 80 0 0 1 190 310" opacity="0.7"/>
-                      <path d="M710 190 A80 80 0 0 0 710 310" opacity="0.7"/>
-                      <!-- IC7 watermark -->
-                      <text x="450" y="275" text-anchor="middle" font-family="Anton,sans-serif" font-size="140" fill="rgba(225,29,72,0.04)" letter-spacing="10" transform="rotate(-5,450,250)" stroke="none">IC7</text>
-                    </g>
-                  </svg>
-                </div>
-                <!-- end bg art -->
-
-                <div class="spotlight-beam" style="left:20%;"></div>
-                <div class="spotlight-beam" style="right:20%;"></div>
-                
-                <div class="tc-case-header">
-                  ${tourLogoHtml}
-                  <h3>${escapeHtml(tourName)}</h3>
-                  <p>WHERE LEGENDS EVOLVE — TROPHY CABINET</p>
-                </div>
-
-                <div class="trophy-pedestals-grid">
-                  <!-- Champion Pedestal -->
-                  <div class="pedestal-card champion-card" data-tag="${escapeHtml(champTag)}">
-                    <div class="trophy-crest-wrap">
-                      <div class="trophy-badge champion"${champLogoStyle}>${champLogoContent}</div>
-                    </div>
-                    <div class="pedestal-base gold">
-                      <div class="pedestal-type">${escapeHtml(champTag)}</div>
-                      <div class="pedestal-winner-name">${escapeHtml(champName)}</div>
-                      <div class="pedestal-stars">★ ★ ★ ★ ★</div>
-                    </div>
+              <div class="evo-tc-showcase">
+                <!-- Header Area -->
+                <div class="evo-tc-header">
+                  <div class="evo-tc-top-icons">
+                    <svg class="evo-tc-player-sil" viewBox="0 0 100 100" fill="#ffffff">
+                      <circle cx="50" cy="20" r="12"/>
+                      <path d="M40 38 h20 v30 h-8 v25 h-8 v-25 h-4 v-30 z" transform="rotate(-15 50 50)"/>
+                      <path d="M20 40 l20 -10 l10 20 l-15 15 z"/>
+                      <path d="M60 30 l25 -10 l-10 25 z"/>
+                    </svg>
+                    <img class="evo-tc-clan-logo" src="/assets/asset_4ec290c1ae.png" alt="IC7 Logo">
                   </div>
+                  <div class="evo-tc-title-wrap">
+                    <h1 class="evo-tc-title"><span>${escapeHtml(tourName.toLowerCase())}</span></h1>
+                  </div>
+                  <div class="evo-tc-subtitle">WHERE LEGENDS EVOLVE</div>
+                </div>
 
-                  <!-- Shield Winner Pedestal -->
-                  <div class="pedestal-card shield-card" data-tag="${escapeHtml(shieldTag)}">
-                    <div class="trophy-crest-wrap">
-                      <div class="trophy-badge shield"${shieldLogoStyle}>${shieldLogoContent}</div>
+                <!-- Glass Cabinet Showcase Box -->
+                <div class="evo-tc-cabinet">
+                  <div class="evo-tc-top-plaque">TROPHY CABINET</div>
+                  <div class="evo-tc-grid">
+                    <!-- Left Pedestal (Champion) -->
+                    <div class="evo-tc-bay">
+                      <div class="evo-tc-spotlight"></div>
+                      ${champBadgeHtml}
+                      <div class="evo-tc-plinth">
+                        <div class="evo-tc-plinth-season">${escapeHtml(champTag)}</div>
+                        <div class="evo-tc-plinth-title">CHAMPIONS</div>
+                        <div class="evo-tc-plinth-name">${escapeHtml(champName)}</div>
+                        <div class="evo-tc-plinth-star">★</div>
+                      </div>
                     </div>
-                    <div class="pedestal-base shield">
-                      <div class="pedestal-type">${escapeHtml(shieldTag)}</div>
-                      <div class="pedestal-winner-name">${escapeHtml(shieldName)}</div>
-                      <div class="pedestal-stars">★ ★ ★ ★ ★</div>
+
+                    <!-- Right Pedestal (Shield Winner) -->
+                    <div class="evo-tc-bay">
+                      <div class="evo-tc-spotlight"></div>
+                      ${shieldBadgeHtml}
+                      <div class="evo-tc-plinth">
+                        <div class="evo-tc-plinth-season">${escapeHtml(shieldTag)}</div>
+                        <div class="evo-tc-plinth-title">CHAMPIONS</div>
+                        <div class="evo-tc-plinth-name">${escapeHtml(shieldName)}</div>
+                        <div class="evo-tc-plinth-star">★</div>
+                      </div>
                     </div>
                   </div>
                 </div>
 
-                <div class="tc-case-footer">
-                  <span>TWO SEASONS. ONE LEGACY. EVOLUTION NEVER STOPS.</span>
+                <!-- Cabinet Footer Tagline -->
+                <div class="evo-tc-footer">
+                  <div class="evo-tc-footer-line1">TWO SEASONS. ONE LEGACY.</div>
+                  <div class="evo-tc-footer-line2">EVOLUTION NEVER STOPS.</div>
                 </div>
               </div>
             </div>
@@ -4934,37 +4886,46 @@
         track.innerHTML = slidesHtml;
 
         if (dotsHost) {
-          dotsHost.innerHTML = MAJOR_TOURS.map((_, i) =>
-            `<button type="button" class="tc-dot${i === 0 ? ' active' : ''}" data-i="${i}" aria-label="Go to slide ${i + 1}"></button>`
+          dotsHost.innerHTML = MAJOR_TOURS.map(
+            (t, i) =>
+              `<button type="button" class="tc-dot${i === 0 ? ' active' : ''}" data-idx="${i}" aria-label="Slide ${i + 1}"></button>`
           ).join('');
         }
 
         let currentIdx = 0;
         const total = MAJOR_TOURS.length;
 
-        function goToSlide(i) {
-          currentIdx = (i + total) % total;
+        function goTo(idx) {
+          currentIdx = (idx + total) % total;
           track.style.transform = `translateX(-${currentIdx * 100}%)`;
           if (dotsHost) {
-            [...dotsHost.children].forEach((d, di) => d.classList.toggle('active', di === currentIdx));
+            dotsHost.querySelectorAll('.tc-dot').forEach((d, i) => {
+              d.classList.toggle('active', i === currentIdx);
+            });
           }
         }
 
         const prevBtn = document.getElementById('tcPrevBtn');
         const nextBtn = document.getElementById('tcNextBtn');
-        if (prevBtn) prevBtn.onclick = () => goToSlide(currentIdx - 1);
-        if (nextBtn) nextBtn.onclick = () => goToSlide(currentIdx + 1);
+        if (prevBtn) prevBtn.onclick = () => { goTo(currentIdx - 1); resetAuto(); };
+        if (nextBtn) nextBtn.onclick = () => { goTo(currentIdx + 1); resetAuto(); };
 
         if (dotsHost) {
-          dotsHost.querySelectorAll('.tc-dot').forEach(d => {
-            d.onclick = () => goToSlide(parseInt(d.dataset.i, 10));
-          });
+          dotsHost.onclick = (e) => {
+            const btn = e.target.closest('.tc-dot');
+            if (btn && btn.dataset.idx !== undefined) {
+              goTo(parseInt(btn.dataset.idx, 10));
+              resetAuto();
+            }
+          };
         }
 
-        if (tcTimer) clearInterval(tcTimer);
-        tcTimer = setInterval(() => {
-          goToSlide(currentIdx + 1);
-        }, 5000);
+        function resetAuto() {
+          if (tcTimer) clearInterval(tcTimer);
+          tcTimer = setInterval(() => goTo(currentIdx + 1), 6000);
+        }
+
+        resetAuto();
       }
 
       renderToursGrid();
