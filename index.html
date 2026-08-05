@@ -3316,28 +3316,7 @@
     </div>
   </section>
 
-  <!-- ============================= TROPHY CABINET ============================= -->
-  <section class="section" id="trophyCabinet" style="background:var(--bg-elevated); position:relative; overflow:hidden;">
-    <div class="wrap">
-      <div class="eyebrow reveal">WHERE LEGENDS EVOLVE</div>
-      <h2 class="section-title reveal">TROPHY <span class="red-text">CABINET</span></h2>
-      <p class="section-lede reveal">Two Seasons. One Legacy. Explore the reigning champions and shield winners across IC7's 6 major tournament series.</p>
-      
-      <!-- 3D Glass Showcase Cabinet Frame -->
-      <div class="trophy-cabinet-container reveal">
-        <button type="button" class="tc-arrow tc-prev" id="tcPrevBtn" aria-label="Previous Tournament">‹</button>
-        <button type="button" class="tc-arrow tc-next" id="tcNextBtn" aria-label="Next Tournament">›</button>
-        
-        <div class="trophy-track-wrap">
-          <div class="trophy-track" id="trophyTrack"></div>
-        </div>
-
-        <div class="tc-dots" id="tcDots"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================= TEAMS ============================= -->
+<!-- ============================= TEAMS ============================= -->
   <section class="section" id="teams">
     <div class="wrap">
       <div class="eyebrow reveal">Our Squads</div>
@@ -4752,210 +4731,19 @@
           await Store.set('ic7_major_tours', data);
           renderToursGrid();
           renderUpcomingTicker();
-          renderTrophyCabinet();
           const msg = document.getElementById('toursMetaSavedMsg');
           if (msg) { msg.hidden = false; setTimeout(() => msg.hidden = true, 2000); }
         });
       }
 
-                        let tcTimer = null;
-      function renderTrophyCabinet() {
-        const track = document.getElementById('trophyTrack');
-        const dotsHost = document.getElementById('tcDots');
-        if (!track) return;
 
-        const meta = getToursMeta();
-
-        function getTourTitleHtml(tourId, rawName) {
-          if (tourId === 'evolution-cup') return `<span>evo</span><span class="trophy-red">l</span><span>ution</span> <span class="cup-title">C<span class="trophy-red">🏆</span>P</span>`;
-          if (tourId === 'intimate-cup') return `<span>inti</span><span class="trophy-red">m</span><span>ate</span> <span class="cup-title">C<span class="trophy-red">🏆</span>P</span>`;
-          if (tourId === 'world-cup') return `<span>wor</span><span class="trophy-red">l</span><span>d</span> <span class="cup-title">C<span class="trophy-red">🏆</span>P</span>`;
-          if (tourId === 'club-world-cup') return `<span>c</span><span class="trophy-red">l</span><span>ub world</span> <span class="cup-title">C<span class="trophy-red">🏆</span>P</span>`;
-          if (tourId === 'coopa-duo') return `<span>coopa'd</span> <span class="trophy-red">d</span><span>uo</span>`;
-          if (tourId === 'districto-cup') return `<span>distric</span><span class="trophy-red">t</span><span>o</span> <span class="cup-title">C<span class="trophy-red">🏆</span>P</span>`;
-          return `<span>${escapeHtml(rawName.toLowerCase())}</span>`;
-        }
-
-        function getTourBadgeLogo(tourId, mLogo) {
-          if (mLogo) return mLogo;
-          if (tourId === 'intimate-cup') return '/assets/intimate_cup_badge.jpg';
-          return '/assets/asset_4ec290c1ae.png';
-        }
-
-        const slidesHtml = MAJOR_TOURS.map((t) => {
-          const m = meta[t.id] || {};
-          const tourName = m.name || t.name;
-          const champName = m.champion || (t.id === 'intimate-cup' ? 'INTIMATE CHAMPION' : 'IL CAPITANO');
-          const shieldName = m.shieldWinner || (t.id === 'intimate-cup' ? 'INTIMATE SHIELD' : 'ICONIC SHIELD');
-
-          const champTag = m.champTag || 'SEASON 1';
-          const shieldTag = m.shieldTag || 'SEASON 2';
-
-          const titleHtml = getTourTitleHtml(t.id, tourName);
-          const badgeLogo = getTourBadgeLogo(t.id, m.tourLogo);
-
-          const champBadgeHtml = m.champLogo
-            ? `<div class="evo-tc-trophy-badge"><img class="evo-tc-trophy-img" src="${m.champLogo}" alt="${escapeHtml(champName)}"></div>`
-            : `<div class="evo-tc-trophy-badge">
-                <svg class="evo-tc-anchor-shield" viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg">
-                  <defs>
-                    <linearGradient id="silverGrad_${t.id}" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stop-color="#ffffff"/>
-                      <stop offset="40%" stop-color="#b0b5bc"/>
-                      <stop offset="70%" stop-color="#78808a"/>
-                      <stop offset="100%" stop-color="#3a4048"/>
-                    </linearGradient>
-                    <radialGradient id="ballGold_${t.id}" cx="50%" cy="50%" r="50%">
-                      <stop offset="0%" stop-color="#fff5d1"/>
-                      <stop offset="50%" stop-color="#ffd700"/>
-                      <stop offset="100%" stop-color="#996515"/>
-                    </radialGradient>
-                  </defs>
-                  <path d="M100 10 L165 40 V110 C165 155 100 195 100 195 C100 195 35 155 35 110 V40 Z" fill="url(#silverGrad_${t.id})" stroke="#222" stroke-width="3"/>
-                  <path d="M100 25 L150 50 V105 C150 142 100 175 100 175 C100 175 50 142 50 105 V50 Z" fill="#120e10" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
-                  <path d="M35 110 C35 150 70 180 100 180 C130 180 165 150 165 110 M100 45 V175 M70 120 H130" stroke="url(#silverGrad_${t.id})" stroke-width="12" fill="none" stroke-linecap="round"/>
-                  <circle cx="100" cy="45" r="14" fill="url(#ballGold_${t.id})" stroke="#fff" stroke-width="1.5"/>
-                  <rect x="35" y="90" width="130" height="24" rx="2" fill="#000" stroke="url(#silverGrad_${t.id})" stroke-width="1.5"/>
-                  <text x="100" y="106" text-anchor="middle" font-family="Cinzel,serif" font-size="9.5" font-weight="900" fill="#fff" letter-spacing="0.5">${escapeHtml(champName)}</text>
-                </svg>
-              </div>`;
-
-          const shieldBadgeHtml = m.shieldLogo
-            ? `<div class="evo-tc-trophy-badge"><img class="evo-tc-trophy-img" src="${m.shieldLogo}" alt="${escapeHtml(shieldName)}"></div>`
-            : `<div class="evo-tc-trophy-badge">
-                <svg class="evo-tc-dragon-shield" viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg">
-                  <defs>
-                    <radialGradient id="goldPlate_${t.id}" cx="50%" cy="50%" r="50%">
-                      <stop offset="0%" stop-color="#fffdf0"/>
-                      <stop offset="35%" stop-color="#ffd700"/>
-                      <stop offset="75%" stop-color="#d4af37"/>
-                      <stop offset="100%" stop-color="#553a08"/>
-                    </radialGradient>
-                  </defs>
-                  <circle cx="100" cy="110" r="82" fill="url(#goldPlate_${t.id})" stroke="#111" stroke-width="4"/>
-                  <circle cx="100" cy="110" r="72" fill="#180508" stroke="#ffd700" stroke-width="2"/>
-                  <path id="textArc_${t.id}" d="M35 110 A65 65 0 1 1 165 110" fill="none"/>
-                  <text font-family="Cinzel,serif" font-size="10.5" font-weight="900" fill="#ffd700" letter-spacing="1.5"><textPath href="#textArc_${t.id}" startOffset="50%" text-anchor="middle">${escapeHtml(shieldName)}</textPath></text>
-                  <path d="M100 65 C115 65 130 75 125 95 C120 115 140 120 135 140 C130 155 110 155 100 140 C90 155 70 155 65 140 C60 120 80 115 75 95 C70 75 85 65 100 65 Z" fill="#e11d48" stroke="#ffd700" stroke-width="1.5"/>
-                  <circle cx="100" cy="172" r="3" fill="#ffd700"/>
-                  <circle cx="70" cy="160" r="2.5" fill="#ffd700"/>
-                  <circle cx="130" cy="160" r="2.5" fill="#ffd700"/>
-                </svg>
-              </div>`;
-
-          return `
-            <div class="trophy-slide">
-              <div class="evo-tc-showcase">
-                <!-- Header Area -->
-                <div class="evo-tc-header">
-                  <div class="evo-tc-top-icons">
-                    <svg class="evo-tc-player-sil" viewBox="0 0 100 100" fill="#ffffff">
-                      <circle cx="50" cy="20" r="12"/>
-                      <path d="M40 38 h20 v30 h-8 v25 h-8 v-25 h-4 v-30 z" transform="rotate(-15 50 50)"/>
-                      <path d="M20 40 l20 -10 l10 20 l-15 15 z"/>
-                      <path d="M60 30 l25 -10 l-10 25 z"/>
-                    </svg>
-                    <img class="evo-tc-clan-logo" src="${badgeLogo}" alt="${escapeHtml(tourName)} Logo">
-                  </div>
-                  <div class="evo-tc-title-wrap">
-                    <h1 class="evo-tc-title">${titleHtml}</h1>
-                  </div>
-                  <div class="evo-tc-subtitle">WHERE LEGENDS EVOLVE</div>
-                </div>
-
-                <!-- Glass Cabinet Showcase Box -->
-                <div class="evo-tc-cabinet">
-                  <div class="evo-tc-top-plaque">TROPHY CABINET</div>
-                  <div class="evo-tc-grid">
-                    <!-- Left Pedestal (Champion) -->
-                    <div class="evo-tc-bay">
-                      <div class="evo-tc-spotlight"></div>
-                      ${champBadgeHtml}
-                      <div class="evo-tc-plinth">
-                        <div class="evo-tc-plinth-season">${escapeHtml(champTag)}</div>
-                        <div class="evo-tc-plinth-title">CHAMPIONS</div>
-                        <div class="evo-tc-plinth-name">${escapeHtml(champName)}</div>
-                        <div class="evo-tc-plinth-star">★</div>
-                      </div>
-                    </div>
-
-                    <!-- Right Pedestal (Shield Winner) -->
-                    <div class="evo-tc-bay">
-                      <div class="evo-tc-spotlight"></div>
-                      ${shieldBadgeHtml}
-                      <div class="evo-tc-plinth">
-                        <div class="evo-tc-plinth-season">${escapeHtml(shieldTag)}</div>
-                        <div class="evo-tc-plinth-title">CHAMPIONS</div>
-                        <div class="evo-tc-plinth-name">${escapeHtml(shieldName)}</div>
-                        <div class="evo-tc-plinth-star">★</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Cabinet Footer Tagline -->
-                <div class="evo-tc-footer">
-                  <div class="evo-tc-footer-line1">TWO SEASONS. ONE LEGACY.</div>
-                  <div class="evo-tc-footer-line2">EVOLUTION NEVER STOPS.</div>
-                </div>
-              </div>
-            </div>
-          `;
-        }).join('');
-
-        track.innerHTML = slidesHtml;
-
-        if (dotsHost) {
-          dotsHost.innerHTML = MAJOR_TOURS.map(
-            (t, i) =>
-              `<button type="button" class="tc-dot${i === 0 ? ' active' : ''}" data-idx="${i}" aria-label="Slide ${i + 1}"></button>`
-          ).join('');
-        }
-
-        let currentIdx = 0;
-        const total = MAJOR_TOURS.length;
-
-        function goTo(idx) {
-          currentIdx = (idx + total) % total;
-          track.style.transform = `translateX(-${currentIdx * 100}%)`;
-          if (dotsHost) {
-            dotsHost.querySelectorAll('.tc-dot').forEach((d, i) => {
-              d.classList.toggle('active', i === currentIdx);
-            });
-          }
-        }
-
-        const prevBtn = document.getElementById('tcPrevBtn');
-        const nextBtn = document.getElementById('tcNextBtn');
-        if (prevBtn) prevBtn.onclick = () => { goTo(currentIdx - 1); resetAuto(); };
-        if (nextBtn) nextBtn.onclick = () => { goTo(currentIdx + 1); resetAuto(); };
-
-        if (dotsHost) {
-          dotsHost.onclick = (e) => {
-            const btn = e.target.closest('.tc-dot');
-            if (btn && btn.dataset.idx !== undefined) {
-              goTo(parseInt(btn.dataset.idx, 10));
-              resetAuto();
-            }
-          };
-        }
-
-        function resetAuto() {
-          if (tcTimer) clearInterval(tcTimer);
-          tcTimer = setInterval(() => goTo(currentIdx + 1), 6000);
-        }
-
-        resetAuto();
-      }
 
       renderToursGrid();
       renderUpcomingTicker();
-      renderTrophyCabinet();
       window.addEventListener('ic7_store_updated', (e) => {
         if (!e.detail || !e.detail.key || e.detail.key === 'ic7_major_tours') {
           renderToursGrid();
           renderUpcomingTicker();
-          renderTrophyCabinet();
         }
       });
 
