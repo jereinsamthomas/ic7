@@ -923,6 +923,17 @@ table.board td.pts{color:var(--red-bright);font-weight:700;}
     </div>
     <p class="tourpage-empty" id="empty_glove" hidden>No golden glove data yet — check back soon.</p>
   </div>
+
+  <div class="tourpage-table-block reveal in-view">
+    <h2>🛡️ Shield Winner</h2>
+    <div class="board-wrap">
+      <table class="board">
+        <thead><tr><th>#</th><th>Player / Team</th><th>Club / Squad</th><th>Season</th><th>Matches</th></tr></thead>
+        <tbody id="tb_shield"></tbody>
+      </table>
+    </div>
+    <p class="tourpage-empty" id="empty_shield" hidden>No shield winner data yet — check back soon.</p>
+  </div>
 </main>
 
 <footer class="footer">
@@ -1022,6 +1033,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   renderTable('scorers', ['player','team','goals','matches']);
   renderTable('assists', ['player','team','assists','matches']);
   renderTable('glove', ['player','team','cleanSheets','matches']);
+  renderTable('shield', ['player','team','season','matches']);
 
   function renderWinners() {
     const items = Store.get('ic7_tour_' + TOUR_ID + '_winners', []);
