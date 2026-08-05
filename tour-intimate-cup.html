@@ -882,17 +882,14 @@ table.board td.pts { font-family: var(--font-mono); font-size: 17.5px; font-weig
 
   <!-- Champions (Past Seasons) -->
   <div class="tourpage-table-block reveal in-view" id="winnersSection">
-    <h2>ðŸ† Champions (Past Seasons)</h2>
+    <h2>🏆 Champions (Past Seasons)</h2>
     <div class="winners-grid" id="winnersList"></div>
   </div>
 
   <!-- Shield Winner -->
   <div class="tourpage-table-block reveal in-view">
-    <h2>ðŸ›¡ï¸ Shield Winner</h2>
-    <div id="shieldImgWrap" hidden style="margin-bottom:24px;text-align:center;">
-      <img id="shieldImg" src="" alt="Shield Winner Image" style="max-width:100%;max-height:560px;border-radius:6px;border:1px solid var(--line-strong);box-shadow:0 12px 35px rgba(0,0,0,0.85);object-fit:contain;">
-    </div>
-    <div class="board-wrap">
+    <h2>🛡️ Shield Winner</h2>
+    <div class="board-wrap" id="shieldBoardWrap">
       <table class="board">
         <thead><tr><th>#</th><th>Player / Team</th><th>Club / Squad</th><th>Season</th><th>Matches</th></tr></thead>
         <tbody id="tb_shield"></tbody>
@@ -903,7 +900,7 @@ table.board td.pts { font-family: var(--font-mono); font-size: 17.5px; font-weig
 
   <!-- Standings -->
   <div class="tourpage-table-block reveal in-view">
-    <h2>Standings</h2>
+    <h2>📊 Standings</h2>
     <div id="standingsImgWrap" hidden style="margin-bottom:24px;text-align:center;">
       <img id="standingsImg" src="" alt="Standings Image" style="max-width:100%;max-height:560px;border-radius:6px;border:1px solid var(--line-strong);box-shadow:0 12px 35px rgba(0,0,0,0.85);object-fit:contain;">
     </div>
@@ -918,7 +915,7 @@ table.board td.pts { font-family: var(--font-mono); font-size: 17.5px; font-weig
 
   <!-- Top Scorers -->
   <div class="tourpage-table-block reveal in-view">
-    <h2>š½ Top Scorers</h2>
+    <h2>⚽ Top Scorers</h2>
     <div id="scorersImgWrap" hidden style="margin-bottom:24px;text-align:center;">
       <img id="scorersImg" src="" alt="Top Scorers Image" style="max-width:100%;max-height:560px;border-radius:6px;border:1px solid var(--line-strong);box-shadow:0 12px 35px rgba(0,0,0,0.85);object-fit:contain;">
     </div>
@@ -931,9 +928,9 @@ table.board td.pts { font-family: var(--font-mono); font-size: 17.5px; font-weig
     <p class="tourpage-empty" id="empty_scorers" hidden>No top scorers data yet - check back soon.</p>
   </div>
 
-  <!-- Most Valuable Player (Replaced Top Assists) -->
+  <!-- Most Valuable Player -->
   <div class="tourpage-table-block reveal in-view">
-    <h2>ðŸŒŸ Most Valuable Player</h2>
+    <h2>🌟 Most Valuable Player</h2>
     <div id="assistsImgWrap" hidden style="margin-bottom:24px;text-align:center;">
       <img id="assistsImg" src="" alt="Most Valuable Player Image" style="max-width:100%;max-height:560px;border-radius:6px;border:1px solid var(--line-strong);box-shadow:0 12px 35px rgba(0,0,0,0.85);object-fit:contain;">
     </div>
@@ -948,7 +945,7 @@ table.board td.pts { font-family: var(--font-mono); font-size: 17.5px; font-weig
 
   <!-- Golden Glove -->
   <div class="tourpage-table-block reveal in-view">
-    <h2>ðŸ§¤ Golden Glove</h2>
+    <h2>🧤 Golden Glove</h2>
     <div id="gloveImgWrap" hidden style="margin-bottom:24px;text-align:center;">
       <img id="gloveImg" src="" alt="Golden Glove Image" style="max-width:100%;max-height:560px;border-radius:6px;border:1px solid var(--line-strong);box-shadow:0 12px 35px rgba(0,0,0,0.85);object-fit:contain;">
     </div>
