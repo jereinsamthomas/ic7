@@ -1049,247 +1049,362 @@
       color: var(--red-bright);
     }
 
-    /* ============================= TROPHY CABINET SHOWCASE ============================= */
+    /* ============================= TROPHY CABINET SHOWCASE — LUXURY ============================= */
     .trophy-cabinet-container {
       position: relative;
-      max-width: 1000px;
+      max-width: 1100px;
       margin: 0 auto;
-      padding: 0 10px;
+      padding: 0 56px;
+    }
+    @media (max-width: 680px) {
+      .trophy-cabinet-container { padding: 0 44px; }
     }
 
     .trophy-track-wrap {
       overflow: hidden;
-      border-radius: 8px;
+      border-radius: 2px;
     }
 
     .trophy-track {
       display: flex;
-      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
       width: 100%;
     }
 
     .trophy-slide {
       flex: 0 0 100%;
       width: 100%;
-      padding: 10px;
+      padding: 4px;
       box-sizing: border-box;
     }
 
-    /* 3D Glass Showcase Cabinet */
+    /* ---- Outer frame: dark mahogany cabinet shell ---- */
     .trophy-case {
       position: relative;
-      background: radial-gradient(ellipse at top, rgba(225, 29, 72, 0.25) 0%, rgba(11, 11, 15, 0.96) 75%);
-      border: 1.5px solid rgba(225, 29, 72, 0.45);
-      box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.95), inset 0 0 50px rgba(225, 29, 72, 0.15);
-      border-radius: 8px;
-      padding: 34px 24px 36px;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(225,29,72,0.18) 0%, transparent 70%),
+        radial-gradient(ellipse 100% 100% at 50% 100%, rgba(0,0,0,0.7) 0%, transparent 80%),
+        linear-gradient(175deg, #13050a 0%, #0a0007 40%, #050005 70%, #0d0008 100%);
+      border: 1px solid rgba(245, 158, 11, 0.22);
+      border-top: 2px solid rgba(245, 158, 11, 0.55);
+      border-bottom: 3px solid rgba(245, 158, 11, 0.4);
+      box-shadow:
+        0 0 0 1px rgba(225, 29, 72, 0.15),
+        0 2px 0 0 rgba(245, 200, 80, 0.5),
+        0 40px 90px -20px rgba(0,0,0,0.98),
+        inset 0 0 80px rgba(225, 29, 72, 0.08),
+        inset 0 0 0 1px rgba(255,255,255,0.04);
+      border-radius: 4px;
+      padding: 0 0 40px;
       text-align: center;
       overflow: hidden;
     }
 
+    /* Gold shimmer line at top */
     .trophy-case::before {
       content: "";
       position: absolute;
       top: 0; left: 0; right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, transparent, var(--red-bright), #f59e0b, var(--red-bright), transparent);
-      box-shadow: 0 0 20px rgba(225, 29, 72, 0.8);
+      height: 3px;
+      background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(245,158,11,0.4) 15%,
+        rgba(255,220,100,0.95) 35%,
+        #ffd700 50%,
+        rgba(255,220,100,0.95) 65%,
+        rgba(245,158,11,0.4) 85%,
+        transparent 100%
+      );
+      box-shadow: 0 0 18px rgba(255, 215, 0, 0.7), 0 0 40px rgba(225, 29, 72, 0.4);
     }
 
+    /* Cabinet glass panel reflection */
+    .trophy-case::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 10%; right: 10%; bottom: 0;
+      background: linear-gradient(180deg,
+        rgba(255,255,255,0.025) 0%,
+        transparent 35%,
+        transparent 65%,
+        rgba(255,255,255,0.01) 100%
+      );
+      pointer-events: none;
+      border-left: 1px solid rgba(255,255,255,0.04);
+      border-right: 1px solid rgba(255,255,255,0.04);
+    }
+
+    /* ---- Cabinet header bar ---- */
     .tc-case-header {
-      margin-bottom: 28px;
+      position: relative;
+      padding: 28px 32px 24px;
+      background: linear-gradient(180deg, rgba(0,0,0,0.55) 0%, transparent 100%);
+      border-bottom: 1px solid rgba(245,158,11,0.2);
+      margin-bottom: 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     .tc-case-header h3 {
       font-family: var(--font-display);
-      font-size: clamp(28px, 5vw, 48px);
-      letter-spacing: .04em;
+      font-size: clamp(30px, 5.5vw, 56px);
+      letter-spacing: .06em;
       text-transform: uppercase;
-      color: #ffffff;
+      background: linear-gradient(160deg, #fff 30%, #ffd700 70%, #f59e0b 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
       line-height: 1;
-      margin-bottom: 6px;
-      text-shadow: 0 0 20px rgba(225, 29, 72, 0.6);
+      margin-bottom: 8px;
+      filter: drop-shadow(0 0 24px rgba(255, 215, 0, 0.35));
     }
 
     .tc-case-header p {
       font-family: var(--font-mono);
-      font-size: 11.5px;
-      letter-spacing: .22em;
+      font-size: 11px;
+      letter-spacing: .32em;
       text-transform: uppercase;
-      color: var(--red);
+      color: rgba(245, 158, 11, 0.7);
     }
 
+    /* ---- Spotlight beams ---- */
+    .spotlight-beam {
+      position: absolute;
+      top: 0;
+      width: 130px;
+      height: 160px;
+      background: linear-gradient(180deg, rgba(255,240,200,0.14) 0%, rgba(255,200,100,0.04) 60%, transparent 100%);
+      clip-path: polygon(25% 0%, 75% 0%, 100% 100%, 0% 100%);
+      pointer-events: none;
+      opacity: 0.7;
+      animation: tcBeamPulse 4s ease-in-out infinite alternate;
+    }
+    .spotlight-beam:nth-child(2) { animation-delay: 2s; }
+    @keyframes tcBeamPulse {
+      from { opacity: 0.5; }
+      to   { opacity: 0.9; }
+    }
+
+    /* ---- Pedestals grid ---- */
     .trophy-pedestals-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 24px;
+      gap: 28px;
+      padding: 0 28px;
       align-items: stretch;
     }
     @media (max-width: 680px) {
       .trophy-pedestals-grid {
         grid-template-columns: 1fr;
-        gap: 20px;
+        gap: 24px;
+        padding: 0 16px;
       }
     }
 
+    /* ---- Individual pedestal card ---- */
     .pedestal-card {
       position: relative;
-      background: rgba(18, 18, 23, 0.75);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 6px;
-      padding: 26px 20px 22px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: space-between;
-      transition: transform .35s ease, border-color .35s ease, box-shadow .35s ease;
-      backdrop-filter: blur(8px);
+      transition: transform .4s ease, box-shadow .4s ease;
     }
 
-    .pedestal-card:hover {
-      transform: translateY(-5px);
-      border-color: rgba(225, 29, 72, 0.6);
-      box-shadow: 0 15px 35px -10px rgba(225, 29, 72, 0.35);
-    }
-
-    .pedestal-card.shield-card:hover {
-      border-color: rgba(245, 158, 11, 0.6);
-      box-shadow: 0 15px 35px -10px rgba(245, 158, 11, 0.35);
-    }
-
-    .spotlight-beam {
-      position: absolute;
-      top: 0;
-      width: 90px;
-      height: 100px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.18) 0%, transparent 100%);
-      clip-path: polygon(30% 0%, 70% 0%, 100% 100%, 0% 100%);
-      pointer-events: none;
-      opacity: 0.6;
-    }
-
+    /* Glass display case for each crest */
     .trophy-crest-wrap {
       position: relative;
-      margin-bottom: 16px;
-      z-index: 2;
-    }
-
-    .trophy-badge {
-      width: 96px;
-      height: 96px;
-      border-radius: 50%;
-      object-fit: cover;
-      background-size: cover;
-      background-position: center;
-      border: 2.5px solid var(--red);
-      box-shadow: 0 0 25px rgba(225, 29, 72, 0.6);
+      width: 100%;
+      padding: 40px 20px 28px;
+      background:
+        radial-gradient(ellipse 70% 50% at 50% 0%, rgba(255,200,80,0.12) 0%, transparent 70%),
+        linear-gradient(180deg, rgba(20,8,8,0.92) 0%, rgba(10,4,6,0.98) 100%);
+      border: 1px solid rgba(245,158,11,0.25);
+      border-top: 2px solid rgba(245,158,11,0.45);
+      border-radius: 3px 3px 0 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 42px;
-      background-color: #0b0b0f;
+      overflow: hidden;
+      flex: 1;
+    }
+
+    /* Inner glow ring behind badge */
+    .trophy-crest-wrap::before {
+      content: "";
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(225,29,72,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .pedestal-card.shield-card .trophy-crest-wrap::before {
+      background: radial-gradient(circle, rgba(245,158,11,0.15) 0%, transparent 70%);
+    }
+
+    /* ---- Big luxury badge / crest ---- */
+    .trophy-badge {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background-size: cover;
+      background-position: center;
+      background-color: #0f0308;
+      border: 4px solid #e11d48;
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.08),
+        0 0 30px rgba(225,29,72,0.6),
+        0 0 70px rgba(225,29,72,0.25),
+        inset 0 0 20px rgba(0,0,0,0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 72px;
       margin: 0 auto;
+      position: relative;
+      z-index: 2;
+      transition: transform .4s ease, box-shadow .4s ease;
+    }
+    @media (max-width: 480px) {
+      .trophy-badge { width: 120px; height: 120px; font-size: 52px; }
+    }
+
+    .pedestal-card:hover .trophy-badge {
+      transform: scale(1.04) translateY(-4px);
+    }
+
+    .pedestal-card.champion-card .trophy-badge {
+      border-color: #e11d48;
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.1),
+        0 0 35px rgba(225,29,72,0.7),
+        0 0 80px rgba(225,29,72,0.3),
+        inset 0 0 20px rgba(0,0,0,0.7);
     }
 
     .pedestal-card.shield-card .trophy-badge {
       border-color: #f59e0b;
-      box-shadow: 0 0 25px rgba(245, 158, 11, 0.6);
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.1),
+        0 0 35px rgba(245,158,11,0.65),
+        0 0 80px rgba(245,158,11,0.28),
+        inset 0 0 20px rgba(0,0,0,0.7);
     }
 
+    /* ---- Plinth / pedestal base ---- */
     .pedestal-base {
       width: 100%;
-      background: linear-gradient(180deg, rgba(30, 30, 42, 0.95), rgba(15, 15, 22, 0.98));
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-bottom: 3px solid var(--red);
-      padding: 14px 10px;
-      margin-top: 14px;
-      border-radius: 3px;
-      box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.08);
+      background: linear-gradient(180deg,
+        rgba(35,12,18,0.98) 0%,
+        rgba(18,6,10,0.99) 100%
+      );
+      border: 1px solid rgba(245,158,11,0.3);
+      border-top: none;
+      border-bottom: 4px solid #e11d48;
+      padding: 18px 14px 20px;
+      border-radius: 0 0 3px 3px;
+      position: relative;
+      overflow: hidden;
+    }
+    .pedestal-base::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 15%; right: 15%; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(225,29,72,0.5), transparent);
     }
 
-    .pedestal-card.shield-card .pedestal-base {
-      border-bottom-color: #f59e0b;
+    .pedestal-card.champion-card .pedestal-base { border-bottom-color: #e11d48; }
+    .pedestal-card.shield-card .pedestal-base   { border-bottom-color: #f59e0b; }
+    .pedestal-card.shield-card .pedestal-base::before {
+      background: linear-gradient(90deg, transparent, rgba(245,158,11,0.5), transparent);
     }
 
     .pedestal-type {
       font-family: var(--font-mono);
-      font-size: 10.5px;
-      letter-spacing: .22em;
+      font-size: 10px;
+      letter-spacing: .28em;
       text-transform: uppercase;
-      color: var(--ink-faint);
-      margin-bottom: 4px;
+      color: rgba(245,158,11,0.75);
+      margin-bottom: 6px;
     }
 
     .pedestal-winner-name {
       font-family: var(--font-display);
-      font-size: 22px;
-      letter-spacing: .03em;
+      font-size: clamp(18px, 2.5vw, 26px);
+      letter-spacing: .04em;
       text-transform: uppercase;
       color: #ffffff;
       line-height: 1.1;
       word-break: break-word;
     }
+    .pedestal-card.champion-card .pedestal-winner-name { color: #ffffff; }
+    .pedestal-card.shield-card .pedestal-winner-name   { color: #fbbf24; }
 
-    .pedestal-card.shield-card .pedestal-winner-name {
-      color: #f59e0b;
-    }
-
+    /* ---- Footer tagline ---- */
     .tc-case-footer {
-      margin-top: 26px;
-      padding-top: 18px;
-      border-top: 1px dashed rgba(255, 255, 255, 0.12);
+      margin-top: 32px;
+      padding: 16px 32px 0;
+      border-top: 1px solid rgba(245,158,11,0.15);
       font-family: var(--font-mono);
-      font-size: 11px;
-      letter-spacing: .25em;
+      font-size: 10.5px;
+      letter-spacing: .3em;
       text-transform: uppercase;
-      color: var(--ink-dim);
+      color: rgba(245,158,11,0.45);
     }
 
+    /* ---- Navigation arrows ---- */
     .tc-arrow {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
       z-index: 10;
-      width: 46px;
-      height: 46px;
+      width: 48px;
+      height: 48px;
       border-radius: 50%;
-      background: rgba(11, 11, 15, 0.88);
-      border: 1px solid var(--line-strong);
-      color: #fff;
-      font-size: 26px;
+      background: rgba(8,2,4,0.9);
+      border: 1px solid rgba(245,158,11,0.4);
+      color: rgba(245,158,11,0.8);
+      font-size: 28px;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      transition: all .25s ease;
+      transition: all .3s ease;
+      box-shadow: 0 0 12px rgba(0,0,0,0.6);
     }
     .tc-arrow:hover {
-      background: var(--red);
+      background: rgba(225,29,72,0.85);
       border-color: var(--red-bright);
-      box-shadow: 0 0 15px rgba(225, 29, 72, 0.6);
+      color: #fff;
+      box-shadow: 0 0 20px rgba(225,29,72,0.6);
       transform: translateY(-50%) scale(1.1);
     }
-    .tc-prev { left: -16px; }
-    .tc-next { right: -16px; }
+    .tc-prev { left: -24px; }
+    .tc-next { right: -24px; }
 
+    /* ---- Dot indicators ---- */
     .tc-dots {
       display: flex;
       justify-content: center;
-      gap: 9px;
-      margin-top: 20px;
+      gap: 10px;
+      margin-top: 24px;
     }
     .tc-dot {
-      width: 12px; height: 12px;
+      width: 8px; height: 8px;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.18);
-      border: 1px solid transparent;
+      background: rgba(245,158,11,0.2);
+      border: 1px solid rgba(245,158,11,0.35);
       cursor: pointer;
-      transition: all .25s ease;
+      transition: all .3s ease;
+      padding: 0;
     }
     .tc-dot.active {
-      background: var(--red);
-      box-shadow: 0 0 12px var(--red-bright);
-      transform: scale(1.25);
+      background: #f59e0b;
+      border-color: #ffd700;
+      box-shadow: 0 0 10px rgba(245,158,11,0.8);
+      transform: scale(1.35);
     }
 
     /* ============================= SCHEDULE ============================= */
