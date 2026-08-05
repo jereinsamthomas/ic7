@@ -4758,21 +4758,41 @@
         });
       }
 
-                  let tcTimer = null;
+                        let tcTimer = null;
       function renderTrophyCabinet() {
         const track = document.getElementById('trophyTrack');
         const dotsHost = document.getElementById('tcDots');
         if (!track) return;
 
         const meta = getToursMeta();
+
+        function getTourTitleHtml(tourId, rawName) {
+          if (tourId === 'evolution-cup') return `<span>evo</span><span class="trophy-red">l</span><span>ution</span> <span class="cup-title">C<span class="trophy-red">🏆</span>P</span>`;
+          if (tourId === 'intimate-cup') return `<span>inti</span><span class="trophy-red">m</span><span>ate</span> <span class="cup-title">C<span class="trophy-red">🏆</span>P</span>`;
+          if (tourId === 'world-cup') return `<span>wor</span><span class="trophy-red">l</span><span>d</span> <span class="cup-title">C<span class="trophy-red">🏆</span>P</span>`;
+          if (tourId === 'club-world-cup') return `<span>c</span><span class="trophy-red">l</span><span>ub world</span> <span class="cup-title">C<span class="trophy-red">🏆</span>P</span>`;
+          if (tourId === 'coopa-duo') return `<span>coopa'd</span> <span class="trophy-red">d</span><span>uo</span>`;
+          if (tourId === 'districto-cup') return `<span>distric</span><span class="trophy-red">t</span><span>o</span> <span class="cup-title">C<span class="trophy-red">🏆</span>P</span>`;
+          return `<span>${escapeHtml(rawName.toLowerCase())}</span>`;
+        }
+
+        function getTourBadgeLogo(tourId, mLogo) {
+          if (mLogo) return mLogo;
+          if (tourId === 'intimate-cup') return '/assets/intimate_cup_badge.jpg';
+          return '/assets/asset_4ec290c1ae.png';
+        }
+
         const slidesHtml = MAJOR_TOURS.map((t) => {
           const m = meta[t.id] || {};
           const tourName = m.name || t.name;
-          const champName = m.champion || 'IL CAPITANO';
-          const shieldName = m.shieldWinner || 'ICONIC SHIELD';
+          const champName = m.champion || (t.id === 'intimate-cup' ? 'INTIMATE CHAMPION' : 'IL CAPITANO');
+          const shieldName = m.shieldWinner || (t.id === 'intimate-cup' ? 'INTIMATE SHIELD' : 'ICONIC SHIELD');
 
           const champTag = m.champTag || 'SEASON 1';
           const shieldTag = m.shieldTag || 'SEASON 2';
+
+          const titleHtml = getTourTitleHtml(t.id, tourName);
+          const badgeLogo = getTourBadgeLogo(t.id, m.tourLogo);
 
           const champBadgeHtml = m.champLogo
             ? `<div class="evo-tc-trophy-badge"><img class="evo-tc-trophy-img" src="${m.champLogo}" alt="${escapeHtml(champName)}"></div>`
@@ -4795,8 +4815,8 @@
                   <path d="M100 25 L150 50 V105 C150 142 100 175 100 175 C100 175 50 142 50 105 V50 Z" fill="#120e10" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
                   <path d="M35 110 C35 150 70 180 100 180 C130 180 165 150 165 110 M100 45 V175 M70 120 H130" stroke="url(#silverGrad_${t.id})" stroke-width="12" fill="none" stroke-linecap="round"/>
                   <circle cx="100" cy="45" r="14" fill="url(#ballGold_${t.id})" stroke="#fff" stroke-width="1.5"/>
-                  <rect x="42" y="90" width="116" height="24" rx="2" fill="#000" stroke="url(#silverGrad_${t.id})" stroke-width="1.5"/>
-                  <text x="100" y="106" text-anchor="middle" font-family="Cinzel,serif" font-size="10" font-weight="900" fill="#fff" letter-spacing="1">${escapeHtml(champName)}</text>
+                  <rect x="35" y="90" width="130" height="24" rx="2" fill="#000" stroke="url(#silverGrad_${t.id})" stroke-width="1.5"/>
+                  <text x="100" y="106" text-anchor="middle" font-family="Cinzel,serif" font-size="9.5" font-weight="900" fill="#fff" letter-spacing="0.5">${escapeHtml(champName)}</text>
                 </svg>
               </div>`;
 
@@ -4815,7 +4835,7 @@
                   <circle cx="100" cy="110" r="82" fill="url(#goldPlate_${t.id})" stroke="#111" stroke-width="4"/>
                   <circle cx="100" cy="110" r="72" fill="#180508" stroke="#ffd700" stroke-width="2"/>
                   <path id="textArc_${t.id}" d="M35 110 A65 65 0 1 1 165 110" fill="none"/>
-                  <text font-family="Cinzel,serif" font-size="11" font-weight="900" fill="#ffd700" letter-spacing="2"><textPath href="#textArc_${t.id}" startOffset="50%" text-anchor="middle">${escapeHtml(shieldName)}</textPath></text>
+                  <text font-family="Cinzel,serif" font-size="10.5" font-weight="900" fill="#ffd700" letter-spacing="1.5"><textPath href="#textArc_${t.id}" startOffset="50%" text-anchor="middle">${escapeHtml(shieldName)}</textPath></text>
                   <path d="M100 65 C115 65 130 75 125 95 C120 115 140 120 135 140 C130 155 110 155 100 140 C90 155 70 155 65 140 C60 120 80 115 75 95 C70 75 85 65 100 65 Z" fill="#e11d48" stroke="#ffd700" stroke-width="1.5"/>
                   <circle cx="100" cy="172" r="3" fill="#ffd700"/>
                   <circle cx="70" cy="160" r="2.5" fill="#ffd700"/>
@@ -4835,10 +4855,10 @@
                       <path d="M20 40 l20 -10 l10 20 l-15 15 z"/>
                       <path d="M60 30 l25 -10 l-10 25 z"/>
                     </svg>
-                    <img class="evo-tc-clan-logo" src="/assets/asset_4ec290c1ae.png" alt="IC7 Logo">
+                    <img class="evo-tc-clan-logo" src="${badgeLogo}" alt="${escapeHtml(tourName)} Logo">
                   </div>
                   <div class="evo-tc-title-wrap">
-                    <h1 class="evo-tc-title"><span>${escapeHtml(tourName.toLowerCase())}</span></h1>
+                    <h1 class="evo-tc-title">${titleHtml}</h1>
                   </div>
                   <div class="evo-tc-subtitle">WHERE LEGENDS EVOLVE</div>
                 </div>
