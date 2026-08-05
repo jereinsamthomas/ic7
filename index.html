@@ -3352,7 +3352,7 @@
     <div class="wrap">
       <div class="eyebrow reveal">Competitions</div>
       <h2 class="section-title reveal">Our Major Team Tours</h2>
-      <p class="section-lede reveal">Standings, top scorers, top assists and golden glove — tracked for every IC7
+      <p class="section-lede reveal">Standings, top scorers, most valuable players and golden glove — tracked for every IC7
         tournament.</p>
       <div class="tours-grid" id="toursGrid"></div>
     </div>
@@ -4616,7 +4616,7 @@
         </div>
         <div class="field-row">
           <div class="field"><label for="mt_${t.id}_scorersImg">${escapeHtml(t.name)} — Top Scorers Image (screenshot)</label><input type="file" accept="image/*" id="mt_${t.id}_scorersImg"><div id="mt_${t.id}_scorersImgPreview" style="margin-top:8px;"></div></div>
-          <div class="field"><label for="mt_${t.id}_assistsImg">${escapeHtml(t.name)} — Top Assists Image (screenshot)</label><input type="file" accept="image/*" id="mt_${t.id}_assistsImg"><div id="mt_${t.id}_assistsImgPreview" style="margin-top:8px;"></div></div>
+          <div class="field"><label for="mt_${t.id}_assistsImg">${escapeHtml(t.name)} — Most Valuable Player Image (screenshot)</label><input type="file" accept="image/*" id="mt_${t.id}_assistsImg"><div id="mt_${t.id}_assistsImgPreview" style="margin-top:8px;"></div></div>
         </div>
         <div class="field-row">
           <div class="field"><label for="mt_${t.id}_gloveImg">${escapeHtml(t.name)} — Golden Glove Image (screenshot)</label><input type="file" accept="image/*" id="mt_${t.id}_gloveImg"><div id="mt_${t.id}_gloveImgPreview" style="margin-top:8px;"></div></div>
@@ -4991,9 +4991,9 @@
           titleField: it => it.player, subtitleField: it => `${it.goals || 0} goals`, thumbField: 'logo'
         },
         {
-          key: 'assists', label: 'Top Assists',
-          fields: [{ id: 'player', label: 'Player Name', type: 'text', required: true }, { id: 'logo', label: 'Player Photo / Logo (optional)', type: 'file', maxWidth: 300 }, { id: 'team', label: 'Team', type: 'text' }, { id: 'assists', label: 'Assists', type: 'text' }, { id: 'matches', label: 'Matches', type: 'text' }],
-          titleField: it => it.player, subtitleField: it => `${it.assists || 0} assists`, thumbField: 'logo'
+          key: 'assists', label: 'Most Valuable',
+          fields: [{ id: 'player', label: 'Player Name', type: 'text', required: true }, { id: 'logo', label: 'Player Photo / Logo (optional)', type: 'file', maxWidth: 300 }, { id: 'team', label: 'Team', type: 'text' }, { id: 'assists', label: 'MVP Score / Rating', type: 'text' }, { id: 'matches', label: 'Matches', type: 'text' }],
+          titleField: it => it.player, subtitleField: it => `MVP ${it.assists || ''}`, thumbField: 'logo'
         },
         {
           key: 'glove', label: 'Golden Glove',

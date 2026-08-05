@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Intimate Cup — IC7 Iconic Sevens</title>
-<meta name="description" content="Intimate Cup — standings, top scorers, top assists and golden glove for IC7's Intimate Cup tournament.">
+<title>Intimate Cup  -  IC7 Iconic Sevens</title>
+<meta name="description" content="Intimate Cup  -  standings, top scorers, most valuable players and golden glove for IC7's Intimate Cup tournament.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -871,7 +871,7 @@ table.board td.pts { font-family: var(--font-mono); font-size: 17.5px; font-weig
     <div>
       <div class="eyebrow reveal in-view">Major Team Tour</div>
       <h1 class="section-title reveal in-view" id="tourName" style="margin-bottom:8px;">Intimate Cup</h1>
-      <p class="section-lede reveal in-view" id="tourDesc" style="margin-bottom:0;">IC7's flagship knockout competition — the one everyone circles on the calendar.</p>
+      <p class="section-lede reveal in-view" id="tourDesc" style="margin-bottom:0;">IC7's flagship knockout competition  -  the one everyone circles on the calendar.</p>
     </div>
   </div>
 
@@ -882,23 +882,83 @@ table.board td.pts { font-family: var(--font-mono); font-size: 17.5px; font-weig
 
   <!-- Champions (Past Seasons) -->
   <div class="tourpage-table-block reveal in-view" id="winnersSection">
-    <h2>🏆 Champions (Past Seasons)</h2>
+    <h2>ðŸ† Champions (Past Seasons)</h2>
     <div class="winners-grid" id="winnersList"></div>
   </div>
 
   <!-- Shield Winner -->
   <div class="tourpage-table-block reveal in-view">
-    <h2>🛡️ Shield Winner</h2>
-    <div id="shieldImgWrap" hidden style="margin-bottom:24px;text-align:center;"><img id="shieldImg" src="" alt="Image" style="max-width:100%;max-height:560px;border-radius:6px;border:1px solid var(--line-strong);box-shadow:0 12px 35px rgba(0,0,0,0.85);object-fit:contain;"></div>
-    <div id="scorersImgWrap" hidden style="margin-bottom:24px;text-align:center;"><img id="scorersImg" src="" alt="Image" style="max-width:100%;max-height:560px;border-radius:6px;border:1px solid var(--line-strong);box-shadow:0 12px 35px rgba(0,0,0,0.85);object-fit:contain;"></div>
-    <div id="assistsImgWrap" hidden style="margin-bottom:24px;text-align:center;"><img id="assistsImg" src="" alt="Image" style="max-width:100%;max-height:560px;border-radius:6px;border:1px solid var(--line-strong);box-shadow:0 12px 35px rgba(0,0,0,0.85);object-fit:contain;"></div>
-    <div id="gloveImgWrap" hidden style="margin-bottom:24px;text-align:center;"><img id="gloveImg" src="" alt="Image" style="max-width:100%;max-height:560px;border-radius:6px;border:1px solid var(--line-strong);box-shadow:0 12px 35px rgba(0,0,0,0.85);object-fit:contain;"></div>
+    <h2>ðŸ›¡ï¸ Shield Winner</h2>
+    <div id="shieldImgWrap" hidden style="margin-bottom:24px;text-align:center;">
+      <img id="shieldImg" src="" alt="Shield Winner Image" style="max-width:100%;max-height:560px;border-radius:6px;border:1px solid var(--line-strong);box-shadow:0 12px 35px rgba(0,0,0,0.85);object-fit:contain;">
+    </div>
     <div class="board-wrap">
       <table class="board">
-        <thead><tr></tbody>
+        <thead><tr><th>#</th><th>Player / Team</th><th>Club / Squad</th><th>Season</th><th>Matches</th></tr></thead>
+        <tbody id="tb_shield"></tbody>
       </table>
     </div>
-    <p class="tourpage-empty" id="empty_glove" hidden>No golden glove data yet — check back soon.</p>
+    <p class="tourpage-empty" id="empty_shield" hidden>No shield winner data yet - check back soon.</p>
+  </div>
+
+  <!-- Standings -->
+  <div class="tourpage-table-block reveal in-view">
+    <h2>Standings</h2>
+    <div id="standingsImgWrap" hidden style="margin-bottom:24px;text-align:center;">
+      <img id="standingsImg" src="" alt="Standings Image" style="max-width:100%;max-height:560px;border-radius:6px;border:1px solid var(--line-strong);box-shadow:0 12px 35px rgba(0,0,0,0.85);object-fit:contain;">
+    </div>
+    <div class="board-wrap">
+      <table class="board">
+        <thead><tr><th>#</th><th>Team</th><th>Played</th><th>Won</th><th>Points</th></tr></thead>
+        <tbody id="tb_standings"></tbody>
+      </table>
+    </div>
+    <p class="tourpage-empty" id="empty_standings" hidden>No standings data yet - check back soon.</p>
+  </div>
+
+  <!-- Top Scorers -->
+  <div class="tourpage-table-block reveal in-view">
+    <h2>š½ Top Scorers</h2>
+    <div id="scorersImgWrap" hidden style="margin-bottom:24px;text-align:center;">
+      <img id="scorersImg" src="" alt="Top Scorers Image" style="max-width:100%;max-height:560px;border-radius:6px;border:1px solid var(--line-strong);box-shadow:0 12px 35px rgba(0,0,0,0.85);object-fit:contain;">
+    </div>
+    <div class="board-wrap">
+      <table class="board">
+        <thead><tr><th>#</th><th>Player</th><th>Team</th><th>Goals</th><th>Matches</th></tr></thead>
+        <tbody id="tb_scorers"></tbody>
+      </table>
+    </div>
+    <p class="tourpage-empty" id="empty_scorers" hidden>No top scorers data yet - check back soon.</p>
+  </div>
+
+  <!-- Most Valuable Player (Replaced Top Assists) -->
+  <div class="tourpage-table-block reveal in-view">
+    <h2>ðŸŒŸ Most Valuable Player</h2>
+    <div id="assistsImgWrap" hidden style="margin-bottom:24px;text-align:center;">
+      <img id="assistsImg" src="" alt="Most Valuable Player Image" style="max-width:100%;max-height:560px;border-radius:6px;border:1px solid var(--line-strong);box-shadow:0 12px 35px rgba(0,0,0,0.85);object-fit:contain;">
+    </div>
+    <div class="board-wrap">
+      <table class="board">
+        <thead><tr><th>#</th><th>Player</th><th>Team</th><th>MVP Rating / Score</th><th>Matches</th></tr></thead>
+        <tbody id="tb_assists"></tbody>
+      </table>
+    </div>
+    <p class="tourpage-empty" id="empty_assists" hidden>No MVP data yet - check back soon.</p>
+  </div>
+
+  <!-- Golden Glove -->
+  <div class="tourpage-table-block reveal in-view">
+    <h2>ðŸ§¤ Golden Glove</h2>
+    <div id="gloveImgWrap" hidden style="margin-bottom:24px;text-align:center;">
+      <img id="gloveImg" src="" alt="Golden Glove Image" style="max-width:100%;max-height:560px;border-radius:6px;border:1px solid var(--line-strong);box-shadow:0 12px 35px rgba(0,0,0,0.85);object-fit:contain;">
+    </div>
+    <div class="board-wrap">
+      <table class="board">
+        <thead><tr><th>#</th><th>Goalkeeper</th><th>Team</th><th>Clean Sheets</th><th>Matches</th></tr></thead>
+        <tbody id="tb_glove"></tbody>
+      </table>
+    </div>
+    <p class="tourpage-empty" id="empty_glove" hidden>No golden glove data yet - check back soon.</p>
   </div>
 
 </main>
@@ -942,14 +1002,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     return String(str || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   }
 
-  // Tournament name/teams/description — editable from the main site's admin dashboard (Major Tours tab)
+  // Tournament name/teams/description  -  editable from the main site's admin dashboard (Major Tours tab)
   const TOUR_ID = "intimate-cup";
   const metaAll = Store.get('ic7_major_tours', {});
   const meta = Object.assign({ name:"Intimate Cup", teams:"14 Teams", desc:"IC7's flagship knockout competition \u2014 the one everyone circles on the calendar." }, metaAll[TOUR_ID] || {});
   document.getElementById('tourName').textContent = meta.name;
   document.getElementById('tourDesc').textContent = meta.desc;
   document.getElementById('tourTeams').textContent = meta.teams;
-  document.title = meta.name + ' — IC7 Iconic Sevens';
+  document.title = meta.name + '  -  IC7 Iconic Sevens';
 
   // Tournament logo
   if (meta.tourLogo) {
