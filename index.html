@@ -4504,6 +4504,10 @@
             : '';
           const shieldLogoContent = m.shieldLogo ? '' : '🛡️';
 
+          const tourLogoHtml = m.tourLogo
+            ? `<img src="${m.tourLogo}" style="width:48px;height:48px;border-radius:50%;object-fit:cover;border:2px solid var(--red);box-shadow:0 0 15px rgba(225,29,72,0.5);margin:0 auto 8px;">`
+            : '';
+
           return `
             <div class="trophy-slide">
               <div class="trophy-case">
@@ -4511,8 +4515,9 @@
                 <div class="spotlight-beam" style="right:20%;"></div>
                 
                 <div class="tc-case-header">
+                  ${tourLogoHtml}
                   <h3>${escapeHtml(tourName)}</h3>
-                  <p>TROPHY CABINET</p>
+                  <p>WHERE LEGENDS EVOLVE — TROPHY CABINET</p>
                 </div>
 
                 <div class="trophy-pedestals-grid">
