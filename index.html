@@ -4370,10 +4370,12 @@
         <div class="field"><label for="mt_${t.id}_desc">${escapeHtml(t.name)} — Description</label><textarea id="mt_${t.id}_desc" rows="2"></textarea></div>
         <div class="field-row">
           <div class="field"><label for="mt_${t.id}_champion">${escapeHtml(t.name)} — Current Champion</label><input type="text" id="mt_${t.id}_champion"></div>
+          <div class="field"><label for="mt_${t.id}_champTag">${escapeHtml(t.name)} — Champion Label</label><input type="text" id="mt_${t.id}_champTag" placeholder="CURRENT CHAMPIONS"></div>
           <div class="field"><label for="mt_${t.id}_champLogo">${escapeHtml(t.name)} — Champion Logo (optional)</label><input type="file" accept="image/*" id="mt_${t.id}_champLogo"></div>
         </div>
         <div class="field-row">
           <div class="field"><label for="mt_${t.id}_shieldWinner">${escapeHtml(t.name)} — Shield Winner</label><input type="text" id="mt_${t.id}_shieldWinner" placeholder="Shield winner name..."></div>
+          <div class="field"><label for="mt_${t.id}_shieldTag">${escapeHtml(t.name)} — Shield Label</label><input type="text" id="mt_${t.id}_shieldTag" placeholder="SHIELD WINNER"></div>
           <div class="field"><label for="mt_${t.id}_shieldLogo">${escapeHtml(t.name)} — Shield Winner Logo (optional)</label><input type="file" accept="image/*" id="mt_${t.id}_shieldLogo"></div>
         </div>
       </div>
@@ -4388,11 +4390,14 @@
           const teamsEl = document.getElementById(`mt_${t.id}_teams`);
           const descEl = document.getElementById(`mt_${t.id}_desc`);
           const champEl = document.getElementById(`mt_${t.id}_champion`);
+          const champTagEl = document.getElementById(`mt_${t.id}_champTag`);
           const shieldEl = document.getElementById(`mt_${t.id}_shieldWinner`);
+          const shieldTagEl = document.getElementById(`mt_${t.id}_shieldTag`);
           if (nameEl) nameEl.value = meta0[t.id].name;
           if (teamsEl) teamsEl.value = meta0[t.id].teams;
           if (descEl) descEl.value = meta0[t.id].desc;
           if (champEl) champEl.value = meta0[t.id].champion || '';
+          if (champTagEl) champTagEl.value = meta0[t.id].champTag || 'CURRENT CHAMPIONS';
           if (shieldEl) shieldEl.value = meta0[t.id].shieldWinner || '';
           // Show existing tournament logo preview
           const previewEl = document.getElementById(`mt_${t.id}_tourLogoPreview`);
@@ -4465,8 +4470,10 @@
               teams: (document.getElementById(`mt_${t.id}_teams`).value || '').trim() || t.teams,
               desc: (document.getElementById(`mt_${t.id}_desc`).value || '').trim(),
               champion: (document.getElementById(`mt_${t.id}_champion`).value || '').trim(),
+              champTag: (document.getElementById(`mt_${t.id}_champTag`).value || '').trim() || 'CURRENT CHAMPIONS',
               champLogo: champLogo,
               shieldWinner: (document.getElementById(`mt_${t.id}_shieldWinner`).value || '').trim(),
+              shieldTag: (document.getElementById(`mt_${t.id}_shieldTag`).value || '').trim() || 'SHIELD WINNER',
               shieldLogo: shieldLogo,
               tourLogo: tourLogo,
               standingsImg: standingsImg
@@ -4508,6 +4515,9 @@
             ? `<img src="${m.tourLogo}" style="width:48px;height:48px;border-radius:50%;object-fit:cover;border:2px solid var(--red);box-shadow:0 0 15px rgba(225,29,72,0.5);margin:0 auto 8px;">`
             : '';
 
+          const champTag = m.champTag || 'CURRENT CHAMPIONS';
+          const shieldTag = m.shieldTag || 'SHIELD WINNER';
+
           return `
             <div class="trophy-slide">
               <div class="trophy-case">
@@ -4527,7 +4537,7 @@
                       <div class="trophy-badge champion"${champLogoStyle}>${champLogoContent}</div>
                     </div>
                     <div class="pedestal-base gold">
-                      <div class="pedestal-type">SEASON 1 · CHAMPIONS</div>
+                      <div class="pedestal-type">${escapeHtml(champTag)}</div>
                       <div class="pedestal-winner-name">${escapeHtml(champName)}</div>
                     </div>
                   </div>
@@ -4538,7 +4548,7 @@
                       <div class="trophy-badge shield"${shieldLogoStyle}>${shieldLogoContent}</div>
                     </div>
                     <div class="pedestal-base shield">
-                      <div class="pedestal-type">SEASON 2 · SHIELD WINNER</div>
+                      <div class="pedestal-type">${escapeHtml(shieldTag)}</div>
                       <div class="pedestal-winner-name">${escapeHtml(shieldName)}</div>
                     </div>
                   </div>
