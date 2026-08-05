@@ -1078,391 +1078,466 @@
       box-sizing: border-box;
     }
 
-    /* ---- Trophy Cabinet — background art layer ---- */
-    .tc-bg-art {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      z-index: 0;
-      overflow: hidden;
-    }
-    /* Big lounge photo — full background, left-biased */
-    .tc-bg-photo-big {
-      position: absolute;
-      inset: 0;
-      background-image: url('/assets/tc_bg_lounge.jpg');
-      background-size: cover;
-      background-position: center 30%;
-      opacity: 0.65;
-      filter: saturate(0.85) brightness(0.75);
-    }
-    /* Small lounge photo — bottom-right decorative window card */
-    .tc-bg-photo-small {
-      position: absolute;
-      bottom: 62px;
-      right: 28px;
-      width: 180px;
-      height: 130px;
-      background-image: url('/assets/tc_bg_lounge2.jpg');
-      background-size: cover;
-      background-position: center;
-      opacity: 0.72;
-      border: 1.5px solid rgba(245,158,11,0.55);
-      border-radius: 2px;
-      filter: saturate(0.85) brightness(0.8);
-      box-shadow: 0 6px 28px rgba(0,0,0,0.8), 0 0 0 1px rgba(245,158,11,0.2);
-    }
-    @media (max-width: 680px) {
-      .tc-bg-photo-small { width: 110px; height: 80px; bottom: 50px; right: 16px; }
-    }
-    /* SVG pitch lines overlay */
-    .tc-bg-art svg {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-    }
-    /* Animations */
-    @keyframes tcPitchPulse {
-      0%, 100% { opacity: 0.09; }
-      50%       { opacity: 0.16; }
-    }
-    .tc-pitch-lines { animation: tcPitchPulse 6s ease-in-out infinite; }
+    /* ================================================
+       TROPHY CABINET — LUXURY AWARD CEREMONY REDESIGN
+       ================================================ */
 
+    /* Outer container with nav arrows */
+    .trophy-cabinet-container {
+      position: relative;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 60px;
+    }
+    @media (max-width: 680px) { .trophy-cabinet-container { padding: 0 44px; } }
 
-    /* ---- Outer frame: dark mahogany cabinet shell ---- */
+    .trophy-track-wrap { overflow: hidden; }
+    .trophy-track {
+      display: flex;
+      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .trophy-slide { flex: 0 0 100%; width: 100%; box-sizing: border-box; }
+
+    /* ── The full cabinet frame ── */
     .trophy-case {
       position: relative;
-      background:
-        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(225,29,72,0.18) 0%, transparent 70%),
-        radial-gradient(ellipse 100% 100% at 50% 100%, rgba(0,0,0,0.7) 0%, transparent 80%),
-        linear-gradient(175deg, #13050a 0%, #0a0007 40%, #050005 70%, #0d0008 100%);
-      border: 1px solid rgba(245, 158, 11, 0.22);
-      border-top: 2px solid rgba(245, 158, 11, 0.55);
-      border-bottom: 3px solid rgba(245, 158, 11, 0.4);
-      box-shadow:
-        0 0 0 1px rgba(225, 29, 72, 0.15),
-        0 2px 0 0 rgba(245, 200, 80, 0.5),
-        0 40px 90px -20px rgba(0,0,0,0.98),
-        inset 0 0 80px rgba(225, 29, 72, 0.08),
-        inset 0 0 0 1px rgba(255,255,255,0.04);
-      border-radius: 4px;
-      padding: 0 0 40px;
-      text-align: center;
       overflow: hidden;
+      border-radius: 6px;
+      /* Layered: lounge photo + dark-vignette overlay */
+      background:
+        /* center vignette keeps content readable */
+        radial-gradient(ellipse 90% 70% at 50% 40%, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.85) 100%),
+        /* bottom gradient blackout */
+        linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.9) 75%),
+        /* lounge photo */
+        url('/assets/tc_bg_lounge.jpg') center 30% / cover no-repeat;
+      border: 1px solid rgba(212,175,55,0.35);
+      box-shadow:
+        0 0 0 3px rgba(212,175,55,0.12),
+        0 50px 100px -20px rgba(0,0,0,0.98),
+        inset 0 1px 0 rgba(255,215,0,0.3),
+        inset 0 -1px 0 rgba(255,215,0,0.15);
+      min-height: 520px;
+      display: flex;
+      flex-direction: column;
     }
 
-    /* Gold shimmer line at top */
+    /* Gold top-shimmer bar */
     .trophy-case::before {
       content: "";
       position: absolute;
       top: 0; left: 0; right: 0;
-      height: 3px;
+      height: 2px;
       background: linear-gradient(90deg,
         transparent 0%,
-        rgba(245,158,11,0.4) 15%,
-        rgba(255,220,100,0.95) 35%,
-        #ffd700 50%,
-        rgba(255,220,100,0.95) 65%,
-        rgba(245,158,11,0.4) 85%,
+        rgba(212,175,55,0.5) 10%,
+        #ffd700 35%, #fff8dc 50%, #ffd700 65%,
+        rgba(212,175,55,0.5) 90%,
         transparent 100%
       );
-      box-shadow: 0 0 18px rgba(255, 215, 0, 0.7), 0 0 40px rgba(225, 29, 72, 0.4);
+      box-shadow: 0 0 24px rgba(255,215,0,0.8), 0 0 60px rgba(255,215,0,0.3);
+      z-index: 5;
     }
-
-    /* Cabinet glass panel reflection */
+    /* Bottom gold line */
     .trophy-case::after {
       content: "";
       position: absolute;
-      top: 0; left: 10%; right: 10%; bottom: 0;
-      background: linear-gradient(180deg,
-        rgba(255,255,255,0.025) 0%,
-        transparent 35%,
-        transparent 65%,
-        rgba(255,255,255,0.01) 100%
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(212,175,55,0.4) 20%,
+        rgba(212,175,55,0.8) 50%,
+        rgba(212,175,55,0.4) 80%,
+        transparent 100%
       );
-      pointer-events: none;
-      border-left: 1px solid rgba(255,255,255,0.04);
-      border-right: 1px solid rgba(255,255,255,0.04);
+      z-index: 5;
     }
 
-    /* ---- Cabinet header bar ---- */
+    /* ── SVG / bg-art pitch overlay ── */
+    .tc-bg-art {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+    .tc-bg-art svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+    /* Small lounge "window" card — bottom-left accent */
+    .tc-bg-photo-small {
+      position: absolute;
+      bottom: 52px;
+      left: 28px;
+      width: 170px;
+      height: 120px;
+      background-image: url('/assets/tc_bg_lounge2.jpg');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.6;
+      border: 1px solid rgba(212,175,55,0.45);
+      border-radius: 2px;
+      filter: saturate(0.75) brightness(0.7);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.85), 0 0 0 1px rgba(212,175,55,0.2);
+    }
+    .tc-bg-photo-big { display: none; } /* handled by .trophy-case background */
+    @media (max-width: 680px) {
+      .tc-bg-photo-small { width: 100px; height: 72px; bottom: 42px; left: 14px; }
+    }
+    @keyframes tcPitchPulse {
+      0%, 100% { opacity: 0.12; }
+      50%       { opacity: 0.22; }
+    }
+    .tc-pitch-lines { animation: tcPitchPulse 7s ease-in-out infinite; }
+
+    /* ── Spotlight beams from ceiling ── */
+    .spotlight-beam {
+      position: absolute;
+      top: 0;
+      width: 180px;
+      height: 55%;
+      background: linear-gradient(180deg,
+        rgba(255,250,210,0.18) 0%,
+        rgba(255,240,160,0.06) 50%,
+        transparent 100%
+      );
+      clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
+      pointer-events: none;
+      z-index: 2;
+    }
+    @keyframes tcBeamPulse {
+      0%, 100% { opacity: 0.55; }
+      50%       { opacity: 0.9; }
+    }
+    .spotlight-beam:first-of-type  { animation: tcBeamPulse 4s ease-in-out infinite; }
+    .spotlight-beam:nth-of-type(2) { animation: tcBeamPulse 4s ease-in-out 2s infinite; }
+
+    /* ── Award-ceremony header ── */
     .tc-case-header {
       position: relative;
-      z-index: 1;
-      padding: 28px 32px 24px;
-      background: linear-gradient(180deg, rgba(0,0,0,0.55) 0%, transparent 100%);
-      border-bottom: 1px solid rgba(245,158,11,0.2);
-      margin-bottom: 32px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      z-index: 3;
+      text-align: center;
+      padding: 32px 32px 22px;
+      border-bottom: 1px solid rgba(212,175,55,0.2);
+      margin-bottom: 28px;
+      background: linear-gradient(180deg,
+        rgba(0,0,0,0.5) 0%,
+        transparent 100%
+      );
     }
-
     .tc-case-header h3 {
       font-family: var(--font-display);
-      font-size: clamp(30px, 5.5vw, 56px);
-      letter-spacing: .06em;
+      font-size: clamp(32px, 6vw, 62px);
+      letter-spacing: .08em;
       text-transform: uppercase;
-      background: linear-gradient(160deg, #fff 30%, #ffd700 70%, #f59e0b 100%);
+      /* Gold foil gradient */
+      background: linear-gradient(160deg, #fff8e7 0%, #ffd700 30%, #fff 55%, #f59e0b 75%, #ffd700 100%);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
       line-height: 1;
       margin-bottom: 8px;
-      filter: drop-shadow(0 0 24px rgba(255, 215, 0, 0.35));
+      filter: drop-shadow(0 2px 20px rgba(255,215,0,0.5));
     }
-
     .tc-case-header p {
       font-family: var(--font-mono);
-      font-size: 11px;
-      letter-spacing: .32em;
+      font-size: 10.5px;
+      letter-spacing: .4em;
       text-transform: uppercase;
-      color: rgba(245, 158, 11, 0.7);
+      color: rgba(212,175,55,0.65);
     }
 
-    /* ---- Spotlight beams ---- */
-    .spotlight-beam {
-      position: absolute;
-      top: 0;
-      width: 130px;
-      height: 160px;
-      background: linear-gradient(180deg, rgba(255,240,200,0.14) 0%, rgba(255,200,100,0.04) 60%, transparent 100%);
-      clip-path: polygon(25% 0%, 75% 0%, 100% 100%, 0% 100%);
-      pointer-events: none;
-      opacity: 0.7;
-      animation: tcBeamPulse 4s ease-in-out infinite alternate;
-    }
-    .spotlight-beam:nth-child(2) { animation-delay: 2s; }
-    @keyframes tcBeamPulse {
-      from { opacity: 0.5; }
-      to   { opacity: 0.9; }
-    }
-
-    /* ---- Pedestals grid ---- */
+    /* ── Two-pedestal display grid ── */
     .trophy-pedestals-grid {
       position: relative;
-      z-index: 1;
+      z-index: 3;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 28px;
-      padding: 0 28px;
-      align-items: stretch;
+      gap: 20px;
+      padding: 0 36px 28px;
+      flex: 1;
     }
     @media (max-width: 680px) {
-      .trophy-pedestals-grid {
-        grid-template-columns: 1fr;
-        gap: 24px;
-        padding: 0 16px;
-      }
+      .trophy-pedestals-grid { grid-template-columns: 1fr; padding: 0 16px 20px; }
     }
 
-    /* ---- Individual pedestal card ---- */
+    /* ── Individual award display case ── */
     .pedestal-card {
       position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
-      transition: transform .4s ease, box-shadow .4s ease;
+      border-radius: 4px;
+      overflow: hidden;
+      /* glass dark panel */
+      background: linear-gradient(170deg,
+        rgba(255,255,255,0.06) 0%,
+        rgba(0,0,0,0.65) 40%,
+        rgba(0,0,0,0.85) 100%
+      );
+      border: 1px solid rgba(212,175,55,0.25);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.08),
+        inset 0 -2px 0 rgba(212,175,55,0.2),
+        0 20px 50px rgba(0,0,0,0.7);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      transition: transform .4s ease, box-shadow .4s ease, border-color .4s ease;
+      padding: 32px 20px 22px;
+    }
+    .pedestal-card:hover {
+      transform: translateY(-6px);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.1),
+        inset 0 -2px 0 rgba(225,29,72,0.6),
+        0 30px 60px rgba(0,0,0,0.8),
+        0 0 0 1px rgba(225,29,72,0.35),
+        0 0 40px rgba(225,29,72,0.2);
+      border-color: rgba(225,29,72,0.5);
+    }
+    .pedestal-card.shield-card:hover {
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.1),
+        inset 0 -2px 0 rgba(245,158,11,0.6),
+        0 30px 60px rgba(0,0,0,0.8),
+        0 0 0 1px rgba(245,158,11,0.35),
+        0 0 40px rgba(245,158,11,0.2);
+      border-color: rgba(245,158,11,0.5);
+    }
+    /* Gloss top-edge */
+    .pedestal-card::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 10%; right: 10%; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    }
+    /* Award category tag — top centre */
+    .pedestal-card::after {
+      content: attr(data-tag);
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: #ffd700;
+      background: rgba(0,0,0,0.7);
+      border: 1px solid rgba(212,175,55,0.4);
+      border-top: none;
+      border-radius: 0 0 4px 4px;
+      padding: 4px 12px;
+      white-space: nowrap;
     }
 
-    /* Glass display case for each crest */
+    /* ── Crest / logo ring ── */
     .trophy-crest-wrap {
       position: relative;
-      width: 100%;
-      padding: 40px 20px 28px;
-      background:
-        radial-gradient(ellipse 70% 50% at 50% 0%, rgba(255,200,80,0.12) 0%, transparent 70%),
-        linear-gradient(180deg, rgba(20,8,8,0.92) 0%, rgba(10,4,6,0.98) 100%);
-      border: 1px solid rgba(245,158,11,0.25);
-      border-top: 2px solid rgba(245,158,11,0.45);
-      border-radius: 3px 3px 0 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      flex: 1;
+      margin-bottom: 20px;
+      z-index: 2;
     }
-
-    /* Inner glow ring behind badge */
+    /* outer decorative ring */
     .trophy-crest-wrap::before {
       content: "";
       position: absolute;
-      width: 200px;
-      height: 200px;
+      inset: -10px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(225,29,72,0.15) 0%, transparent 70%);
-      pointer-events: none;
+      background: conic-gradient(
+        from 0deg,
+        rgba(212,175,55,0.8) 0deg, rgba(255,215,0,1) 60deg,
+        rgba(212,175,55,0.3) 120deg, rgba(255,255,255,0.6) 180deg,
+        rgba(212,175,55,0.3) 240deg, rgba(255,215,0,1) 300deg,
+        rgba(212,175,55,0.8) 360deg
+      );
+      filter: blur(2px);
+      opacity: 0.5;
+      animation: tcRingRotate 8s linear infinite;
     }
-
     .pedestal-card.shield-card .trophy-crest-wrap::before {
-      background: radial-gradient(circle, rgba(245,158,11,0.15) 0%, transparent 70%);
+      background: conic-gradient(
+        from 0deg,
+        rgba(245,158,11,0.8) 0deg, rgba(255,200,50,1) 60deg,
+        rgba(245,158,11,0.3) 120deg, rgba(255,255,255,0.5) 180deg,
+        rgba(245,158,11,0.3) 240deg, rgba(255,200,50,1) 300deg,
+        rgba(245,158,11,0.8) 360deg
+      );
+    }
+    @keyframes tcRingRotate { to { transform: rotate(360deg); } }
+    /* inner dark fill so conic doesn't bleed */
+    .trophy-crest-wrap::after {
+      content: "";
+      position: absolute;
+      inset: -3px;
+      border-radius: 50%;
+      background: rgba(8,2,4,0.88);
     }
 
-    /* ---- Big luxury badge / crest ---- */
+    /* ── Logo/crest badge itself ── */
     .trophy-badge {
-      width: 200px;
-      height: 200px;
+      position: relative;
+      z-index: 2;
+      width: 180px;
+      height: 180px;
       border-radius: 50%;
       background-size: cover;
       background-position: center;
       background-color: #0f0308;
-      border: 5px solid #e11d48;
+      border: 4px solid rgba(212,175,55,0.9);
       box-shadow:
-        0 0 0 2px rgba(255,255,255,0.1),
-        0 0 40px rgba(225,29,72,0.7),
-        0 0 90px rgba(225,29,72,0.3),
-        inset 0 0 24px rgba(0,0,0,0.7);
+        0 0 0 1px rgba(255,255,255,0.12),
+        0 0 0 8px rgba(10,3,5,0.7),
+        0 0 50px rgba(225,29,72,0.6),
+        0 0 100px rgba(225,29,72,0.2),
+        inset 0 0 30px rgba(0,0,0,0.8);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 90px;
+      font-size: 80px;
       margin: 0 auto;
-      position: relative;
-      z-index: 2;
-      transition: transform .4s ease, box-shadow .4s ease;
+      transition: transform .4s cubic-bezier(0.16,1,0.3,1), box-shadow .4s ease;
+    }
+    .pedestal-card.champion-card .trophy-badge {
+      border-color: rgba(225,29,72,0.9);
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.12),
+        0 0 0 8px rgba(10,3,5,0.7),
+        0 0 50px rgba(225,29,72,0.65),
+        0 0 100px rgba(225,29,72,0.25),
+        inset 0 0 30px rgba(0,0,0,0.8);
+    }
+    .pedestal-card.shield-card .trophy-badge {
+      border-color: rgba(245,158,11,0.9);
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.12),
+        0 0 0 8px rgba(10,3,5,0.7),
+        0 0 50px rgba(245,158,11,0.6),
+        0 0 100px rgba(245,158,11,0.2),
+        inset 0 0 30px rgba(0,0,0,0.8);
+    }
+    .pedestal-card:hover .trophy-badge {
+      transform: scale(1.06) translateY(-6px);
     }
     @media (max-width: 480px) {
-      .trophy-badge { width: 140px; height: 140px; font-size: 60px; }
+      .trophy-badge { width: 130px; height: 130px; font-size: 58px; }
     }
 
-    .pedestal-card:hover .trophy-badge {
-      transform: scale(1.04) translateY(-4px);
-    }
-
-    .pedestal-card.champion-card .trophy-badge {
-      border-color: #e11d48;
-      box-shadow:
-        0 0 0 1px rgba(255,255,255,0.1),
-        0 0 35px rgba(225,29,72,0.7),
-        0 0 80px rgba(225,29,72,0.3),
-        inset 0 0 20px rgba(0,0,0,0.7);
-    }
-
-    .pedestal-card.shield-card .trophy-badge {
-      border-color: #f59e0b;
-      box-shadow:
-        0 0 0 1px rgba(255,255,255,0.1),
-        0 0 35px rgba(245,158,11,0.65),
-        0 0 80px rgba(245,158,11,0.28),
-        inset 0 0 20px rgba(0,0,0,0.7);
-    }
-
-    /* ---- Plinth / pedestal base ---- */
+    /* ── Award plinth ── */
     .pedestal-base {
       width: 100%;
       background: linear-gradient(180deg,
-        rgba(35,12,18,0.98) 0%,
-        rgba(18,6,10,0.99) 100%
+        rgba(212,175,55,0.08) 0%,
+        rgba(0,0,0,0.6) 100%
       );
-      border: 1px solid rgba(245,158,11,0.3);
-      border-top: none;
-      border-bottom: 4px solid #e11d48;
-      padding: 18px 14px 20px;
-      border-radius: 0 0 3px 3px;
-      position: relative;
-      overflow: hidden;
+      border-top: 1px solid rgba(212,175,55,0.3);
+      padding: 16px 12px 14px;
+      text-align: center;
     }
-    .pedestal-base::before {
-      content: "";
-      position: absolute;
-      top: 0; left: 15%; right: 15%; height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(225,29,72,0.5), transparent);
-    }
-
-    .pedestal-card.champion-card .pedestal-base { border-bottom-color: #e11d48; }
-    .pedestal-card.shield-card .pedestal-base   { border-bottom-color: #f59e0b; }
-    .pedestal-card.shield-card .pedestal-base::before {
-      background: linear-gradient(90deg, transparent, rgba(245,158,11,0.5), transparent);
-    }
-
     .pedestal-type {
       font-family: var(--font-mono);
-      font-size: 10px;
-      letter-spacing: .28em;
+      font-size: 9.5px;
+      letter-spacing: .3em;
       text-transform: uppercase;
-      color: rgba(245,158,11,0.75);
-      margin-bottom: 6px;
+      color: rgba(212,175,55,0.7);
+      margin-bottom: 8px;
     }
-
     .pedestal-winner-name {
       font-family: var(--font-display);
-      font-size: clamp(18px, 2.5vw, 26px);
+      font-size: clamp(19px, 2.8vw, 28px);
       letter-spacing: .04em;
       text-transform: uppercase;
-      color: #ffffff;
       line-height: 1.1;
       word-break: break-word;
     }
-    .pedestal-card.champion-card .pedestal-winner-name { color: #ffffff; }
-    .pedestal-card.shield-card .pedestal-winner-name   { color: #fbbf24; }
-
-    /* ---- Footer tagline ---- */
-    .tc-case-footer {
-      position: relative;
-      z-index: 1;
-      margin-top: 32px;
-      padding: 16px 32px 0;
-      border-top: 1px solid rgba(245,158,11,0.15);
-      font-family: var(--font-mono);
-      font-size: 10.5px;
-      letter-spacing: .3em;
-      text-transform: uppercase;
-      color: rgba(245,158,11,0.45);
+    .pedestal-card.champion-card .pedestal-winner-name {
+      background: linear-gradient(135deg, #fff 20%, #ffd700 60%, #fff 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      filter: drop-shadow(0 1px 8px rgba(255,215,0,0.4));
+    }
+    .pedestal-card.shield-card .pedestal-winner-name {
+      background: linear-gradient(135deg, #fff8dc 20%, #f59e0b 60%, #fff8dc 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      filter: drop-shadow(0 1px 8px rgba(245,158,11,0.4));
+    }
+    /* Star row under winner name */
+    .pedestal-stars {
+      margin-top: 8px;
+      font-size: 10px;
+      letter-spacing: .15em;
+      color: rgba(212,175,55,0.5);
     }
 
-    /* ---- Navigation arrows ---- */
+    /* ── Footer tagline ── */
+    .tc-case-footer {
+      position: relative;
+      z-index: 3;
+      text-align: center;
+      padding: 14px 32px 18px;
+      border-top: 1px solid rgba(212,175,55,0.15);
+      margin-top: auto;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: .35em;
+      text-transform: uppercase;
+      color: rgba(212,175,55,0.4);
+    }
+
+    /* ── Nav arrows ── */
     .tc-arrow {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
       z-index: 10;
-      width: 48px;
-      height: 48px;
+      width: 52px; height: 52px;
       border-radius: 50%;
-      background: rgba(8,2,4,0.9);
-      border: 1px solid rgba(245,158,11,0.4);
-      color: rgba(245,158,11,0.8);
+      background: rgba(5,0,3,0.92);
+      border: 1px solid rgba(212,175,55,0.45);
+      color: rgba(212,175,55,0.9);
       font-size: 28px;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
       transition: all .3s ease;
-      box-shadow: 0 0 12px rgba(0,0,0,0.6);
+      box-shadow: 0 0 0 1px rgba(212,175,55,0.1), 0 8px 24px rgba(0,0,0,0.7);
     }
     .tc-arrow:hover {
-      background: rgba(225,29,72,0.85);
-      border-color: var(--red-bright);
-      color: #fff;
-      box-shadow: 0 0 20px rgba(225,29,72,0.6);
-      transform: translateY(-50%) scale(1.1);
+      background: rgba(212,175,55,0.15);
+      border-color: #ffd700;
+      color: #ffd700;
+      box-shadow: 0 0 0 1px rgba(212,175,55,0.3), 0 0 24px rgba(212,175,55,0.4);
+      transform: translateY(-50%) scale(1.08);
     }
-    .tc-prev { left: -24px; }
-    .tc-next { right: -24px; }
+    .tc-prev { left: -26px; }
+    .tc-next { right: -26px; }
 
-    /* ---- Dot indicators ---- */
+    /* ── Dot indicators ── */
     .tc-dots {
       display: flex;
       justify-content: center;
-      gap: 10px;
-      margin-top: 24px;
+      align-items: center;
+      gap: 12px;
+      margin-top: 22px;
     }
     .tc-dot {
-      width: 8px; height: 8px;
+      width: 6px; height: 6px;
       border-radius: 50%;
-      background: rgba(245,158,11,0.2);
-      border: 1px solid rgba(245,158,11,0.35);
+      background: rgba(212,175,55,0.2);
+      border: 1px solid rgba(212,175,55,0.3);
       cursor: pointer;
       transition: all .3s ease;
       padding: 0;
     }
     .tc-dot.active {
-      background: #f59e0b;
+      width: 22px;
+      border-radius: 3px;
+      background: linear-gradient(90deg, #ffd700, #f59e0b);
       border-color: #ffd700;
-      box-shadow: 0 0 10px rgba(245,158,11,0.8);
-      transform: scale(1.35);
+      box-shadow: 0 0 10px rgba(212,175,55,0.7);
     }
+
 
     /* ============================= SCHEDULE ============================= */
     .schedule-list {
@@ -4755,24 +4830,26 @@
 
                 <div class="trophy-pedestals-grid">
                   <!-- Champion Pedestal -->
-                  <div class="pedestal-card champion-card">
+                  <div class="pedestal-card champion-card" data-tag="${escapeHtml(champTag)}">
                     <div class="trophy-crest-wrap">
                       <div class="trophy-badge champion"${champLogoStyle}>${champLogoContent}</div>
                     </div>
                     <div class="pedestal-base gold">
                       <div class="pedestal-type">${escapeHtml(champTag)}</div>
                       <div class="pedestal-winner-name">${escapeHtml(champName)}</div>
+                      <div class="pedestal-stars">★ ★ ★ ★ ★</div>
                     </div>
                   </div>
 
                   <!-- Shield Winner Pedestal -->
-                  <div class="pedestal-card shield-card">
+                  <div class="pedestal-card shield-card" data-tag="${escapeHtml(shieldTag)}">
                     <div class="trophy-crest-wrap">
                       <div class="trophy-badge shield"${shieldLogoStyle}>${shieldLogoContent}</div>
                     </div>
                     <div class="pedestal-base shield">
                       <div class="pedestal-type">${escapeHtml(shieldTag)}</div>
                       <div class="pedestal-winner-name">${escapeHtml(shieldName)}</div>
+                      <div class="pedestal-stars">★ ★ ★ ★ ★</div>
                     </div>
                   </div>
                 </div>
