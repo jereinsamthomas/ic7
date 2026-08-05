@@ -1216,6 +1216,7 @@ table.board td.pts{color:var(--red-bright);font-weight:700;}
         <button class="dash-tab" data-tab="gallery" type="button">Gallery</button>
         <button class="dash-tab" data-tab="activities" type="button">Activities</button>
         <button class="dash-tab" data-tab="rules" type="button">Rules</button>
+        <button class="dash-tab" data-tab="sync" type="button">⚡ Live Sync</button>
         <button class="dash-tab" data-tab="password" type="button">Password</button>
       </nav>
 
@@ -1434,16 +1435,50 @@ table.board td.pts{color:var(--red-bright);font-weight:700;}
 
         <!-- RULES -->
         <section class="dash-panel" data-panel="rules" hidden>
-          <h3>Criteria &amp; Clan Rules</h3>
-          <p class="admin-sub">One line per rule — each line becomes its own bullet on the public page.</p>
+          <h3>Clan Rules &amp; Criteria</h3>
+          <p class="admin-sub">Edit the three rules cards displayed in the Criteria section.</p>
           <form class="admin-form" id="rulesForm">
-            <div class="field"><label for="ru_intro">Section Intro</label><textarea id="ru_intro" rows="2"></textarea></div>
-            <div class="field"><label for="ru_criteria">Joining Criteria (one per line)</label><textarea id="ru_criteria" rows="5"></textarea></div>
-            <div class="field"><label for="ru_conduct">Clan Rules (one per line)</label><textarea id="ru_conduct" rows="5"></textarea></div>
-            <div class="field"><label for="ru_consequences">Consequences (one per line)</label><textarea id="ru_consequences" rows="4"></textarea></div>
+            <div class="field"><label for="rl_joinHeading">Card 1 — Heading</label><input type="text" id="rl_joinHeading"></div>
+            <div class="field"><label for="rl_joinText">Card 1 — Rules (one per line)</label><textarea id="rl_joinText" rows="6"></textarea></div>
+
+            <div class="field"><label for="rl_tourHeading">Card 2 — Heading</label><input type="text" id="rl_tourHeading"></div>
+            <div class="field"><label for="rl_tourText">Card 2 — Rules (one per line)</label><textarea id="rl_tourText" rows="6"></textarea></div>
+
+            <div class="field"><label for="rl_conductHeading">Card 3 — Heading</label><input type="text" id="rl_conductHeading"></div>
+            <div class="field"><label for="rl_conductText">Card 3 — Rules (one per line)</label><textarea id="rl_conductText" rows="6"></textarea></div>
+
             <button type="submit" class="btn btn-red">Save Rules</button>
             <span class="admin-success" id="rulesSavedMsg" hidden>Saved.</span>
           </form>
+        </section>
+
+        <!-- LIVE SYNC & BACKUP -->
+        <section class="dash-panel" data-panel="sync" hidden>
+          <h3>⚡ Live Multi-Device Cloud Sync</h3>
+          <p class="admin-sub">Connect a free Supabase database so updates made on your phone or laptop automatically sync to every visitor on any device worldwide.</p>
+          
+          <form class="admin-form" id="cloudSyncForm">
+            <div class="field"><label for="cs_url">Supabase Project URL</label><input type="url" id="cs_url" placeholder="https://your-project.supabase.co"></div>
+            <div class="field"><label for="cs_key">Supabase Anon Key (API key)</label><textarea id="cs_key" rows="2" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."></textarea></div>
+            <div class="admin-form-actions">
+              <button type="submit" class="btn btn-red">Save &amp; Connect Cloud Sync</button>
+              <button type="button" class="btn btn-outline" id="cs_disconnectBtn">Disconnect Cloud</button>
+            </div>
+            <div style="margin-top:14px;" id="cs_statusMsg"></div>
+          </form>
+
+          <div style="margin-top:24px;border-top:1px solid var(--line);padding-top:20px;">
+            <h3 style="font-size:18px;">📦 Data Backup &amp; Restore (JSON)</h3>
+            <p class="admin-sub">Export all site data (squads, stats, champions, rules) to a backup file or import data to copy updates to another device instantly.</p>
+            <div class="admin-form-actions" style="margin-bottom:14px;flex-wrap:wrap;gap:12px;">
+              <button type="button" class="btn btn-red" id="exportDataBtn">Download Data Backup (.json)</button>
+              <label class="btn btn-outline" style="margin:0;cursor:pointer;">
+                Import Backup File (.json)
+                <input type="file" id="importDataInput" accept=".json" style="display:none;">
+              </label>
+            </div>
+            <div id="importStatusMsg"></div>
+          </div>
         </section>
 
         <!-- PASSWORD -->
@@ -2285,6 +2320,92 @@ import { Store } from './src/store.js';
       if(!btn) return;
       document.querySelectorAll('.tour-table-tab').forEach(b => b.classList.toggle('active', b === btn));
       showTourStatBlock();
+    });
+  }
+
+  // Live Cloud Sync Tab logic
+  const csForm = document.getElementById('cloudSyncForm');
+  const csUrlEl = document.getElementById('cs_url');
+  const csKeyEl = document.getElementById('cs_key');
+  const csMsgEl = document.getElementById('cs_statusMsg');
+
+  if (csForm) {
+    csUrlEl.value = localStorage.getItem('ic7_supabase_url') || '';
+    csKeyEl.value = localStorage.getItem('ic7_supabase_key') || '';
+    
+    if (Store.isCloudConnected) {
+      csMsgEl.innerHTML = '<span style="color:var(--green-live);font-family:var(--font-mono);font-size:12px;">✅ Connected to Cloud Database — Updates sync live to all devices!</span>';
+    } else if (csUrlEl.value && csKeyEl.value) {
+      csMsgEl.innerHTML = '<span style="color:var(--red-bright);font-family:var(--font-mono);font-size:12px;">⚠️ Cloud credentials saved, testing connection on submit.</span>';
+    } else {
+      csMsgEl.innerHTML = '<span style="color:var(--ink-faint);font-family:var(--font-mono);font-size:12px;">Running in Local Mode. Enter Supabase URL & Key above to sync live across devices.</span>';
+    }
+
+    csForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const url = csUrlEl.value.trim();
+      const key = csKeyEl.value.trim();
+      csMsgEl.innerHTML = '<span style="color:var(--ink-dim);font-family:var(--font-mono);font-size:12px;">Testing connection...</span>';
+      
+      if (!url || !key) {
+        localStorage.removeItem('ic7_supabase_url');
+        localStorage.removeItem('ic7_supabase_key');
+        csMsgEl.innerHTML = '<span style="color:var(--ink-faint);font-family:var(--font-mono);font-size:12px;">Cleared cloud credentials. Operating in Local Mode.</span>';
+        return;
+      }
+
+      const res = await Store.testConnection(url, key);
+      if (res.success) {
+        localStorage.setItem('ic7_supabase_url', url);
+        localStorage.setItem('ic7_supabase_key', key);
+        csMsgEl.innerHTML = '<span style="color:var(--green-live);font-family:var(--font-mono);font-size:12.5px;">✅ Connection successful! Reloading to sync data...</span>';
+        setTimeout(() => window.location.reload(), 1200);
+      } else {
+        csMsgEl.innerHTML = `<span style="color:var(--red-bright);font-family:var(--font-mono);font-size:12px;">❌ ${escapeHtml(res.error)}</span>`;
+      }
+    });
+
+    document.getElementById('cs_disconnectBtn').addEventListener('click', () => {
+      localStorage.removeItem('ic7_supabase_url');
+      localStorage.removeItem('ic7_supabase_key');
+      csUrlEl.value = ''; csKeyEl.value = '';
+      csMsgEl.innerHTML = '<span style="color:var(--ink-faint);font-family:var(--font-mono);font-size:12px;">Disconnected from cloud. Operating in Local Mode.</span>';
+    });
+  }
+
+  // Backup & Restore JSON
+  const exportBtn = document.getElementById('exportDataBtn');
+  if (exportBtn) {
+    exportBtn.addEventListener('click', () => {
+      const json = Store.exportJson();
+      const blob = new Blob([json], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `ic7_website_backup_${new Date().toISOString().slice(0,10)}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+  }
+
+  const importInput = document.getElementById('importDataInput');
+  if (importInput) {
+    importInput.addEventListener('change', () => {
+      const file = importInput.files[0];
+      const msg = document.getElementById('importStatusMsg');
+      if (!file || !msg) return;
+      msg.innerHTML = '<span style="color:var(--ink-dim);font-family:var(--font-mono);font-size:12px;">Importing backup...</span>';
+      const reader = new FileReader();
+      reader.onload = async (e) => {
+        const res = await Store.importJson(e.target.result);
+        if (res.success) {
+          msg.innerHTML = `<span style="color:var(--green-live);font-family:var(--font-mono);font-size:12px;">✅ Imported ${res.count} items! Reloading page...</span>`;
+          setTimeout(() => window.location.reload(), 1200);
+        } else {
+          msg.innerHTML = `<span style="color:var(--red-bright);font-family:var(--font-mono);font-size:12px;">❌ Import failed: ${escapeHtml(res.error)}</span>`;
+        }
+      };
+      reader.readAsText(file);
     });
   }
 
