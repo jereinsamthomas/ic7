@@ -1049,6 +1049,249 @@
       color: var(--red-bright);
     }
 
+    /* ============================= TROPHY CABINET SHOWCASE ============================= */
+    .trophy-cabinet-container {
+      position: relative;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 10px;
+    }
+
+    .trophy-track-wrap {
+      overflow: hidden;
+      border-radius: 8px;
+    }
+
+    .trophy-track {
+      display: flex;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      width: 100%;
+    }
+
+    .trophy-slide {
+      flex: 0 0 100%;
+      width: 100%;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+
+    /* 3D Glass Showcase Cabinet */
+    .trophy-case {
+      position: relative;
+      background: radial-gradient(ellipse at top, rgba(225, 29, 72, 0.25) 0%, rgba(11, 11, 15, 0.96) 75%);
+      border: 1.5px solid rgba(225, 29, 72, 0.45);
+      box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.95), inset 0 0 50px rgba(225, 29, 72, 0.15);
+      border-radius: 8px;
+      padding: 34px 24px 36px;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .trophy-case::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, transparent, var(--red-bright), #f59e0b, var(--red-bright), transparent);
+      box-shadow: 0 0 20px rgba(225, 29, 72, 0.8);
+    }
+
+    .tc-case-header {
+      margin-bottom: 28px;
+    }
+
+    .tc-case-header h3 {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 5vw, 48px);
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      color: #ffffff;
+      line-height: 1;
+      margin-bottom: 6px;
+      text-shadow: 0 0 20px rgba(225, 29, 72, 0.6);
+    }
+
+    .tc-case-header p {
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--red);
+    }
+
+    .trophy-pedestals-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+    @media (max-width: 680px) {
+      .trophy-pedestals-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+    }
+
+    .pedestal-card {
+      position: relative;
+      background: rgba(18, 18, 23, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 6px;
+      padding: 26px 20px 22px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      transition: transform .35s ease, border-color .35s ease, box-shadow .35s ease;
+      backdrop-filter: blur(8px);
+    }
+
+    .pedestal-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(225, 29, 72, 0.6);
+      box-shadow: 0 15px 35px -10px rgba(225, 29, 72, 0.35);
+    }
+
+    .pedestal-card.shield-card:hover {
+      border-color: rgba(245, 158, 11, 0.6);
+      box-shadow: 0 15px 35px -10px rgba(245, 158, 11, 0.35);
+    }
+
+    .spotlight-beam {
+      position: absolute;
+      top: 0;
+      width: 90px;
+      height: 100px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.18) 0%, transparent 100%);
+      clip-path: polygon(30% 0%, 70% 0%, 100% 100%, 0% 100%);
+      pointer-events: none;
+      opacity: 0.6;
+    }
+
+    .trophy-crest-wrap {
+      position: relative;
+      margin-bottom: 16px;
+      z-index: 2;
+    }
+
+    .trophy-badge {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      object-fit: cover;
+      background-size: cover;
+      background-position: center;
+      border: 2.5px solid var(--red);
+      box-shadow: 0 0 25px rgba(225, 29, 72, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 42px;
+      background-color: #0b0b0f;
+      margin: 0 auto;
+    }
+
+    .pedestal-card.shield-card .trophy-badge {
+      border-color: #f59e0b;
+      box-shadow: 0 0 25px rgba(245, 158, 11, 0.6);
+    }
+
+    .pedestal-base {
+      width: 100%;
+      background: linear-gradient(180deg, rgba(30, 30, 42, 0.95), rgba(15, 15, 22, 0.98));
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-bottom: 3px solid var(--red);
+      padding: 14px 10px;
+      margin-top: 14px;
+      border-radius: 3px;
+      box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.08);
+    }
+
+    .pedestal-card.shield-card .pedestal-base {
+      border-bottom-color: #f59e0b;
+    }
+
+    .pedestal-type {
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      margin-bottom: 4px;
+    }
+
+    .pedestal-winner-name {
+      font-family: var(--font-display);
+      font-size: 22px;
+      letter-spacing: .03em;
+      text-transform: uppercase;
+      color: #ffffff;
+      line-height: 1.1;
+      word-break: break-word;
+    }
+
+    .pedestal-card.shield-card .pedestal-winner-name {
+      color: #f59e0b;
+    }
+
+    .tc-case-footer {
+      margin-top: 26px;
+      padding-top: 18px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.12);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--ink-dim);
+    }
+
+    .tc-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: rgba(11, 11, 15, 0.88);
+      border: 1px solid var(--line-strong);
+      color: #fff;
+      font-size: 26px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all .25s ease;
+    }
+    .tc-arrow:hover {
+      background: var(--red);
+      border-color: var(--red-bright);
+      box-shadow: 0 0 15px rgba(225, 29, 72, 0.6);
+      transform: translateY(-50%) scale(1.1);
+    }
+    .tc-prev { left: -16px; }
+    .tc-next { right: -16px; }
+
+    .tc-dots {
+      display: flex;
+      justify-content: center;
+      gap: 9px;
+      margin-top: 20px;
+    }
+    .tc-dot {
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.18);
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all .25s ease;
+    }
+    .tc-dot.active {
+      background: var(--red);
+      box-shadow: 0 0 12px var(--red-bright);
+      transform: scale(1.25);
+    }
+
     /* ============================= SCHEDULE ============================= */
     .schedule-list {
       display: flex;
@@ -2622,7 +2865,7 @@
         <a href="#live">Live</a>
         <a href="#highlights">Highlights</a>
         <a href="tournament-registration.html" id="navTournamentLink" class="nav-cta" hidden>Tournament Reg</a>
-        <a href="#schedule">Schedule</a>
+        <a href="#trophyCabinet">Trophies</a>
         <a href="#teams">Squads</a>
         <a href="#majorTours">Tours</a>
         <a href="#leaderboard">Table</a>
@@ -2826,13 +3069,24 @@
     </div>
   </section>
 
-  <!-- ============================= SCHEDULE ============================= -->
-  <section class="section" id="schedule" style="background:var(--bg-elevated);">
+  <!-- ============================= TROPHY CABINET ============================= -->
+  <section class="section" id="trophyCabinet" style="background:var(--bg-elevated); position:relative; overflow:hidden;">
     <div class="wrap">
-      <div class="eyebrow reveal">Fixtures</div>
-      <h2 class="section-title reveal">Match Schedule</h2>
-      <p class="section-lede reveal">Upcoming sevens fixtures for the IC7 senior squad.</p>
-      <div class="schedule-list" id="scheduleList"></div>
+      <div class="eyebrow reveal">WHERE LEGENDS EVOLVE</div>
+      <h2 class="section-title reveal">TROPHY <span class="red-text">CABINET</span></h2>
+      <p class="section-lede reveal">Two Seasons. One Legacy. Explore the reigning champions and shield winners across IC7's 6 major tournament series.</p>
+      
+      <!-- 3D Glass Showcase Cabinet Frame -->
+      <div class="trophy-cabinet-container reveal">
+        <button type="button" class="tc-arrow tc-prev" id="tcPrevBtn" aria-label="Previous Tournament">‹</button>
+        <button type="button" class="tc-arrow tc-next" id="tcNextBtn" aria-label="Next Tournament">›</button>
+        
+        <div class="trophy-track-wrap">
+          <div class="trophy-track" id="trophyTrack"></div>
+        </div>
+
+        <div class="tc-dots" id="tcDots"></div>
+      </div>
     </div>
   </section>
 
@@ -4221,16 +4475,122 @@
           await Store.set('ic7_major_tours', data);
           renderToursGrid();
           renderUpcomingTicker();
+          renderTrophyCabinet();
           const msg = document.getElementById('toursMetaSavedMsg');
           if (msg) { msg.hidden = false; setTimeout(() => msg.hidden = true, 2000); }
         });
       }
+
+      let tcTimer = null;
+      function renderTrophyCabinet() {
+        const track = document.getElementById('trophyTrack');
+        const dotsHost = document.getElementById('tcDots');
+        if (!track) return;
+
+        const meta = getToursMeta();
+        const slidesHtml = MAJOR_TOURS.map((t) => {
+          const m = meta[t.id] || {};
+          const tourName = m.name || t.name;
+          const champName = m.champion || 'TBD';
+          const shieldName = m.shieldWinner || 'TBD';
+
+          const champLogoStyle = m.champLogo
+            ? `style="background-image:url('${m.champLogo}')"`
+            : '';
+          const champLogoContent = m.champLogo ? '' : '🏆';
+
+          const shieldLogoStyle = m.shieldLogo
+            ? `style="background-image:url('${m.shieldLogo}')"`
+            : '';
+          const shieldLogoContent = m.shieldLogo ? '' : '🛡️';
+
+          return `
+            <div class="trophy-slide">
+              <div class="trophy-case">
+                <div class="spotlight-beam" style="left:20%;"></div>
+                <div class="spotlight-beam" style="right:20%;"></div>
+                
+                <div class="tc-case-header">
+                  <h3>${escapeHtml(tourName)}</h3>
+                  <p>TROPHY CABINET</p>
+                </div>
+
+                <div class="trophy-pedestals-grid">
+                  <!-- Champion Pedestal -->
+                  <div class="pedestal-card champion-card">
+                    <div class="trophy-crest-wrap">
+                      <div class="trophy-badge champion"${champLogoStyle}>${champLogoContent}</div>
+                    </div>
+                    <div class="pedestal-base gold">
+                      <div class="pedestal-type">SEASON 1 · CHAMPIONS</div>
+                      <div class="pedestal-winner-name">${escapeHtml(champName)}</div>
+                    </div>
+                  </div>
+
+                  <!-- Shield Winner Pedestal -->
+                  <div class="pedestal-card shield-card">
+                    <div class="trophy-crest-wrap">
+                      <div class="trophy-badge shield"${shieldLogoStyle}>${shieldLogoContent}</div>
+                    </div>
+                    <div class="pedestal-base shield">
+                      <div class="pedestal-type">SEASON 2 · SHIELD WINNER</div>
+                      <div class="pedestal-winner-name">${escapeHtml(shieldName)}</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="tc-case-footer">
+                  <span>TWO SEASONS. ONE LEGACY. EVOLUTION NEVER STOPS.</span>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        track.innerHTML = slidesHtml;
+
+        if (dotsHost) {
+          dotsHost.innerHTML = MAJOR_TOURS.map((_, i) =>
+            `<button type="button" class="tc-dot${i === 0 ? ' active' : ''}" data-i="${i}" aria-label="Go to slide ${i + 1}"></button>`
+          ).join('');
+        }
+
+        let currentIdx = 0;
+        const total = MAJOR_TOURS.length;
+
+        function goToSlide(i) {
+          currentIdx = (i + total) % total;
+          track.style.transform = `translateX(-${currentIdx * 100}%)`;
+          if (dotsHost) {
+            [...dotsHost.children].forEach((d, di) => d.classList.toggle('active', di === currentIdx));
+          }
+        }
+
+        const prevBtn = document.getElementById('tcPrevBtn');
+        const nextBtn = document.getElementById('tcNextBtn');
+        if (prevBtn) prevBtn.onclick = () => goToSlide(currentIdx - 1);
+        if (nextBtn) nextBtn.onclick = () => goToSlide(currentIdx + 1);
+
+        if (dotsHost) {
+          dotsHost.querySelectorAll('.tc-dot').forEach(d => {
+            d.onclick = () => goToSlide(parseInt(d.dataset.i, 10));
+          });
+        }
+
+        if (tcTimer) clearInterval(tcTimer);
+        tcTimer = setInterval(() => {
+          goToSlide(currentIdx + 1);
+        }, 5000);
+      }
+
       renderToursGrid();
       renderUpcomingTicker();
+      renderTrophyCabinet();
       window.addEventListener('ic7_store_updated', (e) => {
         if (!e.detail || !e.detail.key || e.detail.key === 'ic7_major_tours') {
           renderToursGrid();
           renderUpcomingTicker();
+          renderTrophyCabinet();
         }
       });
 
