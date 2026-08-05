@@ -2081,6 +2081,10 @@ import { Store } from './src/store.js';
         <div class="field"><label for="mt_${t.id}_champion">${escapeHtml(t.name)} — Current Champion</label><input type="text" id="mt_${t.id}_champion"></div>
         <div class="field"><label for="mt_${t.id}_champLogo">${escapeHtml(t.name)} — Champion Logo (optional)</label><input type="file" accept="image/*" id="mt_${t.id}_champLogo"></div>
       </div>
+      <div class="field-row">
+        <div class="field"><label for="mt_${t.id}_shieldWinner">${escapeHtml(t.name)} — Shield Winner</label><input type="text" id="mt_${t.id}_shieldWinner" placeholder="Shield winner name..."></div>
+        <div class="field"><label for="mt_${t.id}_shieldLogo">${escapeHtml(t.name)} — Shield Winner Logo (optional)</label><input type="file" accept="image/*" id="mt_${t.id}_shieldLogo"></div>
+      </div>
       <div class="field"><label for="mt_${t.id}_desc">${escapeHtml(t.name)} — Short Description</label><textarea id="mt_${t.id}_desc" rows="2"></textarea></div>
     `).join('');
   }
@@ -2093,10 +2097,12 @@ import { Store } from './src/store.js';
       const teamsEl = document.getElementById(`mt_${t.id}_teams`);
       const descEl = document.getElementById(`mt_${t.id}_desc`);
       const champEl = document.getElementById(`mt_${t.id}_champion`);
+      const shieldEl = document.getElementById(`mt_${t.id}_shieldWinner`);
       if(nameEl) nameEl.value = meta0[t.id].name;
       if(teamsEl) teamsEl.value = meta0[t.id].teams;
       if(descEl) descEl.value = meta0[t.id].desc;
       if(champEl) champEl.value = meta0[t.id].champion || '';
+      if(shieldEl) shieldEl.value = meta0[t.id].shieldWinner || '';
     });
     toursMetaForm.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -2109,12 +2115,20 @@ import { Store } from './src/store.js';
           try { champLogo = await compressImage(fileInput.files[0], 300); }
           catch (err) { console.error("Failed to compress champion logo:", err); }
         }
+        const shieldFileInput = document.getElementById(`mt_${t.id}_shieldLogo`);
+        let shieldLogo = (meta0[t.id] && meta0[t.id].shieldLogo) || '';
+        if (shieldFileInput && shieldFileInput.files && shieldFileInput.files[0]) {
+          try { shieldLogo = await compressImage(shieldFileInput.files[0], 300); }
+          catch (err) { console.error("Failed to compress shield logo:", err); }
+        }
         data[t.id] = {
           name: (document.getElementById(`mt_${t.id}_name`).value || '').trim() || t.name,
           teams: (document.getElementById(`mt_${t.id}_teams`).value || '').trim() || t.teams,
           desc: (document.getElementById(`mt_${t.id}_desc`).value || '').trim(),
           champion: (document.getElementById(`mt_${t.id}_champion`).value || '').trim(),
-          champLogo: champLogo
+          champLogo: champLogo,
+          shieldWinner: (document.getElementById(`mt_${t.id}_shieldWinner`).value || '').trim(),
+          shieldLogo: shieldLogo
         };
       }
       await Store.set('ic7_major_tours', data);

@@ -988,6 +988,23 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   }
 
+  if (meta.shieldWinner) {
+    const metaRow = document.querySelector('.tourpage-meta-row');
+    if (metaRow) {
+      const shieldDiv = document.createElement('div');
+      shieldDiv.style.display = 'flex';
+      shieldDiv.style.flexDirection = 'column';
+      shieldDiv.style.gap = '4px';
+      const shieldLogoHtml = meta.shieldLogo
+        ? `<div style="width:24px;height:24px;border-radius:50%;background-image:url('${meta.shieldLogo}');background-size:cover;background-position:center;border:1px solid #f59e0b;box-shadow: 0 0 10px rgba(245,158,11,0.3);"></div>`
+        : '<span style="font-size:18px;line-height:1;">🛡️</span>';
+      shieldDiv.innerHTML = `<span style="color:var(--ink-faint);">Shield Winner</span><b style="display:flex;align-items:center;gap:8px;color:#f59e0b;">${shieldLogoHtml}${escapeHtml(meta.shieldWinner)}</b>`;
+      metaRow.appendChild(shieldDiv);
+    }
+  }
+
+
+
   function renderTable(key, fieldkeys){
     const items = Store.get('ic7_tour_' + TOUR_ID + '_' + key, []);
     const tbody = document.getElementById('tb_' + key);
