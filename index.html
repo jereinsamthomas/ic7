@@ -1099,24 +1099,26 @@
     }
     .trophy-slide { flex: 0 0 100%; width: 100%; box-sizing: border-box; }
 
-    /* ── The full cabinet frame ── */
+    /* ── The full cabinet frame — DEEP COSMIC STAR-SPACE BG ── */
     .trophy-case {
       position: relative;
       overflow: hidden;
       border-radius: 6px;
-      /* Layered: lounge photo + dark-vignette overlay */
       background:
-        /* center vignette keeps content readable */
-        radial-gradient(ellipse 90% 70% at 50% 40%, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.85) 100%),
-        /* bottom gradient blackout */
-        linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.9) 75%),
-        /* lounge photo */
-        url('/assets/tc_bg_lounge.jpg') center 30% / cover no-repeat;
-      border: 1px solid rgba(212,175,55,0.35);
+        /* Top center crimson starburst glow */
+        radial-gradient(circle at 50% 20%, rgba(225,29,72,0.22) 0%, transparent 55%),
+        /* Left ambient gold nebula */
+        radial-gradient(circle at 15% 75%, rgba(212,175,55,0.16) 0%, transparent 45%),
+        /* Right cosmic violet nebula */
+        radial-gradient(circle at 85% 30%, rgba(147,51,234,0.18) 0%, transparent 50%),
+        /* Deep space midnight backdrop */
+        radial-gradient(circle at 50% 50%, #150921 0%, #090312 60%, #030108 100%);
+      border: 1px solid rgba(212,175,55,0.4);
       box-shadow:
         0 0 0 3px rgba(212,175,55,0.12),
+        0 0 40px rgba(225,29,72,0.15),
         0 50px 100px -20px rgba(0,0,0,0.98),
-        inset 0 1px 0 rgba(255,215,0,0.3),
+        inset 0 1px 0 rgba(255,215,0,0.35),
         inset 0 -1px 0 rgba(255,215,0,0.15);
       min-height: 520px;
       display: flex;
@@ -1155,7 +1157,7 @@
       z-index: 5;
     }
 
-    /* ── SVG / bg-art pitch overlay ── */
+    /* ── SVG / bg-art pitch & cosmic starfield overlay ── */
     .tc-bg-art {
       position: absolute;
       inset: 0;
@@ -1164,29 +1166,18 @@
       overflow: hidden;
     }
     .tc-bg-art svg { position: absolute; inset: 0; width: 100%; height: 100%; }
-    /* Small lounge "window" card — bottom-left accent */
-    .tc-bg-photo-small {
-      position: absolute;
-      bottom: 52px;
-      left: 28px;
-      width: 170px;
-      height: 120px;
-      background-image: url('/assets/tc_bg_lounge2.jpg');
-      background-size: cover;
-      background-position: center;
-      opacity: 0.6;
-      border: 1px solid rgba(212,175,55,0.45);
-      border-radius: 2px;
-      filter: saturate(0.75) brightness(0.7);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.85), 0 0 0 1px rgba(212,175,55,0.2);
+
+    @keyframes tcStarBlink {
+      0%, 100% { opacity: 0.2; transform: scale(0.8); }
+      50%       { opacity: 1; transform: scale(1.4); }
     }
-    .tc-bg-photo-big { display: none; } /* handled by .trophy-case background */
-    @media (max-width: 680px) {
-      .tc-bg-photo-small { width: 100px; height: 72px; bottom: 42px; left: 14px; }
-    }
+    .tc-star-s1 { animation: tcStarBlink 3s ease-in-out infinite; transform-origin: center; }
+    .tc-star-s2 { animation: tcStarBlink 4.5s ease-in-out 1.2s infinite; transform-origin: center; }
+    .tc-star-s3 { animation: tcStarBlink 2.5s ease-in-out 0.6s infinite; transform-origin: center; }
+
     @keyframes tcPitchPulse {
-      0%, 100% { opacity: 0.12; }
-      50%       { opacity: 0.22; }
+      0%, 100% { opacity: 0.15; }
+      50%       { opacity: 0.28; }
     }
     .tc-pitch-lines { animation: tcPitchPulse 7s ease-in-out infinite; }
 
@@ -4777,23 +4768,69 @@
           return `
             <div class="trophy-slide">
               <div class="trophy-case">
-                <!-- Background art: lounge photos + pitch line overlay -->
+                <!-- Background art: Deep Cosmic Star Space & Tactical Pitch Overlay -->
                 <div class="tc-bg-art" aria-hidden="true">
-                  <!-- BIG: full bleed lounge room photo -->
-                  <div class="tc-bg-photo-big"></div>
-                  <!-- SMALL: corner lounge window thumbnail -->
-                  <div class="tc-bg-photo-small"></div>
-                  <!-- Pitch lines SVG overlay on top -->
                   <svg viewBox="0 0 900 500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
                     <defs>
                       <radialGradient id="tcGlowC" cx="50%" cy="50%" r="50%">
-                        <stop offset="0%" stop-color="#e11d48" stop-opacity="0.15"/>
-                        <stop offset="100%" stop-color="#e11d48" stop-opacity="0"/>
+                        <stop offset="0%" stop-color="#e11d48" stop-opacity="0.25"/>
+                        <stop offset="60%" stop-color="#9333ea" stop-opacity="0.1"/>
+                        <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+                      </radialGradient>
+                      <radialGradient id="tcStarGlow" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" stop-color="#ffffff" stop-opacity="1"/>
+                        <stop offset="40%" stop-color="#ffd700" stop-opacity="0.8"/>
+                        <stop offset="100%" stop-color="#ffd700" stop-opacity="0"/>
                       </radialGradient>
                     </defs>
-                    <!-- Subtle central glow -->
-                    <ellipse cx="450" cy="250" rx="380" ry="220" fill="url(#tcGlowC)"/>
-                    <!-- Pitch / tactical lines -->
+                    
+                    <!-- Ambient cosmic nebula glow -->
+                    <ellipse cx="450" cy="250" rx="420" ry="240" fill="url(#tcGlowC)"/>
+
+                    <!-- Twinkling Cosmic Stars Group -->
+                    <g class="tc-starfield">
+                      <!-- Bright twinkling stars (s1) -->
+                      <circle cx="120" cy="80" r="2" fill="#ffffff" class="tc-star-s1"/>
+                      <circle cx="780" cy="90" r="2.5" fill="#ffd700" class="tc-star-s1"/>
+                      <circle cx="250" cy="420" r="1.8" fill="#ffffff" class="tc-star-s1"/>
+                      <circle cx="680" cy="410" r="2.2" fill="#fff5d1" class="tc-star-s1"/>
+                      <circle cx="450" cy="70" r="2" fill="#ffffff" class="tc-star-s1"/>
+
+                      <!-- Medium twinkling stars (s2) -->
+                      <circle cx="80" cy="280" r="1.5" fill="#ffd700" class="tc-star-s2"/>
+                      <circle cx="820" cy="260" r="1.5" fill="#ffffff" class="tc-star-s2"/>
+                      <circle cx="340" cy="110" r="1.8" fill="#ffffff" class="tc-star-s2"/>
+                      <circle cx="560" cy="110" r="1.8" fill="#ffd700" class="tc-star-s2"/>
+                      <circle cx="190" cy="190" r="1.5" fill="#ffffff" class="tc-star-s2"/>
+                      <circle cx="710" cy="190" r="1.5" fill="#ffffff" class="tc-star-s2"/>
+                      <circle cx="380" cy="440" r="1.5" fill="#e6ca65" class="tc-star-s2"/>
+                      <circle cx="520" cy="440" r="1.5" fill="#ffffff" class="tc-star-s2"/>
+
+                      <!-- Subtle background micro-stars (s3) -->
+                      <circle cx="50" cy="140" r="1" fill="#ffffff" class="tc-star-s3" opacity="0.6"/>
+                      <circle cx="850" cy="140" r="1" fill="#ffd700" class="tc-star-s3" opacity="0.6"/>
+                      <circle cx="150" cy="350" r="1" fill="#ffffff" class="tc-star-s3" opacity="0.6"/>
+                      <circle cx="750" cy="350" r="1" fill="#ffffff" class="tc-star-s3" opacity="0.6"/>
+                      <circle cx="290" cy="240" r="1" fill="#ffd700" class="tc-star-s3" opacity="0.5"/>
+                      <circle cx="610" cy="240" r="1" fill="#ffffff" class="tc-star-s3" opacity="0.5"/>
+                      <circle cx="450" cy="460" r="1.2" fill="#ffd700" class="tc-star-s3" opacity="0.7"/>
+
+                      <!-- 4-Point Star Sparkle Crosses -->
+                      <g transform="translate(140,110) scale(0.6)" class="tc-star-s1">
+                        <path d="M0,-12 L0,12 M-12,0 L12,0" stroke="#ffd700" stroke-width="1.5" opacity="0.85"/>
+                        <circle cx="0" cy="0" r="3" fill="#ffffff"/>
+                      </g>
+                      <g transform="translate(760,110) scale(0.6)" class="tc-star-s2">
+                        <path d="M0,-12 L0,12 M-12,0 L12,0" stroke="#ffffff" stroke-width="1.5" opacity="0.85"/>
+                        <circle cx="0" cy="0" r="3" fill="#ffd700"/>
+                      </g>
+                      <g transform="translate(450,40) scale(0.7)" class="tc-star-s3">
+                        <path d="M0,-14 L0,14 M-14,0 L14,0" stroke="#ffd700" stroke-width="1.8" opacity="0.9"/>
+                        <circle cx="0" cy="0" r="3.5" fill="#ffffff"/>
+                      </g>
+                    </g>
+
+                    <!-- Pitch / tactical lines overlay -->
                     <g class="tc-pitch-lines" stroke="#e11d48" stroke-width="1.2" fill="none">
                       <!-- outer boundary -->
                       <rect x="60" y="50" width="780" height="400" rx="2"/>
@@ -4801,7 +4838,7 @@
                       <line x1="450" y1="50" x2="450" y2="450"/>
                       <!-- centre circle -->
                       <circle cx="450" cy="250" r="80"/>
-                      <circle cx="450" cy="250" r="4" fill="#e11d48" opacity="0.5"/>
+                      <circle cx="450" cy="250" r="4" fill="#e11d48" opacity="0.6"/>
                       <!-- left penalty box -->
                       <rect x="60" y="148" width="130" height="204"/>
                       <!-- right penalty box -->
@@ -4816,11 +4853,11 @@
                       <path d="M60 450 Q75 450 75 435"/>
                       <path d="M840 450 Q825 450 825 435"/>
                       <!-- penalty spots -->
-                      <circle cx="160" cy="250" r="3" fill="#e11d48" opacity="0.6"/>
-                      <circle cx="740" cy="250" r="3" fill="#e11d48" opacity="0.6"/>
+                      <circle cx="160" cy="250" r="3" fill="#e11d48" opacity="0.7"/>
+                      <circle cx="740" cy="250" r="3" fill="#e11d48" opacity="0.7"/>
                       <!-- penalty arcs -->
-                      <path d="M190 190 A80 80 0 0 1 190 310" opacity="0.6"/>
-                      <path d="M710 190 A80 80 0 0 0 710 310" opacity="0.6"/>
+                      <path d="M190 190 A80 80 0 0 1 190 310" opacity="0.7"/>
+                      <path d="M710 190 A80 80 0 0 0 710 310" opacity="0.7"/>
                       <!-- IC7 watermark -->
                       <text x="450" y="275" text-anchor="middle" font-family="Anton,sans-serif" font-size="140" fill="rgba(225,29,72,0.04)" letter-spacing="10" transform="rotate(-5,450,250)" stroke="none">IC7</text>
                     </g>
