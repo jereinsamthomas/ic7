@@ -2231,9 +2231,44 @@
       text-shadow: 0 0 10px rgba(255, 17, 34, 0.85);
     }
 
+
+    /* ─── Lenis Scroll Override & 3D Depth Reveals ─── */
+    html {
+      scroll-behavior: auto !important; /* Prevent browser smooth scroll clashing with Lenis */
+    }
+    
+    .reveal {
+      opacity: 0;
+      transform: perspective(1200px) rotateX(14deg) translateZ(-110px) translateY(50px);
+      transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+      transform-style: preserve-3d;
+      backface-visibility: hidden;
+    }
+    .reveal.in-view {
+      opacity: 1;
+      transform: perspective(1200px) rotateX(0deg) translateZ(0px) translateY(0);
+    }
+
+    /* Glassmorphism card upgrades */
+    .tour-card, 
+    .team-card, 
+    .player-card, 
+    .activity-card, 
+    .reigning-champ-card, 
+    .stat-card, 
+    .fixture {
+      background: rgba(13, 13, 13, 0.9) !important;
+      border: 1px solid rgba(212, 0, 0, 0.3) !important;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.85), 0 0 15px rgba(212, 0, 0, 0.05) !important;
+      backdrop-filter: blur(12px) !important;
+      -webkit-backdrop-filter: blur(12px) !important;
+      transition: transform 0.15s ease-out, box-shadow 0.15s ease-out, border-color 0.15s ease-out !important;
+    }
+
 </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
 </head>
 
 <body>
@@ -4954,6 +4989,44 @@
 
       // eFootball / PES style 3D Tilt Card Effects
             // ─── THREE.JS 3D HOLOGRAM GAME CONTROLLER & HUD SCREEN ENGINE ───
+            // ─── SMOOTH SCROLL (LENIS ENGINE) ───
+      const initSmoothScroll = () => {
+        if (typeof Lenis !== 'undefined') {
+          const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            direction: 'vertical',
+            gestureDirection: 'vertical',
+            smooth: true,
+            mouseMultiplier: 0.95,
+            smoothTouch: false,
+            touchMultiplier: 1.8,
+            infinite: false
+          });
+
+          function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+          }
+          requestAnimationFrame(raf);
+          
+          // Smooth scroll to anchor targets
+          document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+              const hash = this.getAttribute('href');
+              if (hash === '#') return;
+              const target = document.querySelector(hash);
+              if (target) {
+                e.preventDefault();
+                lenis.scrollTo(target, { offset: -60, duration: 1.2 });
+              }
+            });
+          });
+        }
+      };
+      
+      initSmoothScroll();
+
       const init3DController = () => {
         const canvas = document.getElementById('webgl-canvas');
         if (!canvas || typeof THREE === 'undefined') return;
