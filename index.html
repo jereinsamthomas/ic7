@@ -1379,55 +1379,32 @@
     .tournament-wrap.single .tournament-info { padding-bottom:32px; }
     .tournament-cta { width:100%; margin-top:24px; }
 
-    /* ─── WEEKLY HIGHLIGHT CAROUSEL (PREMIUM IMMERSIVE STYLE) ──────────────── */
+    /* ─── WEEKLY HIGHLIGHT CAROUSEL (FULL SCREEN BLENDED STYLE) ──────────────── */
     .wh-section {
       position: relative;
-      padding: 120px 0 60px;
       background: #000000;
       border-bottom: 3px solid var(--red);
-      min-height: 85vh;
+      width: 100vw;
+      height: 100vh;
+      min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
-    }
-    @media(max-width:700px) {
-      .wh-section {
-        padding: 90px 0 40px;
-        min-height: auto;
-      }
     }
 
     .wh-carousel {
       position: relative;
       overflow: hidden;
       width: 100%;
-      background: #0c0c0c;
-      border: 2px solid var(--red);
-      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.95);
-      background-image:
-        linear-gradient(to right, rgba(212,0,0,0.04) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(212,0,0,0.04) 1px, transparent 1px);
-      background-size: 30px 30px;
-    }
-    .wh-carousel::after {
-      content: "HIGHLIGHTS";
-      position: absolute;
-      bottom: -10px;
-      left: 20px;
-      font-family: var(--font-display);
-      font-size: clamp(60px, 12vw, 150px);
-      color: rgba(212, 0, 0, 0.03);
-      line-height: 0.8;
-      pointer-events: none;
-      z-index: 0;
-      letter-spacing: -0.02em;
+      height: 100%;
+      background: #000000;
     }
 
     .wh-label {
       position: absolute;
-      top: 0;
-      left: 0;
+      top: 100px;
+      left: 10%;
       z-index: 10;
       font-family: var(--font-mono);
       font-size: 11px;
@@ -1437,52 +1414,115 @@
       background: var(--red);
       padding: 8px 18px;
       font-weight: 700;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+      box-shadow: 0 4px 15px rgba(212,0,0,0.3);
+    }
+    @media(max-width:850px) {
+      .wh-label {
+        top: 90px;
+        left: 24px;
+      }
     }
 
     .wh-track {
       display: flex;
-      transition: transform .7s cubic-bezier(0.25, 1, 0.5, 1);
+      width: 100%;
+      height: 100%;
     }
 
     .wh-slide {
       flex: 0 0 100%;
-      display: grid;
-      grid-template-columns: 1fr 1.25fr;
-      min-height: 520px;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
       position: relative;
       z-index: 2;
     }
+
+    .wh-media {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      background-color: #0c0c0c;
+      z-index: 1;
+      transform: scale(1.08);
+      transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    /* Dynamic Ken Burns zoom transition on active slide */
+    .wh-slide.active .wh-media {
+      transform: scale(1);
+    }
+
+    /* Seamless fade blending from black bg to image (No hard borders) */
+    .wh-media::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, 
+        #000000 0%, 
+        rgba(0,0,0,0.92) 32%, 
+        rgba(0,0,0,0.65) 60%, 
+        rgba(0,0,0,0.15) 100%
+      );
+      z-index: 2;
+    }
     @media(max-width:850px) {
-      .wh-slide {
-        grid-template-columns: 1fr;
-        min-height: auto;
+      .wh-media::before {
+        background: linear-gradient(0deg, 
+          #000000 0%, 
+          rgba(0,0,0,0.92) 55%, 
+          rgba(0,0,0,0.4) 85%, 
+          rgba(0,0,0,0.1) 100%
+        );
       }
+    }
+
+    .hl-noimg {
+      font-family: var(--font-display);
+      font-size: clamp(80px, 15vw, 180px);
+      color: rgba(212, 0, 0, 0.08);
+      letter-spacing: .05em;
+      z-index: 2;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
     }
 
     .wh-text {
-      padding: 60px 50px;
+      position: relative;
+      z-index: 3;
+      max-width: 780px;
+      padding: 0 10%;
+      background: none;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      position: relative;
-      z-index: 2;
-      background: linear-gradient(90deg, #0c0c0c 80%, transparent);
     }
     @media(max-width:850px) {
       .wh-text {
-        padding: 40px 24px;
-        background: #0c0c0c;
+        padding: 160px 24px 80px;
+        max-width: 100%;
       }
     }
 
+    /* Pro sliding/fading elements on active slide */
     .wh-date {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+      transition-delay: 0.1s;
       font-family: var(--font-mono);
       font-size: 11px;
       letter-spacing: .2em;
       text-transform: uppercase;
       color: var(--red-bright);
-      margin-bottom: 16px;
+      margin-bottom: 18px;
       display: inline-flex;
       align-items: center;
       gap: 8px;
@@ -1493,77 +1533,58 @@
       height: 2px;
       background: var(--red-bright);
     }
+    .wh-slide.active .wh-date {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
     .wh-text h3 {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+      transition-delay: 0.22s;
       font-family: var(--font-display);
       font-weight: 400;
       text-transform: uppercase;
-      font-size: clamp(32px, 4vw, 54px);
+      font-size: clamp(34px, 5vw, 68px);
       letter-spacing: .01em;
       line-height: 0.95;
-      margin-bottom: 18px;
+      margin-bottom: 20px;
       color: #ffffff;
-      text-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+      text-shadow: 0 0 25px rgba(255, 255, 255, 0.12);
+    }
+    .wh-slide.active .wh-text h3 {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .wh-text p {
-      font-size: 15px;
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+      transition-delay: 0.32s;
+      font-size: 15.5px;
       color: var(--ink-dim);
-      max-width: 480px;
-      line-height: 1.7;
+      max-width: 520px;
+      line-height: 1.75;
     }
-
-    .wh-media {
-      position: relative;
-      background-size: cover;
-      background-position: center;
-      background-color: #111;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 400px;
-      overflow: hidden;
-    }
-    @media(max-width:850px) {
-      .wh-media {
-        min-height: 280px;
-      }
-    }
-    .wh-media::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle at 50% 50%, rgba(212, 0, 0, 0.35) 0%, transparent 75%),
-        linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, transparent 40%),
-        linear-gradient(to right, rgba(12, 12, 12, 0.95) 0%, transparent 15%);
-      z-index: 1;
-    }
-
-    .hl-noimg {
-      font-family: var(--font-display);
-      font-size: 80px;
-      color: rgba(212, 0, 0, 0.15);
-      letter-spacing: .05em;
-      z-index: 2;
-      animation: heartbeat 2.5s ease-in-out infinite;
+    .wh-slide.active .wh-text p {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .wh-dots {
       position: absolute;
-      bottom: 24px;
-      left: 50px;
+      bottom: 60px;
+      left: 10%;
       z-index: 10;
       display: flex;
       gap: 8px;
     }
     @media(max-width:850px) {
       .wh-dots {
-        position: relative;
-        bottom: auto;
-        left: auto;
-        padding: 0 24px 24px;
-        background: #0c0c0c;
+        bottom: 24px;
+        left: 24px;
       }
     }
 
@@ -1571,7 +1592,7 @@
       width: 10px;
       height: 10px;
       border-radius: 0;
-      background: rgba(255, 255, 255, 0.25);
+      background: rgba(255, 255, 255, 0.22);
       border: 1px solid rgba(212, 0, 0, 0.4);
       padding: 0;
       cursor: pointer;
@@ -1610,8 +1631,8 @@
       border-color: var(--red);
       box-shadow: 0 0 15px var(--red);
     }
-    .wh-prev { left: 16px; }
-    .wh-next { right: 16px; }
+    .wh-prev { left: 24px; }
+    .wh-next { right: 24px; }
 
     @media(max-width:850px) {
       .wh-arrow {
@@ -1885,20 +1906,18 @@
 
   <!-- ============================= WEEKLY HIGHLIGHT (auto-sliding carousel) ============================= -->
   <section class="wh-section" id="highlights">
-    <div class="wrap">
-      <div class="wh-carousel" id="whCarousel">
-        <span class="wh-label">Weekly Highlight</span>
-        <div class="wh-track" id="whTrack"></div>
-        <button type="button" class="wh-arrow wh-prev" id="whPrevBtn" aria-label="Previous Highlight">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 19l-7-7 7-7"/></svg>
-        </button>
-        <button type="button" class="wh-arrow wh-next" id="whNextBtn" aria-label="Next Highlight">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 5l7 7-7 7"/></svg>
-        </button>
-        <div class="wh-dots" id="whDots"></div>
-      </div>
-      <p class="highlight-empty" id="highlightEmpty" hidden>No highlights yet — check back soon.</p>
+    <div class="wh-carousel" id="whCarousel">
+      <span class="wh-label">Weekly Highlight</span>
+      <div class="wh-track" id="whTrack"></div>
+      <button type="button" class="wh-arrow wh-prev" id="whPrevBtn" aria-label="Previous Highlight">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 19l-7-7 7-7"/></svg>
+      </button>
+      <button type="button" class="wh-arrow wh-next" id="whNextBtn" aria-label="Next Highlight">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 5l7 7-7 7"/></svg>
+      </button>
+      <div class="wh-dots" id="whDots"></div>
     </div>
+    <p class="highlight-empty" id="highlightEmpty" hidden>No highlights yet — check back soon.</p>
   </section>
 
   <!-- ============================= HERO (E-FOOTBALL SYSTEM LAYOUT) ============================= -->
@@ -2849,8 +2868,15 @@
 
         let idx = 0;
         function goTo(i, animate) {
-          track.style.transition = animate === false ? 'none' : 'transform .6s ease';
+          track.style.transition = animate === false ? 'none' : 'transform .8s cubic-bezier(0.16, 1, 0.3, 1)';
           track.style.transform = `translateX(-${i * 100}%)`;
+          
+          // Toggle active class on all slide elements for entrance transitions
+          const slides = track.querySelectorAll('.wh-slide');
+          slides.forEach((slide, sIdx) => {
+            slide.classList.toggle('active', sIdx === i);
+          });
+
           if (dotsHost) {
             [...dotsHost.children].forEach((d, di) => d.classList.toggle('active', di === (i % total)));
           }
