@@ -734,9 +734,230 @@ table.board td.pts{color:var(--red-bright);font-weight:700;}
 .wh-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.3);border:none;padding:0;cursor:pointer;transition:all .2s ease;}
 .wh-dot.active{background:var(--red-bright);width:20px;border-radius:4px;}
 
+/* ─── SCREEN FIT & UNIVERSAL RESPONSIVE GUARANTEE ─── */
+html, body {
+  max-width: 100vw !important;
+  overflow-x: hidden !important;
+  scroll-behavior: smooth;
+}
+*, *::before, *::after {
+  box-sizing: border-box !important;
+}
+img, svg, video, iframe, canvas, table {
+  max-width: 100% !important;
+  height: auto;
+}
+.wrap, .container, .section, .wh-section, .evo-tc-showcase, .board-wrap, .tourpage-table-block {
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+.board-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ─── LEFT SIDE NAVIGATION DRAWER & FLOATING 3-DOTS TRIGGER ─── */
+.dots-nav-trigger {
+  position: fixed;
+  top: 20px; left: 20px;
+  z-index: 10001;
+  width: 48px; height: 48px;
+  background: rgba(10, 10, 16, 0.9);
+  border: 1.5px solid rgba(255, 215, 0, 0.5);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 0 25px rgba(230, 0, 46, 0.4), 0 4px 15px rgba(0,0,0,0.8);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  color: #ffd700;
+}
+.dots-nav-trigger:hover {
+  transform: scale(1.12);
+  border-color: #ff1122;
+  box-shadow: 0 0 35px rgba(255, 17, 34, 0.85);
+  color: #ffffff;
+}
+.dots-nav-trigger svg {
+  width: 22px; height: 22px;
+  fill: currentColor;
+}
+
+.left-nav-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+.left-nav-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.left-nav-drawer {
+  position: fixed;
+  top: 0; left: 0;
+  width: 310px; max-width: 85vw;
+  height: 100vh;
+  background: linear-gradient(180deg, rgba(10, 10, 16, 0.98) 0%, rgba(18, 0, 6, 0.98) 100%);
+  border-right: 1.5px solid rgba(255, 215, 0, 0.4);
+  box-shadow: 15px 0 50px rgba(0, 0, 0, 0.95), 0 0 30px rgba(230, 0, 46, 0.25);
+  z-index: 10000;
+  transform: translateX(-100%);
+  transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex; flex-direction: column;
+  padding: 28px 22px;
+  overflow-y: auto;
+}
+.left-nav-drawer.open {
+  transform: translateX(0);
+}
+
+.left-drawer-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-bottom: 20px; margin-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 215, 0, 0.25);
+}
+.left-drawer-brand {
+  display: flex; align-items: center; gap: 12px;
+  text-decoration: none; color: #ffffff;
+}
+.left-drawer-brand-title {
+  font-family: 'Cinzel', 'Bebas Neue', sans-serif;
+  font-size: 16px; font-weight: 800;
+  letter-spacing: 0.08em; color: #ffd700;
+}
+.left-drawer-close {
+  background: none; border: 1px solid rgba(255, 215, 0, 0.3);
+  color: #ffffff; width: 36px; height: 36px;
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 20px;
+  transition: all 0.2s ease;
+}
+.left-drawer-close:hover {
+  background: #ff1122; border-color: #ff1122;
+  box-shadow: 0 0 15px #ff1122;
+}
+.left-drawer-links {
+  display: flex; flex-direction: column; gap: 8px; flex: 1;
+}
+.left-drawer-links a {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 16px;
+  font-family: 'Space Mono', 'Manrope', monospace;
+  font-size: 12px; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.85);
+  border-radius: 6px; border: 1px solid transparent;
+  transition: all 0.22s ease;
+}
+.left-drawer-links a:hover, .left-drawer-links a.active {
+  color: #ffd700; background: rgba(230, 0, 46, 0.15);
+  border-color: rgba(255, 215, 0, 0.4);
+  transform: translateX(4px);
+  box-shadow: 0 0 15px rgba(230, 0, 46, 0.2);
+}
+
+/* ─── SILKY SMOOTH NEON CURSOR ─── */
+.smooth-cursor-dot {
+  position: fixed; top: 0; left: 0;
+  width: 8px; height: 8px;
+  background: #ff1122; border-radius: 50%;
+  pointer-events: none; z-index: 999999;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 12px #ff1122, 0 0 25px rgba(230, 0, 46, 0.8);
+  transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease;
+  will-change: transform;
+}
+.smooth-cursor-ring {
+  position: fixed; top: 0; left: 0;
+  width: 36px; height: 36px;
+  border: 1.5px solid rgba(255, 215, 0, 0.7);
+  border-radius: 50%;
+  pointer-events: none; z-index: 999998;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 18px rgba(255, 215, 0, 0.35);
+  transition: width 0.25s ease-out, height 0.25s ease-out, border-color 0.25s ease-out, background-color 0.25s ease-out;
+  will-change: transform;
+}
+.smooth-cursor-ring.hovered {
+  width: 56px; height: 56px;
+  border-color: #ff1122;
+  background: rgba(230, 0, 46, 0.08);
+  box-shadow: 0 0 28px rgba(255, 17, 34, 0.6);
+}
+
+/* ─── FLOATING BACK TO TOP BUTTON ─── */
+.back-to-top-btn {
+  position: fixed; bottom: 24px; right: 24px;
+  z-index: 9990;
+  width: 46px; height: 46px; border-radius: 50%;
+  background: rgba(12, 12, 18, 0.88);
+  border: 1.5px solid rgba(255, 215, 0, 0.45);
+  color: #ffd700;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 16px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.85), 0 0 15px rgba(255, 215, 0, 0.25);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  opacity: 0; pointer-events: none;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+}
+.back-to-top-btn.visible {
+  opacity: 1; pointer-events: auto; transform: translateY(0);
+}
+.back-to-top-btn:hover {
+  background: var(--red, #d40000); border-color: #ffd700; color: #ffffff;
+  transform: translateY(-4px) scale(1.08);
+  box-shadow: 0 0 25px rgba(230, 0, 46, 0.8);
+}
 </style>
 </head>
 <body>
+
+  <!-- Floating 3-Dots Navigation Trigger Button -->
+  <button class="dots-nav-trigger" id="leftNavBtn" aria-label="Open navigation menu" title="Open Menu">
+    <svg viewBox="0 0 24 24">
+      <circle cx="12" cy="5" r="2.2" />
+      <circle cx="12" cy="12" r="2.2" />
+      <circle cx="12" cy="19" r="2.2" />
+    </svg>
+  </button>
+
+  <!-- Left Side Navigation Overlay -->
+  <div class="left-nav-overlay" id="leftNavOverlay"></div>
+
+  <!-- Left Side Vertical Navigation Drawer -->
+  <aside class="left-nav-drawer" id="leftNavDrawer" aria-label="Left Side Navigation">
+    <div class="left-drawer-header">
+      <a href="index.html" class="left-drawer-brand">
+        <span class="crest-img-nav" role="img" aria-label="IC7 Iconic Sevens crest"></span>
+        <span class="left-drawer-brand-title">ICONIC SEVENS</span>
+      </a>
+      <button class="left-drawer-close" id="leftNavClose" aria-label="Close menu">&times;</button>
+    </div>
+
+    <nav class="left-drawer-links" id="leftDrawerLinks">
+      <a href="index.html#hero"><span class="link-icon">🏠</span> Home</a>
+      <a href="index.html#about"><span class="link-icon">⚔️</span> About Clan</a>
+      <a href="index.html#activities"><span class="link-icon">🎮</span> Activities</a>
+      <a href="index.html#live"><span class="link-icon">🔴</span> Live Stream</a>
+      <a href="index.html#highlights"><span class="link-icon">🎬</span> Highlights</a>
+      <a href="tournament-registration.html" class="active"><span class="link-icon">📋</span> Tournament Reg</a>
+      <a href="index.html#trophyCabinet"><span class="link-icon">🏆</span> Trophy Cabinet</a>
+      <a href="index.html#teams"><span class="link-icon">👥</span> Squad Rosters</a>
+      <a href="index.html#majorTours"><span class="link-icon">🥇</span> Tournaments</a>
+      <a href="index.html#leaderboard"><span class="link-icon">📊</span> Leaderboard</a>
+      <a href="index.html#rules"><span class="link-icon">📜</span> Clan Rules</a>
+    </nav>
+  </aside>
 
 <div class="starfield" id="starfield" aria-hidden="true"></div>
 
@@ -1137,7 +1358,94 @@ document.addEventListener('DOMContentLoaded', async () => {
        setTimeout(setupFoilSheens, 200);
      });
 
-     
+     // ─── SILKY SMOOTH CURSOR & LEFT DRAWER & BACK TO TOP ENGINE ───
+     (function setupInteractiveUI() {
+       let cursorDot = document.getElementById('ic7CursorDot');
+       let cursorRing = document.getElementById('ic7CursorRing');
+       if (!cursorDot) {
+         cursorDot = document.createElement('div');
+         cursorDot.id = 'ic7CursorDot';
+         cursorDot.className = 'smooth-cursor-dot';
+         document.body.appendChild(cursorDot);
+
+         cursorRing = document.createElement('div');
+         cursorRing.id = 'ic7CursorRing';
+         cursorRing.className = 'smooth-cursor-ring';
+         document.body.appendChild(cursorRing);
+       }
+
+       let mouseX = window.innerWidth / 2;
+       let mouseY = window.innerHeight / 2;
+       let ringX = mouseX, ringY = mouseY;
+
+       window.addEventListener('mousemove', (e) => {
+         mouseX = e.clientX;
+         mouseY = e.clientY;
+         cursorDot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
+       }, { passive: true });
+
+       function animateCursor() {
+         ringX += (mouseX - ringX) * 0.18;
+         ringY += (mouseY - ringY) * 0.18;
+         cursorRing.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
+         requestAnimationFrame(animateCursor);
+       }
+       requestAnimationFrame(animateCursor);
+
+       const hoverTargets = 'a, button, input, select, textarea, .card, .evo-tc-bay, .evo-tc-plinth, .tour-card, .team-card, .player-card, .dots-nav-trigger';
+       document.body.addEventListener('mouseover', (e) => {
+         if (e.target.closest(hoverTargets)) cursorRing.classList.add('hovered');
+       });
+       document.body.addEventListener('mouseout', (e) => {
+         if (e.target.closest(hoverTargets)) cursorRing.classList.remove('hovered');
+       });
+
+       // Left Navigation Drawer Toggling (Hidden by default, opens ONLY on 3-dots click)
+       const leftBtn = document.getElementById('leftNavBtn');
+       const leftDrawer = document.getElementById('leftNavDrawer');
+       const leftOverlay = document.getElementById('leftNavOverlay');
+       const leftClose = document.getElementById('leftNavClose');
+
+       const openDrawer = () => {
+         if (leftDrawer) leftDrawer.classList.add('open');
+         if (leftOverlay) leftOverlay.classList.add('open');
+         document.body.style.overflow = 'hidden';
+       };
+       const closeDrawer = () => {
+         if (leftDrawer) leftDrawer.classList.remove('open');
+         if (leftOverlay) leftOverlay.classList.remove('open');
+         document.body.style.overflow = '';
+       };
+
+       if (leftBtn) leftBtn.addEventListener('click', openDrawer);
+       if (leftClose) leftClose.addEventListener('click', closeDrawer);
+       if (leftOverlay) leftOverlay.addEventListener('click', closeDrawer);
+
+       document.querySelectorAll('.left-drawer-links a').forEach(link => {
+         link.addEventListener('click', closeDrawer);
+       });
+
+       // Back to Top Button
+       let topBtn = document.getElementById('backToTopBtn');
+       if (!topBtn) {
+         topBtn = document.createElement('button');
+         topBtn.id = 'backToTopBtn';
+         topBtn.className = 'back-to-top-btn';
+         topBtn.setAttribute('aria-label', 'Back to top');
+         topBtn.innerHTML = '▲';
+         document.body.appendChild(topBtn);
+       }
+       window.addEventListener('scroll', () => {
+         if (window.scrollY > 400) {
+           topBtn.classList.add('visible');
+         } else {
+           topBtn.classList.remove('visible');
+         }
+       }, { passive: true });
+       topBtn.addEventListener('click', () => {
+         window.scrollTo({ top: 0, behavior: 'smooth' });
+       });
+     })();
 
    })();
   </script>
