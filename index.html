@@ -13,9 +13,6 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&family=Cinzel:wght@400;600;700&display=swap"
     rel="stylesheet">
-  <!-- Three.js and Lenis CDN libraries -->
-  <script src="https://unpkg.com/three@0.128.0/build/three.min.js"></script>
-  <script src="https://unpkg.com/@studio-freight/lenis@1.0.29/dist/lenis.min.js"></script>
   <style>
     /* ============================================================
        IC7 ICONIC SEVENS — RED · BLACK · WHITE DESIGN SYSTEM
@@ -51,7 +48,7 @@
     }
 
     * { margin:0; padding:0; box-sizing:border-box; }
-    html { scroll-behavior: auto !important; }
+    html { scroll-behavior: smooth; }
 
     body {
       background: var(--bg);
@@ -170,16 +167,17 @@
       transform: translateY(-2px);
     }
 
-        /* 3D Perspective scroll reveals */
+    /* ─── PRO 3D SCROLL REVEALS ─── */
     .reveal {
       opacity: 0;
-      transform: perspective(1000px) rotateX(-8deg) translateY(30px) scale(0.97);
-      transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
-      will-change: opacity, transform;
+      transform: perspective(1200px) rotateX(-20deg) translateY(50px) scale(0.95);
+      transform-origin: top center;
+      transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform, opacity;
     }
     .reveal.in-view {
       opacity: 1;
-      transform: perspective(1000px) rotateX(0deg) translateY(0) scale(1);
+      transform: perspective(1200px) rotateX(0deg) translateY(0) scale(1);
     }
 
     .reveal-3d-left {
@@ -1981,9 +1979,6 @@
 </head>
 
 <body>
-  <!-- Background 3D Canvas -->
-  <canvas id="webgl-canvas" style="position:fixed; inset:0; width:100vw; height:100vh; z-index:1; pointer-events:none;"></canvas>
-
 
   <div class="starfield" id="starfield" aria-hidden="true"></div>
 
@@ -4700,9 +4695,6 @@
 
       // eFootball / PES style 3D Tilt Card Effects
       const init3DTilt = () => {
-        // Disable on touch devices to ensure buttery smooth native scrolling on mobile/tablets
-        if (window.matchMedia('(pointer: coarse)').matches) return;
-
         const cards = document.querySelectorAll('.tour-card, .team-card, .player-card, .activity-card, .reigning-champ-card, .stat-card, .fixture');
         cards.forEach(card => {
           card.style.transition = 'transform 0.15s ease-out, box-shadow 0.15s ease-out, background-color 0.15s ease-out';
@@ -4740,215 +4732,6 @@
       };
       
       init3DTilt();
-      // ─── SMOOTH SCROLL (LENIS) INTERNALS ───
-      const initSmoothScroll = () => {
-        if (typeof Lenis !== 'undefined') {
-          const lenis = new Lenis({
-            duration: 1.2,
-            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-            direction: 'vertical',
-            gestureDirection: 'vertical',
-            smooth: true,
-            mouseMultiplier: 0.95,
-            smoothTouch: false,
-            touchMultiplier: 1.8,
-            infinite: false
-          });
-
-          function raf(time) {
-            lenis.raf(time);
-            requestAnimationFrame(raf);
-          }
-          requestAnimationFrame(raf);
-          
-          // Smooth scroll to anchor targets
-          document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-              const hash = this.getAttribute('href');
-              if (hash === '#') return;
-              const target = document.querySelector(hash);
-              if (target) {
-                e.preventDefault();
-                lenis.scrollTo(target, { offset: -60, duration: 1.2 });
-              }
-            });
-          });
-        }
-      };
-      
-      initSmoothScroll();
-
-      // ─── THREE.JS 3D HOLOGRAM DNA HELIX BACKGROUND ENGINE ───
-      const init3DDnaHelix = () => {
-        const canvas = document.getElementById('webgl-canvas');
-        if (!canvas || typeof THREE === 'undefined') return;
-
-        const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-        renderer.setSize(window.innerWidth, window.innerHeight);
-
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
-        camera.position.z = 5;
-
-        // Parent group to handle all transitions
-        const dnaGroup = new THREE.Group();
-        // Give the helix a beautiful diagonal tilt alignment as seen in Pinterest
-        dnaGroup.rotation.z = Math.PI / 5.2; // Diagonal angle
-        dnaGroup.rotation.x = Math.PI / 9.5; // Angled forward
-        scene.add(dnaGroup);
-
-        // Studio lighting setup to accentuate the shiny metallic textures
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.45);
-        scene.add(ambientLight);
-
-        const dirLight1 = new THREE.DirectionalLight(0xff0033, 1.85); // High intensity red highlight spotlight
-        dirLight1.position.set(6, 9, 6);
-        scene.add(dirLight1);
-
-        const dirLight2 = new THREE.DirectionalLight(0xffffff, 1.3); // High intensity silver fill light
-        dirLight2.position.set(-6, -9, -6);
-        scene.add(dirLight2);
-
-        // Helix parameters
-        const r = 0.72; // radius
-        const height = 4.8; // length of helix along y axis
-        const count = 38; // base rungs
-        const twists = 3.6; // twist density
-
-        // Metallic materials
-        const redMat = new THREE.MeshStandardMaterial({
-          color: 0xff0033,
-          metalness: 0.9,
-          roughness: 0.15
-        });
-        const whiteMat = new THREE.MeshStandardMaterial({
-          color: 0xffffff,
-          metalness: 0.9,
-          roughness: 0.15
-        });
-        const barMat = new THREE.MeshStandardMaterial({
-          color: 0x3a3a3a,
-          metalness: 0.8,
-          roughness: 0.25
-        });
-
-        // Reused geometries for fast render speed
-        const nodeGeo = new THREE.SphereGeometry(0.095, 16, 16);
-        const barGeo = new THREE.CylinderGeometry(0.018, 0.018, r * 2, 8);
-
-        // Generate the Double Helix structure procedurally
-        for (let i = 0; i < count; i++) {
-          const ratio = i / count;
-          const t = ratio * Math.PI * 2 * twists;
-          const y = ratio * height - (height / 2);
-
-          // Node A (Red)
-          const nodeA = new THREE.Mesh(nodeGeo, redMat);
-          nodeA.position.set(Math.sin(t) * r, y, Math.cos(t) * r);
-          dnaGroup.add(nodeA);
-
-          // Node B (White/Silver)
-          const nodeB = new THREE.Mesh(nodeGeo, whiteMat);
-          nodeB.position.set(Math.sin(t + Math.PI) * r, y, Math.cos(t + Math.PI) * r);
-          dnaGroup.add(nodeB);
-
-          // Connecting rungs (aligned to center and rotated flat)
-          const bar = new THREE.Mesh(barGeo, barMat);
-          bar.position.set(0, y, 0);
-          bar.rotation.y = t;
-          bar.rotation.z = Math.PI / 2;
-          dnaGroup.add(bar);
-        }
-
-        // Add 3D Holographic Ground Grid (Tactical pitch radar)
-        const gridHelper = new THREE.GridHelper(36, 24, 0xff0033, 0x330008);
-        gridHelper.position.y = -2.1;
-        gridHelper.material.transparent = true;
-        gridHelper.material.opacity = 0.35;
-        scene.add(gridHelper);
-
-        // Coordinates configuration per scroll keyframes
-        const keyframes = [
-          { scrollPct: 0.0, x: 0.0, y: 0.15, z: 0.5, scale: 1.1 },       // Hero
-          { scrollPct: 0.15, x: 1.15, y: -0.1, z: -1.0, scale: 0.8 },    // About
-          { scrollPct: 0.32, x: -1.2, y: 0.2, z: -0.6, scale: 0.95 },    // Highlights
-          { scrollPct: 0.5, x: 0.0, y: -0.7, z: -1.5, scale: 0.75 },     // Cabinet
-          { scrollPct: 0.68, x: 1.3, y: 0.05, z: -0.8, scale: 0.85 },    // Squads
-          { scrollPct: 0.85, x: -1.2, y: -0.2, z: -1.2, scale: 0.8 },    // Table
-          { scrollPct: 1.0, x: 0.0, y: 0.0, z: 0.3, scale: 1.15 }        // Register
-        ];
-
-        let targetX = 0;
-        let targetY = 0.15;
-        let targetZ = 0.5;
-        let targetScale = 1.1;
-
-        const updateDnaTarget = () => {
-          const scrollTop = window.scrollY;
-          const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-          // Clamp scroll fraction safely between 0 and 1
-          const pct = Math.max(0, Math.min(1, maxScroll > 0 ? scrollTop / maxScroll : 0));
-
-          // Find surrounding keyframes
-          let k1 = keyframes[0];
-          let k2 = keyframes[keyframes.length - 1];
-          for(let i=0; i<keyframes.length - 1; i++) {
-            if (pct >= keyframes[i].scrollPct && pct <= keyframes[i+1].scrollPct) {
-              k1 = keyframes[i];
-              k2 = keyframes[i+1];
-              break;
-            }
-          }
-
-          // Local interpolation ratio
-          const div = k2.scrollPct - k1.scrollPct;
-          const t = div > 0 ? (pct - k1.scrollPct) / div : 0;
-
-          targetX = k1.x + (k2.x - k1.x) * t;
-          targetY = k1.y + (k2.y - k1.y) * t;
-          targetZ = k1.z + (k2.z - k1.z) * t;
-          targetScale = k1.scale + (k2.scale - k1.scale) * t;
-        };
-
-        window.addEventListener('scroll', updateDnaTarget, { passive: true });
-        updateDnaTarget();
-
-        // Resize viewport support
-        window.addEventListener('resize', () => {
-          camera.aspect = window.innerWidth / window.innerHeight;
-          camera.updateProjectionMatrix();
-          renderer.setSize(window.innerWidth, window.innerHeight);
-        });
-
-        // Loop rendering
-        const animate = () => {
-          requestAnimationFrame(animate);
-
-          // Continuous self-rotation along y-axis twist
-          dnaGroup.rotation.y += 0.0075;
-
-          // Lerp inertia calculations
-          dnaGroup.position.x += (targetX - dnaGroup.position.x) * 0.075;
-          dnaGroup.position.y += (targetY - dnaGroup.position.y) * 0.075;
-          dnaGroup.position.z += (targetZ - dnaGroup.position.z) * 0.075;
-
-          // Infinite grid scroll parallax calculation based on camera z
-          if (gridHelper) {
-            gridHelper.position.z = (dnaGroup.position.z * 1.2) % 1.5;
-          }
-
-          const currentScale = dnaGroup.scale.x;
-          const nextScale = currentScale + (targetScale - currentScale) * 0.075;
-          dnaGroup.scale.set(nextScale, nextScale, nextScale);
-
-          renderer.render(scene, camera);
-        };
-
-        animate();
-      };
-
-      init3DDnaHelix();
 
     });
   </script>
