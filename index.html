@@ -18,33 +18,299 @@
        IC7 ICONIC SEVENS — RED · BLACK · WHITE DESIGN SYSTEM
        ============================================================ */
     :root {
-      --bg:             #000000;
-      --bg-elevated:    #0a0a0a;
-      --bg-elevated-2:  #111111;
-      --bg-card:        #0d0d0d;
-      --pitch:          #0a0000;
-      --red:            #d40000;
+      --bg:             #040406;
+      --bg-elevated:    #09090d;
+      --bg-elevated-2:  #101016;
+      --bg-card:        #0c0c12;
+      --pitch:          #080308;
+      --red:            #e6002e;
       --red-bright:     #ff1122;
       --red-dim:        #8b0000;
+      --gold:           #ffd700;
+      --gold-bright:    #ffe57f;
+      --gold-dim:       #b38728;
+      --gold-metallic:  linear-gradient(135deg, #ffe57f 0%, #f59e0b 35%, #d4af37 60%, #fff8dc 85%, #996515 100%);
+      --gold-glow:      rgba(255, 215, 0, 0.45);
+      --red-glow:       rgba(230, 0, 46, 0.55);
       --ink:            #ffffff;
-      --ink-dim:        #c0c0c0;
-      --ink-faint:      #6a6a6a;
+      --ink-dim:        #d1d5db;
+      --ink-faint:      #6b7280;
       --logo-data:      url("/assets/asset_d2d274761c.png");
-      --line:           rgba(212,0,0,0.18);
-      --line-strong:    rgba(212,0,0,0.45);
-      --glass:          rgba(255,255,255,0.025);
-      --glass-strong:   rgba(255,255,255,0.055);
-      --shadow:         rgba(0,0,0,0.98);
-      --green-live:     #22dd66;
-      --radius-lg:      0px;
-      --radius-md:      0px;
-      --radius-sm:      0px;
+      --line:           rgba(230, 0, 46, 0.22);
+      --line-gold:      rgba(255, 215, 0, 0.35);
+      --line-strong:    rgba(230, 0, 46, 0.55);
+      --glass:          rgba(15, 15, 22, 0.65);
+      --glass-strong:   rgba(25, 25, 35, 0.85);
+      --shadow:         rgba(0, 0, 0, 0.95);
+      --green-live:     #10b981;
+      --radius-lg:      8px;
+      --radius-md:      6px;
+      --radius-sm:      4px;
       --font-display:   'Bebas Neue', 'Anton', sans-serif;
-      --font-luxury:    'Oswald', sans-serif;
+      --font-luxury:    'Cinzel', 'Oswald', serif;
       --font-body:      'Manrope', sans-serif;
       --font-mono:      'Space Mono', monospace;
-      --container:      1220px;
+      --container:      1280px;
       color-scheme:     dark;
+    }
+
+    /* AAA LUXURY eSPORTS GOLD & CRIMSON OVERRIDES */
+    .gold-text {
+      background: var(--gold-metallic);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 700;
+      text-shadow: 0 0 25px rgba(255, 215, 0, 0.35);
+    }
+    
+    .gold-border {
+      border: 1px solid rgba(255, 215, 0, 0.4) !important;
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.2) !important;
+    }
+
+    .glass {
+      background: var(--glass) !important;
+      backdrop-filter: blur(20px) !important;
+      -webkit-backdrop-filter: blur(20px) !important;
+      border: 1px solid rgba(255, 215, 0, 0.2) !important;
+      box-shadow: 0 20px 50px -15px rgba(0,0,0,0.9), inset 0 1px 1px rgba(255,255,255,0.1) !important;
+      border-radius: var(--radius-md) !important;
+    }
+
+    /* Floating Glass Navbar */
+    .site-header {
+      position: fixed !important;
+      top: 14px !important;
+      left: 50% !important;
+      transform: translateX(-50%) !important;
+      width: calc(100% - 32px) !important;
+      max-width: var(--container) !important;
+      z-index: 9999 !important;
+      background: rgba(8, 8, 12, 0.78) !important;
+      backdrop-filter: blur(24px) !important;
+      -webkit-backdrop-filter: blur(24px) !important;
+      border: 1px solid rgba(255, 215, 0, 0.25) !important;
+      border-radius: 12px !important;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.85), 0 0 25px rgba(230,0,46,0.2) !important;
+      transition: all 0.3s ease !important;
+    }
+
+    .nav-links a {
+      position: relative;
+      transition: color 0.3s ease, transform 0.2s ease;
+    }
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--gold-metallic);
+      box-shadow: 0 0 10px var(--gold);
+      transition: width 0.3s ease;
+    }
+    .nav-links a:hover {
+      color: var(--gold-bright) !important;
+      transform: translateY(-1px);
+    }
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .brand:hover .crest-img-nav {
+      transform: scale(1.15) rotate(5deg);
+      filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.8));
+    }
+
+    /* AAA 3D perspective card mechanics */
+    .player-card, .tour-card, .team-card, .reigning-champ-card, .activity-card, .trophy-card, .stat-card, .rule-card {
+      perspective: 1500px !important;
+      transform-style: preserve-3d !important;
+      transition: transform 0.2s cubic-bezier(0.1, 0.8, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease !important;
+      border: 1px solid rgba(230, 0, 46, 0.25) !important;
+      border-radius: 8px !important;
+      background: linear-gradient(145deg, rgba(16, 16, 24, 0.85) 0%, rgba(8, 8, 12, 0.95) 100%) !important;
+      box-shadow: 0 15px 35px -10px rgba(0,0,0,0.9), 0 0 15px rgba(230,0,46,0.1) !important;
+    }
+    .player-card:hover, .tour-card:hover, .team-card:hover, .reigning-champ-card:hover, .activity-card:hover {
+      border-color: rgba(255, 215, 0, 0.6) !important;
+      box-shadow: 0 25px 60px -15px rgba(0,0,0,0.95), 0 0 30px rgba(255,215,0,0.3) !important;
+    }
+
+    /* Holographic foil sheen overlay */
+    .foil-sheen {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      pointer-events: none;
+      background: radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.25) 0%, rgba(230, 0, 46, 0.15) 35%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 10;
+      mix-blend-mode: color-dodge;
+    }
+
+    /* Hero Cyber Glitch Effect */
+    .glitch-title {
+      position: relative;
+      display: inline-block;
+    }
+    .glitch-title::before,
+    .glitch-title::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      clip: rect(0, 0, 0, 0);
+    }
+    .glitch-title::before {
+      left: -2px;
+      text-shadow: 2px 0 #ff1122;
+      animation: glitch-anim-1 2.5s infinite linear alternate-reverse;
+    }
+    .glitch-title::after {
+      left: 2px;
+      text-shadow: -2px 0 #ffd700;
+      animation: glitch-anim-2 3s infinite linear alternate-reverse;
+    }
+    @keyframes glitch-anim-1 {
+      0% { clip: rect(10px, 9999px, 30px, 0); }
+      20% { clip: rect(40px, 9999px, 60px, 0); }
+      40% { clip: rect(20px, 9999px, 80px, 0); }
+      60% { clip: rect(70px, 9999px, 90px, 0); }
+      80% { clip: rect(15px, 9999px, 45px, 0); }
+      100% { clip: rect(50px, 9999px, 85px, 0); }
+    }
+    @keyframes glitch-anim-2 {
+      0% { clip: rect(60px, 9999px, 80px, 0); }
+      20% { clip: rect(10px, 9999px, 40px, 0); }
+      40% { clip: rect(50px, 9999px, 75px, 0); }
+      60% { clip: rect(25px, 9999px, 55px, 0); }
+      80% { clip: rect(80px, 9999px, 95px, 0); }
+      100% { clip: rect(35px, 9999px, 65px, 0); }
+    }
+
+    /* Hero Animated Countdown Timer */
+    .hero-countdown-container {
+      margin-top: 32px;
+      padding: 18px 28px;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      background: rgba(10, 10, 16, 0.8) !important;
+      border: 1px solid rgba(255, 215, 0, 0.3) !important;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 20px rgba(255, 215, 0, 0.15) !important;
+      border-radius: 12px;
+    }
+    .countdown-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      color: var(--gold-bright);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-transform: uppercase;
+    }
+    .pulse-dot {
+      width: 8px; height: 8px;
+      background: var(--red-bright);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--red-bright);
+      animation: pulse-ring 1.5s infinite;
+    }
+    @keyframes pulse-ring {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 17, 34, 0.7); }
+      70% { transform: scale(1.15); box-shadow: 0 0 0 10px rgba(255, 17, 34, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 17, 34, 0); }
+    }
+    .countdown-grid {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .cd-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 54px;
+    }
+    .cd-num {
+      font-family: var(--font-display);
+      font-size: 32px;
+      line-height: 1;
+      color: #ffffff;
+      text-shadow: 0 0 12px rgba(255, 215, 0, 0.6);
+      background: var(--gold-metallic);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .cd-lbl {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.15em;
+      color: var(--ink-faint);
+      margin-top: 2px;
+    }
+    .cd-sep {
+      font-family: var(--font-display);
+      font-size: 24px;
+      color: var(--red-bright);
+      margin-bottom: 12px;
+    }
+
+    /* FUT Style Player Card Elements */
+    .player-card {
+      position: relative;
+      overflow: hidden;
+    }
+    .player-card::before {
+      content: "";
+      position: absolute;
+      top: -50%; left: -50%; width: 200%; height: 200%;
+      background: linear-gradient(45deg, transparent 45%, rgba(255,215,0,0.12) 50%, transparent 55%);
+      transform: rotate(30deg);
+      transition: transform 0.8s ease;
+      pointer-events: none;
+    }
+    .player-card:hover::before {
+      transform: rotate(30deg) translate(20%, 20%);
+    }
+
+    /* Gaming Buttons */
+    .btn-red {
+      background: linear-gradient(135deg, #e6002e 0%, #99001f 100%) !important;
+      border: 1px solid rgba(255, 215, 0, 0.4) !important;
+      box-shadow: 0 8px 25px -5px rgba(230,0,46,0.6), 0 0 15px rgba(255,215,0,0.2) !important;
+      color: #ffffff !important;
+      font-weight: 800 !important;
+      letter-spacing: 0.1em !important;
+    }
+    .btn-red:hover {
+      box-shadow: 0 12px 35px -5px rgba(230,0,46,0.85), 0 0 25px rgba(255,215,0,0.5) !important;
+      transform: translateY(-2px) scale(1.02);
+    }
+    .btn-outline {
+      border: 1px solid rgba(255, 215, 0, 0.4) !important;
+      color: var(--gold-bright) !important;
+      background: rgba(15, 15, 22, 0.6) !important;
+      backdrop-filter: blur(10px) !important;
+    }
+    .btn-outline:hover {
+      background: rgba(255, 215, 0, 0.15) !important;
+      border-color: var(--gold) !important;
+      box-shadow: 0 0 20px rgba(255,215,0,0.3) !important;
+      transform: translateY(-2px);
+    }
+
+    /* Footer AAA Styling */
+    .site-footer {
+      background: #040406 !important;
+      border-top: 1px solid rgba(255, 215, 0, 0.2) !important;
+      box-shadow: 0 -15px 40px rgba(0,0,0,0.9), 0 0 30px rgba(230,0,46,0.15) !important;
+      position: relative;
     }
 
     * { margin:0; padding:0; box-sizing:border-box; }
@@ -2556,12 +2822,12 @@
     </div>
 
     <div class="hero-inner">
-      <div class="magazine-tag-frame">← INTIMATE CUP EDITION →</div>
+      <div class="magazine-tag-frame" style="border-color: rgba(255,215,0,0.4); color: var(--gold-bright);">⚡ AAA eSPORTS EXPERIENCE ⚡</div>
 
-      <h1 class="hero-title hero-magazine-title">
+      <h1 class="hero-title hero-magazine-title glitch-title" data-text="ICONIC SEVENS">
         <span class="red-text">ICONIC</span>
-        <span class="red-text">SEVENS</span>
-        <span class="sub-header">CLAN MAGAZINE</span>
+        <span class="gold-text">SEVENS</span>
+        <span class="sub-header" style="color: var(--gold-bright); letter-spacing: 0.25em;">ULTIMATE KERALA eFOOTBALL CLAN</span>
       </h1>
 
       <p class="hero-tagline" id="heroTagline">An eFootball clan uniting players from every corner of Kerala under one
@@ -2578,11 +2844,26 @@
         </a>
         <a href="#schedule" class="btn btn-outline">View Fixtures</a>
       </div>
+
+      <!-- AAA Animated Tournament Countdown Timer -->
+      <div class="hero-countdown-container glass">
+        <div class="countdown-label"><span class="pulse-dot"></span> NEXT MAJOR TOURNAMENT COUNTDOWN</div>
+        <div class="countdown-grid" id="heroCountdown">
+          <div class="cd-box"><span class="cd-num" id="cdDays">03</span><span class="cd-lbl">DAYS</span></div>
+          <div class="cd-sep">:</div>
+          <div class="cd-box"><span class="cd-num" id="cdHours">14</span><span class="cd-lbl">HOURS</span></div>
+          <div class="cd-sep">:</div>
+          <div class="cd-box"><span class="cd-num" id="cdMins">42</span><span class="cd-lbl">MINS</span></div>
+          <div class="cd-sep">:</div>
+          <div class="cd-box"><span class="cd-num" id="cdSecs">58</span><span class="cd-lbl">SECS</span></div>
+        </div>
+      </div>
+
       <div class="hero-stats">
-        <div class="hero-stat"><b id="heroStatFounded">2020</b><span>Founded</span></div>
-        <div class="hero-stat"><b id="heroStatSquad">60+</b><span>Active Squad</span></div>
-        <div class="hero-stat"><b id="heroStatMatches">140+</b><span>Matches Hit</span></div>
-        <div class="hero-stat"><b id="heroStatTrophies">12</b><span>Trophies</span></div>
+        <div class="hero-stat"><b id="heroStatFounded" class="gold-text">2020</b><span>Founded</span></div>
+        <div class="hero-stat"><b id="heroStatSquad" class="gold-text">60+</b><span>Active Squad</span></div>
+        <div class="hero-stat"><b id="heroStatMatches" class="gold-text">140+</b><span>Matches Hit</span></div>
+        <div class="hero-stat"><b id="heroStatTrophies" class="gold-text">12</b><span>Trophies</span></div>
       </div>
     </div>
 
@@ -5284,72 +5565,107 @@
         dirLight2.position.set(-6, -8, -5);
         scene.add(dirLight2);
 
+        // ─── 3D FOOTBALL BALL MESH ───
+        const footballGroup = new THREE.Group();
+        footballGroup.position.set(0, 1.4, 0.2);
+        stadiumGroup.add(footballGroup);
+
+        const ballRadius = 0.42;
+        const ballGeo = new THREE.IcosahedronGeometry(ballRadius, 2);
+        const ballMat = new THREE.MeshStandardMaterial({
+          color: 0x111116,
+          metalness: 0.85,
+          roughness: 0.2,
+          flatShading: true
+        });
+        const football = new THREE.Mesh(ballGeo, ballMat);
+        footballGroup.add(football);
+
+        // Gold & Crimson Seam Wireframe
+        const ballWireGeo = new THREE.IcosahedronGeometry(ballRadius + 0.008, 2);
+        const ballWireMat = new THREE.MeshBasicMaterial({
+          color: 0xffd700,
+          wireframe: true,
+          transparent: true,
+          opacity: 0.75
+        });
+        const ballWire = new THREE.Mesh(ballWireGeo, ballWireMat);
+        footballGroup.add(ballWire);
+
+        // Glowing Crimson Halo Ring
+        const haloGeo = new THREE.RingGeometry(ballRadius + 0.08, ballRadius + 0.12, 32);
+        const haloMat = new THREE.MeshBasicMaterial({
+          color: 0xe6002e,
+          side: THREE.DoubleSide,
+          transparent: true,
+          opacity: 0.55,
+          blending: THREE.AdditiveBlending
+        });
+        const haloRing = new THREE.Mesh(haloGeo, haloMat);
+        haloRing.rotation.x = Math.PI / 2;
+        footballGroup.add(haloRing);
+
         // ─── PART 1: HOVERING 3D eFOOTBALL CONTROLLER ───
         const controllerGroup = new THREE.Group();
-        controllerGroup.position.y = 0.75; // Hovering above the pitch
+        controllerGroup.position.y = 0.75;
         stadiumGroup.add(controllerGroup);
 
         const bodyMat = new THREE.MeshStandardMaterial({ color: 0x09090b, metalness: 0.9, roughness: 0.18 });
         const gripMat = new THREE.MeshStandardMaterial({ color: 0x040405, metalness: 0.7, roughness: 0.3 });
         const stickMat = new THREE.MeshStandardMaterial({ color: 0x111113, metalness: 0.8, roughness: 0.1 });
-        const btnMatRed = new THREE.MeshStandardMaterial({ color: 0xff0033, metalness: 0.9, roughness: 0.1 });
-        const btnMatBlue = new THREE.MeshStandardMaterial({ color: 0x00ffff, metalness: 0.9, roughness: 0.1 });
+        const btnMatRed = new THREE.MeshStandardMaterial({ color: 0xe6002e, metalness: 0.9, roughness: 0.1 });
+        const btnMatGold = new THREE.MeshStandardMaterial({ color: 0xffd700, metalness: 0.9, roughness: 0.1 });
 
-        // Center Pad
         const body = new THREE.Mesh(new THREE.BoxGeometry(1.0, 0.55, 0.28), bodyMat);
         controllerGroup.add(body);
 
-        // Left Grip
         const gripL = new THREE.Mesh(new THREE.CylinderGeometry(0.15, 0.11, 0.8, 16), gripMat);
         gripL.position.set(-0.5, -0.22, 0.03);
         gripL.rotation.z = Math.PI / 7;
         controllerGroup.add(gripL);
 
-        // Right Grip
         const gripR = new THREE.Mesh(new THREE.CylinderGeometry(0.11, 0.15, 0.8, 16), gripMat);
         gripR.position.set(0.5, -0.22, 0.03);
         gripR.rotation.z = -Math.PI / 7;
         controllerGroup.add(gripR);
 
-        // Left Analog Stick
         const stickL = new THREE.Mesh(new THREE.SphereGeometry(0.1, 16, 16), stickMat);
         stickL.position.set(-0.25, -0.05, 0.18);
         controllerGroup.add(stickL);
 
-        // Right Analog Stick
         const stickR = new THREE.Mesh(new THREE.SphereGeometry(0.1, 16, 16), stickMat);
         stickR.position.set(0.25, -0.05, 0.18);
         controllerGroup.add(stickR);
 
-        // Buttons
         const btnA = new THREE.Mesh(new THREE.SphereGeometry(0.045, 12, 12), btnMatRed);
         btnA.position.set(0.4, 0.05, 0.16);
         controllerGroup.add(btnA);
 
-        const btnB = new THREE.Mesh(new THREE.SphereGeometry(0.045, 12, 12), btnMatBlue);
+        const btnB = new THREE.Mesh(new THREE.SphereGeometry(0.045, 12, 12), btnMatGold);
         btnB.position.set(0.48, 0.12, 0.16);
         controllerGroup.add(btnB);
 
-        // ─── PART 2: TACTICAL GREEN FIELD & WHITE BOUNDARIES ───
+        // ─── PART 2: TACTICAL FIELD ───
         const fieldLines = new THREE.Group();
         stadiumGroup.add(fieldLines);
 
-        // Emerald Green grass Plane
-        const grassGeo = new THREE.PlaneGeometry(2.5, 1.65);
-        const grassMat = new THREE.MeshStandardMaterial({
-          color: 0x145a32, // Green turf grass color
-          roughness: 0.85,
-          metalness: 0.1,
-          side: THREE.DoubleSide
-        });
-        const grass = new THREE.Mesh(grassGeo, grassMat);
-        grass.rotation.x = -Math.PI / 2;
-        fieldLines.add(grass);
+        const stripeWidth = 2.5 / 9;
+        for (let i = 0; i < 9; i++) {
+          const stripeGeo = new THREE.PlaneGeometry(stripeWidth, 1.65);
+          const stripeMat = new THREE.MeshStandardMaterial({
+            color: i % 2 === 0 ? 0x0e3f1e : 0x145a30,
+            roughness: 0.82,
+            metalness: 0.1,
+            side: THREE.DoubleSide
+          });
+          const stripe = new THREE.Mesh(stripeGeo, stripeMat);
+          stripe.rotation.x = -Math.PI / 2;
+          stripe.position.set(-1.25 + (stripeWidth * i) + (stripeWidth / 2), 0, 0);
+          fieldLines.add(stripe);
+        }
 
-        // White line boundary materials
         const lineMat = new THREE.LineBasicMaterial({ color: 0xffffff });
 
-        // Outer Touchlines boundary
         const outerPoints = [
           new THREE.Vector3(-1.25, 0.002, -0.8),
           new THREE.Vector3(1.25, 0.002, -0.8),
@@ -5361,13 +5677,11 @@
         const outerLine = new THREE.Line(outerGeo, lineMat);
         fieldLines.add(outerLine);
 
-        // Center division line
         const centerPoints = [new THREE.Vector3(0, 0.002, -0.8), new THREE.Vector3(0, 0.002, 0.8)];
         const centerGeo = new THREE.BufferGeometry().setFromPoints(centerPoints);
         const centerLine = new THREE.Line(centerGeo, lineMat);
         fieldLines.add(centerLine);
 
-        // Center Kickoff Circle
         const circleGeo = new THREE.RingGeometry(0.3, 0.32, 32);
         const circleMat = new THREE.MeshBasicMaterial({ color: 0xffffff, side: THREE.DoubleSide });
         const centerCircle = new THREE.Mesh(circleGeo, circleMat);
@@ -5375,7 +5689,6 @@
         centerCircle.position.y = 0.002;
         fieldLines.add(centerCircle);
 
-        // Penalty Box Left
         const boxLPoints = [
           new THREE.Vector3(-1.25, 0.002, -0.4),
           new THREE.Vector3(-0.95, 0.002, -0.4),
@@ -5386,7 +5699,6 @@
         const boxLLine = new THREE.Line(boxLGeo, lineMat);
         fieldLines.add(boxLLine);
 
-        // Penalty Box Right
         const boxRPoints = [
           new THREE.Vector3(1.25, 0.002, -0.4),
           new THREE.Vector3(0.95, 0.002, -0.4),
@@ -5397,12 +5709,10 @@
         const boxRLine = new THREE.Line(boxRGeo, lineMat);
         fieldLines.add(boxRLine);
 
-        // Goal Posts (thin white cylinder goalposts)
         const goalMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
         const goalGeoH = new THREE.CylinderGeometry(0.015, 0.015, 0.32, 8);
         const goalGeoW = new THREE.CylinderGeometry(0.015, 0.015, 0.14, 8);
 
-        // Left Goal
         const postL1 = new THREE.Mesh(goalGeoW, goalMat);
         postL1.position.set(-1.22, 0.07, -0.15);
         fieldLines.add(postL1);
@@ -5414,7 +5724,12 @@
         barL.rotation.x = Math.PI / 2;
         fieldLines.add(barL);
 
-        // Right Goal
+        const netGeo = new THREE.BoxGeometry(0.08, 0.14, 0.3);
+        const netMat = new THREE.MeshBasicMaterial({ color: 0xcccccc, wireframe: true, transparent: true, opacity: 0.55 });
+        const netL = new THREE.Mesh(netGeo, netMat);
+        netL.position.set(-1.26, 0.07, 0);
+        fieldLines.add(netL);
+
         const postR1 = new THREE.Mesh(goalGeoW, goalMat);
         postR1.position.set(1.22, 0.07, -0.15);
         fieldLines.add(postR1);
@@ -5426,19 +5741,45 @@
         barR.rotation.x = Math.PI / 2;
         fieldLines.add(barR);
 
-        // Volumetric Cone Floodlights pointing down at corner boundaries
+        const netR = new THREE.Mesh(netGeo, netMat);
+        netR.position.set(1.26, 0.07, 0);
+        fieldLines.add(netR);
+
+        const flagPoleGeo = new THREE.CylinderGeometry(0.006, 0.006, 0.22);
+        const flagPoleMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
+        const flagMeshGeo = new THREE.ConeGeometry(0.04, 0.07, 4);
+        const flagMeshMat = new THREE.MeshBasicMaterial({ color: 0xe6002e });
+
+        const flags = [
+          { x: -1.25, z: -0.8 },
+          { x: 1.25, z: -0.8 },
+          { x: -1.25, z: 0.8 },
+          { x: 1.25, z: 0.8 }
+        ];
+        flags.forEach(f => {
+          const pole = new THREE.Mesh(flagPoleGeo, flagPoleMat);
+          pole.position.set(f.x, 0.11, f.z);
+          fieldLines.add(pole);
+
+          const flag = new THREE.Mesh(flagMeshGeo, flagMeshMat);
+          flag.position.set(f.x, 0.2, f.z);
+          flag.rotation.x = Math.PI / 2;
+          fieldLines.add(flag);
+        });
+
+        // Volumetric Cone Floodlights with Crimson & Gold illumination
         const coneGeo = new THREE.ConeGeometry(0.24, 0.9, 16, 1, true);
         const towers = [
-          { x: -1.3, z: -0.85, color: 'red' },
-          { x: 1.3, z: -0.85, color: 'cyan' },
-          { x: -1.3, z: 0.85, color: 'cyan' },
-          { x: 1.3, z: 0.85, color: 'red' }
+          { x: -1.3, z: -0.85, color: 'crimson' },
+          { x: 1.3, z: -0.85, color: 'gold' },
+          { x: -1.3, z: 0.85, color: 'gold' },
+          { x: 1.3, z: 0.85, color: 'crimson' }
         ];
         towers.forEach(t => {
           const coneMat = new THREE.MeshBasicMaterial({
-            color: t.color === 'red' ? 0xff0033 : 0x00ffff,
+            color: t.color === 'crimson' ? 0xe6002e : 0xffd700,
             transparent: true,
-            opacity: 0.11,
+            opacity: 0.15,
             blending: THREE.AdditiveBlending,
             side: THREE.DoubleSide
           });
@@ -5449,9 +5790,9 @@
           stadiumGroup.add(cone);
         });
 
-        // --- ASSEMBLE HOVERING 3D CLAN CREST ---
+        // Hovering Clan Crest
         const crestGroup = new THREE.Group();
-        crestGroup.position.y = 0.22; // Hovering above center kickoff circle
+        crestGroup.position.y = 0.22;
         stadiumGroup.add(crestGroup);
 
         const discMat = new THREE.MeshStandardMaterial({
@@ -5466,7 +5807,7 @@
         crestGroup.add(disc);
 
         const rimGeo = new THREE.RingGeometry(0.28, 0.3, 32);
-        const rimMat = new THREE.MeshBasicMaterial({ color: 0xff0033, side: THREE.DoubleSide });
+        const rimMat = new THREE.MeshBasicMaterial({ color: 0xffd700, side: THREE.DoubleSide });
         const rimFront = new THREE.Mesh(rimGeo, rimMat);
         rimFront.position.z = 0.022;
         crestGroup.add(rimFront);
@@ -5475,82 +5816,75 @@
         rimBack.position.z = -0.022;
         crestGroup.add(rimBack);
 
-        // Glowing Star in center of the shield
         const starGeo = new THREE.ConeGeometry(0.08, 0.2, 4);
-        const starMat = new THREE.MeshStandardMaterial({ color: 0x00ffff, metalness: 0.9, roughness: 0.1 });
+        const starMat = new THREE.MeshStandardMaterial({ color: 0xe6002e, metalness: 0.9, roughness: 0.1 });
         const star = new THREE.Mesh(starGeo, starMat);
         star.position.set(0, 0, 0.03);
         crestGroup.add(star);
 
-        // Floor Grid helper
-        const gridHelper = new THREE.GridHelper(36, 24, 0xff0033, 0x330008);
+        const gridHelper = new THREE.GridHelper(36, 24, 0xe6002e, 0xffd700);
         gridHelper.position.y = -2.1;
         gridHelper.material.transparent = true;
-        gridHelper.material.opacity = 0.35;
+        gridHelper.material.opacity = 0.3;
         scene.add(gridHelper);
 
-        // Glowing space dust particles for maximum spatial depth
+        // Gold and Crimson space dust particles
         const particlesGeo = new THREE.BufferGeometry();
-        const particlesCount = 240;
+        const particlesCount = 280;
         const posArray = new Float32Array(particlesCount * 3);
 
         for (let i = 0; i < particlesCount * 3; i += 3) {
-          posArray[i] = (Math.random() - 0.5) * 11;
-          posArray[i + 1] = (Math.random() - 0.5) * 11;
-          posArray[i + 2] = (Math.random() - 0.5) * 11;
+          posArray[i] = (Math.random() - 0.5) * 12;
+          posArray[i + 1] = (Math.random() - 0.5) * 12;
+          posArray[i + 2] = (Math.random() - 0.5) * 12;
         }
 
         particlesGeo.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
 
         const particlesMat = new THREE.PointsMaterial({
-          size: 0.03,
-          color: 0xff0033,
+          size: 0.035,
+          color: 0xffd700,
           transparent: true,
-          opacity: 0.65,
+          opacity: 0.7,
           blending: THREE.AdditiveBlending
         });
 
         const starField = new THREE.Points(particlesGeo, particlesMat);
         scene.add(starField);
 
-        // Atmospheric Falling Rain/Snow lines (AAA weather effects)
-        const rainGeo = new THREE.BufferGeometry();
-        const rainCount = 160;
-        const rainPos = new Float32Array(rainCount * 3);
-        for (let i = 0; i < rainCount * 3; i += 3) {
-          rainPos[i] = (Math.random() - 0.5) * 7;
-          rainPos[i + 1] = Math.random() * 5 - 1; // vertical spread
-          rainPos[i + 2] = (Math.random() - 0.5) * 7;
+        // Rising Fire Sparks particles
+        const sparkGeo = new THREE.BufferGeometry();
+        const sparkCount = 180;
+        const sparkPos = new Float32Array(sparkCount * 3);
+        for (let i = 0; i < sparkCount * 3; i += 3) {
+          sparkPos[i] = (Math.random() - 0.5) * 8;
+          sparkPos[i + 1] = Math.random() * 6 - 2;
+          sparkPos[i + 2] = (Math.random() - 0.5) * 8;
         }
-        rainGeo.setAttribute('position', new THREE.BufferAttribute(rainPos, 3));
-        const rainMat = new THREE.PointsMaterial({
-          size: 0.016,
-          color: 0x00ffff,
+        sparkGeo.setAttribute('position', new THREE.BufferAttribute(sparkPos, 3));
+        const sparkMat = new THREE.PointsMaterial({
+          size: 0.022,
+          color: 0xe6002e,
           transparent: true,
-          opacity: 0.42
+          opacity: 0.65,
+          blending: THREE.AdditiveBlending
         });
-        const rainField = new THREE.Points(rainGeo, rainMat);
-        scene.add(rainField);
+        const sparkField = new THREE.Points(sparkGeo, sparkMat);
+        scene.add(sparkField);
 
-        // Morphic coordinates and zoom configurations per scroll keyframe
         const keyframes = [
-          // scrollPct, x, y, z, scale, rx, ry, rz
-          { scrollPct: 0.0, x: 1.15, y: -0.22, z: 0.4, scale: 1.12, rx: Math.PI / 5, ry: -Math.PI / 4, rz: 0 },         // Hero (Focus on Controller)
-          { scrollPct: 0.15, x: -1.25, y: 0.42, z: -0.7, scale: 0.9, rx: Math.PI / 3, ry: Math.PI / 6, rz: 0 },       // About (Focus Left Pitch Goal)
-          { scrollPct: 0.32, x: 1.2, y: 0.18, z: -0.2, scale: 1.25, rx: Math.PI / 5.2, ry: -Math.PI / 2.5, rz: 0 },    // Highlights (Zoom kickoff circle)
-          { scrollPct: 0.5, x: 0.0, y: -0.85, z: -1.2, scale: 0.78, rx: Math.PI / 2.1, ry: 0, rz: 0 },               // Cabinet (Flat tactical overhead)
-          { scrollPct: 0.68, x: -1.25, y: 0.38, z: -0.6, scale: 0.92, rx: Math.PI / 3.8, ry: Math.PI / 3, rz: 0 },     // Squads (Focus Right Pitch Goal)
-          { scrollPct: 0.85, x: 1.15, y: -0.15, z: -0.8, scale: 0.8, rx: Math.PI / 3.2, ry: -Math.PI / 5, rz: 0 },     // Table (Slanted deck overview)
-          { scrollPct: 1.0, x: 0.0, y: -0.32, z: 0.5, scale: 1.22, rx: Math.PI / 4.8, ry: Math.PI * 2, rz: 0 }       // Register (Zoom joystick sticks)
+          { scrollPct: 0.0, x: 1.15, y: -0.22, z: 0.4, scale: 1.12, rx: Math.PI / 5, ry: -Math.PI / 4, rz: 0 },
+          { scrollPct: 0.15, x: -1.25, y: 0.42, z: -0.7, scale: 0.9, rx: Math.PI / 3, ry: Math.PI / 6, rz: 0 },
+          { scrollPct: 0.32, x: 1.2, y: 0.18, z: -0.2, scale: 1.25, rx: Math.PI / 5.2, ry: -Math.PI / 2.5, rz: 0 },
+          { scrollPct: 0.5, x: 0.0, y: -0.85, z: -1.2, scale: 0.78, rx: Math.PI / 2.1, ry: 0, rz: 0 },
+          { scrollPct: 0.68, x: -1.25, y: 0.38, z: -0.6, scale: 0.92, rx: Math.PI / 3.8, ry: Math.PI / 3, rz: 0 },
+          { scrollPct: 0.85, x: 1.15, y: -0.15, z: -0.8, scale: 0.8, rx: Math.PI / 3.2, ry: -Math.PI / 5, rz: 0 },
+          { scrollPct: 1.0, x: 0.0, y: -0.32, z: 0.5, scale: 1.22, rx: Math.PI / 4.8, ry: Math.PI * 2, rz: 0 }
         ];
 
-        let targetX = 1.15;
-        let targetY = -0.22;
-        let targetZ = 0.4;
+        let targetX = 1.15, targetY = -0.22, targetZ = 0.4;
         let targetScale = 1.12;
-        let targetRx = Math.PI / 5;
-        let targetRy = -Math.PI / 4;
-        let targetRz = 0;
+        let targetRx = Math.PI / 5, targetRy = -Math.PI / 4, targetRz = 0;
 
         const updateTargets = () => {
           const scrollTop = window.scrollY;
@@ -5592,37 +5926,36 @@
         const animate = () => {
           requestAnimationFrame(animate);
 
-          // Independent spins
+          if (typeof footballGroup !== 'undefined') {
+            footballGroup.rotation.y += 0.012;
+            footballGroup.rotation.x += 0.006;
+            footballGroup.position.y = 1.4 + Math.sin(Date.now() * 0.002) * 0.05;
+          }
+
           crestGroup.rotation.y += 0.012;
           controllerGroup.rotation.y += 0.008;
-
-          // Gentle stadium field yaw rotation
           stadiumGroup.rotation.y += 0.001;
 
-          // Slow rotation drift of the space dust particles
           if (typeof starField !== 'undefined') {
             starField.rotation.y += 0.0006;
             starField.rotation.x += 0.0003;
           }
 
-          // Fall loop calculation for weather rain particles
-          if (typeof rainField !== 'undefined') {
-            const positions = rainField.geometry.attributes.position.array;
+          if (typeof sparkField !== 'undefined') {
+            const positions = sparkField.geometry.attributes.position.array;
             for (let i = 1; i < positions.length; i += 3) {
-              positions[i] -= 0.095; // falling velocity
-              if (positions[i] < -2) {
-                positions[i] = 4; // loop wrap
+              positions[i] += 0.018;
+              if (positions[i] > 4) {
+                positions[i] = -2;
               }
             }
-            rainField.geometry.attributes.position.needsUpdate = true;
+            sparkField.geometry.attributes.position.needsUpdate = true;
           }
 
-          // Zero-gravity floating oscillations
           const oscTime = Date.now() * 0.0012;
           const floatOffset = Math.sin(oscTime) * 0.06;
           const crestFloat = 0.22 + Math.cos(oscTime * 1.6) * 0.025;
 
-          // Mouse coordinate parallax LERP offsets (True 3D mouse parallax tracking)
           const parallaxX = sceneMouseX * 0.38;
           const parallaxY = -sceneMouseY * 0.32;
 
@@ -5650,11 +5983,11 @@
 
       init3DStadium();
 
-
+      // ─── AAA 3D TILT ENGINE & HOLOGRAPHIC SHEEN ───
       const init3DTilt = () => {
-        const cards = document.querySelectorAll('.tour-card, .team-card, .player-card, .activity-card, .reigning-champ-card, .stat-card, .fixture');
+        const cards = document.querySelectorAll('.tour-card, .team-card, .player-card, .activity-card, .reigning-champ-card, .stat-card, .fixture, .trophy-card, .rule-card');
         cards.forEach(card => {
-          card.style.transition = 'transform 0.15s ease-out, box-shadow 0.15s ease-out, background-color 0.15s ease-out';
+          card.style.transition = 'transform 0.15s ease-out, box-shadow 0.15s ease-out, border-color 0.15s ease-out';
           
           card.addEventListener('mousemove', e => {
             const rect = card.getBoundingClientRect();
@@ -5662,33 +5995,70 @@
             const y = e.clientY - rect.top;
             const xc = rect.width / 2;
             const yc = rect.height / 2;
-            const rotateY = ((x - xc) / xc) * 12; // Max Y tilt
-            const rotateX = -((y - yc) / yc) * 12; // Max X tilt
+            const rotateY = ((x - xc) / xc) * 15;
+            const rotateX = -((y - yc) / yc) * 15;
             
-            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.03, 1.03, 1.03)`;
-            card.style.boxShadow = `0 20px 40px rgba(0, 0, 0, 0.85), 0 0 25px rgba(212, 0, 0, 0.35)`;
+            card.style.transform = `perspective(1500px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.04, 1.04, 1.04)`;
+            card.style.boxShadow = `0 25px 50px rgba(0, 0, 0, 0.95), 0 0 30px rgba(255, 215, 0, 0.3), 0 0 15px rgba(230, 0, 46, 0.4)`;
             
-            // Apply translation offset to child elements for 3D depth pop-out
-            const popOuts = card.querySelectorAll('h3, h4, .rc-champ-name, .rc-tour-name, .player-avatar, .team-crest-replacement, .tour-teams, p, b');
+            const sheen = card.querySelector('.foil-sheen');
+            if (sheen) {
+              sheen.style.opacity = '1';
+              sheen.style.background = `radial-gradient(circle at ${(x / rect.width) * 100}% ${(y / rect.height) * 100}%, rgba(255, 215, 0, 0.35) 0%, rgba(230, 0, 46, 0.2) 40%, transparent 70%)`;
+            }
+
+            const popOuts = card.querySelectorAll('h3, h4, .rc-champ-name, .rc-tour-name, .player-avatar, .team-crest-replacement, .tour-teams, p, b, .btn');
             popOuts.forEach(el => {
-              el.style.transform = 'translateZ(20px)';
+              el.style.transform = 'translateZ(25px)';
               el.style.transition = 'transform 0.1s ease-out';
             });
           });
           
           card.addEventListener('mouseleave', () => {
-            card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+            card.style.transform = `perspective(1500px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
             card.style.boxShadow = '';
             
-            const popOuts = card.querySelectorAll('h3, h4, .rc-champ-name, .rc-tour-name, .player-avatar, .team-crest-replacement, .tour-teams, p, b');
+            const sheen = card.querySelector('.foil-sheen');
+            if (sheen) sheen.style.opacity = '0';
+
+            const popOuts = card.querySelectorAll('h3, h4, .rc-champ-name, .rc-tour-name, .player-avatar, .team-crest-replacement, .tour-teams, p, b, .btn');
             popOuts.forEach(el => {
               el.style.transform = 'translateZ(0px)';
             });
           });
         });
       };
-      
       init3DTilt();
+
+      // Countdown Timer Auto Tick
+      const setupCountdownTimer = () => {
+        const targetDate = new Date();
+        targetDate.setDate(targetDate.getDate() + 3);
+        targetDate.setHours(targetDate.getHours() + 14);
+
+        const updateCD = () => {
+          const now = new Date().getTime();
+          const diff = Math.max(0, targetDate.getTime() - now);
+
+          const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+          const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+          const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+          const cdDays = document.getElementById('cdDays');
+          const cdHours = document.getElementById('cdHours');
+          const cdMins = document.getElementById('cdMins');
+          const cdSecs = document.getElementById('cdSecs');
+
+          if (cdDays) cdDays.textContent = String(days).padStart(2, '0');
+          if (cdHours) cdHours.textContent = String(hours).padStart(2, '0');
+          if (cdMins) cdMins.textContent = String(mins).padStart(2, '0');
+          if (cdSecs) cdSecs.textContent = String(secs).padStart(2, '0');
+        };
+        setInterval(updateCD, 1000);
+        updateCD();
+      };
+      setupCountdownTimer();
 
     });
   </script>
