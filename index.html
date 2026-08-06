@@ -1242,26 +1242,31 @@
   margin-bottom: 10px;
 }
 .evo-tc-player-sil {
-  width: 58px;
-  height: 58px;
+  width: 66px;
+  height: 66px;
   opacity: 0.97;
-  filter: drop-shadow(0 0 12px rgba(255,255,255,0.7)) drop-shadow(0 0 25px rgba(225,29,72,0.5));
+  filter: drop-shadow(0 0 14px rgba(255,255,255,0.8)) drop-shadow(0 0 30px rgba(225,29,72,0.6));
 }
 .evo-tc-clan-logo {
-  width: 72px;
-  height: 72px;
+  width: 92px;
+  height: 92px;
   border-radius: 50%;
-  border: 3px solid #ffd700;
+  border: 3.5px solid #ffd700;
   box-shadow:
-    0 0 22px rgba(255,215,0,0.85),
-    0 0 45px rgba(225,29,72,0.5),
-    inset 0 2px 0 rgba(255,255,255,0.4);
+    0 0 25px rgba(255,215,0,0.9),
+    0 0 50px rgba(225,29,72,0.65),
+    0 0 90px rgba(255,215,0,0.3),
+    inset 0 3px 0 rgba(255,255,255,0.5);
   object-fit: cover;
   animation: tcLogoPulseGold 4s ease-in-out infinite;
+  transition: transform .3s ease;
+}
+.evo-tc-clan-logo:hover {
+  transform: scale(1.08);
 }
 @keyframes tcLogoPulseGold {
-  0%, 100% { box-shadow: 0 0 22px rgba(255,215,0,0.85), 0 0 45px rgba(225,29,72,0.5); }
-  50% { box-shadow: 0 0 35px rgba(255,215,0,1), 0 0 75px rgba(225,29,72,0.8), 0 0 120px rgba(255,215,0,0.3); }
+  0%, 100% { box-shadow: 0 0 25px rgba(255,215,0,0.9), 0 0 50px rgba(225,29,72,0.65); }
+  50% { box-shadow: 0 0 40px rgba(255,215,0,1), 0 0 85px rgba(225,29,72,0.85), 0 0 130px rgba(255,215,0,0.4); }
 }
 
 .evo-tc-title-wrap {
@@ -4867,12 +4872,12 @@
         const meta = getToursMeta();
 
         function getTourTitleHtml(tourId, rawName) {
-          if (tourId === 'evolution-cup') return `<span>evo</span><span class="trophy-red">l</span><span>ution</span> <span class="cup-title">C<span class="trophy-red">🏆</span>P</span>`;
-          if (tourId === 'intimate-cup') return `<span>inti</span><span class="trophy-red">m</span><span>ate</span> <span class="cup-title">C<span class="trophy-red">🏆</span>P</span>`;
-          if (tourId === 'world-cup') return `<span>wor</span><span class="trophy-red">l</span><span>d</span> <span class="cup-title">C<span class="trophy-red">🏆</span>P</span>`;
-          if (tourId === 'club-world-cup') return `<span>c</span><span class="trophy-red">l</span><span>ub world</span> <span class="cup-title">C<span class="trophy-red">🏆</span>P</span>`;
+          if (tourId === 'evolution-cup') return `<span>evo</span><span class="trophy-red">l</span><span>ution</span> <span class="cup-title">C<span class="trophy-red">U</span>P</span>`;
+          if (tourId === 'intimate-cup') return `<span>inti</span><span class="trophy-red">m</span><span>ate</span> <span class="cup-title">C<span class="trophy-red">U</span>P</span>`;
+          if (tourId === 'world-cup') return `<span>wor</span><span class="trophy-red">l</span><span>d</span> <span class="cup-title">C<span class="trophy-red">U</span>P</span>`;
+          if (tourId === 'club-world-cup') return `<span>c</span><span class="trophy-red">l</span><span>ub world</span> <span class="cup-title">C<span class="trophy-red">U</span>P</span>`;
           if (tourId === 'coopa-duo') return `<span>coopa'd</span> <span class="trophy-red">d</span><span>uo</span>`;
-          if (tourId === 'districto-cup') return `<span>distric</span><span class="trophy-red">t</span><span>o</span> <span class="cup-title">C<span class="trophy-red">🏆</span>P</span>`;
+          if (tourId === 'districto-cup') return `<span>distric</span><span class="trophy-red">t</span><span>o</span> <span class="cup-title">C<span class="trophy-red">U</span>P</span>`;
           return `<span>${escapeHtml(rawName.toLowerCase())}</span>`;
         }
 
@@ -5106,12 +5111,12 @@
         const meta = getToursMeta();
 
         function getTourTitleHtml(tourId, rawName) {
-          if (tourId === 'evolution-cup') return `<span>evo</span><span class="trophy-red">l</span><span>ution</span> <span class="cup-title">C<span class="trophy-red">🏆</span>P</span>`;
-          if (tourId === 'intimate-cup') return `<span>inti</span><span class="trophy-red">m</span><span>ate</span> <span class="cup-title">C<span class="trophy-red">🏆</span>P</span>`;
-          if (tourId === 'world-cup') return `<span>wor</span><span class="trophy-red">l</span><span>d</span> <span class="cup-title">C<span class="trophy-red">🏆</span>P</span>`;
-          if (tourId === 'club-world-cup') return `<span>c</span><span class="trophy-red">l</span><span>ub world</span> <span class="cup-title">C<span class="trophy-red">🏆</span>P</span>`;
+          if (tourId === 'evolution-cup') return `<span>evo</span><span class="trophy-red">l</span><span>ution</span> <span class="cup-title">C<span class="trophy-red">U</span>P</span>`;
+          if (tourId === 'intimate-cup') return `<span>inti</span><span class="trophy-red">m</span><span>ate</span> <span class="cup-title">C<span class="trophy-red">U</span>P</span>`;
+          if (tourId === 'world-cup') return `<span>wor</span><span class="trophy-red">l</span><span>d</span> <span class="cup-title">C<span class="trophy-red">U</span>P</span>`;
+          if (tourId === 'club-world-cup') return `<span>c</span><span class="trophy-red">l</span><span>ub world</span> <span class="cup-title">C<span class="trophy-red">U</span>P</span>`;
           if (tourId === 'coopa-duo') return `<span>coopa'd</span> <span class="trophy-red">d</span><span>uo</span>`;
-          if (tourId === 'districto-cup') return `<span>distric</span><span class="trophy-red">t</span><span>o</span> <span class="cup-title">C<span class="trophy-red">🏆</span>P</span>`;
+          if (tourId === 'districto-cup') return `<span>distric</span><span class="trophy-red">t</span><span>o</span> <span class="cup-title">C<span class="trophy-red">U</span>P</span>`;
           return `<span>${escapeHtml(rawName.toLowerCase())}</span>`;
         }
 
@@ -5341,12 +5346,12 @@
         const meta = getToursMeta();
 
         function getTourTitleHtml(tourId, rawName) {
-          if (tourId === 'evolution-cup') return `<span>evo</span><span class="trophy-red">l</span><span>ution</span> <span class="cup-title">C<span class="trophy-red">🏆</span>P</span>`;
-          if (tourId === 'intimate-cup') return `<span>inti</span><span class="trophy-red">m</span><span>ate</span> <span class="cup-title">C<span class="trophy-red">🏆</span>P</span>`;
-          if (tourId === 'world-cup') return `<span>wor</span><span class="trophy-red">l</span><span>d</span> <span class="cup-title">C<span class="trophy-red">🏆</span>P</span>`;
-          if (tourId === 'club-world-cup') return `<span>c</span><span class="trophy-red">l</span><span>ub world</span> <span class="cup-title">C<span class="trophy-red">🏆</span>P</span>`;
+          if (tourId === 'evolution-cup') return `<span>evo</span><span class="trophy-red">l</span><span>ution</span> <span class="cup-title">C<span class="trophy-red">U</span>P</span>`;
+          if (tourId === 'intimate-cup') return `<span>inti</span><span class="trophy-red">m</span><span>ate</span> <span class="cup-title">C<span class="trophy-red">U</span>P</span>`;
+          if (tourId === 'world-cup') return `<span>wor</span><span class="trophy-red">l</span><span>d</span> <span class="cup-title">C<span class="trophy-red">U</span>P</span>`;
+          if (tourId === 'club-world-cup') return `<span>c</span><span class="trophy-red">l</span><span>ub world</span> <span class="cup-title">C<span class="trophy-red">U</span>P</span>`;
           if (tourId === 'coopa-duo') return `<span>coopa'd</span> <span class="trophy-red">d</span><span>uo</span>`;
-          if (tourId === 'districto-cup') return `<span>distric</span><span class="trophy-red">t</span><span>o</span> <span class="cup-title">C<span class="trophy-red">🏆</span>P</span>`;
+          if (tourId === 'districto-cup') return `<span>distric</span><span class="trophy-red">t</span><span>o</span> <span class="cup-title">C<span class="trophy-red">U</span>P</span>`;
           return `<span>${escapeHtml(rawName.toLowerCase())}</span>`;
         }
 
