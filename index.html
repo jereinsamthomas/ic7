@@ -1842,6 +1842,14 @@
       display: block;
     }
 
+
+    /* ─── eFOOTBALL/PES 3D TILT CONFIG ─── */
+    .tour-card, .team-card, .player-card, .activity-card, .reigning-champ-card, .stat-card, .fixture {
+      transform-style: preserve-3d;
+      backface-visibility: hidden;
+      perspective: 1000px;
+    }
+
 </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" defer></script>
 </head>
@@ -2897,7 +2905,7 @@
               }, 620);
             }
           }
-          function start() { whTimer = setInterval(advance, 5000); }
+          function start() { whTimer = setInterval(advance, 8000); }
           function stop() { if (whTimer) { clearInterval(whTimer); whTimer = null; } }
           start();
           if (carousel) {
@@ -4525,6 +4533,46 @@
         const url = `https://wa.me/${mainNumber}?text=${encodeURIComponent(text)}`;
         window.open(url, '_blank');
       });
+
+      // eFootball / PES style 3D Tilt Card Effects
+      const init3DTilt = () => {
+        const cards = document.querySelectorAll('.tour-card, .team-card, .player-card, .activity-card, .reigning-champ-card, .stat-card, .fixture');
+        cards.forEach(card => {
+          card.style.transition = 'transform 0.15s ease-out, box-shadow 0.15s ease-out, background-color 0.15s ease-out';
+          
+          card.addEventListener('mousemove', e => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const xc = rect.width / 2;
+            const yc = rect.height / 2;
+            const rotateY = ((x - xc) / xc) * 12; // Max Y tilt
+            const rotateX = -((y - yc) / yc) * 12; // Max X tilt
+            
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.03, 1.03, 1.03)`;
+            card.style.boxShadow = `0 20px 40px rgba(0, 0, 0, 0.85), 0 0 25px rgba(212, 0, 0, 0.35)`;
+            
+            // Apply translation offset to child elements for 3D depth pop-out
+            const popOuts = card.querySelectorAll('h3, h4, .rc-champ-name, .rc-tour-name, .player-avatar, .team-crest-replacement, .tour-teams, p, b');
+            popOuts.forEach(el => {
+              el.style.transform = 'translateZ(20px)';
+              el.style.transition = 'transform 0.1s ease-out';
+            });
+          });
+          
+          card.addEventListener('mouseleave', () => {
+            card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+            card.style.boxShadow = '';
+            
+            const popOuts = card.querySelectorAll('h3, h4, .rc-champ-name, .rc-tour-name, .player-avatar, .team-crest-replacement, .tour-teams, p, b');
+            popOuts.forEach(el => {
+              el.style.transform = 'translateZ(0px)';
+            });
+          });
+        });
+      };
+      
+      init3DTilt();
 
     });
   </script>
