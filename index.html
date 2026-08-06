@@ -2146,11 +2146,98 @@
       border: 1px solid rgba(255, 255, 255, 0.08) !important;
     }
 
+
+    /* ─── NEXUS TOURNAMENTS LAYOUT GRID & PRIZE WIDGET ─── */
+    .tours-layout-grid {
+      display: grid;
+      grid-template-columns: 2.1fr 0.9fr;
+      gap: 32px;
+      align-items: start;
+      margin-top: 32px;
+    }
+    @media(max-width: 950px) {
+      .tours-layout-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .prize-pool-card {
+      background: rgba(13, 13, 13, 0.92) !important;
+      border: 1px solid var(--red-bright, #ff1122) !important;
+      box-shadow: 0 0 35px rgba(212, 0, 0, 0.18);
+      padding: 32px 24px;
+      text-align: center;
+      position: sticky;
+      top: 110px;
+      transition: all 0.3s ease;
+    }
+    .prize-pool-card:hover {
+      box-shadow: 0 0 45px rgba(255, 17, 34, 0.28);
+      border-color: #fff !important;
+    }
+    .prize-title {
+      font-family: var(--font-display);
+      font-size: 38px;
+      color: var(--red-bright);
+      text-shadow: 0 0 18px rgba(255, 17, 34, 0.65);
+      margin: 12px 0 2px;
+    }
+    .prize-sub {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--ink-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 24px;
+    }
+    .glowing-trophy-hud {
+      position: relative;
+      width: 140px;
+      height: 140px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .trophy-glow-circle {
+      position: absolute;
+      inset: 8px;
+      border-radius: 50%;
+      border: 1.5px dashed rgba(255, 17, 34, 0.55);
+      animation: gateSpin 10s linear infinite;
+    }
+    .trophy-vector {
+      width: 60px;
+      height: 60px;
+      color: #ffd700;
+      filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.7));
+      animation: gatePulse 2s ease-in-out infinite alternate;
+    }
+    
+    /* Glowing team crest design overrides */
+    .team-crest-replacement {
+      width: 72px;
+      height: 72px;
+      margin: 0 auto 16px;
+      border-radius: 50%;
+      border: 2px solid var(--red-bright);
+      background: radial-gradient(circle, #200004 0%, #000 100%);
+      box-shadow: 0 0 15px rgba(255, 17, 34, 0.45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 24px;
+      color: #fff;
+      text-shadow: 0 0 10px rgba(255, 17, 34, 0.85);
+    }
+
 </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 
 <body>
+  <canvas id="webgl-canvas" style="position:fixed; top:0; left:0; width:100vw; height:100vh; z-index:-1; pointer-events:none;"></canvas>
 
   <div class="starfield" id="starfield" aria-hidden="true"></div>
 
@@ -4866,6 +4953,228 @@
       });
 
       // eFootball / PES style 3D Tilt Card Effects
+            // ─── THREE.JS 3D HOLOGRAM GAME CONTROLLER & HUD SCREEN ENGINE ───
+      const init3DController = () => {
+        const canvas = document.getElementById('webgl-canvas');
+        if (!canvas || typeof THREE === 'undefined') return;
+
+        const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.setSize(window.innerWidth, window.innerHeight);
+
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
+        camera.position.z = 5;
+
+        // Group to hold the game controller and floating screen
+        const controllerGroup = new THREE.Group();
+        controllerGroup.rotation.z = Math.PI / 12; // tilted slightly
+        scene.add(controllerGroup);
+
+        // Group to hold the background hexagon portal
+        const portalGroup = new THREE.Group();
+        scene.add(portalGroup);
+
+        // High intensity spotlight color scheme (Red and Cyan)
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
+        scene.add(ambientLight);
+
+        const dirLight1 = new THREE.DirectionalLight(0xff0033, 2.3); // Vivid Red Highlight
+        dirLight1.position.set(6, 9, 5);
+        scene.add(dirLight1);
+
+        const dirLight2 = new THREE.DirectionalLight(0x00ffff, 1.9); // Vivid Cyan fill light
+        dirLight2.position.set(-6, -9, -5);
+        scene.add(dirLight2);
+
+        // Assemble the Holographic Game Controller
+        const bodyMat = new THREE.MeshStandardMaterial({ color: 0x0a0a0c, metalness: 0.85, roughness: 0.18 });
+        const gripMat = new THREE.MeshStandardMaterial({ color: 0x040405, metalness: 0.7, roughness: 0.3 });
+        const stickMat = new THREE.MeshStandardMaterial({ color: 0x111113, metalness: 0.8, roughness: 0.1 });
+        const btnMatRed = new THREE.MeshStandardMaterial({ color: 0xff0033, metalness: 0.9, roughness: 0.1 });
+        const btnMatBlue = new THREE.MeshStandardMaterial({ color: 0x00ffff, metalness: 0.9, roughness: 0.1 });
+
+        // Center Pad
+        const body = new THREE.Mesh(new THREE.BoxGeometry(1.5, 0.8, 0.4), bodyMat);
+        controllerGroup.add(body);
+
+        // Left Handle Grip
+        const gripL = new THREE.Mesh(new THREE.CylinderGeometry(0.22, 0.16, 1.2, 16), gripMat);
+        gripL.position.set(-0.75, -0.3, 0.05);
+        gripL.rotation.z = Math.PI / 7;
+        controllerGroup.add(gripL);
+
+        // Right Handle Grip
+        const gripR = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.22, 1.2, 16), gripMat);
+        gripR.position.set(0.75, -0.3, 0.05);
+        gripR.rotation.z = -Math.PI / 7;
+        controllerGroup.add(gripR);
+
+        // Left Thumbstick
+        const baseL = new THREE.Mesh(new THREE.CylinderGeometry(0.18, 0.18, 0.1, 16), gripMat);
+        baseL.position.set(-0.4, -0.1, 0.22);
+        controllerGroup.add(baseL);
+        const stickL = new THREE.Mesh(new THREE.SphereGeometry(0.14, 16, 16), stickMat);
+        stickL.position.set(-0.4, -0.06, 0.28);
+        controllerGroup.add(stickL);
+
+        // Right Thumbstick
+        const baseR = new THREE.Mesh(new THREE.CylinderGeometry(0.18, 0.18, 0.1, 16), gripMat);
+        baseR.position.set(0.4, -0.1, 0.22);
+        controllerGroup.add(baseR);
+        const stickR = new THREE.Mesh(new THREE.SphereGeometry(0.14, 16, 16), stickMat);
+        stickR.position.set(0.4, -0.06, 0.28);
+        controllerGroup.add(stickR);
+
+        // D-Pad Cross Elements (Left Side)
+        const dpadH = new THREE.Mesh(new THREE.BoxGeometry(0.35, 0.11, 0.1), gripMat);
+        dpadH.position.set(-0.6, 0.2, 0.22);
+        controllerGroup.add(dpadH);
+        const dpadV = new THREE.Mesh(new THREE.BoxGeometry(0.11, 0.35, 0.1), gripMat);
+        dpadV.position.set(-0.6, 0.2, 0.22);
+        controllerGroup.add(dpadV);
+
+        // Action Buttons (Right Side - XYAB)
+        const btnA = new THREE.Mesh(new THREE.SphereGeometry(0.065, 12, 12), btnMatRed);
+        btnA.position.set(0.6, 0.08, 0.23);
+        controllerGroup.add(btnA);
+
+        const btnB = new THREE.Mesh(new THREE.SphereGeometry(0.065, 12, 12), btnMatBlue);
+        btnB.position.set(0.72, 0.2, 0.23);
+        controllerGroup.add(btnB);
+
+        const btnY = new THREE.Mesh(new THREE.SphereGeometry(0.065, 12, 12), btnMatRed);
+        btnY.position.set(0.6, 0.32, 0.23);
+        controllerGroup.add(btnY);
+
+        const btnX = new THREE.Mesh(new THREE.SphereGeometry(0.065, 12, 12), btnMatBlue);
+        btnX.position.set(0.48, 0.2, 0.23);
+        controllerGroup.add(btnX);
+
+        // ─── ADDING FLOATING 3D HUD PANEL ───
+        const screenGeo = new THREE.PlaneGeometry(1.6, 1.0);
+        const edgeGeo = new THREE.EdgesGeometry(screenGeo);
+        const edgeMat = new THREE.LineBasicMaterial({ color: 0x00ffff, linewidth: 2 });
+        const screenOutline = new THREE.LineSegments(edgeGeo, edgeMat);
+        screenOutline.position.set(0.85, 0.45, -0.4); // float offset to the right
+        screenOutline.rotation.y = -Math.PI / 6; // angled perspective
+        controllerGroup.add(screenOutline);
+
+        // Grid lines on HUD screen
+        const hudGrid = new THREE.GridHelper(1.2, 8, 0x00ffff, 0x005555);
+        hudGrid.position.set(0.85, 0.45, -0.4);
+        hudGrid.rotation.x = Math.PI / 2;
+        hudGrid.rotation.y = -Math.PI / 6;
+        controllerGroup.add(hudGrid);
+
+        // Assemble the Hexagon light frames
+        const hexGeo1 = new THREE.RingGeometry(2.35, 2.39, 6);
+        const hexMat1 = new THREE.MeshBasicMaterial({ color: 0xff0033, side: THREE.DoubleSide });
+        const hexMesh1 = new THREE.Mesh(hexGeo1, hexMat1);
+        portalGroup.add(hexMesh1);
+
+        const hexGeo2 = new THREE.RingGeometry(2.48, 2.51, 6);
+        const hexMat2 = new THREE.MeshBasicMaterial({ color: 0x00ffff, side: THREE.DoubleSide });
+        const hexMesh2 = new THREE.Mesh(hexGeo2, hexMat2);
+        portalGroup.add(hexMesh2);
+
+        // Add 3D Holographic Ground Grid (Tactical pitch radar)
+        const gridHelper = new THREE.GridHelper(36, 24, 0xff0033, 0x330008);
+        gridHelper.position.y = -2.1;
+        gridHelper.material.transparent = true;
+        gridHelper.material.opacity = 0.35;
+        scene.add(gridHelper);
+
+        // Coordinates configuration per scroll keyframes to frame text areas
+        const keyframes = [
+          { scrollPct: 0.0, x: 1.15, y: 0.1, z: 0.3, scale: 1.1 },       // Hero (Aligns right)
+          { scrollPct: 0.15, x: -1.25, y: -0.15, z: -0.8, scale: 0.82 }, // About (Aligns left)
+          { scrollPct: 0.32, x: 1.2, y: 0.2, z: -0.4, scale: 0.92 },     // Highlights (Aligns right)
+          { scrollPct: 0.5, x: 0.0, y: -0.72, z: -1.3, scale: 0.72 },    // Cabinet (Centers and shrinks)
+          { scrollPct: 0.68, x: -1.25, y: 0.05, z: -0.7, scale: 0.82 },  // Squads (Aligns left)
+          { scrollPct: 0.85, x: 1.15, y: -0.22, z: -0.9, scale: 0.78 },  // Table (Aligns right)
+          { scrollPct: 1.0, x: 0.0, y: 0.1, z: 0.4, scale: 1.12 }        // Register (Centers)
+        ];
+
+        let targetX = 1.15;
+        let targetY = 0.1;
+        let targetZ = 0.3;
+        let targetScale = 1.1;
+
+        const updateTargets = () => {
+          const scrollTop = window.scrollY;
+          const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+          // Clamp scroll fraction safely between 0 and 1
+          const pct = Math.max(0, Math.min(1, maxScroll > 0 ? scrollTop / maxScroll : 0));
+
+          // Find surrounding keyframes
+          let k1 = keyframes[0];
+          let k2 = keyframes[keyframes.length - 1];
+          for(let i=0; i<keyframes.length - 1; i++) {
+            if (pct >= keyframes[i].scrollPct && pct <= keyframes[i+1].scrollPct) {
+              k1 = keyframes[i];
+              k2 = keyframes[i+1];
+              break;
+            }
+          }
+
+          // Local interpolation ratio
+          const div = k2.scrollPct - k1.scrollPct;
+          const t = div > 0 ? (pct - k1.scrollPct) / div : 0;
+
+          targetX = k1.x + (k2.x - k1.x) * t;
+          targetY = k1.y + (k2.y - k1.y) * t;
+          targetZ = k1.z + (k2.z - k1.z) * t;
+          targetScale = k1.scale + (k2.scale - k1.scale) * t;
+        };
+
+        window.addEventListener('scroll', updateTargets, { passive: true });
+        updateTargets();
+
+        // Resize viewport support
+        window.addEventListener('resize', () => {
+          camera.aspect = window.innerWidth / window.innerHeight;
+          camera.updateProjectionMatrix();
+          renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // Loop rendering
+        const animate = () => {
+          requestAnimationFrame(animate);
+
+          // Continuous self-rotation along axes
+          controllerGroup.rotation.y += 0.005;
+          controllerGroup.rotation.x = Math.sin(Date.now() * 0.0006) * 0.12;
+          
+          portalGroup.rotation.z -= 0.0022;
+
+          // Lerp inertia calculations
+          controllerGroup.position.x += (targetX - controllerGroup.position.x) * 0.078;
+          controllerGroup.position.y += (targetY - controllerGroup.position.y) * 0.078;
+          controllerGroup.position.z += (targetZ - controllerGroup.position.z) * 0.078;
+
+          portalGroup.position.copy(controllerGroup.position);
+          portalGroup.position.z -= 0.15; // push slightly behind controller
+
+          // Infinite grid scroll parallax calculation based on camera z
+          if (gridHelper) {
+            gridHelper.position.z = (controllerGroup.position.z * 1.2) % 1.5;
+          }
+
+          const currentScale = controllerGroup.scale.x;
+          const nextScale = currentScale + (targetScale - currentScale) * 0.078;
+          controllerGroup.scale.set(nextScale, nextScale, nextScale);
+          portalGroup.scale.set(nextScale, nextScale, nextScale);
+
+          renderer.render(scene, camera);
+        };
+
+        animate();
+      };
+
+      init3DController();
+
+
       const init3DTilt = () => {
         const cards = document.querySelectorAll('.tour-card, .team-card, .player-card, .activity-card, .reigning-champ-card, .stat-card, .fixture');
         cards.forEach(card => {
