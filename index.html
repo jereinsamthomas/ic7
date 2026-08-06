@@ -4735,6 +4735,162 @@
 
     });
   </script>
+  <!-- Dynamic Cinematic 3D Page Transition Gate -->
+  <script>
+   (function() {
+     // Check if gate is already present to prevent duplicate injections
+     if (document.getElementById('dynamicTransitionGate')) return;
+
+     // Inject Styles for 3D Game Loading Overlay
+     const styles = `
+       .gate-3d-overlay {
+         position: fixed;
+         inset: 0;
+         background: #000000;
+         z-index: 999999;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         perspective: 1200px;
+         transition: opacity 0.5s ease-out, visibility 0.5s;
+         visibility: visible;
+         opacity: 1;
+       }
+       .gate-3d-overlay.gate-hide {
+         opacity: 0;
+         visibility: hidden;
+         pointer-events: none;
+       }
+       .gate-3d-box {
+         text-align: center;
+         transform: rotateX(15deg) translateZ(-150px);
+         transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.65s ease;
+         opacity: 0;
+       }
+       .gate-3d-overlay:not(.gate-hide) .gate-3d-box {
+         transform: rotateX(0deg) translateZ(0);
+         opacity: 1;
+       }
+       /* eFootball / PES Holographic Orb Satellites */
+       .gate-hologram-ball {
+         width: 85px;
+         height: 85px;
+         margin: 0 auto 20px;
+         background: var(--red, #d40000);
+         border-radius: 50%;
+         position: relative;
+         box-shadow: 0 0 35px var(--red-bright, #ff1122), inset 0 0 25px rgba(0,0,0,0.85);
+         animation: gatePulse 1.8s ease-in-out infinite alternate;
+         border: 2px solid #ffffff;
+       }
+       .gate-hologram-ball::before,
+       .gate-hologram-ball::after {
+         content: "";
+         position: absolute;
+         inset: -15px;
+         border: 1.5px solid rgba(255, 255, 255, 0.5);
+         border-radius: 50%;
+         animation: gateSpin 2.4s linear infinite;
+       }
+       .gate-hologram-ball::after {
+         inset: -26px;
+         border-color: rgba(212, 0, 0, 0.6);
+         animation-duration: 3.6s;
+         animation-direction: reverse;
+       }
+       @keyframes gateSpin {
+         0% { transform: rotate3d(1, 1, 1, 0deg); }
+         100% { transform: rotate3d(1, 1, 1, 360deg); }
+       }
+       @keyframes gatePulse {
+         0% { transform: scale(0.92); box-shadow: 0 0 22px var(--red, #d40000), inset 0 0 12px rgba(0,0,0,0.9); }
+         100% { transform: scale(1.08); box-shadow: 0 0 48px var(--red-bright, #ff1122), inset 0 0 16px rgba(0,0,0,0.7); }
+       }
+       .gate-loading-bar {
+         width: 220px;
+         height: 3px;
+         background: rgba(255,255,255,0.08);
+         margin: 16px auto;
+         overflow: hidden;
+         border: 1px solid rgba(212,0,0,0.35);
+       }
+       .gate-loading-fill {
+         width: 0%;
+         height: 100%;
+         background: var(--red-bright, #ff1122);
+         box-shadow: 0 0 8px var(--red-bright, #ff1122);
+       }
+       .gate-3d-overlay:not(.gate-hide) .gate-loading-fill {
+         animation: gateProgress 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+       }
+       @keyframes gateProgress {
+         0% { width: 0%; }
+         100% { width: 100%; }
+       }
+       .gate-text {
+         font-family: 'Space Mono', monospace;
+         font-size: 10px;
+         letter-spacing: 0.3em;
+         color: var(--red-bright, #ff1122);
+         text-transform: uppercase;
+         animation: gateTextTwinkle 1s ease-in-out infinite alternate;
+       }
+       @keyframes gateTextTwinkle {
+         0% { opacity: 0.4; }
+         100% { opacity: 1; }
+       }
+     `;
+     
+     const styleEl = document.createElement('style');
+     styleEl.textContent = styles;
+     document.head.appendChild(styleEl);
+     
+     // Construct dynamic HTML elements
+     const gate = document.createElement('div');
+     gate.className = 'gate-3d-overlay';
+     gate.id = 'dynamicTransitionGate';
+     gate.innerHTML = `
+       <div class="gate-3d-box">
+         <div class="gate-hologram-ball"></div>
+         <div class="gate-loading-bar"><div class="gate-loading-fill"></div></div>
+         <div class="gate-text">LOADING TACTICAL GRID...</div>
+       </div>
+     `;
+     document.body.appendChild(gate);
+     
+     // Open gate (fade out loading screen) on window load complete
+     const dismissGate = () => {
+       setTimeout(() => {
+         gate.classList.add('gate-hide');
+       }, 220);
+     };
+
+     if (document.readyState === 'complete') {
+       dismissGate();
+     } else {
+       window.addEventListener('load', dismissGate);
+     }
+     
+     // Intercept link clicks to execute loading transition
+     document.body.addEventListener('click', (e) => {
+       const anchor = e.target.closest('a');
+       if (!anchor) return;
+       const href = anchor.getAttribute('href');
+       if (!href || href.startsWith('#') || href.startsWith('javascript:')) return;
+       
+       const isLocal = href.endsWith('.html') || href.includes('tour-') || href === 'index.html';
+       const isBlank = anchor.getAttribute('target') === '_blank';
+       
+       if (isLocal && !isBlank) {
+         e.preventDefault();
+         gate.classList.remove('gate-hide');
+         setTimeout(() => {
+           window.location.href = href;
+         }, 550);
+       }
+     });
+   })();
+  </script>
 </body>
 
 </html>
