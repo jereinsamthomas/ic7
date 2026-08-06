@@ -4778,8 +4778,8 @@
       
       initSmoothScroll();
 
-      // ─── THREE.JS 3D HOLOGRAM ORB BACKGROUND ENGINE ───
-      const init3DOrb = () => {
+      // ─── THREE.JS 3D HOLOGRAM DNA HELIX BACKGROUND ENGINE ───
+      const init3DDnaHelix = () => {
         const canvas = document.getElementById('webgl-canvas');
         if (!canvas || typeof THREE === 'undefined') return;
 
@@ -4791,62 +4791,77 @@
         const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
         camera.position.z = 5;
 
-        // Parent group to handle all translations
-        const orbGroup = new THREE.Group();
-        scene.add(orbGroup);
+        // Parent group to handle all transitions
+        const dnaGroup = new THREE.Group();
+        // Give the helix a beautiful diagonal tilt alignment as seen in Pinterest
+        dnaGroup.rotation.z = Math.PI / 5.2; // Diagonal angle
+        dnaGroup.rotation.x = Math.PI / 9.5; // Angled forward
+        scene.add(dnaGroup);
 
-        // 1. Inner wireframe structure (Glowing core)
-        const innerGeo = new THREE.IcosahedronGeometry(1.3, 2);
-        const innerMat = new THREE.MeshBasicMaterial({
+        // Studio lighting setup to accentuate the shiny metallic textures
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.45);
+        scene.add(ambientLight);
+
+        const dirLight1 = new THREE.DirectionalLight(0xff0033, 1.85); // High intensity red highlight spotlight
+        dirLight1.position.set(6, 9, 6);
+        scene.add(dirLight1);
+
+        const dirLight2 = new THREE.DirectionalLight(0xffffff, 1.3); // High intensity silver fill light
+        dirLight2.position.set(-6, -9, -6);
+        scene.add(dirLight2);
+
+        // Helix parameters
+        const r = 0.72; // radius
+        const height = 4.8; // length of helix along y axis
+        const count = 38; // base rungs
+        const twists = 3.6; // twist density
+
+        // Metallic materials
+        const redMat = new THREE.MeshStandardMaterial({
           color: 0xff0033,
-          wireframe: true,
-          transparent: true,
-          opacity: 0.28
+          metalness: 0.9,
+          roughness: 0.15
         });
-        const innerMesh = new THREE.Mesh(innerGeo, innerMat);
-        orbGroup.add(innerMesh);
-
-        // 2. Outer holographic points
-        const outerGeo = new THREE.IcosahedronGeometry(1.32, 3);
-        const outerMat = new THREE.PointsMaterial({
+        const whiteMat = new THREE.MeshStandardMaterial({
           color: 0xffffff,
-          size: 0.042,
-          transparent: true,
-          opacity: 0.8
+          metalness: 0.9,
+          roughness: 0.15
         });
-        const outerPoints = new THREE.Points(outerGeo, outerMat);
-        orbGroup.add(outerPoints);
-
-        // 3. Dual orbital satellite rings
-        const ringGeo = new THREE.RingGeometry(1.85, 1.87, 64);
-        const ringMat = new THREE.MeshBasicMaterial({
-          color: 0xff0033,
-          side: THREE.DoubleSide,
-          transparent: true,
-          opacity: 0.45
+        const barMat = new THREE.MeshStandardMaterial({
+          color: 0x3a3a3a,
+          metalness: 0.8,
+          roughness: 0.25
         });
-        
-        const ring1 = new THREE.Mesh(ringGeo, ringMat);
-        ring1.rotation.x = Math.PI / 3;
-        orbGroup.add(ring1);
 
-        const ring2 = new THREE.Mesh(ringGeo, ringMat);
-        ring2.rotation.x = -Math.PI / 3;
-        ring2.rotation.y = Math.PI / 4;
-        orbGroup.add(ring2);
+        // Reused geometries for fast render speed
+        const nodeGeo = new THREE.SphereGeometry(0.095, 16, 16);
+        const barGeo = new THREE.CylinderGeometry(0.018, 0.018, r * 2, 8);
 
-        // 4. Floating satellite particles (using standard sphere points to avoid Float32Array/setAttribute errors)
-        const satGeo = new THREE.SphereGeometry(1.68, 12, 12);
-        const satMat = new THREE.PointsMaterial({
-          color: 0xff0033,
-          size: 0.035,
-          transparent: true,
-          opacity: 0.9
-        });
-        const satellites = new THREE.Points(satGeo, satMat);
-        orbGroup.add(satellites);
+        // Generate the Double Helix structure procedurally
+        for (let i = 0; i < count; i++) {
+          const ratio = i / count;
+          const t = ratio * Math.PI * 2 * twists;
+          const y = ratio * height - (height / 2);
 
-        // 5. Add a 3D Holographic Ground Grid (Tactical pitch radar)
+          // Node A (Red)
+          const nodeA = new THREE.Mesh(nodeGeo, redMat);
+          nodeA.position.set(Math.sin(t) * r, y, Math.cos(t) * r);
+          dnaGroup.add(nodeA);
+
+          // Node B (White/Silver)
+          const nodeB = new THREE.Mesh(nodeGeo, whiteMat);
+          nodeB.position.set(Math.sin(t + Math.PI) * r, y, Math.cos(t + Math.PI) * r);
+          dnaGroup.add(nodeB);
+
+          // Connecting rungs (aligned to center and rotated flat)
+          const bar = new THREE.Mesh(barGeo, barMat);
+          bar.position.set(0, y, 0);
+          bar.rotation.y = t;
+          bar.rotation.z = Math.PI / 2;
+          dnaGroup.add(bar);
+        }
+
+        // Add 3D Holographic Ground Grid (Tactical pitch radar)
         const gridHelper = new THREE.GridHelper(36, 24, 0xff0033, 0x330008);
         gridHelper.position.y = -2.1;
         gridHelper.material.transparent = true;
@@ -4855,21 +4870,21 @@
 
         // Coordinates configuration per scroll keyframes
         const keyframes = [
-          { scrollPct: 0.0, x: 0, y: 0.25, z: 0, scale: 1.15 },      // Hero
-          { scrollPct: 0.15, x: 1.1, y: -0.15, z: -1.0, scale: 0.8 },  // About
-          { scrollPct: 0.32, x: -1.15, y: 0.25, z: -0.5, scale: 0.95 },// Highlights
-          { scrollPct: 0.5, x: 0, y: -0.7, z: -1.4, scale: 0.78 },   // Cabinet
-          { scrollPct: 0.68, x: 1.25, y: 0.1, z: -0.8, scale: 0.88 },  // Squads
-          { scrollPct: 0.85, x: -1.2, y: -0.3, z: -1.2, scale: 0.8 },  // Table
-          { scrollPct: 1.0, x: 0, y: 0.1, z: 0.2, scale: 1.2 }       // Register
+          { scrollPct: 0.0, x: 0.0, y: 0.15, z: 0.5, scale: 1.1 },       // Hero
+          { scrollPct: 0.15, x: 1.15, y: -0.1, z: -1.0, scale: 0.8 },    // About
+          { scrollPct: 0.32, x: -1.2, y: 0.2, z: -0.6, scale: 0.95 },    // Highlights
+          { scrollPct: 0.5, x: 0.0, y: -0.7, z: -1.5, scale: 0.75 },     // Cabinet
+          { scrollPct: 0.68, x: 1.3, y: 0.05, z: -0.8, scale: 0.85 },    // Squads
+          { scrollPct: 0.85, x: -1.2, y: -0.2, z: -1.2, scale: 0.8 },    // Table
+          { scrollPct: 1.0, x: 0.0, y: 0.0, z: 0.3, scale: 1.15 }        // Register
         ];
 
         let targetX = 0;
-        let targetY = 0.25;
-        let targetZ = 0;
-        let targetScale = 1.15;
+        let targetY = 0.15;
+        let targetZ = 0.5;
+        let targetScale = 1.1;
 
-        const updateOrbTarget = () => {
+        const updateDnaTarget = () => {
           const scrollTop = window.scrollY;
           const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
           // Clamp scroll fraction safely between 0 and 1
@@ -4896,8 +4911,8 @@
           targetScale = k1.scale + (k2.scale - k1.scale) * t;
         };
 
-        window.addEventListener('scroll', updateOrbTarget, { passive: true });
-        updateOrbTarget();
+        window.addEventListener('scroll', updateDnaTarget, { passive: true });
+        updateDnaTarget();
 
         // Resize viewport support
         window.addEventListener('resize', () => {
@@ -4910,27 +4925,22 @@
         const animate = () => {
           requestAnimationFrame(animate);
 
-          // Continuous orbital spin
-          orbGroup.rotation.y += 0.0035;
-          innerMesh.rotation.x -= 0.001;
-          outerPoints.rotation.y += 0.0015;
-          ring1.rotation.z -= 0.006;
-          ring2.rotation.z += 0.0045;
-          satellites.rotation.y -= 0.0022;
+          // Continuous self-rotation along y-axis twist
+          dnaGroup.rotation.y += 0.0075;
 
           // Lerp inertia calculations
-          orbGroup.position.x += (targetX - orbGroup.position.x) * 0.075;
-          orbGroup.position.y += (targetY - orbGroup.position.y) * 0.075;
-          orbGroup.position.z += (targetZ - orbGroup.position.z) * 0.075;
+          dnaGroup.position.x += (targetX - dnaGroup.position.x) * 0.075;
+          dnaGroup.position.y += (targetY - dnaGroup.position.y) * 0.075;
+          dnaGroup.position.z += (targetZ - dnaGroup.position.z) * 0.075;
 
           // Infinite grid scroll parallax calculation based on camera z
           if (gridHelper) {
-            gridHelper.position.z = (orbGroup.position.z * 1.2) % (36 / 24);
+            gridHelper.position.z = (dnaGroup.position.z * 1.2) % 1.5;
           }
 
-          const currentScale = orbGroup.scale.x;
+          const currentScale = dnaGroup.scale.x;
           const nextScale = currentScale + (targetScale - currentScale) * 0.075;
-          orbGroup.scale.set(nextScale, nextScale, nextScale);
+          dnaGroup.scale.set(nextScale, nextScale, nextScale);
 
           renderer.render(scene, camera);
         };
@@ -4938,7 +4948,7 @@
         animate();
       };
 
-      init3DOrb();
+      init3DDnaHelix();
 
     });
   </script>
