@@ -1153,7 +1153,6 @@
   opacity: 0;
 }
 
-/* Meteor 1 (Top Left to Bottom Right) */
 .tc-cosmic-bg::before {
   width: 180px;
   animation: tcWhiteMeteor1 5s linear 1s infinite;
@@ -1165,7 +1164,6 @@
   100% { opacity: 0; }
 }
 
-/* Meteor 2 (Top Right to Bottom Left) */
 .tc-cosmic-bg::after {
   width: 140px;
   animation: tcWhiteMeteor2 7s linear 3.5s infinite;
@@ -1191,7 +1189,6 @@
   transform-origin: top center;
 }
 
-/* Left Gold-Crimson Floodlight Sweeping Beam */
 .evo-tc-floodlight-left {
   left: 5%;
   background: linear-gradient(170deg,
@@ -1203,7 +1200,6 @@
   animation: tcFloodlightSweepLeft 6s ease-in-out infinite alternate;
 }
 
-/* Right Crimson-Gold Floodlight Sweeping Beam */
 .evo-tc-floodlight-right {
   right: 5%;
   background: linear-gradient(190deg,
@@ -1326,7 +1322,7 @@
 }
 .evo-tc-subtitle::after { background: linear-gradient(270deg, transparent, #e11d48); }
 
-/* Glass Cabinet Showcase Box — Pro Gold & Crimson Edition */
+/* Glass Cabinet Showcase Box — Open-Air Stage Disc Edition */
 .evo-tc-cabinet {
   position: relative;
   border: 5px solid #2e1219;
@@ -1365,11 +1361,11 @@
   text-shadow: 0 0 14px rgba(247,224,138,0.7);
 }
 
-/* Inner Double Box Grid */
+/* Inner Double Podium Grid */
 .evo-tc-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 24px;
+  gap: 28px;
   align-items: flex-end;
   justify-content: center;
   position: relative;
@@ -1377,35 +1373,48 @@
   margin-top: 10px;
 }
 @media (max-width: 620px) {
-  .evo-tc-grid { grid-template-columns: 1fr; gap: 24px; }
+  .evo-tc-grid { grid-template-columns: 1fr; gap: 28px; }
 }
 
-/* Individual Champion Trophy Inner Box */
+/* Open-Air 3D Trophy Stage Pedestal (No rigid box border) */
 .evo-tc-bay {
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 1px solid rgba(212,175,55,0.45);
-  border-radius: 8px;
-  background:
-    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255,215,0,0.14) 0%, transparent 70%),
-    linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0.85) 100%);
-  padding: 28px 18px 22px;
-  box-shadow:
-    inset 0 0 30px rgba(0,0,0,0.92),
-    0 0 25px rgba(212,175,55,0.2);
+  border: none;
+  background: transparent;
+  padding: 10px 10px 12px;
+}
+
+/* Glowing Circular Stage Floor Disc */
+.evo-tc-podium-ring {
+  position: absolute;
+  bottom: 64px;
+  width: 230px;
+  height: 52px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 50% 50%, rgba(255,215,0,0.38) 0%, rgba(225,29,72,0.18) 55%, transparent 85%);
+  border: 1.5px solid rgba(255,215,0,0.65);
+  box-shadow: 0 0 35px rgba(255,215,0,0.65), inset 0 0 22px rgba(255,215,0,0.45);
+  pointer-events: none;
+  z-index: 1;
+  animation: tcPodiumGlow 4s ease-in-out infinite alternate;
+}
+@keyframes tcPodiumGlow {
+  0% { transform: scale(0.95); opacity: 0.7; box-shadow: 0 0 25px rgba(255,215,0,0.5); }
+  100% { transform: scale(1.05); opacity: 1; box-shadow: 0 0 45px rgba(255,215,0,0.95), 0 0 85px rgba(225,29,72,0.45); }
 }
 
 /* Trophy Crest Shield / Badge */
 .evo-tc-trophy-badge {
-  width: 200px;
-  height: 230px;
+  width: 210px;
+  height: 240px;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
   z-index: 3;
   transition: transform .4s cubic-bezier(0.16, 1, 0.3, 1), filter .4s ease;
 }
@@ -1414,17 +1423,17 @@
   filter: brightness(1.15);
 }
 .evo-tc-trophy-img {
-  width: 194px;
-  height: 220px;
+  width: 204px;
+  height: 230px;
   object-fit: contain;
   filter:
     drop-shadow(0 12px 28px rgba(0,0,0,0.97))
-    drop-shadow(0 0 20px rgba(212,175,55,0.65))
-    drop-shadow(0 0 8px rgba(255,255,255,0.3));
+    drop-shadow(0 0 22px rgba(212,175,55,0.75))
+    drop-shadow(0 0 10px rgba(255,255,255,0.35));
 }
 .evo-tc-default-crest {
-  width: 180px;
-  height: 180px;
+  width: 190px;
+  height: 190px;
   border-radius: 50%;
   background: radial-gradient(circle at 30% 30%, #4a1524 0%, #1c060d 70%, #0a0104 100%);
   border: 4px solid #ffd700;
@@ -1436,66 +1445,74 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 72px;
+  font-size: 76px;
   color: #fffde0;
   font-weight: 800;
   text-shadow: 0 2px 12px rgba(0,0,0,0.85);
 }
 
 .evo-tc-anchor-shield, .evo-tc-dragon-shield {
-  width: 194px;
-  height: 220px;
+  width: 204px;
+  height: 230px;
   filter:
     drop-shadow(0 12px 28px rgba(0,0,0,0.97))
-    drop-shadow(0 0 20px rgba(212,175,55,0.65));
+    drop-shadow(0 0 22px rgba(212,175,55,0.75));
 }
 
-/* Engraved Metallic Base Plinth */
+/* Engraved Imperial Gold Crest Plinth (LARGER & MORE PROMINENT) */
 .evo-tc-plinth {
   width: 100%;
-  max-width: 250px;
-  background: linear-gradient(180deg, #3d1422 0%, #1c060e 100%);
-  border: 1px solid rgba(212,175,55,0.6);
-  border-bottom: 4px solid #ffd700;
-  padding: 14px 10px;
+  max-width: 290px;
+  background: linear-gradient(180deg, #441724 0%, #1e050c 100%);
+  border: 2px solid #ffd700;
+  border-radius: 8px;
+  padding: 18px 14px 16px;
   text-align: center;
   box-shadow:
-    0 10px 28px rgba(0,0,0,0.97),
-    inset 0 1px 0 rgba(255,255,255,0.08);
+    0 14px 35px rgba(0,0,0,0.98),
+    0 0 30px rgba(255,215,0,0.35),
+    inset 0 1px 0 rgba(255,255,255,0.2);
   position: relative;
-  z-index: 3;
+  z-index: 4;
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+.evo-tc-plinth:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 18px 40px rgba(0,0,0,0.98),
+    0 0 45px rgba(255,215,0,0.55);
 }
 .evo-tc-plinth::before {
   content: "";
   position: absolute;
-  top: 0; left: 15%; right: 15%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(212,175,55,0.8), transparent);
+  top: 0; left: 12%; right: 12%;
+  height: 1.5px;
+  background: linear-gradient(90deg, transparent, rgba(255,215,0,0.95), transparent);
 }
 .evo-tc-plinth-season {
   font-family: 'Cinzel', serif;
-  font-size: 10.5px;
-  font-weight: 700;
-  letter-spacing: .34em;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .36em;
   color: #f7d86a;
-  margin-bottom: 5px;
+  margin-bottom: 6px;
   text-transform: uppercase;
-  text-shadow: 0 0 10px rgba(247,216,106,0.6);
+  text-shadow: 0 0 12px rgba(247,216,106,0.7);
 }
 .evo-tc-plinth-title {
   font-family: 'Playfair Display', 'Cinzel', serif;
-  font-size: 17px;
+  font-size: 19px;
   font-weight: 900;
-  letter-spacing: .24em;
+  letter-spacing: .26em;
   color: #ffffff;
-  margin-bottom: 5px;
-  text-shadow: 0 0 10px rgba(255,255,255,0.5), 0 0 30px rgba(255,255,255,0.15);
+  margin-bottom: 6px;
+  text-shadow: 0 0 12px rgba(255,255,255,0.6), 0 0 35px rgba(255,255,255,0.2);
 }
 .evo-tc-plinth-name {
   font-family: 'Playfair Display', 'Cinzel', serif;
-  font-size: 18px;
+  font-size: 21px;
   font-weight: 900;
-  letter-spacing: .05em;
+  letter-spacing: .06em;
   background: linear-gradient(135deg, #ffffff, #ffd700 40%, #f59e0b 70%, #ffffff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -1503,17 +1520,18 @@
   word-break: break-word;
   animation: tcNameShimmerGold 4s linear infinite;
   background-size: 200% 100%;
+  padding: 2px 0;
 }
 @keyframes tcNameShimmerGold {
   0% { background-position: 200% center; }
   100% { background-position: -200% center; }
 }
 .evo-tc-plinth-star {
-  font-size: 13px;
+  font-size: 15px;
   color: #ffd700;
-  margin-top: 5px;
-  letter-spacing: .35em;
-  text-shadow: 0 0 8px rgba(255,215,0,0.8);
+  margin-top: 6px;
+  letter-spacing: .4em;
+  text-shadow: 0 0 10px rgba(255,215,0,0.9);
   animation: tcStarSpinGold 6s linear infinite;
 }
 @keyframes tcStarSpinGold {
@@ -5015,6 +5033,7 @@
                     <!-- Left Pedestal (Champion) -->
                     <div class="evo-tc-bay">
                       <div class="evo-tc-spotlight"></div>
+                      <div class="evo-tc-podium-ring"></div>
                       ${champBadgeHtml}
                       <div class="evo-tc-plinth">
                         <div class="evo-tc-plinth-season">${escapeHtml(champTag)}</div>
@@ -5027,6 +5046,7 @@
                     <!-- Right Pedestal (Shield Winner) -->
                     <div class="evo-tc-bay">
                       <div class="evo-tc-spotlight"></div>
+                      <div class="evo-tc-podium-ring"></div>
                       ${shieldBadgeHtml}
                       <div class="evo-tc-plinth">
                         <div class="evo-tc-plinth-season">${escapeHtml(shieldTag)}</div>
@@ -5254,6 +5274,7 @@
                     <!-- Left Pedestal (Champion) -->
                     <div class="evo-tc-bay">
                       <div class="evo-tc-spotlight"></div>
+                      <div class="evo-tc-podium-ring"></div>
                       ${champBadgeHtml}
                       <div class="evo-tc-plinth">
                         <div class="evo-tc-plinth-season">${escapeHtml(champTag)}</div>
@@ -5266,6 +5287,7 @@
                     <!-- Right Pedestal (Shield Winner) -->
                     <div class="evo-tc-bay">
                       <div class="evo-tc-spotlight"></div>
+                      <div class="evo-tc-podium-ring"></div>
                       ${shieldBadgeHtml}
                       <div class="evo-tc-plinth">
                         <div class="evo-tc-plinth-season">${escapeHtml(shieldTag)}</div>
@@ -5489,6 +5511,7 @@
                     <!-- Left Pedestal (Champion) -->
                     <div class="evo-tc-bay">
                       <div class="evo-tc-spotlight"></div>
+                      <div class="evo-tc-podium-ring"></div>
                       ${champBadgeHtml}
                       <div class="evo-tc-plinth">
                         <div class="evo-tc-plinth-season">${escapeHtml(champTag)}</div>
@@ -5501,6 +5524,7 @@
                     <!-- Right Pedestal (Shield Winner) -->
                     <div class="evo-tc-bay">
                       <div class="evo-tc-spotlight"></div>
+                      <div class="evo-tc-podium-ring"></div>
                       ${shieldBadgeHtml}
                       <div class="evo-tc-plinth">
                         <div class="evo-tc-plinth-season">${escapeHtml(shieldTag)}</div>
