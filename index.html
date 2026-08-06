@@ -3490,8 +3490,17 @@
       <!-- Tournament Cabinet Selector Tabs Bar -->
       <div class="tc-tabs-bar reveal" id="tcTabsBar"></div>
 
-      <!-- Separate Tournament Cabinets Host -->
-      <div class="tc-cabinets-host reveal" id="tcCabinetsHost"></div>
+      <!-- 3D Moving Glass Showcase Slider Container -->
+      <div class="trophy-cabinet-container reveal">
+        <button type="button" class="tc-arrow tc-prev" id="tcPrevBtn" aria-label="Previous Tournament">‹</button>
+        <button type="button" class="tc-arrow tc-next" id="tcNextBtn" aria-label="Next Tournament">›</button>
+
+        <div class="trophy-track-wrap">
+          <div class="trophy-track" id="trophyTrack"></div>
+        </div>
+
+        <div class="tc-dots" id="tcDots"></div>
+      </div>
     </div>
   </section>
 
@@ -4946,12 +4955,14 @@
           }
           await Store.set('ic7_major_tours', data);
           let tcTimer = null;
-      let activeTcTab = 'all';
+      let tcCurrentIdx = 0;
+      let tcAutoTimer = null;
 
       function renderTrophyCabinet() {
+        const track = document.getElementById('trophyTrack');
+        const dotsHost = document.getElementById('tcDots');
         const tabsHost = document.getElementById('tcTabsBar');
-        const cabinetsHost = document.getElementById('tcCabinetsHost');
-        if (!cabinetsHost) return;
+        if (!track) return;
 
         const meta = getToursMeta();
 
@@ -4976,7 +4987,25 @@
           return '/assets/asset_4ec290c1ae.png';
         }
 
-        const tourCabinets = MAJOR_TOURS.map((t) => {
+        // Render Tabs
+        if (tabsHost) {
+          tabsHost.innerHTML = MAJOR_TOURS.map((t, idx) => {
+            const m = meta[t.id] || {};
+            const tourName = (m.name || t.name).toUpperCase();
+            return `<button type="button" class="tc-tab-btn${idx === tcCurrentIdx ? ' active' : ''}" data-idx="${idx}">${escapeHtml(tourName)}</button>`;
+          }).join('');
+
+          tabsHost.querySelectorAll('.tc-tab-btn').forEach((btn) => {
+            btn.addEventListener('click', (e) => {
+              const idx = parseInt(e.currentTarget.dataset.idx, 10);
+              goToTcSlide(idx);
+              resetTcAuto();
+            });
+          });
+        }
+
+        // Render 6 Trophy Cabinet Slides
+        const slidesHtml = MAJOR_TOURS.map((t) => {
           const m = meta[t.id] || {};
           const tourName = m.name || t.name;
           const champName = m.champion || (t.id === 'intimate-cup' ? 'INTIMATE CHAMPION' : 'IL CAPITANO');
@@ -5065,7 +5094,8 @@
             starsHtml += `<span class="tc-rising-particle" style="width:${size}px;height:${size}px;left:${left}%;background:${color};border-radius:50%;animation-duration:${dur}s;animation-delay:${delay}s;box-shadow:0 0 4px ${color};"></span>`;
           }
 
-          const cabinetInnerHtml = `
+          return `
+            <div class="trophy-slide">
               <div class="evo-tc-showcase">
                 <!-- Moving Space Stars Backdrop -->
                 <div class="tc-cosmic-bg">${starsHtml}</div>
@@ -5075,7 +5105,6 @@
 
                 <!-- Header Area -->
                 <div class="evo-tc-header">
-
                   <div class="evo-tc-top-icons">
                     <svg class="evo-tc-player-sil" viewBox="0 0 100 100" fill="#ffffff">
                       <circle cx="50" cy="20" r="12"/>
@@ -5128,38 +5157,67 @@
                   <div class="evo-tc-footer-line1">TWO SEASONS. ONE LEGACY.</div>
                   <div class="evo-tc-footer-line2">EVOLUTION CUP | INTIMATE CUP | DISTRICTO CUP | COOPA'D CUP | THE FINAL.</div>
                 </div>
-              </div>`;
+              </div>
+            </div>
+          `;
+        }).join('');
 
-          return { id: t.id, html: cabinetInnerHtml };
-        });
+        track.innerHTML = slidesHtml;
 
-        // Generate Tabs Bar HTML
-        let tabsHtml = `<button type="button" class="tc-tab-btn ${activeTcTab === 'all' ? 'active' : ''}" data-tour="all">ALL CABINETS</button>`;
-        MAJOR_TOURS.forEach((t) => {
-          const m = meta[t.id] || {};
-          const tourName = (m.name || t.name).toUpperCase();
-          tabsHtml += `<button type="button" class="tc-tab-btn ${activeTcTab === t.id ? 'active' : ''}" data-tour="${t.id}">${escapeHtml(tourName)}</button>`;
-        });
+        // Render Dots
+        if (dotsHost) {
+          dotsHost.innerHTML = MAJOR_TOURS.map((t, i) =>
+            `<button type="button" class="tc-dot${i === tcCurrentIdx ? ' active' : ''}" data-idx="${i}" aria-label="Slide ${i + 1}"></button>`
+          ).join('');
 
-        if (tabsHost) {
-          tabsHost.innerHTML = tabsHtml;
-          tabsHost.querySelectorAll('.tc-tab-btn').forEach((btn) => {
-            btn.addEventListener('click', (e) => {
-              activeTcTab = e.currentTarget.dataset.tour;
-              renderTrophyCabinet();
+          dotsHost.querySelectorAll('.tc-dot').forEach((dot) => {
+            dot.addEventListener('click', (e) => {
+              const idx = parseInt(e.currentTarget.dataset.idx, 10);
+              goToTcSlide(idx);
+              resetTcAuto();
             });
           });
         }
 
-        // Render active cabinet blocks into cabinetsHost
-        let finalCabinetsHtml = '';
-        tourCabinets.forEach((c) => {
-          if (activeTcTab === 'all' || activeTcTab === c.id) {
-            finalCabinetsHtml += `<div class="tc-tour-cabinet-block" id="tc_block_${c.id}">${c.html}</div>`;
-          }
-        });
+        function goToTcSlide(idx) {
+          const total = MAJOR_TOURS.length;
+          tcCurrentIdx = (idx + total) % total;
+          track.style.transform = `translateX(-${tcCurrentIdx * 100}%)`;
 
-        cabinetsHost.innerHTML = finalCabinetsHtml;
+          if (dotsHost) {
+            dotsHost.querySelectorAll('.tc-dot').forEach((d, i) => {
+              d.classList.toggle('active', i === tcCurrentIdx);
+            });
+          }
+          if (tabsHost) {
+            tabsHost.querySelectorAll('.tc-tab-btn').forEach((t, i) => {
+              t.classList.toggle('active', i === tcCurrentIdx);
+            });
+          }
+        }
+
+        // Connect Prev / Next Arrows
+        const prevBtn = document.getElementById('tcPrevBtn');
+        const nextBtn = document.getElementById('tcNextBtn');
+        if (prevBtn) prevBtn.onclick = () => { goToTcSlide(tcCurrentIdx - 1); resetTcAuto(); };
+        if (nextBtn) nextBtn.onclick = () => { goToTcSlide(tcCurrentIdx + 1); resetTcAuto(); };
+
+        function startTcAuto() {
+          if (tcAutoTimer) clearInterval(tcAutoTimer);
+          tcAutoTimer = setInterval(() => goToTcSlide(tcCurrentIdx + 1), 6000);
+        }
+        function resetTcAuto() {
+          startTcAuto();
+        }
+
+        goToTcSlide(tcCurrentIdx);
+        startTcAuto();
+
+        const container = document.querySelector('.trophy-cabinet-container');
+        if (container) {
+          container.onmouseenter = () => { if (tcAutoTimer) clearInterval(tcAutoTimer); };
+          container.onmouseleave = startTcAuto;
+        }
       }
 
       renderToursGrid();
