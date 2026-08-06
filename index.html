@@ -769,20 +769,72 @@
     .trophy-cabinet-container {
       position: relative;
       width: 100%;
-      max-width: 1100px;
+      max-width: 1200px;
       margin: 0 auto;
       padding: 0 50px;
       box-sizing: border-box;
+      perspective: 1400px; /* Crucial for 3D depth perspective */
     }
     .trophy-track-wrap {
-      overflow: hidden;
-      border-radius: 0;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.9), 0 0 40px rgba(212,0,0,0.2);
-      border: 1px solid rgba(212,0,0,0.4);
-      background: #060000;
+      overflow: visible; /* Show adjacent slides rotating in 3D space */
+      width: 100%;
+      min-height: 600px;
+      position: relative;
+      perspective: 1400px;
+      transform-style: preserve-3d;
     }
-    .trophy-track { display:flex; width:100%; transition:transform 0.85s cubic-bezier(0.16,1,0.3,1); will-change:transform; }
-    .trophy-slide { flex:0 0 100%; width:100%; min-width:100%; box-sizing:border-box; }
+    .trophy-track {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      min-height: 600px;
+    }
+    .trophy-slide {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%) translateZ(-400px) scale(0.6);
+      width: 100%;
+      max-width: 900px;
+      opacity: 0;
+      z-index: 1;
+      pointer-events: none;
+      transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.85s ease, filter 0.85s ease;
+      transform-style: preserve-3d;
+      backface-visibility: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.9), 0 0 45px rgba(212,0,0,0.22);
+      border: 1px solid rgba(212,0,0,0.35);
+    }
+    
+    /* 3D Cover Flow States */
+    .trophy-slide.tc-active {
+      transform: translateX(-50%) translateZ(0) rotateY(0deg) scale(1);
+      opacity: 1;
+      z-index: 10;
+      pointer-events: auto;
+      filter: none;
+    }
+    .trophy-slide.tc-prev-slide {
+      transform: translateX(-108%) translateZ(-180px) rotateY(32deg) scale(0.8);
+      opacity: 0.55;
+      z-index: 5;
+      pointer-events: none;
+      filter: blur(1.5px);
+    }
+    .trophy-slide.tc-next-slide {
+      transform: translateX(8%) translateZ(-180px) rotateY(-32deg) scale(0.8);
+      opacity: 0.55;
+      z-index: 5;
+      pointer-events: none;
+      filter: blur(1.5px);
+    }
+    .trophy-slide.tc-hidden-slide {
+      transform: translateX(-50%) translateZ(-350px) scale(0.6);
+      opacity: 0;
+      z-index: 1;
+      pointer-events: none;
+    }
 
     /* Cabinet Showcase Inner Layout */
     .evo-tc-showcase {
@@ -1429,10 +1481,12 @@
 
     .wh-carousel {
       position: relative;
-      overflow: hidden;
       width: 100%;
       height: 100%;
       background: #000000;
+      perspective: 1400px;
+      transform-style: preserve-3d;
+      overflow: visible;
     }
 
     .wh-label {
@@ -1458,20 +1512,56 @@
     }
 
     .wh-track {
-      display: flex;
+      position: relative;
       width: 100%;
       height: 100%;
+      transform-style: preserve-3d;
     }
 
     .wh-slide {
-      flex: 0 0 100%;
+      position: absolute;
+      inset: 0;
       width: 100%;
       height: 100%;
       display: flex;
       align-items: center;
       justify-content: flex-start;
-      position: relative;
       z-index: 2;
+      opacity: 0;
+      transform: translate3d(0, 0, -400px) scale(0.5);
+      transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.85s ease, filter 0.85s ease;
+      pointer-events: none;
+      transform-style: preserve-3d;
+      backface-visibility: hidden;
+    }
+
+    /* 3D cylindrical states for highlights */
+    .wh-slide.active {
+      transform: translate3d(0, 0, 0) rotateY(0deg) scale(1);
+      opacity: 1;
+      z-index: 10;
+      pointer-events: auto;
+      filter: none;
+    }
+    .wh-slide.wh-prev-slide {
+      transform: translate3d(-38%, 0, -180px) rotateY(32deg) scale(0.8);
+      opacity: 0.5;
+      z-index: 5;
+      pointer-events: none;
+      filter: blur(2px);
+    }
+    .wh-slide.wh-next-slide {
+      transform: translate3d(38%, 0, -180px) rotateY(-32deg) scale(0.8);
+      opacity: 0.5;
+      z-index: 5;
+      pointer-events: none;
+      filter: blur(2px);
+    }
+    .wh-slide.wh-hidden-slide {
+      transform: translate3d(0, 0, -350px) scale(0.6);
+      opacity: 0;
+      z-index: 1;
+      pointer-events: none;
     }
 
     .wh-media {
@@ -2910,17 +3000,27 @@
 
         let idx = 0;
         function goTo(i, animate) {
-          track.style.transition = animate === false ? 'none' : 'transform .8s cubic-bezier(0.16, 1, 0.3, 1)';
-          track.style.transform = `translateX(-${i * 100}%)`;
-          
-          // Toggle active class on all slide elements for entrance transitions
+          const activeIdx = (i + total) % total;
+          const prevIdx = (activeIdx - 1 + total) % total;
+          const nextIdx = (activeIdx + 1) % total;
+
           const slides = track.querySelectorAll('.wh-slide');
           slides.forEach((slide, sIdx) => {
-            slide.classList.toggle('active', sIdx === i);
+            slide.classList.remove('active', 'wh-prev-slide', 'wh-next-slide', 'wh-hidden-slide');
+            
+            if (sIdx === activeIdx) {
+              slide.classList.add('active');
+            } else if (sIdx === prevIdx) {
+              slide.classList.add('wh-prev-slide');
+            } else if (sIdx === nextIdx) {
+              slide.classList.add('wh-next-slide');
+            } else {
+              slide.classList.add('wh-hidden-slide');
+            }
           });
 
           if (dotsHost) {
-            [...dotsHost.children].forEach((d, di) => d.classList.toggle('active', di === (i % total)));
+            [...dotsHost.children].forEach((d, di) => d.classList.toggle('active', di === activeIdx));
           }
         }
         goTo(0, false);
@@ -3923,7 +4023,24 @@
         function goToTcSlide(idx) {
           const total = CABINET_TABS.length;
           tcCurrentIdx = (idx + total) % total;
-          track.style.transform = `translateX(-${tcCurrentIdx * 100}%)`;
+          
+          const prevIdx = (tcCurrentIdx - 1 + total) % total;
+          const nextIdx = (tcCurrentIdx + 1) % total;
+
+          const slides = track.querySelectorAll('.trophy-slide');
+          slides.forEach((slide, sIdx) => {
+            slide.classList.remove('tc-active', 'tc-prev-slide', 'tc-next-slide', 'tc-hidden-slide');
+            
+            if (sIdx === tcCurrentIdx) {
+              slide.classList.add('tc-active');
+            } else if (sIdx === prevIdx) {
+              slide.classList.add('tc-prev-slide');
+            } else if (sIdx === nextIdx) {
+              slide.classList.add('tc-next-slide');
+            } else {
+              slide.classList.add('tc-hidden-slide');
+            }
+          });
 
           if (dotsHost) {
             dotsHost.querySelectorAll('.tc-dot').forEach((d, i) => {
