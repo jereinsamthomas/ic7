@@ -1974,6 +1974,88 @@
       perspective: 1000px;
     }
 
+
+    /* ─── eFOOTBALL 3D FLYTHROUGH CAMERA ENV ─── */
+    .space-3d-viewport {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      perspective: 1400px;
+      transform-style: preserve-3d;
+      z-index: 2;
+      background: #000000;
+      overflow: hidden;
+    }
+    .space-3d-scene {
+      position: absolute;
+      inset: 0;
+      transform-style: preserve-3d;
+      will-change: transform;
+    }
+    .space-3d-scene section,
+    .space-3d-scene footer {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      max-width: 1200px;
+      transform-style: preserve-3d;
+      backface-visibility: hidden;
+      transform: translate3d(-50%, -50%, var(--z-pos, 0px)) rotateY(var(--y-rot, 0deg));
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), filter 0.65s ease;
+      filter: blur(8px);
+    }
+    
+    .space-3d-scene section.active-focus,
+    .space-3d-scene footer.active-focus {
+      opacity: 1 !important;
+      pointer-events: auto !important;
+      filter: none !important;
+    }
+    .space-3d-scene section.visible-depth,
+    .space-3d-scene footer.visible-depth {
+      opacity: 0.3 !important;
+      filter: blur(2px) !important;
+    }
+    
+    .scroll-spacer {
+      height: 1000vh;
+      position: absolute;
+      width: 1px;
+      top: 0; left: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    @media (max-width: 768px) {
+      .space-3d-scene {
+        transform: scale3d(0.85, 0.85, 0.85);
+      }
+    }
+
+    .cam-progress {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 99;
+      background: rgba(0,0,0,0.85);
+      border: 1px solid var(--red);
+      padding: 8px 14px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: #fff;
+    }
+    .cam-progress-fill {
+      width: var(--progress-pct, 0%);
+      height: 3px;
+      background: var(--red-bright);
+      position: absolute;
+      bottom: 0; left: 0;
+    }
+
 </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" defer></script>
 </head>
@@ -2035,6 +2117,10 @@
       <div class="ticker-track" id="tickerTrack"></div>
     </div>
   </header>
+
+  <!-- ============================= 3D CAM VIEWPORT ============================= -->
+  <div class="space-3d-viewport" id="viewport3D">
+    <div class="space-3d-scene" id="scene3D">
 
   <!-- ============================= WEEKLY HIGHLIGHT (auto-sliding carousel) ============================= -->
   <section class="wh-section" id="highlights">
@@ -2484,6 +2570,11 @@
       </div>
     </div>
   </footer>
+    </div>
+  </div><!-- /viewport3D -->
+
+  <div class="scroll-spacer" id="scrollSpacer"></div>
+  <div class="cam-progress">CAMERA POSITION<div class="cam-progress-fill"></div></div>
 
   <a class="wa-float" data-wa-contact href="#" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
     <svg viewBox="0 0 24 24" fill="currentColor">
@@ -4732,6 +4823,171 @@
       };
       
       init3DTilt();
+
+      // ─── 3D SPACE CAMERA FLYTHROUGH SCROLL CONTROLLER ───
+      const viewport = document.getElementById('viewport3D');
+      const scene = document.getElementById('scene3D');
+      const scrollSpacer = document.getElementById('scrollSpacer');
+      
+      let sectionsList = [];
+      let targetZ = 0;
+      let targetYRot = 0;
+      let targetX = 0;
+      let targetY = 0;
+      
+      const getActiveSections = () => {
+        return [...scene.children].filter(child => {
+          if (child.tagName !== 'SECTION' && child.tagName !== 'FOOTER') return false;
+          if (child.classList.contains('dash-panel')) return false;
+          return true;
+        });
+      };
+      
+      const zStep = 2500; // Distance between slides in Z dimensions
+      
+      const updateSectionsConfig = () => {
+        const els = getActiveSections();
+        sectionsList = els.map((el, i) => {
+          // Stagger rotY left/right slightly for high-tech game menu feel
+          const rotY = i === 0 ? 0 : (i % 2 === 0 ? -12 : 12);
+          const z = -i * zStep;
+          
+          el.style.position = 'absolute';
+          el.style.transform = `translate3d(-50%, -50%, ${z}px) rotateY(${rotY}deg)`;
+          
+          return { el, z, rotY };
+        });
+        
+        const maxScrollZ = (sectionsList.length - 1) * zStep;
+        scrollSpacer.style.height = `${sectionsList.length * 105}vh`;
+        return maxScrollZ;
+      };
+      
+      let maxScrollZ = updateSectionsConfig();
+      
+      // Recalculate if dynamic section templates update
+      window.addEventListener('ic7_store_updated', () => {
+        setTimeout(() => {
+          maxScrollZ = updateSectionsConfig();
+        }, 150);
+      });
+      
+      // Bind scroll position to camera target Z depth
+      window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY;
+        const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+        const pct = maxScroll > 0 ? scrollTop / maxScroll : 0;
+        
+        targetZ = pct * maxScrollZ;
+        
+        // Update HUD position slider
+        document.documentElement.style.setProperty('--progress-pct', `${pct * 100}%`);
+        
+        // Target active rotation to Direct Look at the active slide
+        let activeSec = sectionsList[0];
+        let minDistance = Infinity;
+        sectionsList.forEach(s => {
+          const dist = Math.abs(s.z + targetZ);
+          if (dist < minDistance) {
+            minDistance = dist;
+            activeSec = s;
+          }
+        });
+        
+        if (activeSec) {
+          targetYRot = -activeSec.rotY;
+          targetX = activeSec.rotY * -5.5; // Slight pan offset to frame angled card
+        }
+      }, { passive: true });
+      
+      // Lerp Render loop for spring physics inertia
+      let currZ = 0;
+      let currYRot = 0;
+      let currX = 0;
+      let currY = 0;
+      
+      const renderLoop = () => {
+        currZ += (targetZ - currZ) * 0.082;
+        currYRot += (targetYRot - currYRot) * 0.082;
+        currX += (targetX - currX) * 0.082;
+        currY += (targetY - currY) * 0.082;
+        
+        scene.style.transform = `translate3d(${currX}px, ${currY}px, ${currZ}px) rotateY(${currYRot}deg)`;
+        
+        sectionsList.forEach(s => {
+          if (!s.el) return;
+          const dist = s.z + currZ;
+          
+          if (dist > 300) {
+            // Passed behind lens
+            s.el.classList.remove('active-focus', 'visible-depth');
+            s.el.style.opacity = '0';
+            s.el.style.pointerEvents = 'none';
+          } else if (dist > -1400) {
+            // Active slide in viewport
+            s.el.classList.add('active-focus');
+            s.el.classList.remove('visible-depth');
+            s.el.style.opacity = '1';
+            s.el.style.pointerEvents = 'auto';
+          } else if (dist > -3800) {
+            // Seen faded in Z space
+            s.el.classList.add('visible-depth');
+            s.el.classList.remove('active-focus');
+            s.el.style.opacity = '0.32';
+            s.el.style.pointerEvents = 'none';
+          } else {
+            // Clipped / Hidden
+            s.el.classList.remove('active-focus', 'visible-depth');
+            s.el.style.opacity = '0';
+            s.el.style.pointerEvents = 'none';
+          }
+        });
+        
+        requestAnimationFrame(renderLoop);
+      };
+      
+      requestAnimationFrame(renderLoop);
+      
+      // Smooth scroll camera to anchors on link click
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          const hash = this.getAttribute('href');
+          if (hash === '#') return;
+          
+          const targetEl = document.querySelector(hash);
+          if (targetEl) {
+            e.preventDefault();
+            
+            const secIdx = sectionsList.findIndex(s => s.el === targetEl);
+            if (secIdx !== -1) {
+              const scrollPercent = secIdx / (sectionsList.length - 1);
+              const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+              window.scrollTo({
+                top: scrollPercent * maxScroll,
+                behavior: 'smooth'
+              });
+            }
+          }
+        });
+      });
+      
+      // Deep link jump on load
+      if (window.location.hash) {
+        setTimeout(() => {
+          const targetEl = document.querySelector(window.location.hash);
+          if (targetEl) {
+            const secIdx = sectionsList.findIndex(s => s.el === targetEl);
+            if (secIdx !== -1) {
+              const scrollPercent = secIdx / (sectionsList.length - 1);
+              const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+              window.scrollTo({
+                top: scrollPercent * maxScroll,
+                behavior: 'auto'
+              });
+            }
+          }
+        }, 250);
+      }
 
     });
   </script>
