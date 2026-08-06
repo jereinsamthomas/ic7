@@ -18,64 +18,112 @@
        IC7 ICONIC SEVENS — RED · BLACK · WHITE DESIGN SYSTEM
        ============================================================ */
     :root {
-      --bg:             #040406;
-      --bg-elevated:    #09090d;
-      --bg-elevated-2:  #101016;
-      --bg-card:        #0c0c12;
-      --pitch:          #080308;
-      --red:            #e6002e;
+      --bg:             #000000;
+      --bg-elevated:    #080808;
+      --bg-elevated-2:  #121212;
+      --bg-card:        #0d0d0d;
+      --pitch:          #050505;
+      --red:            #d40000;
       --red-bright:     #ff1122;
       --red-dim:        #8b0000;
-      --gold:           #ffd700;
-      --gold-bright:    #ffe57f;
-      --gold-dim:       #b38728;
-      --gold-metallic:  linear-gradient(135deg, #ffe57f 0%, #f59e0b 35%, #d4af37 60%, #fff8dc 85%, #996515 100%);
-      --gold-glow:      rgba(255, 215, 0, 0.45);
-      --red-glow:       rgba(230, 0, 46, 0.55);
+      --red-glow:       rgba(255, 17, 34, 0.65);
       --ink:            #ffffff;
-      --ink-dim:        #d1d5db;
-      --ink-faint:      #6b7280;
+      --ink-dim:        #e0e0e0;
+      --ink-faint:      #888888;
       --logo-data:      url("/assets/asset_d2d274761c.png");
-      --line:           rgba(230, 0, 46, 0.22);
-      --line-gold:      rgba(255, 215, 0, 0.35);
-      --line-strong:    rgba(230, 0, 46, 0.55);
-      --glass:          rgba(15, 15, 22, 0.65);
-      --glass-strong:   rgba(25, 25, 35, 0.85);
-      --shadow:         rgba(0, 0, 0, 0.95);
-      --green-live:     #10b981;
-      --radius-lg:      8px;
-      --radius-md:      6px;
-      --radius-sm:      4px;
-      --font-display:   'Bebas Neue', 'Anton', sans-serif;
-      --font-luxury:    'Cinzel', 'Oswald', serif;
+      --line:           rgba(255, 17, 34, 0.25);
+      --line-strong:    rgba(255, 17, 34, 0.6);
+      --glass:          rgba(10, 10, 10, 0.85);
+      --glass-strong:   rgba(20, 20, 20, 0.95);
+      --shadow:         rgba(0, 0, 0, 0.98);
+      --green-live:     #ff1122;
+      --radius-lg:      0px;
+      --radius-md:      0px;
+      --radius-sm:      0px;
+      --font-display:   'Teko', 'Bebas Neue', sans-serif;
+      --font-luxury:    'Orbitron', 'Cinzel', serif;
       --font-body:      'Manrope', sans-serif;
       --font-mono:      'Space Mono', monospace;
       --container:      1280px;
       color-scheme:     dark;
     }
 
-    /* AAA LUXURY eSPORTS GOLD & CRIMSON OVERRIDES */
-    .gold-text {
-      background: var(--gold-metallic);
+    /* RAGEBITE STRICT BLACK, WHITE & RED OVERRIDES */
+    .gold-text, .red-glow-text {
+      background: linear-gradient(135deg, #ffffff 0%, #ff1122 100%);
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
       font-weight: 700;
-      text-shadow: 0 0 25px rgba(255, 215, 0, 0.35);
+      text-shadow: 0 0 25px rgba(255, 17, 34, 0.5);
     }
     
     .gold-border {
-      border: 1px solid rgba(255, 215, 0, 0.4) !important;
-      box-shadow: 0 0 20px rgba(255, 215, 0, 0.2) !important;
+      border: 1px solid rgba(255, 17, 34, 0.6) !important;
+      box-shadow: 0 0 20px rgba(255, 17, 34, 0.3) !important;
     }
 
     .glass {
       background: var(--glass) !important;
       backdrop-filter: blur(20px) !important;
       -webkit-backdrop-filter: blur(20px) !important;
-      border: 1px solid rgba(255, 215, 0, 0.2) !important;
-      box-shadow: 0 20px 50px -15px rgba(0,0,0,0.9), inset 0 1px 1px rgba(255,255,255,0.1) !important;
-      border-radius: var(--radius-md) !important;
+      border: 1px solid rgba(255, 17, 34, 0.3) !important;
+      box-shadow: 0 20px 50px -15px rgba(0,0,0,0.95) !important;
+      border-radius: 0px !important;
+    }
+
+    /* RAGEBITE V-SHAPE HERO CHEVRON */
+    .ragebite-hero-v {
+      clip-path: polygon(0 0, 100% 0, 100% 84%, 50% 100%, 0 84%);
+      background: linear-gradient(180deg, #990014 0%, #000000 100%);
+      padding: 130px 0 140px;
+      position: relative;
+    }
+
+    /* RAGEBITE DIAMOND FEATURE BADGES */
+    .ragebite-diamond-grid {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin: 40px 0;
+      flex-wrap: wrap;
+    }
+    .ragebite-diamond-wrapper {
+      width: 100px;
+      height: 100px;
+      transform: rotate(45deg);
+      border: 2px solid #ff1122;
+      background: #080808;
+      box-shadow: 0 0 30px rgba(255, 17, 34, 0.5), inset 0 0 15px rgba(255, 17, 34, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+    .ragebite-diamond-wrapper:hover {
+      background: #ff1122;
+      box-shadow: 0 0 45px rgba(255, 17, 34, 0.9);
+      transform: rotate(45deg) scale(1.1);
+    }
+    .ragebite-diamond-content {
+      transform: rotate(-45deg);
+      color: #ffffff;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    /* RAGEBITE LARGE STENCIL NUMBERING */
+    .ragebite-num-accent {
+      font-family: 'Teko', 'Bebas Neue', sans-serif;
+      font-size: 130px;
+      font-weight: 700;
+      line-height: 0.8;
+      color: rgba(255, 255, 255, 0.12);
+      position: absolute;
+      top: -20px;
+      left: 10px;
+      pointer-events: none;
+      z-index: 0;
     }
 
     /* Floating Glass Navbar */
@@ -87,12 +135,12 @@
       width: calc(100% - 32px) !important;
       max-width: var(--container) !important;
       z-index: 9999 !important;
-      background: rgba(8, 8, 12, 0.78) !important;
+      background: rgba(8, 8, 8, 0.88) !important;
       backdrop-filter: blur(24px) !important;
       -webkit-backdrop-filter: blur(24px) !important;
-      border: 1px solid rgba(255, 215, 0, 0.25) !important;
-      border-radius: 12px !important;
-      box-shadow: 0 16px 40px rgba(0,0,0,0.85), 0 0 25px rgba(230,0,46,0.2) !important;
+      border: 1px solid rgba(255, 17, 34, 0.4) !important;
+      border-radius: 0px !important;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.95), 0 0 25px rgba(255,17,34,0.25) !important;
       transition: all 0.3s ease !important;
     }
 
@@ -107,36 +155,57 @@
       left: 0;
       width: 0;
       height: 2px;
-      background: var(--gold-metallic);
-      box-shadow: 0 0 10px var(--gold);
+      background: #ff1122;
+      box-shadow: 0 0 10px #ff1122;
       transition: width 0.3s ease;
     }
     .nav-links a:hover {
-      color: var(--gold-bright) !important;
+      color: #ffffff !important;
       transform: translateY(-1px);
     }
     .nav-links a:hover::after {
       width: 100%;
     }
 
-    .brand:hover .crest-img-nav {
-      transform: scale(1.15) rotate(5deg);
-      filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.8));
-    }
-
-    /* AAA 3D perspective card mechanics */
+    /* 3D Perspective Card Mechanics */
     .player-card, .tour-card, .team-card, .reigning-champ-card, .activity-card, .trophy-card, .stat-card, .rule-card {
       perspective: 1500px !important;
       transform-style: preserve-3d !important;
       transition: transform 0.2s cubic-bezier(0.1, 0.8, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease !important;
-      border: 1px solid rgba(230, 0, 46, 0.25) !important;
-      border-radius: 8px !important;
-      background: linear-gradient(145deg, rgba(16, 16, 24, 0.85) 0%, rgba(8, 8, 12, 0.95) 100%) !important;
-      box-shadow: 0 15px 35px -10px rgba(0,0,0,0.9), 0 0 15px rgba(230,0,46,0.1) !important;
+      border: 1px solid rgba(255, 17, 34, 0.3) !important;
+      border-radius: 0px !important;
+      background: linear-gradient(145deg, rgba(14, 14, 14, 0.9) 0%, rgba(5, 5, 5, 0.98) 100%) !important;
+      box-shadow: 0 15px 35px -10px rgba(0,0,0,0.95), 0 0 15px rgba(255,17,34,0.15) !important;
     }
     .player-card:hover, .tour-card:hover, .team-card:hover, .reigning-champ-card:hover, .activity-card:hover {
-      border-color: rgba(255, 215, 0, 0.6) !important;
-      box-shadow: 0 25px 60px -15px rgba(0,0,0,0.95), 0 0 30px rgba(255,215,0,0.3) !important;
+      border-color: #ff1122 !important;
+      box-shadow: 0 25px 60px -15px rgba(0,0,0,0.98), 0 0 30px rgba(255,17,34,0.4) !important;
+    }
+
+    .btn-red {
+      background: linear-gradient(135deg, #ff1122 0%, #990014 100%) !important;
+      border: 1px solid #ff1122 !important;
+      box-shadow: 0 8px 25px -5px rgba(255,17,34,0.7) !important;
+      color: #ffffff !important;
+      font-weight: 800 !important;
+      letter-spacing: 0.1em !important;
+      border-radius: 0px !important;
+    }
+    .btn-red:hover {
+      box-shadow: 0 12px 35px -5px rgba(255,17,34,0.95), 0 0 25px rgba(255,255,255,0.4) !important;
+      transform: translateY(-2px) scale(1.02);
+    }
+    .btn-outline {
+      border: 1px solid #ffffff !important;
+      color: #ffffff !important;
+      background: rgba(10, 10, 10, 0.8) !important;
+      border-radius: 0px !important;
+    }
+    .btn-outline:hover {
+      background: #ffffff !important;
+      color: #000000 !important;
+      box-shadow: 0 0 20px rgba(255,255,255,0.4) !important;
+      transform: translateY(-2px);
     }
 
     /* Holographic foil sheen overlay */
@@ -2923,56 +2992,86 @@
         <a class="icon-btn" data-wa-contact href="#" target="_blank" rel="noopener" aria-label="WhatsApp">
           <svg viewBox="0 0 24 24" fill="currentColor">
             <path
-              d="M12.02 2C6.5 2 2 6.48 2 12c0 1.86.5 3.6 1.4 5.1L2 22l5.06-1.33A9.94 9.94 0 0012.02 22C17.54 22 22 17.52 22 12S17.54 2 12.02 2zm0 18.1c-1.66 0-3.2-.47-4.5-1.29l-.32-.19-3 .79.8-2.93-.21-.3A8.08 8.08 0 013.93 12c0-4.46 3.63-8.09 8.09-8.09 4.46 0 8.08 3.63 8.08 8.09 0 4.46-3.62 8.1-8.08 8.1zm4.44-6.07c-.24-.12-1.43-.7-1.65-.79-.22-.08-.38-.12-.55.12-.16.24-.63.79-.77.95-.14.16-.28.18-.52.06-.24-.12-1.02-.38-1.94-1.2-.72-.64-1.2-1.43-1.35-1.67-.14-.24-.02-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.55-1.33-.76-1.82-.2-.48-.4-.42-.55-.42-.14 0-.3-.02-.46-.02-.16 0-.42.06-.64.3-.22.24-.85.83-.85 2.02 0 1.19.87 2.34 1 2.5.12.16 1.7 2.6 4.12 3.64.58.25 1.03.4 1.38.51.58.18 1.11.16 1.53.1.47-.07 1.43-.58 1.63-1.15.2-.56.2-1.04.14-1.15-.06-.1-.22-.16-.46-.28z" />
-          </svg>
-        </a>
-        <button class="icon-btn" id="adminOpenBtn" aria-label="Admin login" title="Admin login">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-            <rect x="4.5" y="10" width="15" height="10" rx="1.5" />
-            <path d="M8 10V7a4 4 0 018 0v3" />
-            <circle cx="12" cy="14.5" r="1.4" fill="currentColor" stroke="none" />
-          </svg>
-        </button>
-        <button class="hamburger" id="hamburger" aria-label="Menu">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path id="hbPath" d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-        </button>
-      </div>
-    </div>
-    <div class="ticker-strip">
-      <div class="ticker-track" id="tickerTrack"></div>
-    </div>
-  </header>
-
-  <!-- ============================= WEEKLY HIGHLIGHT (auto-sliding carousel) ============================= -->
-  <section class="wh-section" id="highlights">
-    <div class="wh-carousel" id="whCarousel">
-      <span class="wh-label">Weekly Highlight</span>
-      <div class="wh-track" id="whTrack"></div>
-      <button type="button" class="wh-arrow wh-prev" id="whPrevBtn" aria-label="Previous Highlight">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 19l-7-7 7-7"/></svg>
-      </button>
-      <button type="button" class="wh-arrow wh-next" id="whNextBtn" aria-label="Next Highlight">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 5l7 7-7 7"/></svg>
-      </button>
-      <div class="wh-dots" id="whDots"></div>
-    </div>
-    <p class="highlight-empty" id="highlightEmpty" hidden>No highlights yet — check back soon.</p>
-  </section>
-
-  <!-- ============================= HERO (E-FOOTBALL SYSTEM LAYOUT) ============================= -->
-  <section class="hero" id="hero">
+              d="M12.02 2C6.5 2 2 6.48 2 12c0 1.86.5 3.6 1.4 5.1L2 22l5.06-1.33A9.94 9.94 0 0012.02 22C17.54 22 22 17.52 22 12S17.54 2 12.02 2zm0 18.1c-1.66 0-3.2-.47-4.5-1.29l-.32-.19-3 .79.8-2.93-.21-.3A8.08 8.08 0 013.93 12c0-4.46 3.63-8.09 8.09-8.09 4.46 0 8.08 3.63 8.08 8.09 0 4.46-3.62 8.1-8.08 8.1zm4.44-6.07  <!-- RAGEBITE HERO SECTION (V-Shape Chevron & 3D BG) -->
+  <section class="hero ragebite-hero-v" id="hero">
     <div class="cosmic-void"></div>
     <div class="hud-grid-matrix"></div>
-    <div class="game-scanlines"></div>
     <div class="hero-particles" id="heroParticles"></div>
 
-    <!-- High Tech Video Game Radar Overlay -->
-    <div class="tactical-pitch-overlay">
-      <div class="pitch-ring ring-1">
-        <div class="hud-corner tl"></div>
-        <div class="hud-corner tr"></div>
+    <div class="hero-inner wrap">
+      <!-- Top Emblem Crest -->
+      <div style="text-align: center; margin-bottom: 24px;">
+        <div style="width: 70px; height: 70px; margin: 0 auto 16px; background: #ff1122; transform: rotate(45deg); border: 2px solid #ffffff; box-shadow: 0 0 35px #ff1122; display: flex; align-items: center; justify-content: center;">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="#ffffff" style="transform: rotate(-45deg);"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <div style="font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.3em; color: #ffffff; text-transform: uppercase; font-weight: 700;">
+          WE CREATE LEGENDS FOR ESPORTS AND GAMING
+        </div>
+      </div>
+
+      <div class="nexus-hero-grid" style="padding-top: 20px;">
+        <div class="hero-left-content">
+          <h1 class="nexus-headline" style="font-size: clamp(68px, 9vw, 115px);">
+            LET'S SHAPE THE
+            <span class="red-glow-text">GAMING TOGETHER</span>
+          </h1>
+
+          <p class="hero-tagline" id="heroTagline" style="font-size: 16px; color: #e0e0e0; max-width: 560px; margin-bottom: 32px; line-height: 1.7;">
+            IC7 Iconic Sevens is Kerala's premier eFootball clan — uniting top talent across every district to compete in major coin tournaments and clan championships.
+          </p>
+
+          <div class="hero-actions" style="display: flex; gap: 18px; align-items: center; flex-wrap: wrap;">
+            <a href="#register" class="btn btn-red" style="padding: 18px 40px; font-size: 14px;">
+              REGISTER NOW &nbsp; →
+            </a>
+            <a href="#highlights" class="btn btn-outline" style="padding: 18px 36px; font-size: 14px;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              WATCH TRAILER
+            </a>
+          </div>
+
+          <!-- Sponsor Logos Strip -->
+          <div class="sponsor-strip">
+            <span>RAZER</span>
+            <span>logitech G</span>
+            <span>Red Bull</span>
+            <span>intel.</span>
+            <span>KONAMI</span>
+          </div>
+        </div>
+
+        <div></div>
+      </div>
+
+      <!-- RAGEBITE 4 Diamond Feature Badges -->
+      <div class="ragebite-diamond-grid">
+        <div class="ragebite-diamond-wrapper">
+          <div class="ragebite-diamond-content">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L1 21h22L12 2zm0 3.83L19.17 19H4.83L12 5.83z"/></svg>
+            <div style="font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.1em; margin-top: 4px;">POWER</div>
+          </div>
+        </div>
+        <div class="ragebite-diamond-wrapper">
+          <div class="ragebite-diamond-content">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>
+            <div style="font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.1em; margin-top: 4px;">PRECISION</div>
+          </div>
+        </div>
+        <div class="ragebite-diamond-wrapper">
+          <div class="ragebite-diamond-content">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+            <div style="font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.1em; margin-top: 4px;">TACTICS</div>
+          </div>
+        </div>
+        <div class="ragebite-diamond-wrapper">
+          <div class="ragebite-diamond-content">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l7.59-7.59L21 8l-9 9z"/></svg>
+            <div style="font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.1em; margin-top: 4px;">VICTORY</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
         <div class="hud-corner bl"></div>
         <div class="hud-corner br"></div>
       </div>
@@ -5738,15 +5837,15 @@
         const stadiumGroup = new THREE.Group();
         scene.add(stadiumGroup);
 
-        // High intensity red and cyan lights for reflection sheens
+        // High intensity red and white directional lights
         const ambientLight = new THREE.AmbientLight(0xffffff, 0.45);
         scene.add(ambientLight);
 
-        const dirLight1 = new THREE.DirectionalLight(0xff0033, 2.3);
+        const dirLight1 = new THREE.DirectionalLight(0xff1122, 2.5);
         dirLight1.position.set(6, 8, 5);
         scene.add(dirLight1);
 
-        const dirLight2 = new THREE.DirectionalLight(0x00ffff, 2.0);
+        const dirLight2 = new THREE.DirectionalLight(0xffffff, 1.8);
         dirLight2.position.set(-6, -8, -5);
         scene.add(dirLight2);
 
@@ -5758,18 +5857,18 @@
         const ballRadius = 0.42;
         const ballGeo = new THREE.IcosahedronGeometry(ballRadius, 2);
         const ballMat = new THREE.MeshStandardMaterial({
-          color: 0x111116,
-          metalness: 0.85,
-          roughness: 0.2,
+          color: 0x080808,
+          metalness: 0.9,
+          roughness: 0.15,
           flatShading: true
         });
         const football = new THREE.Mesh(ballGeo, ballMat);
         footballGroup.add(football);
 
-        // Gold & Crimson Seam Wireframe
+        // White & Crimson Seam Wireframe
         const ballWireGeo = new THREE.IcosahedronGeometry(ballRadius + 0.008, 2);
         const ballWireMat = new THREE.MeshBasicMaterial({
-          color: 0xffd700,
+          color: 0xffffff,
           wireframe: true,
           transparent: true,
           opacity: 0.75
@@ -5780,10 +5879,10 @@
         // Glowing Crimson Halo Ring
         const haloGeo = new THREE.RingGeometry(ballRadius + 0.08, ballRadius + 0.12, 32);
         const haloMat = new THREE.MeshBasicMaterial({
-          color: 0xe6002e,
+          color: 0xff1122,
           side: THREE.DoubleSide,
           transparent: true,
-          opacity: 0.55,
+          opacity: 0.6,
           blending: THREE.AdditiveBlending
         });
         const haloRing = new THREE.Mesh(haloGeo, haloMat);
@@ -5798,8 +5897,8 @@
         const bodyMat = new THREE.MeshStandardMaterial({ color: 0x09090b, metalness: 0.9, roughness: 0.18 });
         const gripMat = new THREE.MeshStandardMaterial({ color: 0x040405, metalness: 0.7, roughness: 0.3 });
         const stickMat = new THREE.MeshStandardMaterial({ color: 0x111113, metalness: 0.8, roughness: 0.1 });
-        const btnMatRed = new THREE.MeshStandardMaterial({ color: 0xe6002e, metalness: 0.9, roughness: 0.1 });
-        const btnMatGold = new THREE.MeshStandardMaterial({ color: 0xffd700, metalness: 0.9, roughness: 0.1 });
+        const btnMatRed = new THREE.MeshStandardMaterial({ color: 0xff1122, metalness: 0.9, roughness: 0.1 });
+        const btnMatWhite = new THREE.MeshStandardMaterial({ color: 0xffffff, metalness: 0.9, roughness: 0.1 });
 
         const body = new THREE.Mesh(new THREE.BoxGeometry(1.0, 0.55, 0.28), bodyMat);
         controllerGroup.add(body);
@@ -5826,7 +5925,7 @@
         btnA.position.set(0.4, 0.05, 0.16);
         controllerGroup.add(btnA);
 
-        const btnB = new THREE.Mesh(new THREE.SphereGeometry(0.045, 12, 12), btnMatGold);
+        const btnB = new THREE.Mesh(new THREE.SphereGeometry(0.045, 12, 12), btnMatWhite);
         btnB.position.set(0.48, 0.12, 0.16);
         controllerGroup.add(btnB);
 
@@ -5838,7 +5937,7 @@
         for (let i = 0; i < 9; i++) {
           const stripeGeo = new THREE.PlaneGeometry(stripeWidth, 1.65);
           const stripeMat = new THREE.MeshStandardMaterial({
-            color: i % 2 === 0 ? 0x0e3f1e : 0x145a30,
+            color: i % 2 === 0 ? 0x080808 : 0x121212,
             roughness: 0.82,
             metalness: 0.1,
             side: THREE.DoubleSide
@@ -5933,7 +6032,7 @@
         const flagPoleGeo = new THREE.CylinderGeometry(0.006, 0.006, 0.22);
         const flagPoleMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
         const flagMeshGeo = new THREE.ConeGeometry(0.04, 0.07, 4);
-        const flagMeshMat = new THREE.MeshBasicMaterial({ color: 0xe6002e });
+        const flagMeshMat = new THREE.MeshBasicMaterial({ color: 0xff1122 });
 
         const flags = [
           { x: -1.25, z: -0.8 },
@@ -5952,17 +6051,17 @@
           fieldLines.add(flag);
         });
 
-        // Volumetric Cone Floodlights with Crimson & Gold illumination
+        // Volumetric Cone Floodlights with Crimson Red & White illumination
         const coneGeo = new THREE.ConeGeometry(0.24, 0.9, 16, 1, true);
         const towers = [
           { x: -1.3, z: -0.85, color: 'crimson' },
-          { x: 1.3, z: -0.85, color: 'gold' },
-          { x: -1.3, z: 0.85, color: 'gold' },
+          { x: 1.3, z: -0.85, color: 'white' },
+          { x: -1.3, z: 0.85, color: 'white' },
           { x: 1.3, z: 0.85, color: 'crimson' }
         ];
         towers.forEach(t => {
           const coneMat = new THREE.MeshBasicMaterial({
-            color: t.color === 'crimson' ? 0xe6002e : 0xffd700,
+            color: t.color === 'crimson' ? 0xff1122 : 0xffffff,
             transparent: true,
             opacity: 0.15,
             blending: THREE.AdditiveBlending,
@@ -5992,7 +6091,7 @@
         crestGroup.add(disc);
 
         const rimGeo = new THREE.RingGeometry(0.28, 0.3, 32);
-        const rimMat = new THREE.MeshBasicMaterial({ color: 0xffd700, side: THREE.DoubleSide });
+        const rimMat = new THREE.MeshBasicMaterial({ color: 0xff1122, side: THREE.DoubleSide });
         const rimFront = new THREE.Mesh(rimGeo, rimMat);
         rimFront.position.z = 0.022;
         crestGroup.add(rimFront);
@@ -6002,18 +6101,18 @@
         crestGroup.add(rimBack);
 
         const starGeo = new THREE.ConeGeometry(0.08, 0.2, 4);
-        const starMat = new THREE.MeshStandardMaterial({ color: 0xe6002e, metalness: 0.9, roughness: 0.1 });
+        const starMat = new THREE.MeshStandardMaterial({ color: 0xffffff, metalness: 0.9, roughness: 0.1 });
         const star = new THREE.Mesh(starGeo, starMat);
         star.position.set(0, 0, 0.03);
         crestGroup.add(star);
 
-        const gridHelper = new THREE.GridHelper(36, 24, 0xe6002e, 0xffd700);
+        const gridHelper = new THREE.GridHelper(36, 24, 0xff1122, 0xffffff);
         gridHelper.position.y = -2.1;
         gridHelper.material.transparent = true;
         gridHelper.material.opacity = 0.3;
         scene.add(gridHelper);
 
-        // Gold and Crimson space dust particles
+        // White space dust particles
         const particlesGeo = new THREE.BufferGeometry();
         const particlesCount = 280;
         const posArray = new Float32Array(particlesCount * 3);
@@ -6028,7 +6127,7 @@
 
         const particlesMat = new THREE.PointsMaterial({
           size: 0.035,
-          color: 0xffd700,
+          color: 0xffffff,
           transparent: true,
           opacity: 0.7,
           blending: THREE.AdditiveBlending
@@ -6049,7 +6148,7 @@
         sparkGeo.setAttribute('position', new THREE.BufferAttribute(sparkPos, 3));
         const sparkMat = new THREE.PointsMaterial({
           size: 0.022,
-          color: 0xe6002e,
+          color: 0xff1122,
           transparent: true,
           opacity: 0.65,
           blending: THREE.AdditiveBlending
