@@ -3451,6 +3451,7 @@
           renderToursGrid();
           renderUpcomingTicker();
           renderTrophyCabinet();
+      renderCurrentChampionsCabinet();
           const msg = document.getElementById('toursMetaSavedMsg');
           if (msg) { msg.hidden = false; setTimeout(() => msg.hidden = true, 2000); }
         });
@@ -3465,36 +3466,13 @@
         const tabsHost = document.getElementById('tcTabsBar');
         if (!track) return;
 
-        const meta = getToursMeta();
-
-        function getTourTitleHtml(tourId, rawName) {
-          if (tourId === 'evolution-cup') return `<span>evo</span><span class="trophy-red">l</span><span>ution</span> <span class="cup-title">C<span class="trophy-red">U</span>P</span>`;
-          if (tourId === 'intimate-cup') return `<span>inti</span><span class="trophy-red">m</span><span>ate</span> <span class="cup-title">C<span class="trophy-red">U</span>P</span>`;
-          if (tourId === 'world-cup') return `<span>wor</span><span class="trophy-red">l</span><span>d</span> <span class="cup-title">C<span class="trophy-red">U</span>P</span>`;
-          if (tourId === 'club-world-cup') return `<span>c</span><span class="trophy-red">l</span><span>ub world</span> <span class="cup-title">C<span class="trophy-red">U</span>P</span>`;
-          if (tourId === 'coopa-duo') return `<span>coopa'd</span> <span class="trophy-red">d</span><span>uo</span>`;
-          if (tourId === 'districto-cup') return `<span>distric</span><span class="trophy-red">t</span><span>o</span> <span class="cup-title">C<span class="trophy-red">U</span>P</span>`;
-          return `<span>${escapeHtml(rawName.toLowerCase())}</span>`;
-        }
-
-        function getTourSubtitle(tourId) {
-          if (tourId === 'club-world-cup') return 'THE PINNACLE OF GLOBAL CLUB FOOTBALL.';
-          return '14 TEAMS. ONE INTENSE RIVALRY.';
-        }
-
-        function getTourBadgeLogo(tourId, mLogo) {
-          if (mLogo) return mLogo;
-          if (tourId === 'intimate-cup') return '/assets/intimate_cup_badge.jpg';
-          return '/assets/asset_4ec290c1ae.png';
-        }
+        const meta = Store.get('ic7_tours_meta', {});
 
         // Render Tabs
         if (tabsHost) {
-          tabsHost.innerHTML = MAJOR_TOURS.map((t, idx) => {
-            const m = meta[t.id] || {};
-            const tourName = (m.name || t.name).toUpperCase();
-            return `<button type="button" class="tc-tab-btn${idx === tcCurrentIdx ? ' active' : ''}" data-idx="${idx}">${escapeHtml(tourName)}</button>`;
-          }).join('');
+          tabsHost.innerHTML = MAJOR_TOURS.map((t, i) =>
+            `<button type="button" class="tc-tab-btn${i === tcCurrentIdx ? ' active' : ''}" data-idx="${i}">${escapeHtml(t.name)}</button>`
+          ).join('');
 
           tabsHost.querySelectorAll('.tc-tab-btn').forEach((btn) => {
             btn.addEventListener('click', (e) => {
@@ -3509,43 +3487,10 @@
         const slidesHtml = MAJOR_TOURS.map((t) => {
           const m = meta[t.id] || {};
           const tourName = m.name || t.name;
-          const currChampName = m.currChamp || (t.id === 'intimate-cup' ? 'INTIMATE CHAMPION' : 'CURRENT CHAMPIONS');
-          const currChampTag = m.currChampTag || 'REIGNING CHAMPIONS';
-
           const champName = m.champion || (t.id === 'intimate-cup' ? 'INTIMATE CHAMPION' : 'IL CAPITANO');
           const champTag = m.champTag || 'SEASON 1';
-
           const shieldName = m.shieldWinner || (t.id === 'intimate-cup' ? 'INTIMATE SHIELD' : 'ICONIC SHIELD');
           const shieldTag = m.shieldTag || 'SEASON 2';
-
-          const currChampBadgeHtml = m.currChampLogo
-            ? `<div class="evo-tc-trophy-badge"><img class="evo-tc-trophy-img" src="${m.currChampLogo}" alt="${escapeHtml(currChampName)}"></div>`
-            : `<div class="evo-tc-trophy-badge">
-                <svg class="evo-tc-gold-cup" viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg">
-                  <defs>
-                    <radialGradient id="cupGoldGrad_${t.id}" cx="50%" cy="30%" r="70%">
-                      <stop offset="0%" stop-color="#ffffff"/>
-                      <stop offset="25%" stop-color="#fff5a0"/>
-                      <stop offset="60%" stop-color="#ffd700"/>
-                      <stop offset="85%" stop-color="#d4af37"/>
-                      <stop offset="100%" stop-color="#7a5200"/>
-                    </radialGradient>
-                    <linearGradient id="cupBaseGrad_${t.id}" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stop-color="#2a2a2a"/>
-                      <stop offset="50%" stop-color="#111111"/>
-                      <stop offset="100%" stop-color="#000000"/>
-                    </linearGradient>
-                  </defs>
-                  <path d="M45 55 C20 50 15 95 52 105" fill="none" stroke="url(#cupGoldGrad_${t.id})" stroke-width="9" stroke-linecap="round"/>
-                  <path d="M155 55 C180 50 185 95 148 105" fill="none" stroke="url(#cupGoldGrad_${t.id})" stroke-width="9" stroke-linecap="round"/>
-                  <path d="M50 40 H150 L140 110 C135 145 65 145 60 110 Z" fill="url(#cupGoldGrad_${t.id})" stroke="#fff" stroke-width="1.5"/>
-                  <ellipse cx="100" cy="40" rx="50" ry="12" fill="url(#cupGoldGrad_${t.id})" stroke="#ffeaa7" stroke-width="2"/>
-                  <path d="M92 140 H108 V165 H92 Z" fill="url(#cupGoldGrad_${t.id})"/>
-                  <path d="M70 165 H130 L140 185 H60 Z" fill="url(#cupBaseGrad_${t.id})" stroke="url(#cupGoldGrad_${t.id})" stroke-width="2"/>
-                  <circle cx="100" cy="85" r="16" fill="#12040a" stroke="url(#cupGoldGrad_${t.id})" stroke-width="2"/>
-                  <text x="100" y="91" text-anchor="middle" font-family="Cinzel,serif" font-size="16" fill="#ffd700">★</text>
-                </svg>
-              </div>`;
 
           const titleHtml = getTourTitleHtml(t.id, tourName);
           const subtitleText = getTourSubtitle(t.id);
@@ -3656,9 +3601,9 @@
                 <!-- Glass Cabinet Showcase Box -->
                 <div class="evo-tc-cabinet">
                   <div class="evo-tc-top-plaque">TROPHY CABINET</div>
-                  <div class="evo-tc-grid evo-tc-grid-3">
+                  <div class="evo-tc-grid">
                     <!-- Left Pedestal (Season 1 Champion) -->
-                    <div class="evo-tc-bay evo-tc-bay-side">
+                    <div class="evo-tc-bay">
                       <div class="evo-tc-spotlight"></div>
                       <div class="evo-tc-podium-ring"></div>
                       ${champBadgeHtml}
@@ -3666,25 +3611,12 @@
                         <div class="evo-tc-plinth-season">${escapeHtml(champTag)}</div>
                         <div class="evo-tc-plinth-title">SEASON CHAMPION</div>
                         <div class="evo-tc-plinth-name">${escapeHtml(champName)}</div>
-                        <div class="evo-tc-plinth-star">★</div>
-                      </div>
-                    </div>
-
-                    <!-- Center Pedestal (CURRENT CHAMPIONS - Main Elevated Stage) -->
-                    <div class="evo-tc-bay evo-tc-bay-center">
-                      <div class="evo-tc-spotlight evo-tc-spotlight-gold"></div>
-                      <div class="evo-tc-podium-ring evo-tc-podium-gold"></div>
-                      ${currChampBadgeHtml}
-                      <div class="evo-tc-plinth evo-tc-plinth-gold">
-                        <div class="evo-tc-plinth-season">${escapeHtml(currChampTag)}</div>
-                        <div class="evo-tc-plinth-title">CURRENT CHAMPIONS</div>
-                        <div class="evo-tc-plinth-name">${escapeHtml(currChampName)}</div>
-                        <div class="evo-tc-plinth-star">★★★</div>
+                        <div class="evo-tc-plinth-star"></div>
                       </div>
                     </div>
 
                     <!-- Right Pedestal (Shield Winner) -->
-                    <div class="evo-tc-bay evo-tc-bay-side">
+                    <div class="evo-tc-bay">
                       <div class="evo-tc-spotlight"></div>
                       <div class="evo-tc-podium-ring"></div>
                       ${shieldBadgeHtml}
@@ -3692,7 +3624,7 @@
                         <div class="evo-tc-plinth-season">${escapeHtml(shieldTag)}</div>
                         <div class="evo-tc-plinth-title">SHIELD WINNER</div>
                         <div class="evo-tc-plinth-name">${escapeHtml(shieldName)}</div>
-                        <div class="evo-tc-plinth-star">★</div>
+                        <div class="evo-tc-plinth-star"></div>
                       </div>
                     </div>
                   </div>
@@ -3766,15 +3698,213 @@
         }
       }
 
+      /* ─── CURRENT CHAMPIONS CABINET (1-PEDESTAL SHOWCASE) ─── */
+      let ccCurrentIdx = 0;
+      let ccAutoTimer = null;
+
+      function renderCurrentChampionsCabinet() {
+        const track = document.getElementById('currChampTrack');
+        const dotsHost = document.getElementById('ccDots');
+        const tabsHost = document.getElementById('ccTabsBar');
+        if (!track) return;
+
+        const meta = Store.get('ic7_tours_meta', {});
+
+        // Render Tabs
+        if (tabsHost) {
+          tabsHost.innerHTML = MAJOR_TOURS.map((t, i) =>
+            `<button type="button" class="tc-tab-btn${i === ccCurrentIdx ? ' active' : ''}" data-idx="${i}">${escapeHtml(t.name)}</button>`
+          ).join('');
+
+          tabsHost.querySelectorAll('.tc-tab-btn').forEach((btn) => {
+            btn.addEventListener('click', (e) => {
+              const idx = parseInt(e.currentTarget.dataset.idx, 10);
+              goToCcSlide(idx);
+              resetCcAuto();
+            });
+          });
+        }
+
+        // Render 6 Current Champion Slides
+        const slidesHtml = MAJOR_TOURS.map((t) => {
+          const m = meta[t.id] || {};
+          const tourName = m.name || t.name;
+          const currChampName = m.currChamp || (t.id === 'intimate-cup' ? 'INTIMATE CHAMPION' : 'CURRENT CHAMPIONS');
+          const currChampTag = m.currChampTag || 'REIGNING CHAMPIONS';
+
+          const titleHtml = getTourTitleHtml(t.id, tourName);
+          const subtitleText = getTourSubtitle(t.id);
+          const badgeLogo = getTourBadgeLogo(t.id, m.tourLogo);
+
+          const currChampBadgeHtml = m.currChampLogo
+            ? `<div class="evo-tc-trophy-badge"><img class="evo-tc-trophy-img" src="${m.currChampLogo}" alt="${escapeHtml(currChampName)}"></div>`
+            : `<div class="evo-tc-trophy-badge">
+                <svg class="evo-tc-gold-cup" viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <radialGradient id="cupGoldGrad_cc_${t.id}" cx="50%" cy="30%" r="70%">
+                      <stop offset="0%" stop-color="#ffffff"/>
+                      <stop offset="25%" stop-color="#fff5a0"/>
+                      <stop offset="60%" stop-color="#ffd700"/>
+                      <stop offset="85%" stop-color="#d4af37"/>
+                      <stop offset="100%" stop-color="#7a5200"/>
+                    </radialGradient>
+                    <linearGradient id="cupBaseGrad_cc_${t.id}" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#2a2a2a"/>
+                      <stop offset="50%" stop-color="#111111"/>
+                      <stop offset="100%" stop-color="#000000"/>
+                    </linearGradient>
+                  </defs>
+                  <path d="M45 55 C20 50 15 95 52 105" fill="none" stroke="url(#cupGoldGrad_cc_${t.id})" stroke-width="9" stroke-linecap="round"/>
+                  <path d="M155 55 C180 50 185 95 148 105" fill="none" stroke="url(#cupGoldGrad_cc_${t.id})" stroke-width="9" stroke-linecap="round"/>
+                  <path d="M50 40 H150 L140 110 C135 145 65 145 60 110 Z" fill="url(#cupGoldGrad_cc_${t.id})" stroke="#fff" stroke-width="1.5"/>
+                  <ellipse cx="100" cy="40" rx="50" ry="12" fill="url(#cupGoldGrad_cc_${t.id})" stroke="#ffeaa7" stroke-width="2"/>
+                  <path d="M92 140 H108 V165 H92 Z" fill="url(#cupGoldGrad_cc_${t.id})"/>
+                  <path d="M70 165 H130 L140 185 H60 Z" fill="url(#cupBaseGrad_cc_${t.id})" stroke="url(#cupGoldGrad_cc_${t.id})" stroke-width="2"/>
+                  <circle cx="100" cy="85" r="16" fill="#12040a" stroke="url(#cupGoldGrad_cc_${t.id})" stroke-width="2"/>
+                  <text x="100" y="91" text-anchor="middle" font-family="Cinzel,serif" font-size="16" fill="#ffd700"></text>
+                </svg>
+              </div>`;
+
+          // Generate space stars
+          let starsHtml = '';
+          const starSizes = ['star-xs','star-sm','star-sm','star-md','star-lg'];
+          for (let i = 0; i < 90; i++) {
+            const sizeFactor = Math.random();
+            const size = sizeFactor < 0.6 ? 1.2 + Math.random() * 1.5 :
+                         sizeFactor < 0.85 ? 2.5 + Math.random() * 1.8 :
+                         4.2 + Math.random() * 2.2;
+            const left = Math.random() * 100;
+            const top = Math.random() * 100;
+            const delay = -(Math.random() * 6);
+            const dur = 3.5 + Math.random() * 3.5;
+            const sSize = starSizes[Math.floor(Math.random() * starSizes.length)];
+            starsHtml += `<span class="${sSize}" style="width:${size}px;height:${size}px;left:${left}%;top:${top}%;animation-duration:${dur}s;animation-delay:${delay}s;"></span>`;
+          }
+
+          return `
+            <div class="trophy-slide">
+              <div class="evo-tc-showcase">
+                <!-- Moving Space Stars Backdrop -->
+                <div class="tc-cosmic-bg">${starsHtml}</div>
+                <!-- Stadium Floodlight Beams -->
+                <div class="evo-tc-floodlight-left"></div>
+                <div class="evo-tc-floodlight-right"></div>
+
+                <!-- Header Area -->
+                <div class="evo-tc-header">
+                  <div class="evo-tc-top-icons">
+                    <svg class="evo-tc-player-sil" viewBox="0 0 100 100" fill="#ffffff">
+                      <circle cx="50" cy="20" r="12"/>
+                      <path d="M40 38 h20 v30 h-8 v-25 h-8 v-25 h-4 v-30 z" transform="rotate(-15 50 50)"/>
+                      <path d="M20 40 l20 -10 l10 20 l-15 15 z"/>
+                      <path d="M60 30 l25 -10 l-10 25 z"/>
+                    </svg>
+                    <img class="evo-tc-clan-logo" src="${badgeLogo}" alt="${escapeHtml(tourName)} Logo">
+                  </div>
+                  <div class="evo-tc-title-wrap">
+                    <h1 class="evo-tc-title">${titleHtml}</h1>
+                  </div>
+                  <div class="evo-tc-subtitle">${subtitleText}</div>
+                </div>
+
+                <!-- Glass Cabinet Showcase Box -->
+                <div class="evo-tc-cabinet">
+                  <div class="evo-tc-top-plaque">REIGNING CHAMPION</div>
+                  <div class="evo-tc-grid-1col" style="display:flex; justify-content:center; align-items:flex-end; min-height:360px;">
+                    <!-- Center Pedestal (CURRENT CHAMPIONS - Main Elevated Stage) -->
+                    <div class="evo-tc-bay evo-tc-bay-center" style="transform:translateY(0);">
+                      <div class="evo-tc-spotlight evo-tc-spotlight-gold"></div>
+                      <div class="evo-tc-podium-ring evo-tc-podium-gold"></div>
+                      ${currChampBadgeHtml}
+                      <div class="evo-tc-plinth evo-tc-plinth-gold">
+                        <div class="evo-tc-plinth-season">${escapeHtml(currChampTag)}</div>
+                        <div class="evo-tc-plinth-title">CURRENT CHAMPIONS</div>
+                        <div class="evo-tc-plinth-name">${escapeHtml(currChampName)}</div>
+                        <div class="evo-tc-plinth-star"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Cabinet Footer Tagline -->
+                <div class="evo-tc-footer">
+                  <div class="evo-tc-footer-line1">CURRENT TITLEHOLDER</div>
+                  <div class="evo-tc-footer-line2">EVOLUTION CUP | INTIMATE CUP | DISTRICTO CUP | COOPA'D CUP | THE FINAL.</div>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        track.innerHTML = slidesHtml;
+
+        // Render Dots
+        if (dotsHost) {
+          dotsHost.innerHTML = MAJOR_TOURS.map((t, i) =>
+            `<button type="button" class="tc-dot${i === ccCurrentIdx ? ' active' : ''}" data-idx="${i}" aria-label="Slide ${i + 1}"></button>`
+          ).join('');
+
+          dotsHost.querySelectorAll('.tc-dot').forEach((dot) => {
+            dot.addEventListener('click', (e) => {
+              const idx = parseInt(e.currentTarget.dataset.idx, 10);
+              goToCcSlide(idx);
+              resetCcAuto();
+            });
+          });
+        }
+
+        function goToCcSlide(idx) {
+          const total = MAJOR_TOURS.length;
+          ccCurrentIdx = (idx + total) % total;
+          track.style.transform = `translateX(-${ccCurrentIdx * 100}%)`;
+
+          if (dotsHost) {
+            dotsHost.querySelectorAll('.tc-dot').forEach((d, i) => {
+              d.classList.toggle('active', i === ccCurrentIdx);
+            });
+          }
+          if (tabsHost) {
+            tabsHost.querySelectorAll('.tc-tab-btn').forEach((t, i) => {
+              t.classList.toggle('active', i === ccCurrentIdx);
+            });
+          }
+        }
+
+        // Connect Prev / Next Arrows
+        const prevBtn = document.getElementById('ccPrevBtn');
+        const nextBtn = document.getElementById('ccNextBtn');
+        if (prevBtn) prevBtn.onclick = () => { goToCcSlide(ccCurrentIdx - 1); resetCcAuto(); };
+        if (nextBtn) nextBtn.onclick = () => { goToCcSlide(ccCurrentIdx + 1); resetCcAuto(); };
+
+        function startCcAuto() {
+          if (ccAutoTimer) clearInterval(ccAutoTimer);
+          ccAutoTimer = setInterval(() => goToCcSlide(ccCurrentIdx + 1), 6000);
+        }
+        function resetCcAuto() {
+          startCcAuto();
+        }
+
+        goToCcSlide(ccCurrentIdx);
+        startCcAuto();
+
+        const container = document.getElementById('ccContainer');
+        if (container) {
+          container.onmouseenter = () => { if (ccAutoTimer) clearInterval(ccAutoTimer); };
+          container.onmouseleave = startCcAuto;
+        }
+      }
+
       renderToursGrid();
       renderUpcomingTicker();
       renderTrophyCabinet();
+      renderCurrentChampionsCabinet();
 
       window.addEventListener('ic7_store_updated', (e) => {
         if (!e.detail || !e.detail.key || e.detail.key === 'ic7_major_tours') {
           renderToursGrid();
           renderUpcomingTicker();
           renderTrophyCabinet();
+      renderCurrentChampionsCabinet();
         }
       });
 
