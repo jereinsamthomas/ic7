@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Anton&family=Cinzel:wght@600;700;800;900&family=Cormorant+Garamond:wght@600;700&family=Manrope:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Anton&family=Cinzel:wght@400;600;700;800;900&family=Cinzel+Decorative:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Manrope:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700&display=swap"
     rel="stylesheet">
   <style>
     /* ============================= TOKENS (GAMING RED, BLACK, WHITE) ============================= */
@@ -1286,21 +1286,27 @@
   margin-bottom: 10px;
 }
 .evo-tc-player-sil {
-  width: 52px;
-  height: 52px;
-  opacity: 0.95;
-  filter: drop-shadow(0 0 10px rgba(255,255,255,0.5));
+  width: 58px;
+  height: 58px;
+  opacity: 0.97;
+  filter: drop-shadow(0 0 12px rgba(255,255,255,0.6)) drop-shadow(0 0 25px rgba(225,29,72,0.3));
 }
 .evo-tc-clan-logo {
-  width: 52px;
-  height: 52px;
+  width: 72px;
+  height: 72px;
   border-radius: 50%;
-  border: 2px solid #d4af37;
+  border: 3px solid #f0c040;
   box-shadow:
-    0 0 16px rgba(212,175,55,0.7),
-    0 0 30px rgba(212,175,55,0.3),
-    inset 0 1px 0 rgba(255,255,255,0.25);
+    0 0 20px rgba(240,192,64,0.85),
+    0 0 45px rgba(240,192,64,0.4),
+    0 0 80px rgba(240,192,64,0.15),
+    inset 0 2px 0 rgba(255,255,255,0.35);
   object-fit: cover;
+  animation: tcLogoPulse 4s ease-in-out infinite;
+}
+@keyframes tcLogoPulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(240,192,64,0.85), 0 0 45px rgba(240,192,64,0.4), inset 0 2px 0 rgba(255,255,255,0.35); }
+  50%       { box-shadow: 0 0 30px rgba(240,192,64,1), 0 0 70px rgba(240,192,64,0.7), 0 0 120px rgba(240,192,64,0.25), inset 0 2px 0 rgba(255,255,255,0.35); }
 }
 .evo-tc-title-wrap {
   position: relative;
@@ -1308,17 +1314,17 @@
   margin-bottom: 4px;
 }
 .evo-tc-title {
-  font-family: var(--font-luxury);
-  font-size: clamp(38px, 6vw, 64px);
+  font-family: 'Cinzel Decorative', 'Cinzel', serif;
+  font-size: clamp(42px, 6.5vw, 72px);
   font-weight: 900;
-  letter-spacing: .06em;
+  letter-spacing: .05em;
   text-transform: lowercase;
-  color: #ffffff;
-  line-height: 1;
+  color: #f8f0ff;
+  line-height: 1.05;
   text-shadow:
-    0 0 10px rgba(255, 255, 255, 0.6),
-    0 0 30px rgba(255, 255, 255, 0.2),
-    0 4px 20px rgba(0,0,0,0.8);
+    0 0 15px rgba(255, 255, 255, 0.7),
+    0 0 40px rgba(255, 255, 255, 0.25),
+    0 6px 30px rgba(0,0,0,0.9);
 }
 .evo-tc-title .trophy-red {
   color: #e11d48;
@@ -1338,18 +1344,18 @@
   letter-spacing: 0.08em;
 }
 .evo-tc-subtitle {
-  font-family: var(--font-luxury);
-  font-size: 12px;
+  font-family: 'Cinzel', serif;
+  font-size: 13px;
   font-weight: 700;
-  letter-spacing: .42em;
+  letter-spacing: .48em;
   text-transform: uppercase;
-  color: #e6ca65;
+  color: #f5d87a;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 16px;
-  margin-top: 6px;
-  text-shadow: 0 0 12px rgba(230,202,101,0.6);
+  gap: 18px;
+  margin-top: 8px;
+  text-shadow: 0 0 16px rgba(245,216,122,0.75), 0 0 35px rgba(245,216,122,0.35);
 }
 .evo-tc-subtitle::before, .evo-tc-subtitle::after {
   content: "";
@@ -1391,15 +1397,15 @@
   border: 1px solid rgba(212,175,55,0.6);
   border-top: none;
   padding: 4px 28px;
-  font-family: var(--font-luxury);
-  font-size: 10px;
+  font-family: 'Cinzel', serif;
+  font-size: 12px;
   font-weight: 700;
-  letter-spacing: .42em;
-  color: #e6ca65;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.9);
+  letter-spacing: .46em;
+  color: #f7e08a;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.95);
   border-radius: 0 0 6px 6px;
   z-index: 5;
-  text-shadow: 0 0 10px rgba(230,202,101,0.5);
+  text-shadow: 0 0 14px rgba(247,224,138,0.7), 0 0 30px rgba(247,224,138,0.3);
 }
 
 /* Decorative corner accents */
@@ -1479,8 +1485,8 @@
 
 /* Trophy Crest Shield / Badge */
 .evo-tc-trophy-badge {
-  width: 175px;
-  height: 200px;
+  width: 200px;
+  height: 230px;
   position: relative;
   display: flex;
   align-items: center;
@@ -1494,8 +1500,8 @@
   filter: brightness(1.15);
 }
 .evo-tc-trophy-img {
-  width: 168px;
-  height: 192px;
+  width: 194px;
+  height: 220px;
   object-fit: contain;
   filter:
     drop-shadow(0 12px 28px rgba(0,0,0,0.97))
@@ -1503,8 +1509,8 @@
     drop-shadow(0 0 8px rgba(255,255,255,0.2));
 }
 .evo-tc-default-crest {
-  width: 160px;
-  height: 160px;
+  width: 180px;
+  height: 180px;
   border-radius: 50%;
   background: radial-gradient(circle at 30% 30%, #4a3840 0%, #1c1015 70%, #090508 100%);
   border: 4px solid #d4af37;
@@ -1523,8 +1529,8 @@
 }
 
 .evo-tc-anchor-shield, .evo-tc-dragon-shield {
-  width: 168px;
-  height: 192px;
+  width: 194px;
+  height: 220px;
   filter:
     drop-shadow(0 12px 28px rgba(0,0,0,0.97))
     drop-shadow(0 0 20px rgba(212,175,55,0.55));
@@ -1533,8 +1539,8 @@
 /* Engraved Metallic Base Plinth */
 .evo-tc-plinth {
   width: 100%;
-  max-width: 230px;
-  background: linear-gradient(180deg, #35272c 0%, #1b1014 100%);
+  max-width: 250px;
+  background: linear-gradient(180deg, #3d2d34 0%, #1e1216 100%);
   border: 1px solid rgba(212,175,55,0.55);
   border-bottom: 4px solid #d4af37;
   padding: 14px 10px;
@@ -1553,38 +1559,55 @@
   background: linear-gradient(90deg, transparent, rgba(212,175,55,0.55), transparent);
 }
 .evo-tc-plinth-season {
-  font-family: var(--font-luxury);
-  font-size: 9px;
+  font-family: 'Cinzel', serif;
+  font-size: 10.5px;
   font-weight: 700;
-  letter-spacing: .32em;
-  color: #e6ca65;
-  margin-bottom: 4px;
+  letter-spacing: .34em;
+  color: #f7d86a;
+  margin-bottom: 5px;
   text-transform: uppercase;
+  text-shadow: 0 0 10px rgba(247,216,106,0.55);
 }
 .evo-tc-plinth-title {
-  font-family: var(--font-luxury);
-  font-size: 14.5px;
+  font-family: 'Playfair Display', 'Cinzel', serif;
+  font-size: 17px;
   font-weight: 900;
-  letter-spacing: .22em;
+  letter-spacing: .24em;
   color: #ffffff;
-  margin-bottom: 4px;
-  text-shadow: 0 0 6px rgba(255,255,255,0.3);
+  margin-bottom: 5px;
+  text-shadow: 0 0 10px rgba(255,255,255,0.5), 0 0 30px rgba(255,255,255,0.15);
 }
 .evo-tc-plinth-name {
-  font-family: var(--font-luxury);
-  font-size: 16px;
-  font-weight: 800;
-  letter-spacing: .06em;
-  color: #ffd700;
-  text-transform: uppercase;
-  text-shadow: 0 0 14px rgba(255,215,0,0.6);
+  font-family: 'Playfair Display', 'Cinzel', serif;
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: .05em;
+  background: linear-gradient(135deg, #fffde4, #ffd700 40%, #ffaa00 70%, #ff8c00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: none;
+  filter: drop-shadow(0 0 12px rgba(255,200,0,0.6));
   word-break: break-word;
+  animation: tcNameShimmer 4s linear infinite;
+  background-size: 200% 100%;
+}
+@keyframes tcNameShimmer {
+  0%   { background-position: 200% center; }
+  100% { background-position: -200% center; }
 }
 .evo-tc-plinth-star {
-  font-size: 9px;
-  color: #d4af37;
-  margin-top: 4px;
-  letter-spacing: .3em;
+  font-size: 13px;
+  color: #f7d035;
+  margin-top: 5px;
+  letter-spacing: .35em;
+  text-shadow: 0 0 8px rgba(247,208,53,0.7);
+  animation: tcStarSpin 6s linear infinite;
+}
+@keyframes tcStarSpin {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.3); }
+  100% { transform: scale(1); }
 }
 
 /* Footer Section */
@@ -1594,17 +1617,17 @@
   position: relative;
 }
 .evo-tc-footer-line1 {
-  font-family: var(--font-luxury);
-  font-size: 11px;
+  font-family: 'Cinzel', serif;
+  font-size: 12.5px;
   font-weight: 700;
-  letter-spacing: .38em;
-  color: #e11d48;
-  margin-bottom: 4px;
+  letter-spacing: .4em;
+  color: #ff4d6d;
+  margin-bottom: 5px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 14px;
-  text-shadow: 0 0 10px rgba(225,29,72,0.5);
+  gap: 16px;
+  text-shadow: 0 0 14px rgba(255,77,109,0.75), 0 0 35px rgba(255,77,109,0.35);
 }
 .evo-tc-footer-line1::before, .evo-tc-footer-line1::after {
   content: "";
@@ -1615,12 +1638,12 @@
   box-shadow: 0 0 10px rgba(225,29,72,0.8);
 }
 .evo-tc-footer-line2 {
-  font-family: var(--font-luxury);
-  font-size: 11px;
+  font-family: 'Cinzel', serif;
+  font-size: 11.5px;
   font-weight: 800;
-  letter-spacing: .25em;
-  color: rgba(255,255,255,0.75);
-  text-shadow: 0 0 10px rgba(255,255,255,0.25);
+  letter-spacing: .28em;
+  color: rgba(255,255,255,0.8);
+  text-shadow: 0 0 12px rgba(255,255,255,0.35), 0 0 30px rgba(255,255,255,0.1);
 }
 
 /* Nav arrows */
