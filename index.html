@@ -5067,7 +5067,8 @@
       
       initSmoothScroll();
 
-      const init3DController = () => {
+            // ─── THREE.JS 3D HOLOGRAM TACTICAL FIELD & GLOWING CLAN CREST ENGINE ───
+      const init3DStadium = () => {
         const canvas = document.getElementById('webgl-canvas');
         if (!canvas || typeof THREE === 'undefined') return;
 
@@ -5079,148 +5080,140 @@
         const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
         camera.position.z = 5;
 
-        // Group to hold the game controller and floating screen
-        const controllerGroup = new THREE.Group();
-        controllerGroup.rotation.z = Math.PI / 12; // tilted slightly
-        scene.add(controllerGroup);
+        // Group to hold the pitch and crest structures
+        const stadiumGroup = new THREE.Group();
+        scene.add(stadiumGroup);
 
-        // Group to hold the background hexagon portal
-        const portalGroup = new THREE.Group();
-        scene.add(portalGroup);
-
-        // High intensity spotlight color scheme (Red and Cyan)
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
+        // High intensity red & cyan lighting to accentuate the metallic details
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.42);
         scene.add(ambientLight);
 
-        const dirLight1 = new THREE.DirectionalLight(0xff0033, 2.3); // Vivid Red Highlight
-        dirLight1.position.set(6, 9, 5);
+        const dirLight1 = new THREE.DirectionalLight(0xff0033, 2.3);
+        dirLight1.position.set(6, 8, 5);
         scene.add(dirLight1);
 
-        const dirLight2 = new THREE.DirectionalLight(0x00ffff, 1.9); // Vivid Cyan fill light
-        dirLight2.position.set(-6, -9, -5);
+        const dirLight2 = new THREE.DirectionalLight(0x00ffff, 1.9);
+        dirLight2.position.set(-6, -8, -5);
         scene.add(dirLight2);
 
-        // Assemble the Holographic Game Controller
-        const bodyMat = new THREE.MeshStandardMaterial({ color: 0x0a0a0c, metalness: 0.85, roughness: 0.18 });
-        const gripMat = new THREE.MeshStandardMaterial({ color: 0x040405, metalness: 0.7, roughness: 0.3 });
-        const stickMat = new THREE.MeshStandardMaterial({ color: 0x111113, metalness: 0.8, roughness: 0.1 });
-        const btnMatRed = new THREE.MeshStandardMaterial({ color: 0xff0033, metalness: 0.9, roughness: 0.1 });
-        const btnMatBlue = new THREE.MeshStandardMaterial({ color: 0x00ffff, metalness: 0.9, roughness: 0.1 });
+        // --- ASSEMBLE TACTICAL FOOTBALL FIELD MARKINGS ---
+        const fieldLines = new THREE.Group();
+        stadiumGroup.add(fieldLines);
 
-        // Center Pad
-        const body = new THREE.Mesh(new THREE.BoxGeometry(1.5, 0.8, 0.4), bodyMat);
-        controllerGroup.add(body);
+        const lineMat = new THREE.LineBasicMaterial({ color: 0xff0033 });
 
-        // Left Handle Grip
-        const gripL = new THREE.Mesh(new THREE.CylinderGeometry(0.22, 0.16, 1.2, 16), gripMat);
-        gripL.position.set(-0.75, -0.3, 0.05);
-        gripL.rotation.z = Math.PI / 7;
-        controllerGroup.add(gripL);
+        // Outer Touchlines boundary
+        const outerPoints = [
+          new THREE.Vector3(-1.25, 0, -0.8),
+          new THREE.Vector3(1.25, 0, -0.8),
+          new THREE.Vector3(1.25, 0, 0.8),
+          new THREE.Vector3(-1.25, 0, 0.8),
+          new THREE.Vector3(-1.25, 0, -0.8)
+        ];
+        const outerGeo = new THREE.BufferGeometry().setFromPoints(outerPoints);
+        const outerLine = new THREE.Line(outerGeo, lineMat);
+        fieldLines.add(outerLine);
 
-        // Right Handle Grip
-        const gripR = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.22, 1.2, 16), gripMat);
-        gripR.position.set(0.75, -0.3, 0.05);
-        gripR.rotation.z = -Math.PI / 7;
-        controllerGroup.add(gripR);
+        // Center division line
+        const centerPoints = [new THREE.Vector3(0, 0, -0.8), new THREE.Vector3(0, 0, 0.8)];
+        const centerGeo = new THREE.BufferGeometry().setFromPoints(centerPoints);
+        const centerLine = new THREE.Line(centerGeo, lineMat);
+        fieldLines.add(centerLine);
 
-        // Left Thumbstick
-        const baseL = new THREE.Mesh(new THREE.CylinderGeometry(0.18, 0.18, 0.1, 16), gripMat);
-        baseL.position.set(-0.4, -0.1, 0.22);
-        controllerGroup.add(baseL);
-        const stickL = new THREE.Mesh(new THREE.SphereGeometry(0.14, 16, 16), stickMat);
-        stickL.position.set(-0.4, -0.06, 0.28);
-        controllerGroup.add(stickL);
+        // Center Kickoff Circle
+        const circleGeo = new THREE.RingGeometry(0.3, 0.32, 32);
+        const circleMat = new THREE.MeshBasicMaterial({ color: 0xff0033, side: THREE.DoubleSide });
+        const centerCircle = new THREE.Mesh(circleGeo, circleMat);
+        centerCircle.rotation.x = -Math.PI / 2;
+        fieldLines.add(centerCircle);
 
-        // Right Thumbstick
-        const baseR = new THREE.Mesh(new THREE.CylinderGeometry(0.18, 0.18, 0.1, 16), gripMat);
-        baseR.position.set(0.4, -0.1, 0.22);
-        controllerGroup.add(baseR);
-        const stickR = new THREE.Mesh(new THREE.SphereGeometry(0.14, 16, 16), stickMat);
-        stickR.position.set(0.4, -0.06, 0.28);
-        controllerGroup.add(stickR);
+        // Penalty Box Left
+        const boxLPoints = [
+          new THREE.Vector3(-1.25, 0, -0.4),
+          new THREE.Vector3(-0.95, 0, -0.4),
+          new THREE.Vector3(-0.95, 0, 0.4),
+          new THREE.Vector3(-1.25, 0, 0.4)
+        ];
+        const boxLGeo = new THREE.BufferGeometry().setFromPoints(boxLPoints);
+        const boxLLine = new THREE.Line(boxLGeo, lineMat);
+        fieldLines.add(boxLLine);
 
-        // D-Pad Cross Elements (Left Side)
-        const dpadH = new THREE.Mesh(new THREE.BoxGeometry(0.35, 0.11, 0.1), gripMat);
-        dpadH.position.set(-0.6, 0.2, 0.22);
-        controllerGroup.add(dpadH);
-        const dpadV = new THREE.Mesh(new THREE.BoxGeometry(0.11, 0.35, 0.1), gripMat);
-        dpadV.position.set(-0.6, 0.2, 0.22);
-        controllerGroup.add(dpadV);
+        // Penalty Box Right
+        const boxRPoints = [
+          new THREE.Vector3(1.25, 0, -0.4),
+          new THREE.Vector3(0.95, 0, -0.4),
+          new THREE.Vector3(0.95, 0, 0.4),
+          new THREE.Vector3(1.25, 0, 0.4)
+        ];
+        const boxRGeo = new THREE.BufferGeometry().setFromPoints(boxRPoints);
+        const boxRLine = new THREE.Line(boxRGeo, lineMat);
+        fieldLines.add(boxRLine);
 
-        // Action Buttons (Right Side - XYAB)
-        const btnA = new THREE.Mesh(new THREE.SphereGeometry(0.065, 12, 12), btnMatRed);
-        btnA.position.set(0.6, 0.08, 0.23);
-        controllerGroup.add(btnA);
+        // --- ASSEMBLE HOVERING 3D CLAN CREST ---
+        const crestGroup = new THREE.Group();
+        crestGroup.position.y = 0.35; // Hovering above center kickoff circle
+        stadiumGroup.add(crestGroup);
 
-        const btnB = new THREE.Mesh(new THREE.SphereGeometry(0.065, 12, 12), btnMatBlue);
-        btnB.position.set(0.72, 0.2, 0.23);
-        controllerGroup.add(btnB);
+        const discMat = new THREE.MeshStandardMaterial({
+          color: 0x09090b,
+          metalness: 0.9,
+          roughness: 0.15,
+          transparent: true,
+          opacity: 0.88
+        });
+        const disc = new THREE.Mesh(new THREE.CylinderGeometry(0.38, 0.38, 0.05, 32), discMat);
+        disc.rotation.x = Math.PI / 2;
+        crestGroup.add(disc);
 
-        const btnY = new THREE.Mesh(new THREE.SphereGeometry(0.065, 12, 12), btnMatRed);
-        btnY.position.set(0.6, 0.32, 0.23);
-        controllerGroup.add(btnY);
+        const rimGeo = new THREE.RingGeometry(0.38, 0.41, 32);
+        const rimMat = new THREE.MeshBasicMaterial({ color: 0xff0033, side: THREE.DoubleSide });
+        const rimFront = new THREE.Mesh(rimGeo, rimMat);
+        rimFront.position.z = 0.028;
+        crestGroup.add(rimFront);
 
-        const btnX = new THREE.Mesh(new THREE.SphereGeometry(0.065, 12, 12), btnMatBlue);
-        btnX.position.set(0.48, 0.2, 0.23);
-        controllerGroup.add(btnX);
+        const rimBack = new THREE.Mesh(rimGeo, rimMat);
+        rimBack.position.z = -0.028;
+        crestGroup.add(rimBack);
 
-        // ─── ADDING FLOATING 3D HUD PANEL ───
-        const screenGeo = new THREE.PlaneGeometry(1.6, 1.0);
-        const edgeGeo = new THREE.EdgesGeometry(screenGeo);
-        const edgeMat = new THREE.LineBasicMaterial({ color: 0x00ffff, linewidth: 2 });
-        const screenOutline = new THREE.LineSegments(edgeGeo, edgeMat);
-        screenOutline.position.set(0.85, 0.45, -0.4); // float offset to the right
-        screenOutline.rotation.y = -Math.PI / 6; // angled perspective
-        controllerGroup.add(screenOutline);
+        // Glowing Star in center of the shield
+        const starGeo = new THREE.ConeGeometry(0.12, 0.28, 4);
+        const starMat = new THREE.MeshStandardMaterial({ color: 0x00ffff, metalness: 0.9, roughness: 0.1 });
+        const star = new THREE.Mesh(starGeo, starMat);
+        star.position.set(0, 0, 0.04);
+        crestGroup.add(star);
 
-        // Grid lines on HUD screen
-        const hudGrid = new THREE.GridHelper(1.2, 8, 0x00ffff, 0x005555);
-        hudGrid.position.set(0.85, 0.45, -0.4);
-        hudGrid.rotation.x = Math.PI / 2;
-        hudGrid.rotation.y = -Math.PI / 6;
-        controllerGroup.add(hudGrid);
-
-        // Assemble the Hexagon light frames
-        const hexGeo1 = new THREE.RingGeometry(2.35, 2.39, 6);
-        const hexMat1 = new THREE.MeshBasicMaterial({ color: 0xff0033, side: THREE.DoubleSide });
-        const hexMesh1 = new THREE.Mesh(hexGeo1, hexMat1);
-        portalGroup.add(hexMesh1);
-
-        const hexGeo2 = new THREE.RingGeometry(2.48, 2.51, 6);
-        const hexMat2 = new THREE.MeshBasicMaterial({ color: 0x00ffff, side: THREE.DoubleSide });
-        const hexMesh2 = new THREE.Mesh(hexGeo2, hexMat2);
-        portalGroup.add(hexMesh2);
-
-        // Add 3D Holographic Ground Grid (Tactical pitch radar)
+        // Floor Grid helper
         const gridHelper = new THREE.GridHelper(36, 24, 0xff0033, 0x330008);
         gridHelper.position.y = -2.1;
         gridHelper.material.transparent = true;
         gridHelper.material.opacity = 0.35;
         scene.add(gridHelper);
 
-        // Coordinates configuration per scroll keyframes to frame text areas
+        // Coordinates & rotation configuration per scroll keyframes (morphic camera paths!)
         const keyframes = [
-          { scrollPct: 0.0, x: 1.15, y: 0.1, z: 0.3, scale: 1.1 },       // Hero (Aligns right)
-          { scrollPct: 0.15, x: -1.25, y: -0.15, z: -0.8, scale: 0.82 }, // About (Aligns left)
-          { scrollPct: 0.32, x: 1.2, y: 0.2, z: -0.4, scale: 0.92 },     // Highlights (Aligns right)
-          { scrollPct: 0.5, x: 0.0, y: -0.72, z: -1.3, scale: 0.72 },    // Cabinet (Centers and shrinks)
-          { scrollPct: 0.68, x: -1.25, y: 0.05, z: -0.7, scale: 0.82 },  // Squads (Aligns left)
-          { scrollPct: 0.85, x: 1.15, y: -0.22, z: -0.9, scale: 0.78 },  // Table (Aligns right)
-          { scrollPct: 1.0, x: 0.0, y: 0.1, z: 0.4, scale: 1.12 }        // Register (Centers)
+          // scrollPct, x, y, z, scale, rx, ry, rz
+          { scrollPct: 0.0, x: 1.15, y: 0.1, z: 0.3, scale: 1.0, rx: Math.PI / 4.8, ry: -Math.PI / 4, rz: 0 },         // Hero (diagonal view)
+          { scrollPct: 0.15, x: -1.25, y: -0.15, z: -0.8, scale: 0.8, rx: Math.PI / 3, ry: Math.PI / 6, rz: 0 },     // About (angled side-on)
+          { scrollPct: 0.32, x: 1.2, y: 0.2, z: -0.4, scale: 0.9, rx: Math.PI / 6, ry: -Math.PI / 2, rz: 0 },       // Highlights (goal-line view)
+          { scrollPct: 0.5, x: 0.0, y: -0.72, z: -1.3, scale: 0.7, rx: Math.PI / 2.2, ry: 0, rz: 0 },               // Cabinet (overhead layout)
+          { scrollPct: 0.68, x: -1.25, y: 0.05, z: -0.7, scale: 0.8, rx: Math.PI / 4, ry: Math.PI / 3, rz: 0 },     // Squads (opposite side stand view)
+          { scrollPct: 0.85, x: 1.15, y: -0.22, z: -0.9, scale: 0.75, rx: Math.PI / 3.5, ry: -Math.PI / 5, rz: 0 }, // Table (slanted blimp view)
+          { scrollPct: 1.0, x: 0.0, y: 0.1, z: 0.4, scale: 1.1, rx: Math.PI / 6, ry: Math.PI * 2, rz: 0 }           // Register (centered entrance)
         ];
 
         let targetX = 1.15;
         let targetY = 0.1;
         let targetZ = 0.3;
-        let targetScale = 1.1;
+        let targetScale = 1.0;
+        let targetRx = Math.PI / 4.8;
+        let targetRy = -Math.PI / 4;
+        let targetRz = 0;
 
         const updateTargets = () => {
           const scrollTop = window.scrollY;
           const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-          // Clamp scroll fraction safely between 0 and 1
           const pct = Math.max(0, Math.min(1, maxScroll > 0 ? scrollTop / maxScroll : 0));
 
-          // Find surrounding keyframes
           let k1 = keyframes[0];
           let k2 = keyframes[keyframes.length - 1];
           for(let i=0; i<keyframes.length - 1; i++) {
@@ -5231,7 +5224,6 @@
             }
           }
 
-          // Local interpolation ratio
           const div = k2.scrollPct - k1.scrollPct;
           const t = div > 0 ? (pct - k1.scrollPct) / div : 0;
 
@@ -5239,45 +5231,45 @@
           targetY = k1.y + (k2.y - k1.y) * t;
           targetZ = k1.z + (k2.z - k1.z) * t;
           targetScale = k1.scale + (k2.scale - k1.scale) * t;
+
+          targetRx = k1.rx + (k2.rx - k1.rx) * t;
+          targetRy = k1.ry + (k2.ry - k1.ry) * t;
+          targetRz = k1.rz + (k2.rz - k1.rz) * t;
         };
 
         window.addEventListener('scroll', updateTargets, { passive: true });
         updateTargets();
 
-        // Resize viewport support
         window.addEventListener('resize', () => {
           camera.aspect = window.innerWidth / window.innerHeight;
           camera.updateProjectionMatrix();
           renderer.setSize(window.innerWidth, window.innerHeight);
         });
 
-        // Loop rendering
         const animate = () => {
           requestAnimationFrame(animate);
 
-          // Continuous self-rotation along axes
-          controllerGroup.rotation.y += 0.005;
-          controllerGroup.rotation.x = Math.sin(Date.now() * 0.0006) * 0.12;
-          
-          portalGroup.rotation.z -= 0.0022;
+          // Independent spin on the clan crest logo
+          crestGroup.rotation.y += 0.012;
 
-          // Lerp inertia calculations
-          controllerGroup.position.x += (targetX - controllerGroup.position.x) * 0.078;
-          controllerGroup.position.y += (targetY - controllerGroup.position.y) * 0.078;
-          controllerGroup.position.z += (targetZ - controllerGroup.position.z) * 0.078;
+          // Gentle stadium field rotation
+          stadiumGroup.rotation.y += 0.001;
 
-          portalGroup.position.copy(controllerGroup.position);
-          portalGroup.position.z -= 0.15; // push slightly behind controller
+          stadiumGroup.position.x += (targetX - stadiumGroup.position.x) * 0.075;
+          stadiumGroup.position.y += (targetY - stadiumGroup.position.y) * 0.075;
+          stadiumGroup.position.z += (targetZ - stadiumGroup.position.z) * 0.075;
 
-          // Infinite grid scroll parallax calculation based on camera z
+          stadiumGroup.rotation.x += (targetRx - stadiumGroup.rotation.x) * 0.075;
+          stadiumGroup.rotation.y += (targetRy - stadiumGroup.rotation.y) * 0.075;
+          stadiumGroup.rotation.z += (targetRz - stadiumGroup.rotation.z) * 0.075;
+
           if (gridHelper) {
-            gridHelper.position.z = (controllerGroup.position.z * 1.2) % 1.5;
+            gridHelper.position.z = (stadiumGroup.position.z * 1.2) % 1.5;
           }
 
-          const currentScale = controllerGroup.scale.x;
-          const nextScale = currentScale + (targetScale - currentScale) * 0.078;
-          controllerGroup.scale.set(nextScale, nextScale, nextScale);
-          portalGroup.scale.set(nextScale, nextScale, nextScale);
+          const currentScale = stadiumGroup.scale.x;
+          const nextScale = currentScale + (targetScale - currentScale) * 0.075;
+          stadiumGroup.scale.set(nextScale, nextScale, nextScale);
 
           renderer.render(scene, camera);
         };
@@ -5285,7 +5277,7 @@
         animate();
       };
 
-      init3DController();
+      init3DStadium();
 
 
       const init3DTilt = () => {
@@ -5446,28 +5438,7 @@
          mix-blend-mode: color-dodge;
        }
 
-       /* Floating eFootball GP/Gold coins in background */
-       .ef-floating-coin {
-         position: absolute;
-         width: 44px;
-         height: 44px;
-         background: radial-gradient(circle at 35% 35%, #ffd700 0%, #b8860b 80%);
-         border-radius: 50%;
-         border: 2px solid #fff;
-         box-shadow: 0 0 15px rgba(255,215,0,0.5), inset 0 0 8px rgba(0,0,0,0.6);
-         display: flex;
-         align-items: center;
-         justify-content: center;
-         font-family: 'Bebas Neue', sans-serif;
-         font-weight: bold;
-         color: #fff;
-         font-size: 16px;
-         text-shadow: 0 1px 3px rgba(0,0,0,0.8);
-         pointer-events: none;
-         z-index: 1;
-         animation: coinFloat 4s ease-in-out infinite alternate, coinSpin 3s linear infinite;
-         transform-style: preserve-3d;
-       }
+       
        @keyframes coinFloat {
          0% { transform: translateY(0px) rotateY(0deg); }
          100% { transform: translateY(-20px) rotateY(180deg); }
@@ -5599,27 +5570,7 @@
        setTimeout(setupFoilSheens, 200);
      });
 
-     // 3. Set up floating eFootball gold GP coins in section borders
-     const injectCoins = () => {
-       const targets = document.querySelectorAll('.hero, .wh-section, .about-section, .tour-details-wrap, .evo-tc-showcase');
-       targets.forEach((section, idx) => {
-         if (section.querySelector('.ef-floating-coin')) return;
-         
-         const coin = document.createElement('div');
-         coin.className = 'ef-floating-coin';
-         coin.textContent = 'GP';
-         coin.style.top = `${10 + Math.random() * 60}%`;
-         if (idx % 2 === 0) {
-           coin.style.left = '6%';
-         } else {
-           coin.style.right = '6%';
-         }
-         coin.style.animationDelay = `${-idx * 0.8}s`;
-         section.style.position = 'relative';
-         section.appendChild(coin);
-       });
-     };
-     injectCoins();
+     
 
    })();
   </script>

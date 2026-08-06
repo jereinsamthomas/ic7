@@ -1005,28 +1005,7 @@ document.addEventListener('DOMContentLoaded', async () => {
          mix-blend-mode: color-dodge;
        }
 
-       /* Floating eFootball GP/Gold coins in background */
-       .ef-floating-coin {
-         position: absolute;
-         width: 44px;
-         height: 44px;
-         background: radial-gradient(circle at 35% 35%, #ffd700 0%, #b8860b 80%);
-         border-radius: 50%;
-         border: 2px solid #fff;
-         box-shadow: 0 0 15px rgba(255,215,0,0.5), inset 0 0 8px rgba(0,0,0,0.6);
-         display: flex;
-         align-items: center;
-         justify-content: center;
-         font-family: 'Bebas Neue', sans-serif;
-         font-weight: bold;
-         color: #fff;
-         font-size: 16px;
-         text-shadow: 0 1px 3px rgba(0,0,0,0.8);
-         pointer-events: none;
-         z-index: 1;
-         animation: coinFloat 4s ease-in-out infinite alternate, coinSpin 3s linear infinite;
-         transform-style: preserve-3d;
-       }
+       
        @keyframes coinFloat {
          0% { transform: translateY(0px) rotateY(0deg); }
          100% { transform: translateY(-20px) rotateY(180deg); }
@@ -1158,27 +1137,7 @@ document.addEventListener('DOMContentLoaded', async () => {
        setTimeout(setupFoilSheens, 200);
      });
 
-     // 3. Set up floating eFootball gold GP coins in section borders
-     const injectCoins = () => {
-       const targets = document.querySelectorAll('.hero, .wh-section, .about-section, .tour-details-wrap, .evo-tc-showcase');
-       targets.forEach((section, idx) => {
-         if (section.querySelector('.ef-floating-coin')) return;
-         
-         const coin = document.createElement('div');
-         coin.className = 'ef-floating-coin';
-         coin.textContent = 'GP';
-         coin.style.top = `${10 + Math.random() * 60}%`;
-         if (idx % 2 === 0) {
-           coin.style.left = '6%';
-         } else {
-           coin.style.right = '6%';
-         }
-         coin.style.animationDelay = `${-idx * 0.8}s`;
-         section.style.position = 'relative';
-         section.appendChild(coin);
-       });
-     };
-     injectCoins();
+     
 
    })();
   </script>
