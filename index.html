@@ -1050,7 +1050,42 @@
       color: var(--red-bright);
     }
 
-    /* ================================================
+    
+/* Tournament Cabinet Tabs Bar */
+.tc-tabs-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 35px;
+  z-index: 5;
+  position: relative;
+}
+.tc-tab-btn {
+  background: rgba(26, 5, 13, 0.85);
+  border: 1.5px solid rgba(212, 175, 55, 0.4);
+  color: #f7d86a;
+  padding: 9px 20px;
+  border-radius: 6px;
+  font-family: 'Cinzel', serif;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.tc-tab-btn:hover, .tc-tab-btn.active {
+  background: linear-gradient(135deg, #e11d48, #9f1239);
+  border-color: #ffd700;
+  color: #ffffff;
+  box-shadow: 0 0 22px rgba(225, 29, 72, 0.65);
+}
+.tc-tour-cabinet-block {
+  margin-bottom: 50px;
+  transition: all 0.4s ease;
+}
+
+/* ================================================
    PRO LUXURY IMPERIAL GOLD & CRIMSON TROPHY CABINET SLIDER
    ================================================ */
 .trophy-cabinet-container {
@@ -3414,20 +3449,14 @@
   <section class="section" id="trophyCabinet" style="background:var(--bg-elevated); position:relative; overflow:hidden;">
     <div class="wrap">
       <div class="eyebrow reveal">WHERE LEGENDS EVOLVE</div>
-      <h2 class="section-title reveal">TROPHY <span class="red-text">CABINET</span></h2>
-      <p class="section-lede reveal">Two Seasons. One Legacy. Explore the reigning champions and shield winners across IC7's 6 major tournament series.</p>
-      
-      <!-- 3D Glass Showcase Cabinet Frame -->
-      <div class="trophy-cabinet-container reveal">
-        <button type="button" class="tc-arrow tc-prev" id="tcPrevBtn" aria-label="Previous Tournament">‹</button>
-        <button type="button" class="tc-arrow tc-next" id="tcNextBtn" aria-label="Next Tournament">›</button>
-        
-        <div class="trophy-track-wrap">
-          <div class="trophy-track" id="trophyTrack"></div>
-        </div>
+      <h2 class="section-title reveal">TROPHY <span class="red-text">CABINETS</span></h2>
+      <p class="section-lede reveal">Two Seasons. One Legacy. Explore the official trophy cabinets for IC7's major tournament series.</p>
 
-        <div class="tc-dots" id="tcDots"></div>
-      </div>
+      <!-- Tournament Cabinet Selector Tabs Bar -->
+      <div class="tc-tabs-bar reveal" id="tcTabsBar"></div>
+
+      <!-- Separate Tournament Cabinets Host -->
+      <div class="tc-cabinets-host reveal" id="tcCabinetsHost"></div>
     </div>
   </section>
 
@@ -4882,10 +4911,12 @@
           }
           await Store.set('ic7_major_tours', data);
           let tcTimer = null;
+      let activeTcTab = 'all';
+
       function renderTrophyCabinet() {
-        const track = document.getElementById('trophyTrack');
-        const dotsHost = document.getElementById('tcDots');
-        if (!track) return;
+        const tabsHost = document.getElementById('tcTabsBar');
+        const cabinetsHost = document.getElementById('tcCabinetsHost');
+        if (!cabinetsHost) return;
 
         const meta = getToursMeta();
 
@@ -4999,8 +5030,7 @@
             starsHtml += `<span class="tc-rising-particle" style="width:${size}px;height:${size}px;left:${left}%;background:${color};border-radius:50%;animation-duration:${dur}s;animation-delay:${delay}s;box-shadow:0 0 4px ${color};"></span>`;
           }
 
-          return `
-            <div class="trophy-slide">
+          const cabinetInnerHtml = `
               <div class="evo-tc-showcase">
                 <!-- Moving Space Stars Backdrop -->
                 <div class="tc-cosmic-bg">${starsHtml}</div>
@@ -5123,10 +5153,12 @@
 
 
       let tcTimer = null;
+      let activeTcTab = 'all';
+
       function renderTrophyCabinet() {
-        const track = document.getElementById('trophyTrack');
-        const dotsHost = document.getElementById('tcDots');
-        if (!track) return;
+        const tabsHost = document.getElementById('tcTabsBar');
+        const cabinetsHost = document.getElementById('tcCabinetsHost');
+        if (!cabinetsHost) return;
 
         const meta = getToursMeta();
 
@@ -5240,8 +5272,7 @@
             starsHtml += `<span class="tc-rising-particle" style="width:${size}px;height:${size}px;left:${left}%;background:${color};border-radius:50%;animation-duration:${dur}s;animation-delay:${delay}s;box-shadow:0 0 4px ${color};"></span>`;
           }
 
-          return `
-            <div class="trophy-slide">
+          const cabinetInnerHtml = `
               <div class="evo-tc-showcase">
                 <!-- Moving Space Stars Backdrop -->
                 <div class="tc-cosmic-bg">${starsHtml}</div>
@@ -5360,10 +5391,12 @@
       window.addEventListener('ic7_store_updated', (e) => {
         if (!e.detail || !e.detail.key || e.detail.key === 'ic7_major_tours') {
           let tcTimer = null;
+      let activeTcTab = 'all';
+
       function renderTrophyCabinet() {
-        const track = document.getElementById('trophyTrack');
-        const dotsHost = document.getElementById('tcDots');
-        if (!track) return;
+        const tabsHost = document.getElementById('tcTabsBar');
+        const cabinetsHost = document.getElementById('tcCabinetsHost');
+        if (!cabinetsHost) return;
 
         const meta = getToursMeta();
 
@@ -5477,8 +5510,7 @@
             starsHtml += `<span class="tc-rising-particle" style="width:${size}px;height:${size}px;left:${left}%;background:${color};border-radius:50%;animation-duration:${dur}s;animation-delay:${delay}s;box-shadow:0 0 4px ${color};"></span>`;
           }
 
-          return `
-            <div class="trophy-slide">
+          const cabinetInnerHtml = `
               <div class="evo-tc-showcase">
                 <!-- Moving Space Stars Backdrop -->
                 <div class="tc-cosmic-bg">${starsHtml}</div>
