@@ -3639,6 +3639,41 @@
   margin-top: 4px;
 }
 
+
+.evo-tc-grid-3 {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr 1fr;
+  gap: 18px;
+  align-items: flex-end;
+}
+@media (max-width: 900px) {
+  .evo-tc-grid-3 {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+}
+.evo-tc-bay-center {
+  transform: translateY(-12px);
+}
+.evo-tc-spotlight-gold {
+  background: radial-gradient(ellipse at top, rgba(255, 215, 0, 0.55) 0%, transparent 75%) !important;
+}
+.evo-tc-podium-gold {
+  background: radial-gradient(ellipse at center, rgba(255, 215, 0, 0.65) 0%, rgba(225, 29, 72, 0.35) 70%, transparent 100%) !important;
+  box-shadow: 0 0 40px rgba(255, 215, 0, 0.7) !important;
+  border-color: #ffd700 !important;
+}
+.evo-tc-plinth-gold {
+  border-color: #ffd700 !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9), 0 0 25px rgba(255, 215, 0, 0.45) !important;
+  background: linear-gradient(180deg, rgba(45, 12, 28, 0.98) 0%, rgba(15, 3, 8, 0.98) 100%) !important;
+}
+.evo-tc-gold-cup {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 10px 25px rgba(255, 215, 0, 0.6));
+}
+
 </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" defer></script>
 </head>
@@ -5175,9 +5210,14 @@
         </div>
         <div class="field"><label for="mt_${t.id}_desc">${escapeHtml(t.name)} — Description</label><textarea id="mt_${t.id}_desc" rows="2"></textarea></div>
         <div class="field-row">
-          <div class="field"><label for="mt_${t.id}_champion">${escapeHtml(t.name)} — Current Champion</label><input type="text" id="mt_${t.id}_champion"></div>
-          <div class="field"><label for="mt_${t.id}_champTag">${escapeHtml(t.name)} — Champion Label</label><input type="text" id="mt_${t.id}_champTag" placeholder="CURRENT CHAMPIONS"></div>
-          <div class="field"><label for="mt_${t.id}_champLogo">${escapeHtml(t.name)} — Champion Logo (optional)</label><input type="file" accept="image/*" id="mt_${t.id}_champLogo"></div>
+          <div class="field"><label for="mt_${t.id}_currChamp">${escapeHtml(t.name)} — Current Champion (Center Pedestal)</label><input type="text" id="mt_${t.id}_currChamp" placeholder="Current champion team..."></div>
+          <div class="field"><label for="mt_${t.id}_currChampTag">${escapeHtml(t.name)} — Current Champion Label</label><input type="text" id="mt_${t.id}_currChampTag" placeholder="REIGNING CHAMPIONS"></div>
+          <div class="field"><label for="mt_${t.id}_currChampLogo">${escapeHtml(t.name)} — Current Champion Logo (optional)</label><input type="file" accept="image/*" id="mt_${t.id}_currChampLogo"><div id="mt_${t.id}_currChampLogoPreview" style="margin-top:8px;"></div></div>
+        </div>
+        <div class="field-row">
+          <div class="field"><label for="mt_${t.id}_champion">${escapeHtml(t.name)} — Season 1 Champion (Left Pedestal)</label><input type="text" id="mt_${t.id}_champion"></div>
+          <div class="field"><label for="mt_${t.id}_champTag">${escapeHtml(t.name)} — Season 1 Label</label><input type="text" id="mt_${t.id}_champTag" placeholder="SEASON 1 CHAMPION"></div>
+          <div class="field"><label for="mt_${t.id}_champLogo">${escapeHtml(t.name)} — Season 1 Logo (optional)</label><input type="file" accept="image/*" id="mt_${t.id}_champLogo"><div id="mt_${t.id}_champLogoPreview" style="margin-top:8px;"></div></div>
         </div>
         <div class="field-row">
           <div class="field"><label for="mt_${t.id}_shieldWinner">${escapeHtml(t.name)} — Shield Winner</label><input type="text" id="mt_${t.id}_shieldWinner" placeholder="Shield winner name..."></div>
@@ -5287,6 +5327,13 @@
           const data = {};
           const meta0 = getToursMeta();
           for (const t of MAJOR_TOURS) {
+            const currFileInput = document.getElementById(`mt_${t.id}_currChampLogo`);
+            let currChampLogo = (meta0[t.id] && meta0[t.id].currChampLogo) || '';
+            if (currFileInput && currFileInput.files && currFileInput.files[0]) {
+              try { currChampLogo = await compressImage(currFileInput.files[0], 350); }
+              catch (err) { console.error("Failed to compress current champ logo:", err); }
+            }
+
             const fileInput = document.getElementById(`mt_${t.id}_champLogo`);
             let champLogo = (meta0[t.id] && meta0[t.id].champLogo) || '';
             if (fileInput && fileInput.files && fileInput.files[0]) {
@@ -5323,8 +5370,11 @@
               name: (document.getElementById(`mt_${t.id}_name`).value || '').trim() || t.name,
               teams: (document.getElementById(`mt_${t.id}_teams`).value || '').trim() || t.teams,
               desc: (document.getElementById(`mt_${t.id}_desc`).value || '').trim(),
+              currChamp: (document.getElementById(`mt_${t.id}_currChamp`).value || '').trim(),
+              currChampTag: (document.getElementById(`mt_${t.id}_currChampTag`).value || '').trim() || 'REIGNING CHAMPIONS',
+              currChampLogo: currChampLogo,
               champion: (document.getElementById(`mt_${t.id}_champion`).value || '').trim(),
-              champTag: (document.getElementById(`mt_${t.id}_champTag`).value || '').trim() || 'CURRENT CHAMPIONS',
+              champTag: (document.getElementById(`mt_${t.id}_champTag`).value || '').trim() || 'SEASON 1 CHAMPION',
               champLogo: champLogo,
               shieldWinner: (document.getElementById(`mt_${t.id}_shieldWinner`).value || '').trim(),
               shieldTag: (document.getElementById(`mt_${t.id}_shieldTag`).value || '').trim() || 'SHIELD WINNER',
@@ -5399,11 +5449,43 @@
         const slidesHtml = MAJOR_TOURS.map((t) => {
           const m = meta[t.id] || {};
           const tourName = m.name || t.name;
-          const champName = m.champion || (t.id === 'intimate-cup' ? 'INTIMATE CHAMPION' : 'IL CAPITANO');
-          const shieldName = m.shieldWinner || (t.id === 'intimate-cup' ? 'INTIMATE SHIELD' : 'ICONIC SHIELD');
+          const currChampName = m.currChamp || (t.id === 'intimate-cup' ? 'INTIMATE CHAMPION' : 'CURRENT CHAMPIONS');
+          const currChampTag = m.currChampTag || 'REIGNING CHAMPIONS';
 
+          const champName = m.champion || (t.id === 'intimate-cup' ? 'INTIMATE CHAMPION' : 'IL CAPITANO');
           const champTag = m.champTag || 'SEASON 1';
+
+          const shieldName = m.shieldWinner || (t.id === 'intimate-cup' ? 'INTIMATE SHIELD' : 'ICONIC SHIELD');
           const shieldTag = m.shieldTag || 'SEASON 2';
+
+          const currChampBadgeHtml = m.currChampLogo
+            ? `<div class="evo-tc-trophy-badge"><img class="evo-tc-trophy-img" src="${m.currChampLogo}" alt="${escapeHtml(currChampName)}"></div>`
+            : `<div class="evo-tc-trophy-badge">
+                <svg class="evo-tc-gold-cup" viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <radialGradient id="cupGoldGrad_${t.id}" cx="50%" cy="30%" r="70%">
+                      <stop offset="0%" stop-color="#ffffff"/>
+                      <stop offset="25%" stop-color="#fff5a0"/>
+                      <stop offset="60%" stop-color="#ffd700"/>
+                      <stop offset="85%" stop-color="#d4af37"/>
+                      <stop offset="100%" stop-color="#7a5200"/>
+                    </radialGradient>
+                    <linearGradient id="cupBaseGrad_${t.id}" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#2a2a2a"/>
+                      <stop offset="50%" stop-color="#111111"/>
+                      <stop offset="100%" stop-color="#000000"/>
+                    </linearGradient>
+                  </defs>
+                  <path d="M45 55 C20 50 15 95 52 105" fill="none" stroke="url(#cupGoldGrad_${t.id})" stroke-width="9" stroke-linecap="round"/>
+                  <path d="M155 55 C180 50 185 95 148 105" fill="none" stroke="url(#cupGoldGrad_${t.id})" stroke-width="9" stroke-linecap="round"/>
+                  <path d="M50 40 H150 L140 110 C135 145 65 145 60 110 Z" fill="url(#cupGoldGrad_${t.id})" stroke="#fff" stroke-width="1.5"/>
+                  <ellipse cx="100" cy="40" rx="50" ry="12" fill="url(#cupGoldGrad_${t.id})" stroke="#ffeaa7" stroke-width="2"/>
+                  <path d="M92 140 H108 V165 H92 Z" fill="url(#cupGoldGrad_${t.id})"/>
+                  <path d="M70 165 H130 L140 185 H60 Z" fill="url(#cupBaseGrad_${t.id})" stroke="url(#cupGoldGrad_${t.id})" stroke-width="2"/>
+                  <circle cx="100" cy="85" r="16" fill="#12040a" stroke="url(#cupGoldGrad_${t.id})" stroke-width="2"/>
+                  <text x="100" y="91" text-anchor="middle" font-family="Cinzel,serif" font-size="16" fill="#ffd700">★</text>
+                </svg>
+              </div>`;
 
           const titleHtml = getTourTitleHtml(t.id, tourName);
           const subtitleText = getTourSubtitle(t.id);
@@ -5514,28 +5596,41 @@
                 <!-- Glass Cabinet Showcase Box -->
                 <div class="evo-tc-cabinet">
                   <div class="evo-tc-top-plaque">TROPHY CABINET</div>
-                  <div class="evo-tc-grid">
-                    <!-- Left Pedestal (Champion) -->
-                    <div class="evo-tc-bay">
+                  <div class="evo-tc-grid evo-tc-grid-3">
+                    <!-- Left Pedestal (Season 1 Champion) -->
+                    <div class="evo-tc-bay evo-tc-bay-side">
                       <div class="evo-tc-spotlight"></div>
                       <div class="evo-tc-podium-ring"></div>
                       ${champBadgeHtml}
                       <div class="evo-tc-plinth">
                         <div class="evo-tc-plinth-season">${escapeHtml(champTag)}</div>
-                        <div class="evo-tc-plinth-title">CHAMPIONS</div>
+                        <div class="evo-tc-plinth-title">SEASON CHAMPION</div>
                         <div class="evo-tc-plinth-name">${escapeHtml(champName)}</div>
                         <div class="evo-tc-plinth-star">★</div>
                       </div>
                     </div>
 
+                    <!-- Center Pedestal (CURRENT CHAMPIONS - Main Elevated Stage) -->
+                    <div class="evo-tc-bay evo-tc-bay-center">
+                      <div class="evo-tc-spotlight evo-tc-spotlight-gold"></div>
+                      <div class="evo-tc-podium-ring evo-tc-podium-gold"></div>
+                      ${currChampBadgeHtml}
+                      <div class="evo-tc-plinth evo-tc-plinth-gold">
+                        <div class="evo-tc-plinth-season">${escapeHtml(currChampTag)}</div>
+                        <div class="evo-tc-plinth-title">CURRENT CHAMPIONS</div>
+                        <div class="evo-tc-plinth-name">${escapeHtml(currChampName)}</div>
+                        <div class="evo-tc-plinth-star">★★★</div>
+                      </div>
+                    </div>
+
                     <!-- Right Pedestal (Shield Winner) -->
-                    <div class="evo-tc-bay">
+                    <div class="evo-tc-bay evo-tc-bay-side">
                       <div class="evo-tc-spotlight"></div>
                       <div class="evo-tc-podium-ring"></div>
                       ${shieldBadgeHtml}
                       <div class="evo-tc-plinth">
                         <div class="evo-tc-plinth-season">${escapeHtml(shieldTag)}</div>
-                        <div class="evo-tc-plinth-title">CHAMPIONS</div>
+                        <div class="evo-tc-plinth-title">SHIELD WINNER</div>
                         <div class="evo-tc-plinth-name">${escapeHtml(shieldName)}</div>
                         <div class="evo-tc-plinth-star">★</div>
                       </div>
