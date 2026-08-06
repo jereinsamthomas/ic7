@@ -5152,6 +5152,7 @@
       initSmoothScroll();
 
             // ─── THREE.JS 3D HOLOGRAM TACTICAL FIELD & GLOWING CLAN CREST ENGINE ───
+            // ─── THREE.JS 3D HOLOGRAM TACTICAL FIELD & GAME CONTROLLER DECK ───
       const init3DStadium = () => {
         const canvas = document.getElementById('webgl-canvas');
         if (!canvas || typeof THREE === 'undefined') return;
@@ -5164,23 +5165,69 @@
         const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
         camera.position.z = 5;
 
-        // Group to hold the pitch and crest structures
+        // Parent group to handle LERP transformations
         const stadiumGroup = new THREE.Group();
         scene.add(stadiumGroup);
 
-        // High intensity red & cyan lighting to accentuate the metallic details
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.42);
+        // High intensity red and cyan lights for reflection sheens
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.45);
         scene.add(ambientLight);
 
         const dirLight1 = new THREE.DirectionalLight(0xff0033, 2.3);
         dirLight1.position.set(6, 8, 5);
         scene.add(dirLight1);
 
-        const dirLight2 = new THREE.DirectionalLight(0x00ffff, 1.9);
+        const dirLight2 = new THREE.DirectionalLight(0x00ffff, 2.0);
         dirLight2.position.set(-6, -8, -5);
         scene.add(dirLight2);
 
-        // --- ASSEMBLE TACTICAL FOOTBALL FIELD MARKINGS ---
+        // ─── PART 1: HOVERING 3D eFOOTBALL CONTROLLER ───
+        const controllerGroup = new THREE.Group();
+        controllerGroup.position.y = 0.75; // Hovering above the pitch
+        stadiumGroup.add(controllerGroup);
+
+        const bodyMat = new THREE.MeshStandardMaterial({ color: 0x09090b, metalness: 0.9, roughness: 0.18 });
+        const gripMat = new THREE.MeshStandardMaterial({ color: 0x040405, metalness: 0.7, roughness: 0.3 });
+        const stickMat = new THREE.MeshStandardMaterial({ color: 0x111113, metalness: 0.8, roughness: 0.1 });
+        const btnMatRed = new THREE.MeshStandardMaterial({ color: 0xff0033, metalness: 0.9, roughness: 0.1 });
+        const btnMatBlue = new THREE.MeshStandardMaterial({ color: 0x00ffff, metalness: 0.9, roughness: 0.1 });
+
+        // Center Pad
+        const body = new THREE.Mesh(new THREE.BoxGeometry(1.0, 0.55, 0.28), bodyMat);
+        controllerGroup.add(body);
+
+        // Left Grip
+        const gripL = new THREE.Mesh(new THREE.CylinderGeometry(0.15, 0.11, 0.8, 16), gripMat);
+        gripL.position.set(-0.5, -0.22, 0.03);
+        gripL.rotation.z = Math.PI / 7;
+        controllerGroup.add(gripL);
+
+        // Right Grip
+        const gripR = new THREE.Mesh(new THREE.CylinderGeometry(0.11, 0.15, 0.8, 16), gripMat);
+        gripR.position.set(0.5, -0.22, 0.03);
+        gripR.rotation.z = -Math.PI / 7;
+        controllerGroup.add(gripR);
+
+        // Left Analog Stick
+        const stickL = new THREE.Mesh(new THREE.SphereGeometry(0.1, 16, 16), stickMat);
+        stickL.position.set(-0.25, -0.05, 0.18);
+        controllerGroup.add(stickL);
+
+        // Right Analog Stick
+        const stickR = new THREE.Mesh(new THREE.SphereGeometry(0.1, 16, 16), stickMat);
+        stickR.position.set(0.25, -0.05, 0.18);
+        controllerGroup.add(stickR);
+
+        // Buttons
+        const btnA = new THREE.Mesh(new THREE.SphereGeometry(0.045, 12, 12), btnMatRed);
+        btnA.position.set(0.4, 0.05, 0.16);
+        controllerGroup.add(btnA);
+
+        const btnB = new THREE.Mesh(new THREE.SphereGeometry(0.045, 12, 12), btnMatBlue);
+        btnB.position.set(0.48, 0.12, 0.16);
+        controllerGroup.add(btnB);
+
+        // ─── PART 2: TACTICAL FOOTBALL FIELD ───
         const fieldLines = new THREE.Group();
         stadiumGroup.add(fieldLines);
 
@@ -5235,7 +5282,7 @@
 
         // --- ASSEMBLE HOVERING 3D CLAN CREST ---
         const crestGroup = new THREE.Group();
-        crestGroup.position.y = 0.35; // Hovering above center kickoff circle
+        crestGroup.position.y = 0.22; // Hovering above center kickoff circle
         stadiumGroup.add(crestGroup);
 
         const discMat = new THREE.MeshStandardMaterial({
@@ -5245,25 +5292,25 @@
           transparent: true,
           opacity: 0.88
         });
-        const disc = new THREE.Mesh(new THREE.CylinderGeometry(0.38, 0.38, 0.05, 32), discMat);
+        const disc = new THREE.Mesh(new THREE.CylinderGeometry(0.28, 0.28, 0.04, 32), discMat);
         disc.rotation.x = Math.PI / 2;
         crestGroup.add(disc);
 
-        const rimGeo = new THREE.RingGeometry(0.38, 0.41, 32);
+        const rimGeo = new THREE.RingGeometry(0.28, 0.3, 32);
         const rimMat = new THREE.MeshBasicMaterial({ color: 0xff0033, side: THREE.DoubleSide });
         const rimFront = new THREE.Mesh(rimGeo, rimMat);
-        rimFront.position.z = 0.028;
+        rimFront.position.z = 0.022;
         crestGroup.add(rimFront);
 
         const rimBack = new THREE.Mesh(rimGeo, rimMat);
-        rimBack.position.z = -0.028;
+        rimBack.position.z = -0.022;
         crestGroup.add(rimBack);
 
         // Glowing Star in center of the shield
-        const starGeo = new THREE.ConeGeometry(0.12, 0.28, 4);
+        const starGeo = new THREE.ConeGeometry(0.08, 0.2, 4);
         const starMat = new THREE.MeshStandardMaterial({ color: 0x00ffff, metalness: 0.9, roughness: 0.1 });
         const star = new THREE.Mesh(starGeo, starMat);
-        star.position.set(0, 0, 0.04);
+        star.position.set(0, 0, 0.03);
         crestGroup.add(star);
 
         // Floor Grid helper
@@ -5273,23 +5320,47 @@
         gridHelper.material.opacity = 0.35;
         scene.add(gridHelper);
 
-        // Coordinates & rotation configuration per scroll keyframes (morphic camera paths!)
+        // Glowing space dust particles for maximum spatial depth
+        const particlesGeo = new THREE.BufferGeometry();
+        const particlesCount = 240;
+        const posArray = new Float32Array(particlesCount * 3);
+
+        for (let i = 0; i < particlesCount * 3; i += 3) {
+          posArray[i] = (Math.random() - 0.5) * 11;
+          posArray[i + 1] = (Math.random() - 0.5) * 11;
+          posArray[i + 2] = (Math.random() - 0.5) * 11;
+        }
+
+        particlesGeo.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+
+        const particlesMat = new THREE.PointsMaterial({
+          size: 0.03,
+          color: 0xff0033,
+          transparent: true,
+          opacity: 0.65,
+          blending: THREE.AdditiveBlending
+        });
+
+        const starField = new THREE.Points(particlesGeo, particlesMat);
+        scene.add(starField);
+
+        // Morphic coordinates and zoom configurations per scroll keyframe
         const keyframes = [
           // scrollPct, x, y, z, scale, rx, ry, rz
-          { scrollPct: 0.0, x: 1.15, y: 0.1, z: 0.3, scale: 1.0, rx: Math.PI / 4.8, ry: -Math.PI / 4, rz: 0 },         // Hero (diagonal view)
-          { scrollPct: 0.15, x: -1.25, y: -0.15, z: -0.8, scale: 0.8, rx: Math.PI / 3, ry: Math.PI / 6, rz: 0 },     // About (angled side-on)
-          { scrollPct: 0.32, x: 1.2, y: 0.2, z: -0.4, scale: 0.9, rx: Math.PI / 6, ry: -Math.PI / 2, rz: 0 },       // Highlights (goal-line view)
-          { scrollPct: 0.5, x: 0.0, y: -0.72, z: -1.3, scale: 0.7, rx: Math.PI / 2.2, ry: 0, rz: 0 },               // Cabinet (overhead layout)
-          { scrollPct: 0.68, x: -1.25, y: 0.05, z: -0.7, scale: 0.8, rx: Math.PI / 4, ry: Math.PI / 3, rz: 0 },     // Squads (opposite side stand view)
-          { scrollPct: 0.85, x: 1.15, y: -0.22, z: -0.9, scale: 0.75, rx: Math.PI / 3.5, ry: -Math.PI / 5, rz: 0 }, // Table (slanted blimp view)
-          { scrollPct: 1.0, x: 0.0, y: 0.1, z: 0.4, scale: 1.1, rx: Math.PI / 6, ry: Math.PI * 2, rz: 0 }           // Register (centered entrance)
+          { scrollPct: 0.0, x: 1.15, y: -0.22, z: 0.4, scale: 1.12, rx: Math.PI / 5, ry: -Math.PI / 4, rz: 0 },         // Hero (Focus on Controller)
+          { scrollPct: 0.15, x: -1.25, y: 0.42, z: -0.7, scale: 0.9, rx: Math.PI / 3, ry: Math.PI / 6, rz: 0 },       // About (Focus Left Pitch Goal)
+          { scrollPct: 0.32, x: 1.2, y: 0.18, z: -0.2, scale: 1.25, rx: Math.PI / 5.2, ry: -Math.PI / 2.5, rz: 0 },    // Highlights (Zoom kickoff circle)
+          { scrollPct: 0.5, x: 0.0, y: -0.85, z: -1.2, scale: 0.78, rx: Math.PI / 2.1, ry: 0, rz: 0 },               // Cabinet (Flat tactical overhead)
+          { scrollPct: 0.68, x: -1.25, y: 0.38, z: -0.6, scale: 0.92, rx: Math.PI / 3.8, ry: Math.PI / 3, rz: 0 },     // Squads (Focus Right Pitch Goal)
+          { scrollPct: 0.85, x: 1.15, y: -0.15, z: -0.8, scale: 0.8, rx: Math.PI / 3.2, ry: -Math.PI / 5, rz: 0 },     // Table (Slanted deck overview)
+          { scrollPct: 1.0, x: 0.0, y: -0.32, z: 0.5, scale: 1.22, rx: Math.PI / 4.8, ry: Math.PI * 2, rz: 0 }       // Register (Zoom joystick sticks)
         ];
 
         let targetX = 1.15;
-        let targetY = 0.1;
-        let targetZ = 0.3;
-        let targetScale = 1.0;
-        let targetRx = Math.PI / 4.8;
+        let targetY = -0.22;
+        let targetZ = 0.4;
+        let targetScale = 1.12;
+        let targetRx = Math.PI / 5;
         let targetRy = -Math.PI / 4;
         let targetRz = 0;
 
@@ -5333,10 +5404,11 @@
         const animate = () => {
           requestAnimationFrame(animate);
 
-          // Independent spin on the clan crest logo
+          // Independent spins
           crestGroup.rotation.y += 0.012;
+          controllerGroup.rotation.y += 0.008;
 
-          // Gentle stadium field rotation
+          // Gentle stadium field yaw rotation
           stadiumGroup.rotation.y += 0.001;
 
           // Slow rotation drift of the space dust particles
@@ -5348,7 +5420,7 @@
           // Zero-gravity floating oscillations
           const oscTime = Date.now() * 0.0012;
           const floatOffset = Math.sin(oscTime) * 0.06;
-          const crestFloat = 0.35 + Math.cos(oscTime * 1.6) * 0.035;
+          const crestFloat = 0.22 + Math.cos(oscTime * 1.6) * 0.025;
 
           stadiumGroup.position.x += (targetX - stadiumGroup.position.x) * 0.075;
           stadiumGroup.position.y += ((targetY + floatOffset) - stadiumGroup.position.y) * 0.075;
@@ -5357,10 +5429,6 @@
           if (typeof crestGroup !== 'undefined') {
             crestGroup.position.y = crestFloat;
           }
-
-          stadiumGroup.rotation.x += (targetRx - stadiumGroup.rotation.x) * 0.075;
-          stadiumGroup.rotation.y += (targetRy - stadiumGroup.rotation.y) * 0.075;
-          stadiumGroup.rotation.z += (targetRz - stadiumGroup.rotation.z) * 0.075;
 
           if (gridHelper) {
             gridHelper.position.z = (stadiumGroup.position.z * 1.2) % 1.5;
