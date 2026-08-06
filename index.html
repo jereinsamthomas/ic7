@@ -313,25 +313,11 @@
       position: relative;
     }
 
-    /* PRO CLEAN HERO WITH SOLID RED SHADE & WHITE BEAM FADE FROM BOTTOM */
+    /* PRO SOLID RED SHADE HERO & LOGO MATCHING TYPOGRAPHY */
     .hero {
       position: relative;
-      background: radial-gradient(ellipse at 50% 20%, #4a000c 0%, #1a0004 55%, #050508 100%) !important;
+      background: #b8001c !important;
       overflow: hidden;
-    }
-
-    .hero-white-beam {
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100%;
-      max-width: 950px;
-      height: 320px;
-      background: radial-gradient(ellipse at 50% 100%, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.18) 35%, rgba(255, 17, 34, 0.08) 65%, transparent 85%);
-      filter: blur(25px);
-      pointer-events: none;
-      z-index: 1;
     }
 
     .nexus-hero-grid {
@@ -348,19 +334,19 @@
       .nexus-hero-grid { grid-template-columns: 1fr; }
     }
     .nexus-headline {
-      font-family: 'Teko', 'Bebas Neue', sans-serif;
-      font-size: clamp(64px, 8.5vw, 110px);
-      line-height: 0.88;
+      font-family: 'Cinzel', 'Orbitron', 'Teko', sans-serif;
+      font-size: clamp(52px, 7vw, 92px);
+      line-height: 0.95;
       text-transform: uppercase;
-      font-weight: 700;
-      letter-spacing: 0.02em;
+      font-weight: 900;
+      letter-spacing: 0.05em;
       margin-bottom: 20px;
       color: #ffffff;
-      text-shadow: 0 0 30px rgba(255, 17, 34, 0.4);
+      text-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
     }
     .nexus-headline .red-glow-text {
-      color: #ff1122;
-      text-shadow: 0 0 25px rgba(255, 17, 34, 0.85), 0 0 50px rgba(255, 17, 34, 0.5);
+      color: #ffffff;
+      text-shadow: 0 0 25px rgba(255, 255, 255, 0.9), 0 0 12px rgba(255, 215, 0, 0.5);
       display: block;
     }
     .sponsor-strip {
@@ -2986,9 +2972,6 @@
     <div class="cosmic-void"></div>
     <div class="hud-grid-matrix"></div>
     <div class="hero-particles" id="heroParticles"></div>
-    
-    <!-- White Light Beam Fading inside from Bottom -->
-    <div class="hero-white-beam"></div>
 
     <!-- Floating Logo Frame -->
     <div class="hero-logo-container">
