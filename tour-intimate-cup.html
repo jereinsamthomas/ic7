@@ -7,33 +7,34 @@
 <meta name="description" content="Intimate Cup  -  standings, top scorers, most valuable players and golden glove for IC7's Intimate Cup tournament.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Anton&family=Manrope:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="icon" type="image/png" href="/assets/asset_4ec290c1ae.png">
 <style>
 
 /* ============================= TOKENS (GAMING RED, BLACK, WHITE) ============================= */
 :root{
-  --bg: #050507;
-  --bg-elevated: #0b0b0f;
-  --bg-elevated-2: #121217;
-  --pitch: #1a0305;
-  --red: #e11d48;
-  --red-bright: #ff3366;
-  --red-dim: #9f1239;
+  --bg: #000000;
+  --bg-elevated: #0a0a0a;
+  --bg-elevated-2: #111111;
+  --bg-card: #0d0d0d;
+  --pitch: #060000;
+  --red: #d40000;
+  --red-bright: #ff1122;
+  --red-dim: #8b0000;
   --ink: #ffffff;
-  --ink-dim: #b8b8c7;
-  --ink-faint: #5c5c6d;
+  --ink-dim: #c0c0c0;
+  --ink-faint: #6a6a6a;
   --logo-data: url("/assets/asset_d2d274761c.png");
-  --line: rgba(225,29,72,0.22);
-  --line-strong: rgba(225,29,72,0.5);
+  --line: rgba(212,0,0,0.18);
+  --line-strong: rgba(212,0,0,0.45);
   --glass: rgba(255,255,255,0.025);
-  --glass-strong: rgba(255,255,255,0.06);
-  --shadow: rgba(0,0,0,0.96);
-  --green-live: #3ecf72;
-  --radius-lg: 0px; 
-  --radius-md: 4px;
-  --radius-sm: 2px;
-  --font-display: 'Anton', sans-serif;
+  --glass-strong: rgba(255,255,255,0.055);
+  --shadow: rgba(0,0,0,0.98);
+  --green-live: #22dd66;
+  --radius-lg: 0px;
+  --radius-md: 0px;
+  --radius-sm: 0px;
+  --font-display: 'Bebas Neue', 'Anton', sans-serif;
   --font-body: 'Manrope', sans-serif;
   --font-mono: 'Space Mono', monospace;
   --container: 1220px;
@@ -1139,6 +1140,31 @@ table.board td.pts { font-family: var(--font-mono); font-size: 17.5px; font-weig
   color: #ffffff;
   text-shadow: 0 0 12px rgba(255,255,255,0.3);
 }
+
+
+/* RED-BLACK-WHITE overrides */
+.site-header.scrolled{background:rgba(0,0,0,0.97);border-bottom:1px solid var(--red);}
+.glass{background:#0d0d0d;border-color:rgba(212,0,0,0.2);}
+.btn-red{background:var(--red);border:2px solid var(--red);}
+.btn-red:hover{background:var(--red-bright);border-color:var(--red-bright);}
+.eyebrow::before{background:var(--red-bright);height:2px;width:28px;}
+.section-title{font-family:var(--font-display);color:#fff;}
+.stat-card{border-top:3px solid var(--red);background:var(--bg-card);}
+.tc-tab-btn{background:#111;border-color:rgba(212,0,0,0.35);color:rgba(255,255,255,0.6);border-radius:0;}
+.tc-tab-btn:hover,.tc-tab-btn.active{background:var(--red);border-color:var(--red);box-shadow:0 0 16px rgba(212,0,0,0.55);}
+.tc-arrow{border-color:rgba(212,0,0,0.55);color:var(--red-bright);background:rgba(0,0,0,0.9);border-radius:0;}
+.tc-arrow:hover{background:var(--red);border-color:#fff;color:#fff;}
+.tc-dot{border-color:rgba(212,0,0,0.4);background:rgba(255,255,255,0.18);border-radius:0;}
+.tc-dot.active,.tc-dot:hover{background:var(--red);border-color:#fff;box-shadow:0 0 10px var(--red);transform:scaleX(2.4);}
+table.board thead th{background:#0a0000;border-bottom:2px solid var(--red);}
+table.board tbody tr.lead{background:linear-gradient(90deg,rgba(212,0,0,0.14),transparent);border-left:3px solid var(--red-bright);}
+.wh-label{background:var(--red);}
+.wh-dot.active{background:var(--red-bright);width:22px;border-radius:0;}
+.crest-img-nav{border:2px solid var(--red);border-radius:0;}
+.nav-cta{background:var(--red);border:2px solid var(--red);}
+.ticker-strip{border-top:1px solid var(--red);background:#060000;}
+.ticker-track{color:#fff;}
+footer .footer{border-top:3px solid var(--red);background:#060000;}
 
 </style>
 </head>
