@@ -5330,43 +5330,57 @@
         btnB.position.set(0.48, 0.12, 0.16);
         controllerGroup.add(btnB);
 
-        // ─── PART 2: TACTICAL FOOTBALL FIELD ───
+        // ─── PART 2: TACTICAL GREEN FIELD & WHITE BOUNDARIES ───
         const fieldLines = new THREE.Group();
         stadiumGroup.add(fieldLines);
 
-        const lineMat = new THREE.LineBasicMaterial({ color: 0xff0033 });
+        // Emerald Green grass Plane
+        const grassGeo = new THREE.PlaneGeometry(2.5, 1.65);
+        const grassMat = new THREE.MeshStandardMaterial({
+          color: 0x145a32, // Green turf grass color
+          roughness: 0.85,
+          metalness: 0.1,
+          side: THREE.DoubleSide
+        });
+        const grass = new THREE.Mesh(grassGeo, grassMat);
+        grass.rotation.x = -Math.PI / 2;
+        fieldLines.add(grass);
+
+        // White line boundary materials
+        const lineMat = new THREE.LineBasicMaterial({ color: 0xffffff });
 
         // Outer Touchlines boundary
         const outerPoints = [
-          new THREE.Vector3(-1.25, 0, -0.8),
-          new THREE.Vector3(1.25, 0, -0.8),
-          new THREE.Vector3(1.25, 0, 0.8),
-          new THREE.Vector3(-1.25, 0, 0.8),
-          new THREE.Vector3(-1.25, 0, -0.8)
+          new THREE.Vector3(-1.25, 0.002, -0.8),
+          new THREE.Vector3(1.25, 0.002, -0.8),
+          new THREE.Vector3(1.25, 0.002, 0.8),
+          new THREE.Vector3(-1.25, 0.002, 0.8),
+          new THREE.Vector3(-1.25, 0.002, -0.8)
         ];
         const outerGeo = new THREE.BufferGeometry().setFromPoints(outerPoints);
         const outerLine = new THREE.Line(outerGeo, lineMat);
         fieldLines.add(outerLine);
 
         // Center division line
-        const centerPoints = [new THREE.Vector3(0, 0, -0.8), new THREE.Vector3(0, 0, 0.8)];
+        const centerPoints = [new THREE.Vector3(0, 0.002, -0.8), new THREE.Vector3(0, 0.002, 0.8)];
         const centerGeo = new THREE.BufferGeometry().setFromPoints(centerPoints);
         const centerLine = new THREE.Line(centerGeo, lineMat);
         fieldLines.add(centerLine);
 
         // Center Kickoff Circle
         const circleGeo = new THREE.RingGeometry(0.3, 0.32, 32);
-        const circleMat = new THREE.MeshBasicMaterial({ color: 0xff0033, side: THREE.DoubleSide });
+        const circleMat = new THREE.MeshBasicMaterial({ color: 0xffffff, side: THREE.DoubleSide });
         const centerCircle = new THREE.Mesh(circleGeo, circleMat);
         centerCircle.rotation.x = -Math.PI / 2;
+        centerCircle.position.y = 0.002;
         fieldLines.add(centerCircle);
 
         // Penalty Box Left
         const boxLPoints = [
-          new THREE.Vector3(-1.25, 0, -0.4),
-          new THREE.Vector3(-0.95, 0, -0.4),
-          new THREE.Vector3(-0.95, 0, 0.4),
-          new THREE.Vector3(-1.25, 0, 0.4)
+          new THREE.Vector3(-1.25, 0.002, -0.4),
+          new THREE.Vector3(-0.95, 0.002, -0.4),
+          new THREE.Vector3(-0.95, 0.002, 0.4),
+          new THREE.Vector3(-1.25, 0.002, 0.4)
         ];
         const boxLGeo = new THREE.BufferGeometry().setFromPoints(boxLPoints);
         const boxLLine = new THREE.Line(boxLGeo, lineMat);
@@ -5374,14 +5388,43 @@
 
         // Penalty Box Right
         const boxRPoints = [
-          new THREE.Vector3(1.25, 0, -0.4),
-          new THREE.Vector3(0.95, 0, -0.4),
-          new THREE.Vector3(0.95, 0, 0.4),
-          new THREE.Vector3(1.25, 0, 0.4)
+          new THREE.Vector3(1.25, 0.002, -0.4),
+          new THREE.Vector3(0.95, 0.002, -0.4),
+          new THREE.Vector3(0.95, 0.002, 0.4),
+          new THREE.Vector3(1.25, 0.002, 0.4)
         ];
         const boxRGeo = new THREE.BufferGeometry().setFromPoints(boxRPoints);
         const boxRLine = new THREE.Line(boxRGeo, lineMat);
         fieldLines.add(boxRLine);
+
+        // Goal Posts (thin white cylinder goalposts)
+        const goalMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
+        const goalGeoH = new THREE.CylinderGeometry(0.015, 0.015, 0.32, 8);
+        const goalGeoW = new THREE.CylinderGeometry(0.015, 0.015, 0.14, 8);
+
+        // Left Goal
+        const postL1 = new THREE.Mesh(goalGeoW, goalMat);
+        postL1.position.set(-1.22, 0.07, -0.15);
+        fieldLines.add(postL1);
+        const postL2 = new THREE.Mesh(goalGeoW, goalMat);
+        postL2.position.set(-1.22, 0.07, 0.15);
+        fieldLines.add(postL2);
+        const barL = new THREE.Mesh(goalGeoH, goalMat);
+        barL.position.set(-1.22, 0.14, 0);
+        barL.rotation.x = Math.PI / 2;
+        fieldLines.add(barL);
+
+        // Right Goal
+        const postR1 = new THREE.Mesh(goalGeoW, goalMat);
+        postR1.position.set(1.22, 0.07, -0.15);
+        fieldLines.add(postR1);
+        const postR2 = new THREE.Mesh(goalGeoW, goalMat);
+        postR2.position.set(1.22, 0.07, 0.15);
+        fieldLines.add(postR2);
+        const barR = new THREE.Mesh(goalGeoH, goalMat);
+        barR.position.set(1.22, 0.14, 0);
+        barR.rotation.x = Math.PI / 2;
+        fieldLines.add(barR);
 
         // Volumetric Cone Floodlights pointing down at corner boundaries
         const coneGeo = new THREE.ConeGeometry(0.24, 0.9, 16, 1, true);
