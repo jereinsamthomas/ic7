@@ -1515,13 +1515,14 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 });
 </script>
-  <!-- Dynamic Cinematic 3D Page Transition Gate -->
-  <script>
+  
+  <!-- Dynamic Cinematic 3D Page Transition Gate & eFootball Interactions -->
+  <script id="dynamicTransitionScript">
    (function() {
-     // Check if gate is already present to prevent duplicate injections
+     // Safeguard to prevent duplicate script executions
      if (document.getElementById('dynamicTransitionGate')) return;
 
-     // Inject Styles for 3D Game Loading Overlay
+     // 1. Inject Styles for 3D Game Loading Overlay, Foil Card Sheens, and Floating eFootball GP Coins
      const styles = `
        .gate-3d-overlay {
          position: fixed;
@@ -1619,13 +1620,86 @@ document.addEventListener('DOMContentLoaded', async () => {
          0% { opacity: 0.4; }
          100% { opacity: 1; }
        }
+
+       /* eFootball Foil Card Refraction Sheen */
+       .foil-sheen {
+         position: absolute;
+         inset: 0;
+         background: linear-gradient(135deg, rgba(255,255,255,0) 30%, rgba(255,255,255,0.12) 50%, rgba(255,255,255,0) 70%);
+         background-size: 200% 200%;
+         background-position: 0% 0%;
+         transition: opacity 0.25s ease;
+         opacity: 0;
+         z-index: 3;
+         pointer-events: none;
+         mix-blend-mode: color-dodge;
+       }
+
+       /* Floating eFootball GP/Gold coins in background */
+       .ef-floating-coin {
+         position: absolute;
+         width: 44px;
+         height: 44px;
+         background: radial-gradient(circle at 35% 35%, #ffd700 0%, #b8860b 80%);
+         border-radius: 50%;
+         border: 2px solid #fff;
+         box-shadow: 0 0 15px rgba(255,215,0,0.5), inset 0 0 8px rgba(0,0,0,0.6);
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         font-family: 'Bebas Neue', sans-serif;
+         font-weight: bold;
+         color: #fff;
+         font-size: 16px;
+         text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+         pointer-events: none;
+         z-index: 1;
+         animation: coinFloat 4s ease-in-out infinite alternate, coinSpin 3s linear infinite;
+         transform-style: preserve-3d;
+       }
+       @keyframes coinFloat {
+         0% { transform: translateY(0px) rotateY(0deg); }
+         100% { transform: translateY(-20px) rotateY(180deg); }
+       }
+       @keyframes coinSpin {
+         0% { transform: rotateY(0deg); }
+         100% { transform: rotateY(360deg); }
+       }
+
+       /* Bottom scroll redirect indicator */
+       .scroll-redirect-bar {
+         width: 100%;
+         text-align: center;
+         padding: 24px 20px;
+         background: linear-gradient(to top, #000000 80%, transparent);
+         border-top: 1px dashed rgba(212,0,0,0.3);
+         font-family: 'Space Mono', monospace;
+         font-size: 11px;
+         color: var(--red-bright, #ff1122);
+         margin-top: 40px;
+         box-sizing: border-box;
+       }
+       .scroll-redirect-inner {
+         display: inline-flex;
+         align-items: center;
+         justify-content: center;
+         gap: 12px;
+       }
+       .scroll-redirect-inner .indicator-ball {
+         width: 16px;
+         height: 16px;
+         background: var(--red, #d40000);
+         border-radius: 50%;
+         box-shadow: 0 0 8px var(--red-bright, #ff1122);
+         animation: gatePulse 1.2s ease-in-out infinite alternate;
+       }
      `;
      
      const styleEl = document.createElement('style');
      styleEl.textContent = styles;
      document.head.appendChild(styleEl);
      
-     // Construct dynamic HTML elements
+     // Construct dynamic HTML elements for the Loading screen gate
      const gate = document.createElement('div');
      gate.className = 'gate-3d-overlay';
      gate.id = 'dynamicTransitionGate';
@@ -1638,7 +1712,7 @@ document.addEventListener('DOMContentLoaded', async () => {
      `;
      document.body.appendChild(gate);
      
-     // Open gate (fade out loading screen) on window load complete
+     // Dismiss gate on page load complete
      const dismissGate = () => {
        setTimeout(() => {
          gate.classList.add('gate-hide');
@@ -1669,6 +1743,126 @@ document.addEventListener('DOMContentLoaded', async () => {
          }, 550);
        }
      });
+
+     // 2. Set up eFootball metallic card sheens
+     const setupFoilSheens = () => {
+       const cards = document.querySelectorAll('.player-card, .tour-card, .team-card, .reigning-champ-card');
+       cards.forEach(card => {
+         if (card.querySelector('.foil-sheen')) return;
+         
+         const sheen = document.createElement('div');
+         sheen.className = 'foil-sheen';
+         card.style.position = 'relative';
+         card.style.overflow = 'hidden';
+         card.appendChild(sheen);
+
+         card.addEventListener('mouseenter', () => sheen.style.opacity = '1');
+         card.addEventListener('mouseleave', () => sheen.style.opacity = '0');
+         card.addEventListener('mousemove', (e) => {
+           const rect = card.getBoundingClientRect();
+           const x = (e.clientX - rect.left) / rect.width * 100;
+           const y = (e.clientY - rect.top) / rect.height * 100;
+           sheen.style.backgroundPosition = `${x}% ${y}%`;
+         });
+       });
+     };
+     setupFoilSheens();
+
+     // Re-run setup on dynamic store updates (e.g. Trophy Cabinets re-rendering)
+     window.addEventListener('ic7_store_updated', () => {
+       setTimeout(setupFoilSheens, 200);
+     });
+
+     // 3. Set up floating eFootball gold GP coins in section borders
+     const injectCoins = () => {
+       const targets = document.querySelectorAll('.hero, .wh-section, .about-section, .tour-details-wrap, .evo-tc-showcase');
+       targets.forEach((section, idx) => {
+         if (section.querySelector('.ef-floating-coin')) return;
+         
+         const coin = document.createElement('div');
+         coin.className = 'ef-floating-coin';
+         coin.textContent = 'GP';
+         coin.style.top = `${10 + Math.random() * 60}%`;
+         if (idx % 2 === 0) {
+           coin.style.left = '6%';
+         } else {
+           coin.style.right = '6%';
+         }
+         // Vary animation properties slightly for organic drift
+         coin.style.animationDelay = `${-idx * 0.8}s`;
+         section.style.position = 'relative';
+         section.appendChild(coin);
+       });
+     };
+     injectCoins();
+
+     // 4. Infinite scroll-down page connection system
+     const pageChain = [
+       'index.html',
+       'tour-world-cup.html',
+       'tour-club-world-cup.html',
+       'tour-coopa-duo.html',
+       'tour-districto-cup.html',
+       'tour-evolution-cup.html',
+       'tour-intimate-cup.html'
+     ];
+
+     const pageNames = {
+       'index.html': 'IC7 CLAN PORTAL (HOME)',
+       'tour-world-cup.html': 'WORLD CUP SQUAD',
+       'tour-club-world-cup.html': 'CLUB WORLD CUP SQUAD',
+       'tour-coopa-duo.html': 'COOPA DUO SQUAD',
+       'tour-districto-cup.html': 'DISTRICTO CUP SQUAD',
+       'tour-evolution-cup.html': 'EVOLUTION CUP SQUAD',
+       'tour-intimate-cup.html': 'INTIMATE CUP SQUAD'
+     };
+
+     const getFilename = (path) => {
+       const parts = path.split('/');
+       let file = parts.pop() || 'index.html';
+       if (file === '' || file === 'football') file = 'index.html';
+       return file;
+     };
+
+     const currentFile = getFilename(window.location.pathname);
+     const currentIdx = pageChain.indexOf(currentFile);
+     
+     if (currentIdx !== -1) {
+       const nextIdx = (currentIdx + 1) % pageChain.length;
+       const nextFile = pageChain[nextIdx];
+       const nextPageName = pageNames[nextFile];
+
+       // Create and append the redirect bar at the bottom of the body
+       const redirectBar = document.createElement('div');
+       redirectBar.className = 'scroll-redirect-bar';
+       redirectBar.innerHTML = `
+         <div class="scroll-redirect-inner">
+           <div class="indicator-ball"></div>
+           <span>SCROLL PAST BOTTOM TO LOAD NEXT TOUR: <b style="color:#ffffff;">${nextPageName}</b></span>
+         </div>
+       `;
+       document.body.appendChild(redirectBar);
+
+       // Detect bottom scroll delta to fire transitions
+       let transitionFired = false;
+       window.addEventListener('scroll', () => {
+         if (transitionFired) return;
+
+         const scrollTop = window.scrollY;
+         const windowHeight = window.innerHeight;
+         const docHeight = document.documentElement.scrollHeight;
+         
+         // Trigger when user scrolls to within 4px of the absolute bottom of the page
+         if (scrollTop + windowHeight >= docHeight - 4) {
+           transitionFired = true;
+           gate.classList.remove('gate-hide');
+           setTimeout(() => {
+             window.location.href = nextFile;
+           }, 550);
+         }
+       }, { passive: true });
+     }
+
    })();
   </script>
 </body>
