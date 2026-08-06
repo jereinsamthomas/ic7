@@ -3255,7 +3255,391 @@
         animation: none;
       }
     }
-  </style>
+  
+/* ================================================
+   PRO LUXURY IMPERIAL GOLD & CRIMSON TROPHY CABINET SLIDER
+   ================================================ */
+.tc-tabs-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 35px;
+  z-index: 5;
+  position: relative;
+}
+.tc-tab-btn {
+  background: rgba(26, 5, 13, 0.85);
+  border: 1.5px solid rgba(212, 175, 55, 0.4);
+  color: #f7d86a;
+  padding: 9px 20px;
+  border-radius: 6px;
+  font-family: 'Cinzel', serif;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.tc-tab-btn:hover, .tc-tab-btn.active {
+  background: linear-gradient(135deg, #e11d48, #9f1239);
+  border-color: #ffd700;
+  color: #ffffff;
+  box-shadow: 0 0 22px rgba(225, 29, 72, 0.65);
+}
+
+.trophy-cabinet-container {
+  position: relative;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 45px;
+  box-sizing: border-box;
+}
+
+.trophy-track-wrap {
+  overflow: hidden;
+  border-radius: 18px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(225, 29, 72, 0.25);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  background: #080206;
+}
+
+.trophy-track {
+  display: flex;
+  width: 100%;
+  transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.trophy-slide {
+  flex: 0 0 100%;
+  width: 100%;
+  min-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Arrows */
+.tc-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(18, 4, 10, 0.85);
+  border: 1.5px solid rgba(255, 215, 0, 0.5);
+  color: #ffd700;
+  font-size: 28px;
+  font-weight: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+}
+.tc-arrow:hover {
+  background: #e11d48;
+  color: #ffffff;
+  border-color: #ffd700;
+  box-shadow: 0 0 25px rgba(225, 29, 72, 0.8);
+  transform: translateY(-50%) scale(1.1);
+}
+.tc-prev { left: -5px; }
+.tc-next { right: -5px; }
+
+/* Dots */
+.tc-dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 25px;
+}
+.tc-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 215, 0, 0.4);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+.tc-dot.active, .tc-dot:hover {
+  background: #ffd700;
+  border-color: #e11d48;
+  box-shadow: 0 0 12px #ffd700;
+  transform: scale(1.25);
+}
+
+/* Cabinet Showcase Inner Layout */
+.evo-tc-showcase {
+  position: relative;
+  padding: 40px 30px;
+  background: radial-gradient(circle at 50% 20%, #1c0512 0%, #080206 80%);
+  overflow: hidden;
+  min-height: 580px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tc-cosmic-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+.tc-cosmic-bg span {
+  position: absolute;
+  background: #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 0 6px #ffffff;
+  animation: tcFastWhiteStarDrift linear infinite;
+}
+@keyframes tcFastWhiteStarDrift {
+  0% { transform: translateY(0) scale(0.8); opacity: 0.2; }
+  50% { opacity: 1; }
+  100% { transform: translateY(-300px) scale(1.2); opacity: 0; }
+}
+
+.evo-tc-floodlight-left, .evo-tc-floodlight-right {
+  position: absolute;
+  top: -100px;
+  width: 350px;
+  height: 700px;
+  pointer-events: none;
+  opacity: 0.22;
+  z-index: 2;
+}
+.evo-tc-floodlight-left {
+  left: -50px;
+  background: conic-gradient(from 120deg at 0% 0%, rgba(255,215,0,0.5) 0deg, transparent 60deg);
+  animation: tcLightSwivelL 7s ease-in-out infinite alternate;
+}
+.evo-tc-floodlight-right {
+  right: -50px;
+  background: conic-gradient(from 240deg at 100% 0%, rgba(225,29,72,0.5) 0deg, transparent 60deg);
+  animation: tcLightSwivelR 7s ease-in-out infinite alternate;
+}
+@keyframes tcLightSwivelL { 0% { transform: rotate(-5deg); } 100% { transform: rotate(10deg); } }
+@keyframes tcLightSwivelR { 0% { transform: rotate(5deg); } 100% { transform: rotate(-10deg); } }
+
+/* Header Elements */
+.evo-tc-header {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  margin-bottom: 30px;
+}
+.evo-tc-top-icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 12px;
+}
+.evo-tc-player-sil {
+  width: 44px;
+  height: 44px;
+  filter: drop-shadow(0 0 10px rgba(255,255,255,0.8));
+}
+.evo-tc-clan-logo {
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2.5px solid #ffd700;
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.6), 0 0 50px rgba(225, 29, 72, 0.4);
+}
+.evo-tc-title {
+  font-family: 'Cinzel', serif;
+  font-size: 34px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  color: #ffffff;
+  text-transform: uppercase;
+  margin: 0;
+  text-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+}
+.evo-tc-title .trophy-red {
+  color: #e11d48;
+  text-shadow: 0 0 15px #e11d48;
+}
+.evo-tc-subtitle {
+  font-family: 'Cinzel', serif;
+  font-size: 12px;
+  letter-spacing: 0.3em;
+  color: #f7d86a;
+  margin-top: 6px;
+}
+
+/* Glass Showcase Cabinet Grid */
+.evo-tc-cabinet {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  max-width: 950px;
+  background: rgba(18, 4, 12, 0.6);
+  border: 1.5px solid rgba(212, 175, 55, 0.35);
+  border-radius: 16px;
+  padding: 30px 20px 20px;
+  backdrop-filter: blur(10px);
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.8), 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+.evo-tc-top-plaque {
+  position: absolute;
+  top: -16px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #ffd700, #b8860b);
+  color: #080206;
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.25em;
+  padding: 4px 24px;
+  border-radius: 4px;
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.5);
+  border: 1px solid #ffffff;
+}
+
+.evo-tc-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  align-items: flex-end;
+}
+@media (max-width: 768px) {
+  .evo-tc-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+.evo-tc-bay {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 10px;
+}
+.evo-tc-spotlight {
+  position: absolute;
+  top: -20px;
+  width: 140px;
+  height: 200px;
+  background: radial-gradient(ellipse at top, rgba(255, 215, 0, 0.3) 0%, transparent 70%);
+  pointer-events: none;
+}
+.evo-tc-podium-ring {
+  position: absolute;
+  bottom: 60px;
+  width: 220px;
+  height: 45px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(255, 215, 0, 0.35) 0%, rgba(225, 29, 72, 0.15) 60%, transparent 100%);
+  border: 1.5px solid rgba(255, 215, 0, 0.4);
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
+  transform: perspective(300px) rotateX(60deg);
+}
+
+.evo-tc-trophy-badge {
+  position: relative;
+  z-index: 4;
+  width: 150px;
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+.evo-tc-trophy-img {
+  max-width: 140px;
+  max-height: 140px;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 15px rgba(255, 215, 0, 0.5));
+  transition: transform 0.4s ease;
+}
+.evo-tc-bay:hover .evo-tc-trophy-img {
+  transform: translateY(-8px) scale(1.05);
+}
+.evo-tc-anchor-shield, .evo-tc-dragon-shield {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.8));
+}
+
+/* Plinth Base Box */
+.evo-tc-plinth {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  max-width: 290px;
+  background: linear-gradient(180deg, rgba(28, 8, 16, 0.95) 0%, rgba(10, 2, 6, 0.98) 100%);
+  border: 1.5px solid rgba(212, 175, 55, 0.6);
+  border-radius: 8px;
+  padding: 12px 15px;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.7), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+}
+.evo-tc-plinth-season {
+  font-family: 'Cinzel', serif;
+  font-size: 10.5px;
+  letter-spacing: 0.2em;
+  color: #a3a8b0;
+  text-transform: uppercase;
+}
+.evo-tc-plinth-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: #ffd700;
+  margin: 3px 0;
+}
+.evo-tc-plinth-name {
+  font-family: 'Outfit', sans-serif;
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+  text-transform: uppercase;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+.evo-tc-plinth-star {
+  color: #ffd700;
+  font-size: 14px;
+  margin-top: 4px;
+  text-shadow: 0 0 8px #ffd700;
+}
+
+/* Footer Tagline */
+.evo-tc-footer {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  margin-top: 25px;
+}
+.evo-tc-footer-line1 {
+  font-family: 'Cinzel', serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  color: #ffd700;
+}
+.evo-tc-footer-line2 {
+  font-family: 'Cinzel', serif;
+  font-size: 9.5px;
+  letter-spacing: 0.15em;
+  color: rgba(255, 255, 255, 0.5);
+  margin-top: 4px;
+}
+
+</style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" defer></script>
 </head>
 
@@ -4954,7 +5338,14 @@
             };
           }
           await Store.set('ic7_major_tours', data);
-          let tcTimer = null;
+          renderToursGrid();
+          renderUpcomingTicker();
+          renderTrophyCabinet();
+          const msg = document.getElementById('toursMetaSavedMsg');
+          if (msg) { msg.hidden = false; setTimeout(() => msg.hidden = true, 2000); }
+        });
+      }
+
       let tcCurrentIdx = 0;
       let tcAutoTimer = null;
 
@@ -5219,15 +5610,6 @@
           container.onmouseleave = startTcAuto;
         }
       }
-
-      renderToursGrid();
-          renderUpcomingTicker();
-          const msg = document.getElementById('toursMetaSavedMsg');
-          if (msg) { msg.hidden = false; setTimeout(() => msg.hidden = true, 2000); }
-        });
-      }
-
-
 
       renderToursGrid();
       renderUpcomingTicker();
