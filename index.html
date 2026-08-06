@@ -367,7 +367,7 @@
       align-items: center;
       overflow: hidden;
       padding-top: 24px;
-      background: #000;
+      background: transparent !important; /* Allow WebGL background to shine through */
     }
 
     .cosmic-void {
@@ -375,13 +375,14 @@
       inset: 0;
       z-index: 0;
       background-repeat: no-repeat;
-      background-position: center, center, center, center 24%;
-      background-size: cover, cover, cover, cover;
+      background-position: center;
+      background-size: cover;
+      /* Softened dark gradients to blend with background WebGL */
       background-image:
-        radial-gradient(circle at 82% 30%, rgba(212,0,0,0.50) 0%, transparent 48%),
-        radial-gradient(circle at 12% 72%, rgba(140,0,0,0.28) 0%, transparent 55%),
-        linear-gradient(100deg, rgba(0,0,0,0.98) 0%, rgba(0,0,0,0.93) 32%, rgba(0,0,0,0.65) 60%, rgba(0,0,0,0.40) 100%),
-        url("/assets/asset_38294717af.jpg");
+        radial-gradient(circle at 82% 30%, rgba(212,0,0,0.25) 0%, transparent 48%),
+        radial-gradient(circle at 12% 72%, rgba(140,0,0,0.12) 0%, transparent 55%),
+        linear-gradient(100deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.7) 45%, rgba(0,0,0,0.25) 100%);
+      opacity: 0.75;
     }
 
     .game-scanlines {
@@ -2119,6 +2120,30 @@
       color: var(--ink-faint);
       text-transform: uppercase;
       letter-spacing: 0.08em;
+    }
+
+
+    /* ─── WebGL Transparency overrides ─── */
+    .section, 
+    .wh-section, 
+    .ut-section {
+      background: transparent !important;
+    }
+    
+    /* Ensure content boxes maintain high-contrast readability */
+    .glass, 
+    .form-card, 
+    .tour-card, 
+    .rules-card, 
+    .player-card, 
+    .team-card, 
+    .stat-card,
+    .contact-card,
+    .dashboard-card {
+      background: rgba(13, 13, 13, 0.88) !important;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
     }
 
 </style>
