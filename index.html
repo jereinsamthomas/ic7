@@ -3577,7 +3577,28 @@
         const tabsHost = document.getElementById('tcTabsBar');
         if (!track) return;
 
-        const meta = Store.get('ic7_tours_meta', {});
+        const meta = getToursMeta();
+
+        function getTourTitleHtml(tourId, rawName) {
+          if (tourId === 'evolution-cup') return `<span>evo</span><span class="trophy-red">l</span><span>ution</span> <span class="cup-title">C<span class="trophy-red">🏆</span>P</span>`;
+          if (tourId === 'intimate-cup') return `<span>inti</span><span class="trophy-red">m</span><span>ate</span> <span class="cup-title">C<span class="trophy-red">🏆</span>P</span>`;
+          if (tourId === 'world-cup') return `<span>wor</span><span class="trophy-red">l</span><span>d</span> <span class="cup-title">C<span class="trophy-red">🏆</span>P</span>`;
+          if (tourId === 'club-world-cup') return `<span>c</span><span class="trophy-red">l</span><span>ub world</span> <span class="cup-title">C<span class="trophy-red">🏆</span>P</span>`;
+          if (tourId === 'coopa-duo') return `<span>coopa'd</span> <span class="trophy-red">d</span><span>uo</span>`;
+          if (tourId === 'districto-cup') return `<span>distric</span><span class="trophy-red">t</span><span>o</span> <span class="cup-title">C<span class="trophy-red">🏆</span>P</span>`;
+          return `<span>${escapeHtml(rawName.toLowerCase())}</span>`;
+        }
+
+        function getTourBadgeLogo(tourId, mLogo) {
+          if (mLogo) return mLogo;
+          if (tourId === 'intimate-cup') return '/assets/intimate_cup_badge.jpg';
+          return '/assets/asset_4ec290c1ae.png';
+        }
+
+        function getTourSubtitle(tourId) {
+          if (tourId === 'intimate-cup') return 'WHERE LEGENDS COLLIDE';
+          return 'WHERE LEGENDS EVOLVE';
+        }
         
         // Define all 7 tabs (6 tours + 1 integrated Current Champions showcase)
         const CABINET_TABS = [
