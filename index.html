@@ -4700,6 +4700,9 @@
 
       // eFootball / PES style 3D Tilt Card Effects
       const init3DTilt = () => {
+        // Disable on touch devices to ensure buttery smooth native scrolling on mobile/tablets
+        if (window.matchMedia('(pointer: coarse)').matches) return;
+
         const cards = document.querySelectorAll('.tour-card, .team-card, .player-card, .activity-card, .reigning-champ-card, .stat-card, .fixture');
         cards.forEach(card => {
           card.style.transition = 'transform 0.15s ease-out, box-shadow 0.15s ease-out, background-color 0.15s ease-out';
@@ -4856,6 +4859,13 @@
         const satellites = new THREE.Points(satGeo, satMat);
         orbGroup.add(satellites);
 
+        // 5. Add a 3D Holographic Ground Grid (Tactical pitch radar)
+        const gridHelper = new THREE.GridHelper(36, 24, 0xff0033, 0x330008);
+        gridHelper.position.y = -2.1;
+        gridHelper.material.transparent = true;
+        gridHelper.material.opacity = 0.35;
+        scene.add(gridHelper);
+
         // Coordinates configuration per scroll keyframes
         const keyframes = [
           { scrollPct: 0.0, x: 0, y: 0.25, z: 0, scale: 1.15 },      // Hero
@@ -4924,6 +4934,11 @@
           orbGroup.position.x += (targetX - orbGroup.position.x) * 0.075;
           orbGroup.position.y += (targetY - orbGroup.position.y) * 0.075;
           orbGroup.position.z += (targetZ - orbGroup.position.z) * 0.075;
+
+          // Infinite grid scroll parallax calculation based on camera z
+          if (gridHelper) {
+            gridHelper.position.z = (orbGroup.position.z * 1.2) % (36 / 24);
+          }
 
           const currentScale = orbGroup.scale.x;
           const nextScale = currentScale + (targetScale - currentScale) * 0.075;
