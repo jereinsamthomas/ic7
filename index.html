@@ -14,8 +14,8 @@
     href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&family=Cinzel:wght@400;600;700&display=swap"
     rel="stylesheet">
   <!-- Three.js and Lenis CDN libraries -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
+  <script src="https://unpkg.com/three@0.128.0/build/three.min.js"></script>
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.29/dist/lenis.min.js"></script>
   <style>
     /* ============================================================
        IC7 ICONIC SEVENS — RED · BLACK · WHITE DESIGN SYSTEM
@@ -51,7 +51,7 @@
     }
 
     * { margin:0; padding:0; box-sizing:border-box; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: auto !important; }
 
     body {
       background: var(--bg);
@@ -4835,26 +4835,13 @@
         ring2.rotation.y = Math.PI / 4;
         orbGroup.add(ring2);
 
-        // 4. Floating satellite particles
-        const satCount = 40;
-        const satGeo = new THREE.BufferGeometry();
-        const satPositions = new Float32Array(satCount * 3);
-        for(let i=0; i<satCount; i++) {
-          const u = Math.random();
-          const v = Math.random();
-          const theta = u * 2.0 * Math.PI;
-          const phi = Math.acos(2.0 * v - 1.0);
-          const r = 1.35 + Math.random() * 0.45;
-          satPositions[i*3] = r * Math.sin(phi) * Math.cos(theta);
-          satPositions[i*3+1] = r * Math.sin(phi) * Math.sin(theta);
-          satPositions[i*3+2] = r * Math.cos(phi);
-        }
-        satGeo.setAttribute('position', new THREE.BufferAttribute(satPositions, 3));
+        // 4. Floating satellite particles (using standard sphere points to avoid Float32Array/setAttribute errors)
+        const satGeo = new THREE.SphereGeometry(1.68, 12, 12);
         const satMat = new THREE.PointsMaterial({
           color: 0xff0033,
           size: 0.035,
           transparent: true,
-          opacity: 0.95
+          opacity: 0.9
         });
         const satellites = new THREE.Points(satGeo, satMat);
         orbGroup.add(satellites);
@@ -4885,7 +4872,8 @@
         const updateOrbTarget = () => {
           const scrollTop = window.scrollY;
           const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-          const pct = maxScroll > 0 ? scrollTop / maxScroll : 0;
+          // Clamp scroll fraction safely between 0 and 1
+          const pct = Math.max(0, Math.min(1, maxScroll > 0 ? scrollTop / maxScroll : 0));
 
           // Find surrounding keyframes
           let k1 = keyframes[0];
