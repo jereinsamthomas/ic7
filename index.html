@@ -2293,24 +2293,51 @@
     .tournament-cta { width:100%; margin-top:24px; }
 
     /* ─── WEEKLY HIGHLIGHT CAROUSEL (FULL SCREEN BLENDED STYLE) ──────────────── */
+    /* ─── WEEKLY HIGHLIGHT CAROUSEL (RAGEBITE / ESPORTS ANGLED V-SHIELD SHAPE) ─── */
     .wh-section {
       position: relative;
-      background: #000000;
-      border-bottom: 3px solid var(--red);
+      background: radial-gradient(ellipse at 50% 25%, rgba(200, 0, 35, 0.45) 0%, rgba(60, 0, 10, 0.85) 55%, #040406 100%);
+      border-bottom: none;
       width: 100vw;
-      height: 100vh;
-      min-height: 100vh;
+      min-height: calc(100vh + 90px);
+      padding-bottom: 90px;
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
+      overflow: visible;
+      z-index: 10;
+      clip-path: polygon(0 0, 100% 0, 100% calc(100% - 90px), 50% 100%, 0 calc(100% - 90px));
+      box-shadow: inset 0 0 120px rgba(255, 17, 34, 0.3);
+    }
+    @media(max-width:850px) {
+      .wh-section {
+        min-height: calc(100vh + 55px);
+        padding-bottom: 60px;
+        clip-path: polygon(0 0, 100% 0, 100% calc(100% - 60px), 50% 100%, 0 calc(100% - 60px));
+      }
+    }
+
+    .wh-v-border-svg {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 92px;
+      pointer-events: none;
+      z-index: 30;
+      filter: drop-shadow(0 0 16px #ff1122) drop-shadow(0 0 30px rgba(230, 0, 46, 0.8));
+    }
+    @media(max-width:850px) {
+      .wh-v-border-svg {
+        height: 62px;
+      }
     }
 
     .wh-carousel {
       position: relative;
       width: 100%;
       height: 100%;
-      background: #000000;
+      background: transparent;
       perspective: 1400px;
       transform-style: preserve-3d;
       overflow: visible;
@@ -3407,6 +3434,20 @@
       <div class="wh-dots" id="whDots"></div>
     </div>
     <p class="highlight-empty" id="highlightEmpty" hidden>No highlights yet — check back soon.</p>
+
+    <!-- Glowing Red V-Shield Bottom Border Stroke -->
+    <svg class="wh-v-border-svg" viewBox="0 0 1000 100" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M 0,5 L 500,95 L 1000,5" fill="none" stroke="#ff1122" stroke-width="6" filter="url(#glowRedV)"/>
+      <defs>
+        <filter id="glowRedV" x="-20%" y="-20%" width="140%" height="140%">
+          <feGaussianBlur stdDeviation="4" result="glow"/>
+          <feMerge>
+            <feMergeNode in="glow"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      </defs>
+    </svg>
   </section>
 
   <!-- ============================= HERO (E-FOOTBALL SYSTEM LAYOUT) ============================= -->

@@ -713,10 +713,16 @@ table.board td.pts{color:var(--red-bright);font-weight:700;}
 .tournament-wrap.single .tournament-info{padding-bottom:34px;}
 .tournament-cta{width:100%;margin-top:26px;}
 
-/* ============================= WEEKLY HIGHLIGHT CAROUSEL (top of page) ============================= */
-.wh-section{position:relative;padding:118px 0 20px;background:var(--bg-elevated);border-bottom:1px solid var(--line);}
-@media(max-width:700px){.wh-section{padding:104px 0 16px;}}
-.wh-carousel{position:relative;overflow:hidden;border:1px solid var(--line-strong);background:var(--bg-elevated-2);box-shadow:0 25px 60px -30px var(--shadow);}
+/* ============================= WEEKLY HIGHLIGHT CAROUSEL (RAGEBITE V-SHIELD SHAPE) ============================= */
+.wh-section{
+  position:relative;
+  padding:118px 0 70px;
+  background:radial-gradient(ellipse at 50% 25%, rgba(200, 0, 35, 0.45) 0%, rgba(60, 0, 10, 0.85) 55%, #040406 100%);
+  border-bottom:none;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 40px), 50% 100%, 0 calc(100% - 40px));
+}
+@media(max-width:700px){.wh-section{padding:104px 0 50px;clip-path: polygon(0 0, 100% 0, 100% calc(100% - 30px), 50% 100%, 0 calc(100% - 30px));}}
+.wh-carousel{position:relative;overflow:hidden;border:1px solid var(--line-strong);background:rgba(12, 12, 18, 0.7);box-shadow:0 25px 60px -30px var(--shadow);border-radius:12px;}
 .wh-label{
   position:absolute;top:14px;left:14px;z-index:2;
   font-family:var(--font-mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;
