@@ -4436,6 +4436,57 @@
        tick();
      };
 
+      const transitionPhrases = [
+        "SYNCHRONIZING TACTICAL DATA...",
+        "CONNECTING CLAN SERVER...",
+        "LOADING CHAMPIONSHIP DATA...",
+        "INITIALIZING ARENA ENGINE...",
+        "OPTIMIZING STADIUM SYSTEM..."
+      ];
+
+      // Dismiss gate on page load complete
+      const dismissGate = () => {
+        const phrase = transitionPhrases[Math.floor(Math.random() * transitionPhrases.length)];
+        playTextScramble(phrase);
+        setTimeout(() => {
+          gate.classList.add('gate-hide');
+        }, 550);
+      };
+
+      if (document.readyState === 'complete') {
+        dismissGate();
+      } else {
+        window.addEventListener('load', dismissGate);
+      }
+
+      // Safety fallback in case load event already fired or is delayed
+      setTimeout(() => {
+        if (gate && !gate.classList.contains('gate-hide')) {
+          gate.classList.add('gate-hide');
+        }
+      }, 700);
+
+      // Intercept link clicks to execute loading transition
+      document.body.addEventListener('click', (e) => {
+        const anchor = e.target.closest('a');
+        if (!anchor) return;
+        const href = anchor.getAttribute('href');
+        if (!href || href.startsWith('#') || href.startsWith('javascript:')) return;
+        
+        const isLocal = href.endsWith('.html') || href.includes('tour-') || href === 'index.html';
+        const isBlank = anchor.getAttribute('target') === '_blank';
+        
+        if (isLocal && !isBlank) {
+          e.preventDefault();
+          const phrase = transitionPhrases[Math.floor(Math.random() * transitionPhrases.length)];
+          playTextScramble(phrase);
+          gate.classList.remove('gate-hide');
+          setTimeout(() => {
+            window.location.href = href;
+          }, 650);
+        }
+      });
+
            // ─── SILKY SMOOTH CURSOR & LEFT DRAWER & BACK TO TOP ENGINE ───
       const setupInteractiveUI = () => {
         // 1. Smooth Cursor with Lerp
