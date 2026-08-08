@@ -4088,6 +4088,7 @@
                 <div class="field"><label for="hlImage">Upload Photo</label><input type="file" accept="image/*" id="hlImage"></div>
               </div>
               <div class="field"><label for="hlImageUrl">Image URL Link (optional — or paste photo URL)</label><input type="text" id="hlImageUrl" placeholder="https://... or assets/image.jpg"></div>
+              <div id="hlPreviewContainer" style="display:none; margin:10px 0; border:1.5px solid var(--red); border-radius:8px; overflow:hidden; height:110px; background-size:cover; background-position:center;"></div>
               <div class="field"><label for="hlBody">Story</label><textarea id="hlBody" rows="3" required></textarea>
               </div>
               <div class="admin-form-actions">
@@ -4534,6 +4535,18 @@
         }));
       }
 
+      function updateHlPreview(imgUrl) {
+        const preview = document.getElementById('hlPreviewContainer');
+        if (!preview) return;
+        if (imgUrl) {
+          preview.style.backgroundImage = `url('${imgUrl}')`;
+          preview.style.display = 'block';
+        } else {
+          preview.style.backgroundImage = '';
+          preview.style.display = 'none';
+        }
+      }
+
       function loadHighlightIntoForm(id) {
         const h = getHighlights().find(x => x.id === id);
         if (!h) return;
@@ -4543,6 +4556,7 @@
         document.getElementById('hlBody').value = h.body;
         const urlInput = document.getElementById('hlImageUrl');
         if (urlInput) urlInput.value = h.image || '';
+        updateHlPreview(h.image || '');
         document.getElementById('hlCancelEdit').hidden = false;
       }
 
@@ -4551,6 +4565,7 @@
         document.getElementById('hlEditId').value = '';
         const urlInput = document.getElementById('hlImageUrl');
         if (urlInput) urlInput.value = '';
+        updateHlPreview('');
         document.getElementById('hlDate').value = new Date().toISOString().slice(0, 10);
         document.getElementById('hlCancelEdit').hidden = true;
       }
@@ -4707,6 +4722,26 @@
         renderAdminList();
         renderHighlights();
       });
+
+      const fileInputEl = document.getElementById('hlImage');
+      const urlInputEl = document.getElementById('hlImageUrl');
+      if (fileInputEl) {
+        fileInputEl.addEventListener('change', async () => {
+          if (fileInputEl.files && fileInputEl.files[0]) {
+            try {
+              const compressed = await compressImage(fileInputEl.files[0], 600);
+              updateHlPreview(compressed);
+            } catch (e) {}
+          }
+        });
+      }
+      if (urlInputEl) {
+        urlInputEl.addEventListener('input', () => {
+          if (urlInputEl.value.trim()) {
+            updateHlPreview(urlInputEl.value.trim());
+          }
+        });
+      }
 
       // init
       resetHighlightForm();
