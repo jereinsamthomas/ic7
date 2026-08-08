@@ -943,13 +943,9 @@
       transform: perspective(1200px) rotateY(0deg) translateX(0) scale(1);
     }
 
-    /* ─── HEADER / NAV ──────────────────────────────────────── */
+    /* ─── HEADER / NAV (Hidden — navigation accessed via 3-dots drawer) ─── */
     .site-header {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      transition: all .3s ease;
-      border-bottom: 1px solid transparent;
+      display: none !important;
     }
     .site-header.scrolled {
       background: rgba(0,0,0,0.97);
@@ -2299,21 +2295,25 @@
       background: radial-gradient(ellipse at 50% 25%, rgba(200, 0, 35, 0.45) 0%, rgba(60, 0, 10, 0.85) 55%, #040406 100%);
       border-bottom: none;
       width: 100vw;
-      min-height: calc(100vh + 90px);
-      padding-bottom: 90px;
+      height: 80vh;
+      min-height: 540px;
+      max-height: 740px;
+      padding-top: 15px;
+      padding-bottom: 60px;
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: visible;
       z-index: 10;
-      clip-path: polygon(0 0, 100% 0, 100% calc(100% - 90px), 82% calc(100% - 68px), 66% calc(100% - 32px), 50% 100%, 34% calc(100% - 32px), 18% calc(100% - 68px), 0 calc(100% - 90px));
+      clip-path: polygon(0 0, 100% 0, 100% calc(100% - 65px), 82% calc(100% - 48px), 66% calc(100% - 22px), 50% 100%, 34% calc(100% - 22px), 18% calc(100% - 48px), 0 calc(100% - 65px));
       box-shadow: inset 0 0 120px rgba(255, 17, 34, 0.3);
     }
     @media(max-width:850px) {
       .wh-section {
-        min-height: calc(100vh + 55px);
-        padding-bottom: 60px;
-        clip-path: polygon(0 0, 100% 0, 100% calc(100% - 60px), 82% calc(100% - 45px), 66% calc(100% - 20px), 50% 100%, 34% calc(100% - 20px), 18% calc(100% - 45px), 0 calc(100% - 60px));
+        height: 82vh;
+        min-height: 480px;
+        padding-bottom: 45px;
+        clip-path: polygon(0 0, 100% 0, 100% calc(100% - 45px), 82% calc(100% - 32px), 66% calc(100% - 15px), 50% 100%, 34% calc(100% - 15px), 18% calc(100% - 32px), 0 calc(100% - 45px));
       }
     }
 
@@ -2345,24 +2345,27 @@
 
     .wh-label {
       position: absolute;
-      top: 36px;
-      left: 6%;
-      z-index: 20;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 25;
       font-family: var(--font-mono);
-      font-size: 11px;
-      letter-spacing: .2em;
+      font-size: 12px;
+      letter-spacing: .24em;
       text-transform: uppercase;
       color: #ffffff;
-      background: var(--red-bright);
-      padding: 8px 18px;
-      font-weight: 700;
+      background: var(--red-bright, #ff1122);
+      padding: 10px 24px;
+      font-weight: 800;
       border-radius: 4px;
-      box-shadow: 0 4px 20px rgba(230,0,46,0.5);
+      box-shadow: 0 0 25px rgba(255, 17, 34, 0.7), 0 4px 15px rgba(0,0,0,0.8);
+      border: 1px solid rgba(255, 215, 0, 0.5);
     }
     @media(max-width:850px) {
       .wh-label {
-        top: 24px;
-        left: 20px;
+        top: 14px;
+        font-size: 10.5px;
+        padding: 7px 18px;
       }
     }
 
@@ -3338,18 +3341,20 @@
     </div>
 
     <nav class="left-drawer-links" id="leftDrawerLinks">
-      <a href="#about"><span class="link-icon"></span>About Clan</a>
-      <a href="#activities"><span class="link-icon"></span>Activities</a>
-      <a href="#live"><span class="link-icon"></span>Live Stream</a>
-      <a href="#highlights"><span class="link-icon"></span>Highlights</a>
-      <a href="tournament-registration.html"><span class="link-icon"></span>Tournament Reg</a>
-      <a href="#trophyCabinet"><span class="link-icon"></span>Trophy Cabinet</a>
-      <a href="#teams"><span class="link-icon"></span>Squad Rosters</a>
-      <a href="#majorTours"><span class="link-icon"></span>Tournaments</a>
-      <a href="#leaderboard"><span class="link-icon"></span>Leaderboard</a>
-      <a href="#gallery"><span class="link-icon"></span>Clan Gallery</a>
-      <a href="#rules"><span class="link-icon"></span>Clan Rules</a>
-      <a href="#register" style="margin-top: 16px; background: #ff1122; color: #ffffff; justify-content: center;"><span class="link-icon" style="background:#fff;"></span>REGISTER NOW</a>
+      <a href="#highlights" class="active"><span class="link-icon">🎬</span> Weekly Highlights</a>
+      <a href="#hero"><span class="link-icon">⚡</span> Home Hero</a>
+      <a href="#about"><span class="link-icon">⚔️</span> About Clan</a>
+      <a href="#activities"><span class="link-icon">🎮</span> Activities</a>
+      <a href="#live"><span class="link-icon">🔴</span> Live Stream</a>
+      <a href="tournament-registration.html"><span class="link-icon">📋</span> Tournament Reg</a>
+      <a href="#trophyCabinet"><span class="link-icon">🏆</span> Trophy Cabinet</a>
+      <a href="#teams"><span class="link-icon">👥</span> Squad Rosters</a>
+      <a href="#majorTours"><span class="link-icon">🥇</span> Tournaments</a>
+      <a href="#leaderboard"><span class="link-icon">📊</span> Leaderboard</a>
+      <a href="#gallery"><span class="link-icon">🖼️</span> Clan Gallery</a>
+      <a href="#rules"><span class="link-icon">📜</span> Clan Rules</a>
+      <button type="button" id="leftDrawerAdminBtn" class="btn btn-outline" style="width: 100%; margin-top: 14px; justify-content: center; font-size: 12px; letter-spacing: 0.1em; border-color: rgba(255,17,34,0.5);"><span class="link-icon">🔒</span> Admin Login</button>
+      <a href="#register" style="margin-top: 10px; background: #ff1122; color: #ffffff; justify-content: center; font-weight: 800;"><span class="link-icon">🔥</span> REGISTER NOW</a>
     </nav>
   </aside>
 
@@ -7104,6 +7109,14 @@
         if (leftBtn) leftBtn.addEventListener('click', openDrawer);
         if (leftClose) leftClose.addEventListener('click', closeDrawer);
         if (leftOverlay) leftOverlay.addEventListener('click', closeDrawer);
+
+        const leftAdminBtn = document.getElementById('leftDrawerAdminBtn');
+        if (leftAdminBtn) {
+          leftAdminBtn.addEventListener('click', () => {
+            closeDrawer();
+            openModal();
+          });
+        }
 
         const drawerLinks = document.querySelectorAll('.left-drawer-links a');
         drawerLinks.forEach(link => {
