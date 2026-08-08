@@ -2373,6 +2373,7 @@
       transform-style: preserve-3d;
     }
 
+    /* Single clean slide layout (No Peeking Overlap) */
     .wh-slide {
       position: absolute;
       inset: 0;
@@ -2381,40 +2382,28 @@
       display: flex;
       align-items: center;
       justify-content: flex-start;
-      z-index: 2;
+      z-index: 1;
       opacity: 0;
-      transform: translate3d(0, 0, -400px) scale(0.5);
-      transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.85s ease, filter 0.85s ease;
+      visibility: hidden;
+      transform: scale(0.96);
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.6s ease;
       pointer-events: none;
-      transform-style: preserve-3d;
-      backface-visibility: hidden;
     }
 
-    /* 3D cylindrical states for highlights */
     .wh-slide.active {
-      transform: translate3d(0, 0, 0) rotateY(0deg) scale(1);
       opacity: 1;
+      visibility: visible;
+      transform: scale(1);
       z-index: 10;
       pointer-events: auto;
-      filter: none;
     }
-    .wh-slide.wh-prev-slide {
-      transform: translate3d(-38%, 0, -180px) rotateY(32deg) scale(0.8);
-      opacity: 0.5;
-      z-index: 5;
-      pointer-events: none;
-      filter: blur(2px);
-    }
-    .wh-slide.wh-next-slide {
-      transform: translate3d(38%, 0, -180px) rotateY(-32deg) scale(0.8);
-      opacity: 0.5;
-      z-index: 5;
-      pointer-events: none;
-      filter: blur(2px);
-    }
+
+    .wh-slide.wh-prev-slide,
+    .wh-slide.wh-next-slide,
     .wh-slide.wh-hidden-slide {
-      transform: translate3d(0, 0, -350px) scale(0.6);
       opacity: 0;
+      visibility: hidden;
+      transform: scale(0.96);
       z-index: 1;
       pointer-events: none;
     }
@@ -2426,37 +2415,37 @@
       height: 100%;
       background-size: cover;
       background-position: center;
-      background-color: #0c0c0c;
+      background-color: #050508;
       z-index: 1;
-      transform: scale(1.08);
+      transform: scale(1.05);
       transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    /* Dynamic Ken Burns zoom transition on active slide */
     .wh-slide.active .wh-media {
       transform: scale(1);
     }
 
-    /* Seamless fade blending from black bg to image (No hard borders) */
+    .wh-slide-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      z-index: 1;
+      pointer-events: none;
+    }
+
     .wh-media::before {
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(90deg, 
-        #000000 0%, 
-        rgba(0,0,0,0.92) 32%, 
-        rgba(0,0,0,0.65) 60%, 
-        rgba(0,0,0,0.15) 100%
-      );
+      background: radial-gradient(circle at 75% 50%, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.7) 60%, rgba(0,0,0,0.92) 100%),
+                  linear-gradient(90deg, rgba(4,4,6,0.95) 0%, rgba(4,4,6,0.75) 45%, rgba(4,4,6,0.2) 100%);
       z-index: 2;
     }
     @media(max-width:850px) {
       .wh-media::before {
-        background: linear-gradient(0deg, 
-          #000000 0%, 
-          rgba(0,0,0,0.92) 55%, 
-          rgba(0,0,0,0.4) 85%, 
-          rgba(0,0,0,0.1) 100%
-        );
+        background: linear-gradient(0deg, #040406 0%, rgba(4,4,6,0.9) 60%, rgba(4,4,6,0.3) 100%);
       }
     }
 
@@ -2473,35 +2462,44 @@
       pointer-events: none;
     }
 
+    /* Clean, highly readable glassmorphic news text box */
     .wh-text {
       position: relative;
-      z-index: 3;
-      max-width: 780px;
-      padding: 0 10%;
-      background: none;
+      z-index: 15;
+      max-width: 660px;
+      margin-left: 6%;
+      margin-top: 40px;
+      padding: 38px 44px;
+      background: rgba(8, 8, 14, 0.84);
+      border: 1px solid rgba(255, 215, 0, 0.35);
+      border-left: 5px solid var(--red-bright);
+      border-radius: 12px;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.9), 0 0 30px rgba(230, 0, 46, 0.25);
       display: flex;
       flex-direction: column;
       justify-content: center;
     }
     @media(max-width:850px) {
       .wh-text {
-        padding: 160px 24px 80px;
-        max-width: 100%;
+        margin: 80px 18px 40px;
+        padding: 26px 20px;
+        max-width: calc(100% - 36px);
       }
     }
 
-    /* Pro sliding/fading elements on active slide */
     .wh-date {
       opacity: 0;
-      transform: translateY(22px);
-      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateY(16px);
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
       transition-delay: 0.1s;
       font-family: var(--font-mono);
       font-size: 11px;
       letter-spacing: .2em;
       text-transform: uppercase;
       color: var(--red-bright);
-      margin-bottom: 18px;
+      margin-bottom: 14px;
       display: inline-flex;
       align-items: center;
       gap: 8px;
@@ -2519,18 +2517,18 @@
 
     .wh-text h3 {
       opacity: 0;
-      transform: translateY(32px);
-      transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
-      transition-delay: 0.22s;
+      transform: translateY(22px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+      transition-delay: 0.18s;
       font-family: var(--font-display);
       font-weight: 400;
       text-transform: uppercase;
-      font-size: clamp(34px, 5vw, 68px);
+      font-size: clamp(28px, 3.8vw, 54px);
       letter-spacing: .01em;
-      line-height: 0.95;
-      margin-bottom: 20px;
+      line-height: 1.05;
+      margin-bottom: 16px;
       color: #ffffff;
-      text-shadow: 0 0 25px rgba(255, 255, 255, 0.12);
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
     }
     .wh-slide.active .wh-text h3 {
       opacity: 1;
@@ -2539,50 +2537,57 @@
 
     .wh-text p {
       opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
-      transition-delay: 0.32s;
-      font-size: 15.5px;
+      transform: translateY(18px);
+      transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+      transition-delay: 0.26s;
+      font-size: 15px;
       color: var(--ink-dim);
-      max-width: 520px;
-      line-height: 1.75;
+      max-width: 540px;
+      line-height: 1.7;
+      margin: 0;
     }
     .wh-slide.active .wh-text p {
       opacity: 1;
       transform: translateY(0);
     }
 
+    /* Position square slide indicators at bottom-right so they never overlap the news text */
     .wh-dots {
       position: absolute;
-      bottom: 120px;
-      left: 6%;
-      z-index: 20;
+      bottom: 115px;
+      right: 6%;
+      z-index: 25;
       display: flex;
-      gap: 10px;
+      gap: 8px;
       align-items: center;
+      background: rgba(8, 8, 14, 0.75);
+      padding: 8px 16px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 215, 0, 0.3);
+      backdrop-filter: blur(10px);
     }
     @media(max-width:850px) {
       .wh-dots {
-        bottom: 80px;
-        left: 20px;
+        bottom: 75px;
+        right: 20px;
       }
     }
 
     .wh-dot {
-      width: 14px;
-      height: 14px;
+      width: 12px;
+      height: 12px;
       border-radius: 2px;
-      background: rgba(255, 255, 255, 0.18);
+      background: rgba(255, 255, 255, 0.2);
       border: 1.5px solid rgba(255, 215, 0, 0.5);
       padding: 0;
       cursor: pointer;
-      transition: all .25s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: all .25s ease;
     }
     .wh-dot.active {
       background: var(--red-bright);
       border-color: #ffd700;
-      width: 40px;
-      box-shadow: 0 0 16px var(--red-bright);
+      width: 32px;
+      box-shadow: 0 0 14px var(--red-bright);
     }
 
     /* Immersive Navigation Arrows */
