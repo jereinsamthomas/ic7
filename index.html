@@ -771,42 +771,43 @@
       filter: drop-shadow(0 12px 30px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 25px rgba(255, 17, 34, 0.7));
     }
 
-    /* Hero Live Stats Bar (Dark Theme) */
+    /* Hero Live Stats Bar (Restored White Background Cards) */
     .hero-live-stats {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 16px;
       padding-top: 24px;
-      border-top: 1px solid rgba(255,255,255,0.12);
+      border-top: 1px solid rgba(255,255,255,0.18);
     }
     .hero-stat-pill {
-      background: rgba(12, 12, 18, 0.75);
-      border: 1px solid rgba(255, 215, 0, 0.3);
+      background: #ffffff !important;
+      border: 1.5px solid rgba(255, 17, 34, 0.5) !important;
       padding: 16px;
-      border-radius: 8px;
+      border-radius: 10px;
       text-align: center;
-      transition: all 0.25s ease;
-      backdrop-filter: blur(10px);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), 0 0 15px rgba(255, 17, 34, 0.2);
     }
     .hero-stat-pill:hover {
-      border-color: #ff1122;
-      box-shadow: 0 0 25px rgba(255,17,34,0.5);
-      transform: translateY(-3px);
+      border-color: #ff1122 !important;
+      box-shadow: 0 14px 35px rgba(255, 17, 34, 0.45);
+      transform: translateY(-4px) scale(1.03);
     }
     .hero-stat-num {
       font-family: 'Teko', 'Bebas Neue', sans-serif;
-      font-size: 36px;
+      font-size: 38px;
       line-height: 1;
       font-weight: 800;
       color: #ff1122 !important;
-      text-shadow: 0 0 15px rgba(255,17,34,0.7);
+      text-shadow: none;
     }
     .hero-stat-lbl {
       font-family: var(--font-mono);
-      font-size: 10px;
-      letter-spacing: 0.12em;
-      color: #aaaabb !important;
+      font-size: 10.5px;
+      letter-spacing: 0.14em;
+      color: #111116 !important;
       text-transform: uppercase;
+      font-weight: 800;
       margin-top: 4px;
     }
 
