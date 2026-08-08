@@ -2022,15 +2022,155 @@
     }
 
     /* Cabinet Showcase Inner Layout */
+    /* ─── TROPHY CABINET REDESIGN WITH 3D GEOMETRIC BLOCKS WALLPAPER ─── */
+    #trophyCabinet {
+      position: relative;
+      background-image: url('assets/tc_bg_3d_blocks.jpg') !important;
+      background-size: cover !important;
+      background-position: center center !important;
+      background-repeat: no-repeat !important;
+      padding: 100px 0 !important;
+      overflow: hidden;
+    }
+    #trophyCabinet::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: radial-gradient(circle at 50% 30%, rgba(16, 0, 4, 0.74) 0%, rgba(4, 4, 8, 0.94) 85%) !important;
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      z-index: 1;
+    }
+
+    /* Cabinet Showcase Inner Layout */
     .evo-tc-showcase {
       position: relative;
       padding: 44px 30px;
-      background: radial-gradient(circle at 50% 20%, #180004 0%, #060000 80%);
+      background: rgba(8, 8, 14, 0.88) !important;
+      border: 1px solid rgba(255, 17, 34, 0.4) !important;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.95), 0 0 35px rgba(255, 17, 34, 0.25) !important;
+      backdrop-filter: blur(16px) !important;
+      border-radius: 16px !important;
       overflow: hidden;
       min-height: 580px;
       display: flex;
       flex-direction: column;
       align-items: center;
+    }
+
+    /* Reigning Champions 3x2 Grid displaying Champion & Shield Winner details */
+    .reigning-champs-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      width: 100%;
+      max-width: 1100px;
+      margin: 24px auto 0;
+      z-index: 3;
+      position: relative;
+    }
+    @media(max-width: 992px) {
+      .reigning-champs-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media(max-width: 640px) {
+      .reigning-champs-grid { grid-template-columns: 1fr; }
+    }
+
+    .reigning-champ-card {
+      background: rgba(10, 10, 16, 0.92);
+      border: 1.5px solid rgba(255, 17, 34, 0.45);
+      border-radius: 14px;
+      padding: 18px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.9), 0 0 20px rgba(255, 17, 34, 0.2);
+      backdrop-filter: blur(14px);
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .reigning-champ-card:hover {
+      transform: translateY(-5px);
+      border-color: #ff1122;
+      box-shadow: 0 16px 40px rgba(255, 17, 34, 0.5);
+    }
+    .rc-card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    }
+    .rc-tour-icon {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      border: 1.5px solid #ff1122;
+      object-fit: cover;
+    }
+    .rc-tour-name {
+      font-family: var(--font-display);
+      font-size: 17px;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: 0.05em;
+    }
+    .rc-dual-titleholders {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .rc-titleholder-box {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 12px;
+      background: rgba(20, 20, 30, 0.75);
+      border: 1px solid rgba(255, 215, 0, 0.35);
+      border-radius: 8px;
+    }
+    .rc-titleholder-box.shield-box {
+      border-color: rgba(255, 17, 34, 0.45);
+      background: rgba(26, 8, 12, 0.75);
+    }
+    .rc-titleholder-logo {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      border: 1.5px solid #ffd700;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+    .shield-box .rc-titleholder-logo {
+      border-color: #ff1122;
+    }
+    .rc-titleholder-info {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+    }
+    .rc-th-tag {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      color: #ffd700;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+    .shield-box .rc-th-tag {
+      color: #ff1122;
+    }
+    .rc-th-name {
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.15;
+      margin: 2px 0 1px;
+    }
+    .rc-th-season {
+      font-family: var(--font-mono);
+      font-size: 9.5px;
+      color: rgba(255, 255, 255, 0.7);
+      letter-spacing: 0.1em;
     }
     /* Red shimmer top bar */
     .evo-tc-showcase::before {
@@ -5801,17 +5941,24 @@
                     <div class="evo-tc-subtitle" style="color: var(--red-bright);">CURRENT TITLEHOLDERS SHOWCASE</div>
                   </div>
 
-                  <!-- 3x2 Grid layout styled like SEOwins.io feature blocks -->
+                  <!-- 3x2 Grid layout displaying Reigning Champion & Shield Winner for all 6 tournaments -->
                   <div class="reigning-champs-grid">
                     ${MAJOR_TOURS.map(tour => {
                       const m0 = meta[tour.id] || {};
                       const tourName = m0.name || tour.name;
-                      const currChampName = m0.currChamp || 'TBD';
-                      const currChampTag = m0.currChampTag || 'REIGNING CHAMPIONS';
+                      const currChampName = m0.currChamp || m0.champion || 'TBD';
+                      const currChampTag = m0.currChampTag || 'REIGNING CHAMPION';
+                      const shieldName = m0.shieldWinner || 'SHIELD WINNER';
+                      const shieldTag = m0.shieldTag || 'SHIELD WINNER';
                       const badgeLogo = getTourBadgeLogo(tour.id, m0.tourLogo);
-                      const currChampBadgeHtml = m0.currChampLogo
-                        ? `<img class="rc-card-logo" src="${m0.currChampLogo}" alt="${escapeHtml(currChampName)}">`
-                        : `<div class="rc-card-logo-placeholder">🏆</div>`;
+                      
+                      const currChampLogoHtml = m0.currChampLogo || m0.champLogo
+                        ? `<img class="rc-titleholder-logo" src="${m0.currChampLogo || m0.champLogo}" alt="${escapeHtml(currChampName)}">`
+                        : `<div class="rc-titleholder-logo" style="background:#ff1122;color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;">🏆</div>`;
+
+                      const shieldLogoHtml = m0.shieldLogo
+                        ? `<img class="rc-titleholder-logo" src="${m0.shieldLogo}" alt="${escapeHtml(shieldName)}">`
+                        : `<div class="rc-titleholder-logo" style="background:#ffd700;color:#000;display:flex;align-items:center;justify-content:center;font-size:18px;">🛡️</div>`;
 
                       return `
                         <div class="reigning-champ-card">
@@ -5819,13 +5966,24 @@
                             <img class="rc-tour-icon" src="${badgeLogo}" alt="${escapeHtml(tourName)}">
                             <span class="rc-tour-name">${escapeHtml(tourName)}</span>
                           </div>
-                          <div class="rc-card-body">
-                            <div class="rc-badge-wrapper">
-                              ${currChampBadgeHtml}
+                          <div class="rc-dual-titleholders">
+                            <!-- Champion Box -->
+                            <div class="rc-titleholder-box">
+                              ${currChampLogoHtml}
+                              <div class="rc-titleholder-info">
+                                <span class="rc-th-tag">${escapeHtml(currChampTag)}</span>
+                                <h4 class="rc-th-name">${escapeHtml(currChampName)}</h4>
+                                <span class="rc-th-season">SEASON 1 · 2026</span>
+                              </div>
                             </div>
-                            <div class="rc-champ-info">
-                              <h4 class="rc-champ-name">${escapeHtml(currChampName)}</h4>
-                              <span class="rc-champ-tag">${escapeHtml(currChampTag)}</span>
+                            <!-- Shield Winner Box -->
+                            <div class="rc-titleholder-box shield-box">
+                              ${shieldLogoHtml}
+                              <div class="rc-titleholder-info">
+                                <span class="rc-th-tag">${escapeHtml(shieldTag)}</span>
+                                <h4 class="rc-th-name">${escapeHtml(shieldName)}</h4>
+                                <span class="rc-th-season">SEASON 2 · 2026</span>
+                              </div>
                             </div>
                           </div>
                         </div>
