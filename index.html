@@ -532,37 +532,27 @@
       position: relative;
     }
 
-    /* ─── FULL PAGE SOLID WHITE CANVAS THEME OVERRIDES ───────────────── */
-    body {
-      background-color: #ffffff !important;
-      color: #111118 !important;
-    }
-    
-    /* Clean white section backgrounds and card styling */
-    .section, .dash-panel, .nexus-team-card, .evo-tc-bay, .tour-table-card, .trophy-card, .card {
-      background-color: #ffffff !important;
-      color: #111118 !important;
-      border: 1px solid #e2e8f0 !important;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.05) !important;
-    }
-
-    .section-head h2, .section-head h3, h1, h2, h3, h4, h5, h6 {
-      color: #111118 !important;
-    }
-
-    /* ─── WHITE INK-WASH HERO SECTION (MATCHING REFERENCE IMAGE) ───── */
+    /* ─── WHITE INK-WASH HERO SECTION (SCOPED STRICTLY TO HERO SECTION ONLY) ───── */
     .hero-ink-white {
       position: relative;
       background: #ffffff !important;
       padding: 50px 0 70px;
-      color: #111118;
+      color: #111118 !important;
       overflow: hidden;
+    }
+    .hero-ink-white h1, 
+    .hero-ink-white h2, 
+    .hero-ink-white h3, 
+    .hero-ink-white h4, 
+    .hero-ink-white h5, 
+    .hero-ink-white h6 {
+      color: #111118 !important;
     }
     .hero-ink-white::before {
       content: "";
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at 50% 30%, rgba(212,0,0,0.04) 0%, transparent 70%);
+      background: radial-gradient(circle at 50% 30%, rgba(212,0,0,0.03) 0%, transparent 70%);
       pointer-events: none;
     }
 
@@ -697,7 +687,7 @@
       max-width: 100%;
       height: auto;
       border-radius: 12px;
-      filter: drop-shadow(0 15px 35px rgba(0,0,0,0.12));
+      filter: drop-shadow(0 15px 35px rgba(0,0,0,0.08));
     }
 
     /* 4-Block Feature Grid Layout (Matching Reference Layout) */
@@ -730,7 +720,7 @@
     .card-spotlight {
       background: #ffffff !important;
       border: 1px solid #e2e8f0 !important;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.06) !important;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05) !important;
     }
     .feat-card-header {
       display: flex;
@@ -773,37 +763,37 @@
       color: #d40000;
     }
 
-    /* Card 2: News Dark Smoke Card */
+    /* Card 2: News Card (Unified White Tone) */
     .card-news-dark {
-      background: #181820 !important;
-      color: #ffffff !important;
-      border: 1px solid rgba(255,255,255,0.1) !important;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2) !important;
+      background: #ffffff !important;
+      color: #111118 !important;
+      border: 1px solid #e2e8f0 !important;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05) !important;
     }
     .news-tab {
       font-family: var(--font-mono);
       font-size: 10px;
-      color: #888899;
+      color: #777788;
       cursor: pointer;
     }
     .news-tab.active {
-      color: #ff1122;
+      color: #d40000;
       font-weight: 700;
-      border-bottom: 2px solid #ff1122;
+      border-bottom: 2px solid #d40000;
     }
     .news-highlight-text {
       font-size: 13px;
       line-height: 1.6;
-      color: #dddde5 !important;
+      color: #2b2b36 !important;
       margin-bottom: 16px;
     }
     .highlight-red {
-      color: #ff3344;
+      color: #d40000;
       font-weight: 700;
     }
     .news-more-link {
       font-size: 11px;
-      color: #ff3344;
+      color: #d40000;
       font-weight: 700;
     }
 
@@ -3755,7 +3745,7 @@
 
       <!-- Player Artwork Image Cutout Showcase -->
       <div class="hero-players-img-wrap">
-        <img src="./assets/hero_players-BtJg94OT.png" alt="IC7 eFootball Player Artwork" class="hero-players-img">
+        <img src="./assets/hero_players-DFwJZWB_.png" alt="IC7 eFootball Player Artwork" class="hero-players-img">
       </div>
     </div>
 
