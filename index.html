@@ -3878,7 +3878,7 @@
           <!-- Class-Leading IC7 Logo Frame -->
           <div class="class-logo-frame">
             <div class="logo-ring-outer">
-              <img src="assets/logo.png" alt="IC7 Logo Crest" class="class-logo-img">
+              <img src="./assets/logo-DMMRsZcg.png" alt="IC7 Logo Crest" class="class-logo-img">
             </div>
             <div class="logo-text-badge">
               <span class="logo-clan-title">ICONIC SEVENS</span>
@@ -3940,7 +3940,7 @@
           <div class="hero-big-logo-frame">
             <div class="big-logo-glow-aura"></div>
             <div class="big-logo-ring-shield">
-              <img src="assets/logo.png" alt="Iconic Sevens Official IC7 Logo Crest" class="hero-big-logo-img">
+              <img src="./assets/logo-DMMRsZcg.png" alt="Iconic Sevens Official IC7 Logo Crest" class="hero-big-logo-img">
             </div>
             <div class="big-logo-pedestal-badge">
               <span class="pedestal-gold-star">★ ★ ★ ★ ★</span>
@@ -5003,38 +5003,51 @@
           }
         });
 
-        // 2. Left Side Navigation Drawer Toggle (Hidden by default, shown ONLY on 3-dots button click)
-        const leftBtn = document.getElementById('leftNavBtn');
-        const leftDrawer = document.getElementById('leftNavDrawer');
-        const leftOverlay = document.getElementById('leftNavOverlay');
-        const leftClose = document.getElementById('leftNavClose');
-
+        // 2. Left Side Navigation Drawer Toggle (Robust Event Delegation for 3-Lines Button)
         const openDrawer = () => {
-          if (leftDrawer) leftDrawer.classList.add('open');
-          if (leftOverlay) leftOverlay.classList.add('open');
+          const drawer = document.getElementById('leftNavDrawer');
+          const overlay = document.getElementById('leftNavOverlay');
+          if (drawer) drawer.classList.add('open');
+          if (overlay) overlay.classList.add('open');
           document.body.style.overflow = 'hidden';
         };
         const closeDrawer = () => {
-          if (leftDrawer) leftDrawer.classList.remove('open');
-          if (leftOverlay) leftOverlay.classList.remove('open');
+          const drawer = document.getElementById('leftNavDrawer');
+          const overlay = document.getElementById('leftNavOverlay');
+          if (drawer) drawer.classList.remove('open');
+          if (overlay) overlay.classList.remove('open');
           document.body.style.overflow = '';
         };
-
-        if (leftBtn) leftBtn.addEventListener('click', openDrawer);
-        if (leftClose) leftClose.addEventListener('click', closeDrawer);
-        if (leftOverlay) leftOverlay.addEventListener('click', closeDrawer);
-
-        const leftAdminBtn = document.getElementById('leftDrawerAdminBtn');
-        if (leftAdminBtn) {
-          leftAdminBtn.addEventListener('click', () => {
+        const toggleDrawer = () => {
+          const drawer = document.getElementById('leftNavDrawer');
+          if (drawer && drawer.classList.contains('open')) {
             closeDrawer();
-            openModal();
-          });
-        }
+          } else {
+            openDrawer();
+          }
+        };
 
-        const drawerLinks = document.querySelectorAll('.left-drawer-links a');
-        drawerLinks.forEach(link => {
-          link.addEventListener('click', closeDrawer);
+        document.addEventListener('click', (e) => {
+          const trigger = e.target.closest('#leftNavBtn, .three-lines-nav-trigger, .dots-nav-trigger');
+          if (trigger) {
+            e.preventDefault();
+            e.stopPropagation();
+            toggleDrawer();
+            return;
+          }
+          if (e.target.closest('#leftNavClose') || e.target.closest('#leftNavOverlay')) {
+            closeDrawer();
+            return;
+          }
+          if (e.target.closest('#leftDrawerAdminBtn')) {
+            closeDrawer();
+            if (typeof openModal === 'function') openModal();
+            return;
+          }
+          const drawerLink = e.target.closest('.left-drawer-links a');
+          if (drawerLink) {
+            closeDrawer();
+          }
         });
 
         // 3. Back To Top Floating Button
