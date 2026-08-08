@@ -4446,9 +4446,14 @@
 
           <!-- HERO & ABOUT -->
           <section class="dash-panel" data-panel="hero" hidden>
-            <h3>Hero &amp; About</h3>
-            <p class="admin-sub">The headline tagline, stat counters, and About story.</p>
+            <h3>Hero, Logo &amp; About</h3>
+            <p class="admin-sub">Change club logo, headline tagline, stat counters, and About story.</p>
             <form class="admin-form" id="heroForm">
+              <div class="field-row">
+                <div class="field"><label for="he_logoUrl">Club Logo Image URL Link</label><input type="text" id="he_logoUrl" placeholder="assets/logo.png or https://..."></div>
+                <div class="field"><label for="he_logoFile">Upload New Club Logo Photo</label><input type="file" accept="image/*" id="he_logoFile"></div>
+              </div>
+              <div id="he_logoPreview" style="display:none; margin:10px 0; border:2px solid var(--red); border-radius:50%; width:80px; height:80px; background-size:contain; background-position:center; background-repeat:no-repeat; background-color:#000;"></div>
               <div class="field"><label for="he_tagline">Hero Tagline</label><textarea id="he_tagline"
                   rows="2"></textarea></div>
               <div class="field-row">
@@ -4477,8 +4482,8 @@
                 <div class="field"><label for="he_aboutDistricts">Districts</label><input type="text"
                     id="he_aboutDistricts"></div>
               </div>
-              <button type="submit" class="btn btn-red">Save Hero &amp; About</button>
-              <span class="admin-success" id="heroSavedMsg" hidden>Saved.</span>
+              <button type="submit" class="btn btn-red">Save Logo, Hero &amp; About</button>
+              <span class="admin-success" id="heroSavedMsg" hidden>Saved logo &amp; hero settings.</span>
             </form>
           </section>
 
@@ -6318,10 +6323,22 @@
       applyContactSettings();
       window.IC7CMS = { getContactSettings: contactSettings.get, applyContactSettings };
 
+      // Helper function to update all logo elements across the site
+      function updateLogoImages() {
+        const logoUrl = Store.get('ic7_logo_url', Store.get('ic7_hero_about', {}).logoUrl || 'assets/logo.png');
+        document.querySelectorAll('.class-logo-img, .hero-big-logo-img, .pro-hero-logo-img').forEach(img => {
+          if (img) img.src = logoUrl;
+        });
+        document.querySelectorAll('.crest-img-nav').forEach(el => {
+          if (el) el.style.backgroundImage = `url('${logoUrl}')`;
+        });
+      }
+
       // Hero & About
       const heroSettings = setupObjectSettings({
         storeKey: 'ic7_hero_about',
         seed: {
+          logoUrl: 'assets/logo.png',
           tagline: "An eFootball clan uniting players from every corner of Kerala under one badge. We grind coin tournaments, chase clan championships, and back each other like family — on the pitch and off it.",
           founded: '2020', squad: '60+', matches: '140+', trophies: '12',
           p1: "IC7 Iconic Sevens started in 2020 when a handful of eFootball players from different corners of Kerala found each other online and started grinding matches together. What began as pickup games between strangers turned into a clan with a name, a crest and a reputation.",
@@ -6330,27 +6347,51 @@
           aboutSquads: '3', aboutTrophies: '12', aboutPlayers: '60+', aboutDistricts: '7'
         },
         fields: [
-          { id: 'tagline', type: 'textarea' }, { id: 'founded', type: 'text' }, { id: 'squad', type: 'text' }, { id: 'matches', type: 'text' }, { id: 'trophies', type: 'text' },
+          { id: 'logoUrl', type: 'text' }, { id: 'tagline', type: 'textarea' }, { id: 'founded', type: 'text' }, { id: 'squad', type: 'text' }, { id: 'matches', type: 'text' }, { id: 'trophies', type: 'text' },
           { id: 'p1', type: 'textarea' }, { id: 'p2', type: 'textarea' }, { id: 'p3', type: 'textarea' },
           { id: 'aboutSquads', type: 'text' }, { id: 'aboutTrophies', type: 'text' }, { id: 'aboutPlayers', type: 'text' }, { id: 'aboutDistricts', type: 'text' }
         ],
         formId: 'heroForm', idPrefix: 'he', savedMsgId: 'heroSavedMsg',
-        onSave: () => applyHeroAbout()
+        onSave: async () => {
+          const fileInput = document.getElementById('he_logoFile');
+          const urlInput = document.getElementById('he_logoUrl');
+          let url = urlInput ? urlInput.value.trim() : '';
+          if (fileInput && fileInput.files && fileInput.files[0]) {
+            try {
+              url = await compressImage(fileInput.files[0], 600);
+            } catch(e){}
+          }
+          if (url) {
+            Store.set('ic7_logo_url', url);
+            if (urlInput) urlInput.value = url;
+          }
+          applyHeroAbout();
+          updateLogoImages();
+        }
       });
       function applyHeroAbout() {
         const h = heroSettings.get();
+        if (h.logoUrl) {
+          Store.set('ic7_logo_url', h.logoUrl);
+        }
+        updateLogoImages();
         const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
         set('heroTagline', h.tagline);
         set('heroStatFounded', h.founded); set('heroStatSquad', h.squad); set('heroStatMatches', h.matches); set('heroStatTrophies', h.trophies);
         set('aboutP1', h.p1); set('aboutP2', h.p2); set('aboutP3', h.p3);
         set('aboutStatSquads', h.aboutSquads); set('aboutStatTrophies', h.aboutTrophies); set('aboutStatPlayers', h.aboutPlayers); set('aboutStatDistricts', h.aboutDistricts);
-        // preserve the bold "IC7 Iconic Sevens" lead-in on paragraph 1
         const p1 = document.getElementById('aboutP1');
-        if (p1 && h.p1.indexOf('IC7 Iconic Sevens') === 0) {
+        if (p1 && h.p1 && h.p1.indexOf('IC7 Iconic Sevens') === 0) {
           p1.innerHTML = '<b>IC7 Iconic Sevens</b>' + escapeHtml(h.p1.slice('IC7 Iconic Sevens'.length));
         }
       }
       applyHeroAbout();
+
+      window.addEventListener('ic7_store_updated', (e) => {
+        if (!e.detail || !e.detail.key || e.detail.key === 'ic7_logo_url') {
+          updateLogoImages();
+        }
+      });
 
       // Live match
       const liveSettings = setupObjectSettings({
