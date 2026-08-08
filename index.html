@@ -5996,13 +5996,15 @@
               </div>
             `;
           } else {
-            // Render standard 2-pedestal tour slides
+            // Render standard 2-pedestal tour slides (Season Champion & Shield Winner)
             const m = meta[t.id] || {};
             const tourName = m.name || t.name;
-            const champName = m.champion || (t.id === 'intimate-cup' ? 'INTIMATE CHAMPION' : 'IL CAPITANO');
-            const champTag = m.champTag || 'SEASON 1';
-            const shieldName = m.shieldWinner || (t.id === 'intimate-cup' ? 'INTIMATE SHIELD' : 'ICONIC SHIELD');
-            const shieldTag = m.shieldTag || 'SEASON 2';
+            const defaultChampName = tourName.toUpperCase() + ' CHAMPION';
+            const defaultShieldName = tourName.toUpperCase() + ' SHIELD';
+            const champName = m.champion || defaultChampName;
+            const champTag = m.champTag || 'SEASON 1 · 2026';
+            const shieldName = m.shieldWinner || defaultShieldName;
+            const shieldTag = m.shieldTag || 'SEASON 2 · 2026';
 
             const titleHtml = getTourTitleHtml(t.id, tourName);
             const subtitleText = getTourSubtitle(t.id);
