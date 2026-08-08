@@ -556,50 +556,55 @@
       pointer-events: none;
     }
 
-    /* Clear Logo Crest Frame */
+    /* Bigger Clear Logo Crest Frame */
     .hero-logo-frame {
       text-align: center;
-      margin-bottom: 28px;
+      margin-bottom: 32px;
       position: relative;
       z-index: 10;
     }
     .hero-crest-img-clear {
-      width: 110px;
-      height: 110px;
-      margin: 0 auto 12px;
+      width: 170px;
+      height: 170px;
+      margin: 0 auto 16px;
       display: block;
       background-image: url('assets/logo.png');
       background-size: contain;
       background-position: center;
       background-repeat: no-repeat;
       border-radius: 50%;
-      border: 3px solid #ff1122;
+      border: 4px solid #ff1122;
       background-color: #ffffff;
-      box-shadow: 0 0 25px rgba(255,17,34,0.3), 0 10px 30px rgba(0,0,0,0.12);
+      box-shadow: 0 0 35px rgba(255,17,34,0.4), 0 12px 35px rgba(0,0,0,0.15);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .hero-crest-img-clear:hover {
+      transform: scale(1.06) rotate(3deg);
     }
     .hero-logo-badge {
       font-family: var(--font-display);
-      font-size: 24px;
+      font-size: 28px;
       font-weight: 900;
-      letter-spacing: 0.15em;
+      letter-spacing: 0.18em;
       color: #d40000;
       text-transform: uppercase;
     }
     .hero-logo-sub {
       font-family: var(--font-mono);
-      font-size: 11px;
-      letter-spacing: 0.22em;
+      font-size: 12px;
+      letter-spacing: 0.24em;
       color: #555566;
       text-transform: uppercase;
+      font-weight: 700;
     }
 
     /* Main Hero Headline & Art Showcase */
     .hero-art-showcase {
       display: grid;
-      grid-template-columns: 1fr 1.1fr;
-      gap: 40px;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 36px;
       align-items: center;
-      margin-bottom: 50px;
+      margin-bottom: 40px;
       position: relative;
       z-index: 5;
     }
@@ -609,27 +614,43 @@
 
     .hero-main-title {
       font-family: 'Cinzel', 'Oswald', sans-serif;
-      font-size: clamp(38px, 5.2vw, 74px);
-      line-height: 0.95;
+      font-size: clamp(48px, 6.8vw, 92px);
+      line-height: 0.92;
       font-weight: 900;
-      color: #d40000 !important;
       text-transform: uppercase;
       letter-spacing: 0.02em;
-      margin-bottom: 18px;
-      text-shadow: 0 4px 15px rgba(212,0,0,0.15);
+      margin-bottom: 22px;
     }
-    .hero-main-title .title-sub-red {
-      display: block;
+
+    .word-black {
       color: #111118 !important;
-      font-size: 0.72em;
+      display: inline-block;
+      text-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      margin-right: 12px;
+    }
+
+    .word-red-anim {
+      display: inline-block;
+      background: linear-gradient(110deg, #d40000 0%, #ff1122 35%, #ff4d6d 50%, #ff1122 65%, #d40000 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: heroRedShimmer 3.5s linear infinite;
+      filter: drop-shadow(0 4px 18px rgba(212, 0, 0, 0.35));
+    }
+    @keyframes heroRedShimmer {
+      0% { background-position: 0% center; }
+      100% { background-position: 200% center; }
     }
 
     .hero-tagline {
-      font-size: 16px;
-      line-height: 1.75;
-      color: #4a4a5a !important;
-      margin-bottom: 28px;
-      max-width: 540px;
+      font-size: 18px;
+      line-height: 1.8;
+      color: #333344 !important;
+      margin-bottom: 32px;
+      max-width: 600px;
+      font-weight: 500;
     }
 
     .hero-action-row {
@@ -645,9 +666,9 @@
     .btn-hero-red {
       background: #d40000 !important;
       color: #ffffff !important;
-      padding: 16px 36px;
+      padding: 18px 40px;
       font-weight: 800;
-      font-size: 14px;
+      font-size: 15px;
       letter-spacing: 0.12em;
       border-radius: 6px;
       box-shadow: 0 8px 25px rgba(212,0,0,0.4);
@@ -666,9 +687,9 @@
       background: #ffffff !important;
       color: #111118 !important;
       border: 1.5px solid #d40000 !important;
-      padding: 16px 32px;
+      padding: 18px 36px;
       font-weight: 700;
-      font-size: 14px;
+      font-size: 15px;
       border-radius: 6px;
       transition: all 0.25s ease;
     }
@@ -684,10 +705,11 @@
       text-align: center;
     }
     .hero-players-img {
-      max-width: 100%;
+      max-width: 440px;
+      width: 100%;
       height: auto;
       border-radius: 12px;
-      filter: drop-shadow(0 15px 35px rgba(0,0,0,0.08));
+      filter: drop-shadow(0 15px 35px rgba(0,0,0,0.1));
     }
 
     /* 4-Block Feature Grid Layout (Matching Reference Layout) */
@@ -3725,75 +3747,27 @@
 
   <!-- ============================= HERO (E-FOOTBALL SYSTEM LAYOUT) ============================= -->
   <section class="hero-ink-white" id="hero">
-    <!-- Top Central Logo Frame -->
+    <!-- Top Central Logo Frame (Bigger Logo) -->
     <div class="hero-logo-frame">
       <span class="hero-crest-img-clear" role="img" aria-label="Iconic Sevens logo crest"></span>
       <div class="hero-logo-badge">ICONIC SEVENS</div>
-      <div class="hero-logo-sub">KERALA eFOOTBALL CLAN</div>
+      <div class="hero-logo-sub">KERALA eFOOTBALL CLAN &amp; CHAMPIONS</div>
     </div>
 
     <!-- Main Hero Headline & Player Artwork Showcase -->
     <div class="hero-art-showcase wrap">
       <div class="hero-headline-wrap">
-        <h1 class="hero-main-title">DREAMING <span class="title-sub-red">OF CLOUD FIELD</span></h1>
+        <h1 class="hero-main-title"><span class="word-black">ICONIC</span> <span class="word-red-anim">SEVENS</span></h1>
         <p class="hero-tagline" id="heroTagline">Uniting Kerala's top eFootball players and clan squads to compete for glory, coin tournaments, and clan championships.</p>
         <div class="hero-action-row">
-          <a href="#register" class="btn-hero-red">CLIENT DOWNLOAD &amp; REGISTER &nbsp; &rarr;</a>
+          <a href="#register" class="btn-hero-red">REGISTER NOW &nbsp; &rarr;</a>
           <a href="#highlights" class="btn-hero-white">WATCH HIGHLIGHTS</a>
         </div>
       </div>
 
-      <!-- Player Artwork Image Cutout Showcase -->
+      <!-- Player Artwork Image Cutout Showcase (Slightly Smaller Image) -->
       <div class="hero-players-img-wrap">
         <img src="./assets/hero_players-DFwJZWB_.png" alt="IC7 eFootball Player Artwork" class="hero-players-img">
-      </div>
-    </div>
-
-    <!-- Featured 4-Card Grid (Matching Reference Layout) -->
-    <div class="hero-feature-grid wrap">
-      <!-- Card 1: Recommend Career -->
-      <div class="hero-feat-card card-spotlight">
-        <div class="feat-card-header">
-          <span class="feat-badge-red">RECOMMEND CAREER &gt;</span>
-          <span class="feat-badge-tag">TRIALS OPEN</span>
-        </div>
-        <h4 class="feat-title">COASTAL KINGS &amp; ROOKIES</h4>
-        <p class="feat-desc">Join Kerala's top esports ladder. Register for the upcoming trials and clear team selection.</p>
-        <a href="#teams" class="feat-link-btn">EXPLORE SQUADS &rarr;</a>
-      </div>
-
-      <!-- Card 2: Announcement & Latest News -->
-      <div class="hero-feat-card card-news-dark">
-        <div class="feat-card-header">
-          <span class="news-tab active">ANNOUNCEMENT</span>
-          <span class="news-tab">LATEST NEWS</span>
-        </div>
-        <div class="news-body-content">
-          <p class="news-highlight-text">"Expedition" new data file released! Dual mode clan tournaments live with <span class="highlight-red">₹15,000 prize pool, coin tour reward, and gold ascension!</span></p>
-          <a href="#activities" class="news-more-link">Open details to view highlight info &rarr;</a>
-        </div>
-      </div>
-
-      <!-- Card 3: Guild Settled -->
-      <div class="hero-feat-card card-guild">
-        <div class="feat-card-header">
-          <span class="feat-badge-red">GUILD SETTLED</span>
-        </div>
-        <ul class="guild-list">
-          <li><span class="g-num">01</span> <span class="g-name">IC7 Elite Squad</span> <span class="g-status">Top 1</span></li>
-          <li><span class="g-num">02</span> <span class="g-name">IC7 Rookies Squad</span> <span class="g-status">Active</span></li>
-          <li><span class="g-num">03</span> <span class="g-name">IC7 Duo Champions</span> <span class="g-status">Qualified</span></li>
-        </ul>
-        <a href="#register" class="guild-apply-btn">APPLY NOW &rarr;</a>
-      </div>
-
-      <!-- Card 4: Dream Canyon Red Banner -->
-      <div class="hero-feat-card card-banner-red">
-        <div class="banner-red-content">
-          <h3 class="banner-title">DREAM CANYON CHAMPIONSHIP</h3>
-          <p class="banner-sub">TODAY STOCK OPEN — 64 Teams eFootball Clan League Live</p>
-          <a href="tournament-registration.html" class="banner-btn">REGISTER TOURNAMENT NOW &rarr;</a>
-        </div>
       </div>
     </div>
 
