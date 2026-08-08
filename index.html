@@ -2436,19 +2436,22 @@
       object-position: center;
       z-index: 1;
       pointer-events: none;
+      filter: brightness(1.1) contrast(1.08) saturate(1.1);
+      image-rendering: -webkit-optimize-contrast;
+      image-rendering: crisp-edges;
     }
 
     .wh-media::before {
       content: "";
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at 75% 50%, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.7) 60%, rgba(0,0,0,0.92) 100%),
-                  linear-gradient(90deg, rgba(4,4,6,0.95) 0%, rgba(4,4,6,0.75) 45%, rgba(4,4,6,0.2) 100%);
+      background: linear-gradient(90deg, rgba(4,4,6,0.85) 0%, rgba(4,4,6,0.4) 35%, transparent 75%);
       z-index: 2;
+      pointer-events: none;
     }
     @media(max-width:850px) {
       .wh-media::before {
-        background: linear-gradient(0deg, #040406 0%, rgba(4,4,6,0.9) 60%, rgba(4,4,6,0.3) 100%);
+        background: linear-gradient(0deg, rgba(4,4,6,0.92) 0%, rgba(4,4,6,0.4) 50%, transparent 85%);
       }
     }
 
@@ -3315,7 +3318,7 @@
   <script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-  <script type="module" crossorigin src="./assets/main-DOVC0Jt4.js"></script>
+  <script type="module" crossorigin src="./assets/main-SIDKuuGY.js"></script>
   <link rel="modulepreload" crossorigin href="./assets/store-Cr00HOVh.js">
 </head>
 
