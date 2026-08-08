@@ -2345,23 +2345,24 @@
 
     .wh-label {
       position: absolute;
-      top: 100px;
-      left: 10%;
-      z-index: 10;
+      top: 36px;
+      left: 6%;
+      z-index: 20;
       font-family: var(--font-mono);
       font-size: 11px;
       letter-spacing: .2em;
       text-transform: uppercase;
-      color: #fff;
-      background: var(--red);
+      color: #ffffff;
+      background: var(--red-bright);
       padding: 8px 18px;
       font-weight: 700;
-      box-shadow: 0 4px 15px rgba(212,0,0,0.3);
+      border-radius: 4px;
+      box-shadow: 0 4px 20px rgba(230,0,46,0.5);
     }
     @media(max-width:850px) {
       .wh-label {
-        top: 90px;
-        left: 24px;
+        top: 24px;
+        left: 20px;
       }
     }
 
@@ -2553,33 +2554,35 @@
 
     .wh-dots {
       position: absolute;
-      bottom: 60px;
-      left: 10%;
-      z-index: 10;
+      bottom: 120px;
+      left: 6%;
+      z-index: 20;
       display: flex;
-      gap: 8px;
+      gap: 10px;
+      align-items: center;
     }
     @media(max-width:850px) {
       .wh-dots {
-        bottom: 24px;
-        left: 24px;
+        bottom: 80px;
+        left: 20px;
       }
     }
 
     .wh-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 0;
-      background: rgba(255, 255, 255, 0.22);
-      border: 1px solid rgba(212, 0, 0, 0.4);
+      width: 14px;
+      height: 14px;
+      border-radius: 2px;
+      background: rgba(255, 255, 255, 0.18);
+      border: 1.5px solid rgba(255, 215, 0, 0.5);
       padding: 0;
       cursor: pointer;
-      transition: all .25s ease;
+      transition: all .25s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .wh-dot.active {
       background: var(--red-bright);
-      border-color: var(--red-bright);
-      width: 32px;
+      border-color: #ffd700;
+      width: 40px;
+      box-shadow: 0 0 16px var(--red-bright);
     }
 
     /* Immersive Navigation Arrows */
@@ -3304,7 +3307,7 @@
   <script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-  <script type="module" crossorigin src="./assets/main-B_yMPRij.js"></script>
+  <script type="module" crossorigin src="./assets/main-DOVC0Jt4.js"></script>
   <link rel="modulepreload" crossorigin href="./assets/store-Cr00HOVh.js">
 </head>
 
@@ -4548,21 +4551,13 @@
 
         let mouseX = window.innerWidth / 2;
         let mouseY = window.innerHeight / 2;
-        let ringX = mouseX, ringY = mouseY;
 
         window.addEventListener('mousemove', (e) => {
           mouseX = e.clientX;
           mouseY = e.clientY;
           cursorDot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
+          cursorRing.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
         }, { passive: true });
-
-        function animateCursor() {
-          ringX += (mouseX - ringX) * 0.18;
-          ringY += (mouseY - ringY) * 0.18;
-          cursorRing.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
-          requestAnimationFrame(animateCursor);
-        }
-        requestAnimationFrame(animateCursor);
 
         // Hover expansions
         const hoverTargets = 'a, button, input, select, textarea, .card, .evo-tc-bay, .evo-tc-plinth, .tour-card, .team-card, .player-card, .dots-nav-trigger';
