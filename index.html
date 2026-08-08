@@ -3718,7 +3718,7 @@
   <script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-  <script type="module" crossorigin src="./assets/main-SIDKuuGY.js"></script>
+  <script type="module" crossorigin src="./assets/main-MEtmyXqQ.js"></script>
   <link rel="modulepreload" crossorigin href="./assets/store-Cr00HOVh.js">
 </head>
 
@@ -4448,9 +4448,14 @@
 
           <!-- HERO & ABOUT -->
           <section class="dash-panel" data-panel="hero" hidden>
-            <h3>Hero &amp; About</h3>
-            <p class="admin-sub">The headline tagline, stat counters, and About story.</p>
+            <h3>Hero, Logo &amp; About</h3>
+            <p class="admin-sub">Change club logo, headline tagline, stat counters, and About story.</p>
             <form class="admin-form" id="heroForm">
+              <div class="field-row">
+                <div class="field"><label for="he_logoUrl">Club Logo Image URL Link</label><input type="text" id="he_logoUrl" placeholder="assets/logo.png or https://..."></div>
+                <div class="field"><label for="he_logoFile">Upload New Club Logo Photo</label><input type="file" accept="image/*" id="he_logoFile"></div>
+              </div>
+              <div id="he_logoPreview" style="display:none; margin:10px 0; border:2px solid var(--red); border-radius:50%; width:80px; height:80px; background-size:contain; background-position:center; background-repeat:no-repeat; background-color:#000;"></div>
               <div class="field"><label for="he_tagline">Hero Tagline</label><textarea id="he_tagline"
                   rows="2"></textarea></div>
               <div class="field-row">
@@ -4479,8 +4484,8 @@
                 <div class="field"><label for="he_aboutDistricts">Districts</label><input type="text"
                     id="he_aboutDistricts"></div>
               </div>
-              <button type="submit" class="btn btn-red">Save Hero &amp; About</button>
-              <span class="admin-success" id="heroSavedMsg" hidden>Saved.</span>
+              <button type="submit" class="btn btn-red">Save Logo, Hero &amp; About</button>
+              <span class="admin-success" id="heroSavedMsg" hidden>Saved logo &amp; hero settings.</span>
             </form>
           </section>
 
