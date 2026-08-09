@@ -2025,7 +2025,7 @@
       filter: none !important;
     }
 
-    /* Cabinet Showcase Inner Layout (NO BLUR, ULTRA CRISP CONTRAST) */
+    /* Cabinet Showcase Inner Layout (VIVID BACKGROUND, ULTRA CRISP TITLES & CONTRAST) */
     #trophyCabinet {
       position: relative;
       background-image: url('./assets/tc_bg_laser_mesh-CCwSh8f4.jpg') !important;
@@ -2040,10 +2040,40 @@
       position: absolute;
       top: 0; left: 0;
       width: 100%; height: 100%;
-      background: radial-gradient(circle at 50% 30%, rgba(8, 0, 4, 0.75) 0%, rgba(4, 4, 8, 0.94) 85%) !important;
+      background: radial-gradient(circle at 50% 30%, rgba(12, 0, 4, 0.28) 0%, rgba(4, 4, 8, 0.58) 85%) !important;
       backdrop-filter: none !important;
       -webkit-backdrop-filter: none !important;
       z-index: 1;
+    }
+
+    /* Crystal Clear Trophy Cabinet Titles */
+    #trophyCabinet .eyebrow {
+      font-family: var(--font-mono);
+      font-size: 13px !important;
+      font-weight: 900 !important;
+      color: #ff1122 !important;
+      letter-spacing: .35em !important;
+      text-transform: uppercase !important;
+      text-shadow: 0 0 16px rgba(255, 17, 34, 0.8), 0 2px 8px rgba(0, 0, 0, 0.9) !important;
+    }
+    #trophyCabinet .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(38px, 6vw, 64px) !important;
+      font-weight: 900 !important;
+      color: #ffffff !important;
+      letter-spacing: 0.04em !important;
+      text-transform: uppercase !important;
+      text-shadow: 0 0 24px rgba(0, 0, 0, 0.95), 0 0 35px rgba(255, 17, 34, 0.7) !important;
+    }
+    #trophyCabinet .section-title .red-text {
+      color: #ff1122 !important;
+      text-shadow: 0 0 20px rgba(255, 17, 34, 0.9) !important;
+    }
+    #trophyCabinet .section-lede {
+      font-size: 17px !important;
+      color: #ffffff !important;
+      font-weight: 700 !important;
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.95) !important;
     }
 
     .evo-tc-showcase {
