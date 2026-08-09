@@ -1953,6 +1953,20 @@
     }
     .tc-tour-cabinet-block { margin-bottom: 50px; transition: all 0.4s ease; }
 
+    /* Teams 5-Card Responsive Grid */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 36px;
+    }
+    @media(max-width: 900px) {
+      .team-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media(max-width: 600px) {
+      .team-grid { grid-template-columns: 1fr; }
+    }
+
     /* ─── TROPHY CABINET SLIDER ─────────────────────────────── */
     /* ─── TROPHY CABINET SLIDER (ZERO BLUR, FLAT ULTRA-CRISP 2D LAYOUT) ─── */
     .trophy-cabinet-container {
@@ -4108,7 +4122,7 @@
   <script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-  <script type="module" crossorigin src="./assets/main-DNNTZTwt.js"></script>
+  <script type="module" crossorigin src="./assets/main-ChttjNir.js"></script>
   <link rel="modulepreload" crossorigin href="./assets/store-Cr00HOVh.js">
 </head>
 
