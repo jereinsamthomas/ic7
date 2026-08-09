@@ -2475,41 +2475,41 @@
     .evo-tc-title-wrap { position:relative; display:inline-block; margin-bottom:4px; }
     .evo-tc-title {
       font-family: var(--font-display);
-      font-size: clamp(44px, 7vw, 80px);
-      font-weight: 400;
-      letter-spacing: .04em;
-      text-transform: uppercase;
-      color: #ffffff;
-      line-height: 1;
-      text-shadow: 0 0 14px rgba(255,255,255,0.5), 0 6px 28px rgba(0,0,0,0.9);
+      font-size: clamp(40px, 6.5vw, 76px) !important;
+      font-weight: 900 !important;
+      letter-spacing: .05em !important;
+      text-transform: uppercase !important;
+      color: #ffffff !important;
+      line-height: 1.05 !important;
+      text-shadow: 0 0 22px rgba(0, 0, 0, 0.95), 0 0 35px rgba(255, 17, 34, 0.6) !important;
     }
     .evo-tc-title .trophy-red {
-      color: var(--red-bright);
+      color: #ff1122 !important;
       display: inline-block;
-      text-shadow: 0 0 14px rgba(212,0,0,0.9), 0 0 35px rgba(212,0,0,0.5);
-      animation: tcRedPulse 3s ease-in-out infinite;
-    }
-    @keyframes tcRedPulse {
-      0%,100% { text-shadow:0 0 14px rgba(212,0,0,0.9), 0 0 35px rgba(212,0,0,0.5); }
-      50%     { text-shadow:0 0 28px rgba(255,17,34,1),  0 0 60px rgba(212,0,0,0.8); }
+      text-shadow: 0 0 22px rgba(255, 17, 34, 0.95) !important;
     }
     .evo-tc-title .cup-title { text-transform:uppercase; font-size:0.88em; letter-spacing:.07em; }
     .evo-tc-subtitle {
       font-family: var(--font-mono);
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: .48em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.7);
+      font-size: 13px !important;
+      font-weight: 800 !important;
+      letter-spacing: .45em !important;
+      text-transform: uppercase !important;
+      color: #ffffff !important;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 16px;
-      margin-top: 8px;
+      margin-top: 10px;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.95) !important;
     }
     .evo-tc-subtitle::before, .evo-tc-subtitle::after {
-      content:""; display:block; width:40px; height:2px;
-      background: var(--red);
+      content: "";
+      display: block;
+      width: 44px;
+      height: 3px;
+      background: #ff1122 !important;
+      box-shadow: 0 0 12px #ff1122 !important;
     }
 
     /* Professional Glass Cabinet Showcase Box (Ultra High Contrast Visibility) */
@@ -2535,18 +2535,18 @@
       position: absolute;
       top: 0; left: 50%;
       transform: translate(-50%, -50%);
-      background: linear-gradient(135deg, #1a1622 0%, #0d0b12 100%);
-      border: 1.5px solid #ffd700;
-      padding: 6px 28px;
+      background: #0d0b14 !important;
+      border: 2px solid #ffd700 !important;
+      padding: 7px 30px !important;
       font-family: var(--font-luxury);
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: .42em;
-      color: #ffd700;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.9), 0 0 15px rgba(255, 215, 0, 0.3);
+      font-size: 12px !important;
+      font-weight: 900 !important;
+      letter-spacing: .42em !important;
+      color: #ffd700 !important;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.95), 0 0 18px rgba(255, 215, 0, 0.4) !important;
       border-radius: 20px;
       z-index: 5;
-      text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+      text-shadow: 0 0 14px rgba(255, 215, 0, 0.8) !important;
     }
 
     /* Pedestals Grid inside Cabinet */
