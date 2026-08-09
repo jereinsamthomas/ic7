@@ -1992,21 +1992,35 @@
       overflow: hidden;
     }
     
-    /* Crisp 2D Slide States (NO BLUR, 100% SHARP READABILITY) */
+    /* Crisp 2D Slide States (NO BLUR, 100% VISIBILITY & READABILITY) */
+    #trophyCabinet,
+    #trophyCabinet .wrap,
+    #trophyCabinet .tc-tabs-bar,
+    #trophyCabinet .trophy-cabinet-container,
+    #trophyCabinet .trophy-track-wrap,
+    #trophyCabinet .trophy-track {
+      opacity: 1 !important;
+      visibility: visible !important;
+      transform: none !important;
+    }
     .trophy-slide.tc-active {
       display: block !important;
       opacity: 1 !important;
-      z-index: 10;
-      pointer-events: auto;
+      visibility: visible !important;
+      z-index: 10 !important;
+      pointer-events: auto !important;
       transform: none !important;
       filter: none !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
     }
     .trophy-slide.tc-prev-slide,
     .trophy-slide.tc-next-slide,
     .trophy-slide.tc-hidden-slide {
       display: none !important;
       opacity: 0 !important;
-      pointer-events: none;
+      visibility: hidden !important;
+      pointer-events: none !important;
       transform: none !important;
       filter: none !important;
     }
@@ -4412,15 +4426,15 @@
 <!-- ============================= TROPHY CABINET ============================= -->
   <section class="section" id="trophyCabinet" style="background:var(--bg-elevated); position:relative; overflow:hidden;">
     <div class="wrap">
-      <div class="eyebrow reveal">WHERE LEGENDS EVOLVE</div>
-      <h2 class="section-title reveal">TROPHY <span class="red-text">CABINETS</span></h2>
-      <p class="section-lede reveal">Two Seasons. One Legacy. Explore the official trophy cabinets for IC7's major tournament series.</p>
+      <div class="eyebrow" style="color:var(--red);font-weight:800;letter-spacing:.25em;">WHERE LEGENDS EVOLVE</div>
+      <h2 class="section-title" style="color:#ffffff;font-size:clamp(32px,5vw,56px);font-weight:800;">TROPHY <span class="red-text">CABINETS</span></h2>
+      <p class="section-lede" style="color:rgba(255,255,255,0.85);font-size:16px;">Two Seasons. One Legacy. Explore the official trophy cabinets for IC7's major tournament series.</p>
 
       <!-- Tournament Cabinet Selector Tabs Bar -->
-      <div class="tc-tabs-bar reveal" id="tcTabsBar"></div>
+      <div class="tc-tabs-bar" id="tcTabsBar"></div>
 
-      <!-- 3D Moving Glass Showcase Slider Container -->
-      <div class="trophy-cabinet-container reveal">
+      <!-- 2D High Contrast Glass Showcase Slider Container -->
+      <div class="trophy-cabinet-container">
         <button type="button" class="tc-arrow tc-prev" id="tcPrevBtn" aria-label="Previous Tournament">‹</button>
         <button type="button" class="tc-arrow tc-next" id="tcNextBtn" aria-label="Next Tournament">›</button>
 
