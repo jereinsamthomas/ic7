@@ -1954,85 +1954,71 @@
     .tc-tour-cabinet-block { margin-bottom: 50px; transition: all 0.4s ease; }
 
     /* ─── TROPHY CABINET SLIDER ─────────────────────────────── */
+    /* ─── TROPHY CABINET SLIDER (ZERO BLUR, FLAT ULTRA-CRISP 2D LAYOUT) ─── */
     .trophy-cabinet-container {
       position: relative;
       width: 100%;
-      max-width: 1200px;
+      max-width: 1100px;
       margin: 0 auto;
-      padding: 0 50px;
+      padding: 0 40px;
       box-sizing: border-box;
-      perspective: 1400px; /* Crucial for 3D depth perspective */
     }
     .trophy-track-wrap {
-      overflow: visible; /* Show adjacent slides rotating in 3D space */
+      overflow: hidden;
       width: 100%;
-      min-height: 600px;
+      min-height: 540px;
       position: relative;
-      perspective: 1400px;
-      transform-style: preserve-3d;
     }
     .trophy-track {
       position: relative;
       width: 100%;
       height: 100%;
-      transform-style: preserve-3d;
-      min-height: 600px;
+      min-height: 540px;
     }
     .trophy-slide {
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%) translateZ(-400px) scale(0.6);
+      display: none;
+      position: relative;
       width: 100%;
-      max-width: 900px;
+      max-width: 960px;
+      margin: 0 auto;
       opacity: 0;
-      z-index: 1;
-      pointer-events: none;
-      transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.85s ease, filter 0.85s ease;
-      transform-style: preserve-3d;
-      backface-visibility: hidden;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.9), 0 0 45px rgba(212,0,0,0.22);
-      border: 1px solid rgba(212,0,0,0.35);
+      transition: opacity 0.4s ease;
+      filter: none !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.95), 0 0 35px rgba(255,17,34,0.3);
+      border: 2px solid #ff1122;
+      border-radius: 16px;
+      overflow: hidden;
     }
     
-    /* 3D Cover Flow States */
+    /* Crisp 2D Slide States (NO BLUR, 100% SHARP READABILITY) */
     .trophy-slide.tc-active {
-      transform: translateX(-50%) translateZ(0) rotateY(0deg) scale(1);
-      opacity: 1;
+      display: block !important;
+      opacity: 1 !important;
       z-index: 10;
       pointer-events: auto;
-      filter: none;
+      transform: none !important;
+      filter: none !important;
     }
-    .trophy-slide.tc-prev-slide {
-      transform: translateX(-108%) translateZ(-180px) rotateY(32deg) scale(0.8);
-      opacity: 0.55;
-      z-index: 5;
-      pointer-events: none;
-      filter: blur(1.5px);
-    }
-    .trophy-slide.tc-next-slide {
-      transform: translateX(8%) translateZ(-180px) rotateY(-32deg) scale(0.8);
-      opacity: 0.55;
-      z-index: 5;
-      pointer-events: none;
-      filter: blur(1.5px);
-    }
+    .trophy-slide.tc-prev-slide,
+    .trophy-slide.tc-next-slide,
     .trophy-slide.tc-hidden-slide {
-      transform: translateX(-50%) translateZ(-350px) scale(0.6);
-      opacity: 0;
-      z-index: 1;
+      display: none !important;
+      opacity: 0 !important;
       pointer-events: none;
+      transform: none !important;
+      filter: none !important;
     }
 
-    /* Cabinet Showcase Inner Layout */
-    /* ─── TROPHY CABINET REDESIGN WITH FUTURISTIC LASER POLYGON MESH WALLPAPER ─── */
+    /* Cabinet Showcase Inner Layout (NO BLUR, ULTRA CRISP CONTRAST) */
     #trophyCabinet {
       position: relative;
       background-image: url('assets/tc_bg_laser_mesh.jpg') !important;
       background-size: cover !important;
       background-position: center center !important;
       background-repeat: no-repeat !important;
-      padding: 110px 0 !important;
+      padding: 90px 0 !important;
       overflow: hidden;
     }
     #trophyCabinet::before {
@@ -2040,26 +2026,193 @@
       position: absolute;
       top: 0; left: 0;
       width: 100%; height: 100%;
-      background: radial-gradient(circle at 50% 30%, rgba(12, 0, 4, 0.68) 0%, rgba(4, 4, 8, 0.90) 85%) !important;
-      backdrop-filter: blur(3px);
-      -webkit-backdrop-filter: blur(3px);
+      background: radial-gradient(circle at 50% 30%, rgba(8, 0, 4, 0.75) 0%, rgba(4, 4, 8, 0.94) 85%) !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
       z-index: 1;
     }
 
-    /* Cabinet Showcase Inner Layout */
     .evo-tc-showcase {
       position: relative;
       padding: 44px 30px;
-      background: rgba(8, 8, 14, 0.88) !important;
-      border: 1px solid rgba(255, 17, 34, 0.4) !important;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.95), 0 0 35px rgba(255, 17, 34, 0.25) !important;
-      backdrop-filter: blur(16px) !important;
+      background: #090912 !important;
+      border: 2px solid #ff1122 !important;
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.98), 0 0 40px rgba(255, 17, 34, 0.35) !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+      filter: none !important;
       border-radius: 16px !important;
       overflow: hidden;
       min-height: 580px;
       display: flex;
       flex-direction: column;
       align-items: center;
+    }
+
+    /* Glass Cabinet Box */
+    .evo-tc-cabinet {
+      position: relative;
+      width: 100%;
+      max-width: 960px;
+      border: 2px solid #ff1122 !important;
+      outline: 1.5px solid #ffd700 !important;
+      outline-offset: 4px;
+      box-shadow: 0 25px 65px rgba(0, 0, 0, 0.98), 0 0 50px rgba(255, 17, 34, 0.4) !important;
+      background: #0c0b14 !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+      padding: 50px 24px 36px !important;
+      border-radius: 16px !important;
+      min-height: 480px;
+      z-index: 3;
+      margin-top: 10px;
+    }
+
+    /* Dual Side-by-Side Panels Layout */
+    .evo-tc-dual-sides-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      width: 100%;
+      margin-top: 10px;
+      z-index: 3;
+      position: relative;
+    }
+    @media(max-width: 768px) {
+      .evo-tc-dual-sides-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+    }
+
+    .evo-tc-side-panel {
+      background: #12101d;
+      border: 2px solid rgba(255, 215, 0, 0.5);
+      border-radius: 14px;
+      padding: 24px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.95), 0 0 20px rgba(255, 215, 0, 0.25);
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .evo-tc-side-panel.shield-side-panel {
+      border-color: rgba(255, 17, 34, 0.6);
+      background: #180910;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.95), 0 0 20px rgba(255, 17, 34, 0.3);
+    }
+    .evo-tc-side-panel:hover {
+      transform: translateY(-6px);
+      border-color: #ffd700;
+      box-shadow: 0 22px 50px rgba(0, 0, 0, 0.98), 0 0 35px rgba(255, 215, 0, 0.5);
+    }
+    .evo-tc-side-panel.shield-side-panel:hover {
+      border-color: #ff1122;
+      box-shadow: 0 22px 50px rgba(0, 0, 0, 0.98), 0 0 35px rgba(255, 17, 34, 0.6);
+    }
+
+    .tc-side-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 18px;
+    }
+    .tc-side-badge {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .25em;
+      padding: 4px 14px;
+      border-radius: 20px;
+      text-transform: uppercase;
+    }
+    .tc-side-badge.gold-badge {
+      background: #ffd700;
+      color: #000000;
+      font-weight: 900;
+      box-shadow: 0 0 12px rgba(255, 215, 0, 0.6);
+    }
+    .tc-side-badge.red-badge {
+      background: #ff1122;
+      color: #ffffff;
+      font-weight: 900;
+      box-shadow: 0 0 12px rgba(255, 17, 34, 0.6);
+    }
+    .tc-side-title {
+      font-family: var(--font-luxury);
+      font-size: 17px;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+
+    .tc-side-body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+    .tc-logo-ring {
+      width: 96px; height: 96px;
+      border-radius: 50%;
+      padding: 4px;
+      background: #08080f;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 16px;
+      transition: transform 0.3s ease;
+    }
+    .tc-logo-ring:hover {
+      transform: scale(1.08);
+    }
+    .tc-logo-ring.gold-ring {
+      border: 3px solid #ffd700;
+      box-shadow: 0 0 25px rgba(255, 215, 0, 0.7);
+    }
+    .tc-logo-ring.red-ring {
+      border: 3px solid #ff1122;
+      box-shadow: 0 0 25px rgba(255, 17, 34, 0.7);
+    }
+    .tc-champ-logo-img {
+      width: 100%; height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .tc-winner-name {
+      font-family: var(--font-display);
+      font-size: 25px;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: .05em;
+      margin-bottom: 4px;
+      text-shadow: 0 0 14px rgba(255, 255, 255, 0.6);
+      word-break: break-word;
+    }
+    .tc-winner-season {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .2em;
+      color: #ffd700;
+      margin-bottom: 10px;
+    }
+    .shield-side-panel .tc-winner-season {
+      color: #ff1122;
+    }
+    .tc-award-stars {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 800;
+      color: #ffd700;
+      letter-spacing: .25em;
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+    }
+    .tc-award-stars.red-stars {
+      color: #ff1122;
+      text-shadow: 0 0 10px rgba(255, 17, 34, 0.8);
     }
 
     /* Reigning Champions 3x2 Grid displaying Champion & Shield Winner details */
@@ -2081,12 +2234,14 @@
     }
 
     .reigning-champ-card {
-      background: rgba(10, 10, 16, 0.92);
-      border: 1.5px solid rgba(255, 17, 34, 0.45);
+      background: #110f1d !important;
+      border: 2px solid #ff1122 !important;
       border-radius: 14px;
       padding: 18px;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.9), 0 0 20px rgba(255, 17, 34, 0.2);
-      backdrop-filter: blur(14px);
+      box-shadow: 0 14px 35px rgba(0,0,0,0.95), 0 0 25px rgba(255, 17, 34, 0.3) !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+      filter: none !important;
       transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
       display: flex;
       flex-direction: column;
@@ -5996,68 +6151,22 @@
               </div>
             `;
           } else {
-            // Render standard 2-pedestal tour slides (Season Champion & Shield Winner)
+            // Render standard 2-side tour slides (Season Champion & Shield Winner)
             const m = meta[t.id] || {};
             const tourName = m.name || t.name;
             const defaultChampName = tourName.toUpperCase() + ' CHAMPION';
             const defaultShieldName = tourName.toUpperCase() + ' SHIELD';
             const champName = m.champion || defaultChampName;
-            const champTag = m.champTag || 'SEASON 1 · 2026';
+            const champTag = m.champTag || 'SEASON 1 CHAMPION';
             const shieldName = m.shieldWinner || defaultShieldName;
-            const shieldTag = m.shieldTag || 'SEASON 2 · 2026';
+            const shieldTag = m.shieldTag || 'SHIELD WINNER';
 
             const titleHtml = getTourTitleHtml(t.id, tourName);
             const subtitleText = getTourSubtitle(t.id);
             const badgeLogo = getTourBadgeLogo(t.id, m.tourLogo);
 
-            const champBadgeHtml = m.champLogo
-              ? `<div class="evo-tc-trophy-badge"><img class="evo-tc-trophy-img" src="${m.champLogo}" alt="${escapeHtml(champName)}"></div>`
-              : `<div class="evo-tc-trophy-badge">
-                  <svg class="evo-tc-anchor-shield" viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                      <linearGradient id="silverGrad_${t.id}" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#ffffff"/>
-                        <stop offset="40%" stop-color="#b0b5bc"/>
-                        <stop offset="70%" stop-color="#78808a"/>
-                        <stop offset="100%" stop-color="#3a4048"/>
-                      </linearGradient>
-                      <radialGradient id="ballGold_${t.id}" cx="50%" cy="50%" r="50%">
-                        <stop offset="0%" stop-color="#fff5d1"/>
-                        <stop offset="50%" stop-color="#ffd700"/>
-                        <stop offset="100%" stop-color="#996515"/>
-                      </radialGradient>
-                    </defs>
-                    <path d="M100 10 L165 40 V110 C165 155 100 195 100 195 C100 195 35 155 35 110 V40 Z" fill="url(#silverGrad_${t.id})" stroke="#222" stroke-width="3"/>
-                    <path d="M100 25 L150 50 V105 C150 142 100 175 100 175 C100 175 50 142 50 105 V50 Z" fill="#120e10" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
-                    <path d="M35 110 C35 150 70 180 100 180 C130 180 165 150 165 110 M100 45 V175 M70 120 H130" stroke="url(#silverGrad_${t.id})" stroke-width="12" fill="none" stroke-linecap="round"/>
-                    <circle cx="100" cy="45" r="14" fill="url(#ballGold_${t.id})" stroke="#fff" stroke-width="1.5"/>
-                    <rect x="35" y="90" width="130" height="24" rx="2" fill="#000" stroke="url(#silverGrad_${t.id})" stroke-width="1.5"/>
-                    <text x="100" y="106" text-anchor="middle" font-family="Cinzel,serif" font-size="9.5" font-weight="900" fill="#fff" letter-spacing="0.5">${escapeHtml(champName)}</text>
-                  </svg>
-                </div>`;
-
-            const shieldBadgeHtml = m.shieldLogo
-              ? `<div class="evo-tc-trophy-badge"><img class="evo-tc-trophy-img" src="${m.shieldLogo}" alt="${escapeHtml(shieldName)}"></div>`
-              : `<div class="evo-tc-trophy-badge">
-                  <svg class="evo-tc-dragon-shield" viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                      <radialGradient id="goldPlate_${t.id}" cx="50%" cy="50%" r="50%">
-                        <stop offset="0%" stop-color="#fffdf0"/>
-                        <stop offset="35%" stop-color="#ffd700"/>
-                        <stop offset="75%" stop-color="#d4af37"/>
-                        <stop offset="100%" stop-color="#553a08"/>
-                      </radialGradient>
-                    </defs>
-                    <circle cx="100" cy="110" r="82" fill="url(#goldPlate_${t.id})" stroke="#111" stroke-width="4"/>
-                    <circle cx="100" cy="110" r="72" fill="#180508" stroke="#ffd700" stroke-width="2"/>
-                    <path id="textArc_${t.id}" d="M35 110 A65 65 0 1 1 165 110" fill="none"/>
-                    <text font-family="Cinzel,serif" font-size="10.5" font-weight="900" fill="#ffd700" letter-spacing="1.5"><textPath href="#textArc_${t.id}" startOffset="50%" text-anchor="middle">${escapeHtml(shieldName)}</textPath></text>
-                    <path d="M100 65 C115 65 130 75 125 95 C120 115 140 120 135 140 C130 155 110 155 100 140 C90 155 70 155 65 140 C60 120 80 115 75 95 C70 75 85 65 100 65 Z" fill="#e11d48" stroke="#ffd700" stroke-width="1.5"/>
-                    <circle cx="100" cy="172" r="3" fill="#ffd700"/>
-                    <circle cx="70" cy="160" r="2.5" fill="#ffd700"/>
-                    <circle cx="130" cy="160" r="2.5" fill="#ffd700"/>
-                  </svg>
-                </div>`;
+            const champLogoUrl = m.champLogo || m.currChampLogo || 'assets/logo.png';
+            const shieldLogoUrl = m.shieldLogo || 'assets/asset_4ec290c1ae.png';
 
             return `
               <div class="trophy-slide">
@@ -6083,33 +6192,39 @@
                     <div class="evo-tc-subtitle">${subtitleText}</div>
                   </div>
 
-                  <!-- Glass Cabinet Showcase Box -->
+                  <!-- Glass Cabinet Showcase Box (2 Separate Sides) -->
                   <div class="evo-tc-cabinet">
-                    <div class="evo-tc-top-plaque">TROPHY CABINET</div>
-                    <div class="evo-tc-grid">
-                      <!-- Left Pedestal (Season 1 Champion) -->
-                      <div class="evo-tc-bay">
-                        <div class="evo-tc-spotlight"></div>
-                        <div class="evo-tc-podium-ring"></div>
-                        ${champBadgeHtml}
-                        <div class="evo-tc-plinth">
-                          <div class="evo-tc-plinth-season">${escapeHtml(champTag)}</div>
-                          <div class="evo-tc-plinth-title">SEASON CHAMPION</div>
-                          <div class="evo-tc-plinth-name">${escapeHtml(champName)}</div>
-                          <div class="evo-tc-plinth-star">★ ★ ★</div>
+                    <div class="evo-tc-top-plaque">DUAL TITLEHOLDERS SHOWCASE</div>
+                    <div class="evo-tc-dual-sides-container">
+                      <!-- LEFT SIDE: SEASON CHAMPION -->
+                      <div class="evo-tc-side-panel champ-side-panel">
+                        <div class="tc-side-header">
+                          <span class="tc-side-badge gold-badge">${escapeHtml(champTag)}</span>
+                          <h3 class="tc-side-title">SEASON CHAMPION</h3>
+                        </div>
+                        <div class="tc-side-body">
+                          <div class="tc-logo-ring gold-ring">
+                            <img src="${champLogoUrl}" alt="${escapeHtml(champName)}" class="tc-champ-logo-img">
+                          </div>
+                          <h2 class="tc-winner-name">${escapeHtml(champName)}</h2>
+                          <div class="tc-winner-season">SEASON 1 · 2026</div>
+                          <div class="tc-award-stars">★ ★ ★ GOLD CHAMPION AWARD ★ ★ ★</div>
                         </div>
                       </div>
 
-                      <!-- Right Pedestal (Shield Winner) -->
-                      <div class="evo-tc-bay">
-                        <div class="evo-tc-spotlight"></div>
-                        <div class="evo-tc-podium-ring"></div>
-                        ${shieldBadgeHtml}
-                        <div class="evo-tc-plinth">
-                          <div class="evo-tc-plinth-season">${escapeHtml(shieldTag)}</div>
-                          <div class="evo-tc-plinth-title">SHIELD WINNER</div>
-                          <div class="evo-tc-plinth-name">${escapeHtml(shieldName)}</div>
-                          <div class="evo-tc-plinth-star">★ ★ ★</div>
+                      <!-- RIGHT SIDE: SHIELD WINNER -->
+                      <div class="evo-tc-side-panel shield-side-panel">
+                        <div class="tc-side-header">
+                          <span class="tc-side-badge red-badge">${escapeHtml(shieldTag)}</span>
+                          <h3 class="tc-side-title">SHIELD WINNER</h3>
+                        </div>
+                        <div class="tc-side-body">
+                          <div class="tc-logo-ring red-ring">
+                            <img src="${shieldLogoUrl}" alt="${escapeHtml(shieldName)}" class="tc-champ-logo-img">
+                          </div>
+                          <h2 class="tc-winner-name">${escapeHtml(shieldName)}</h2>
+                          <div class="tc-winner-season">SEASON 2 · 2026</div>
+                          <div class="tc-award-stars red-stars">★ ★ ★ SHIELD WINNER AWARD ★ ★ ★</div>
                         </div>
                       </div>
                     </div>
